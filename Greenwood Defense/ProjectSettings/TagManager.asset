@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bin
+  - Enemy
+  - Ally
   layers:
   - Default
   - TransparentFX
@@ -52,4 +55,7 @@ TagManager:
     locked: 0
   - name: Frontground
     uniqueID: 2030022207
+    locked: 0
+  - name: UI
+    uniqueID: 3687017483
     locked: 0
