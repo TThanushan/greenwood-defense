@@ -3,18 +3,22 @@ using UnityEngine;
 
 public class Unit : HealthBar
 {
+    [Header("Attack")]
+
     public float attackDamage = 1f;
     public float attackSpeed = 1f;
-    public float moveSpeed = 1;
+    public float attackRange = 0.24f;
 
-    public float attackRange = 1f;
+    [Header("Others")]
+
+    public float moveSpeed = 0.5f;
     public float reward = 5f;
 
     public event System.Action onAttack;
 
     protected int wayX = 1;
-    private string targetTag = "Enemy";
-    private float nextAttackTime = 0f;
+    protected string targetTag = "Enemy";
+    protected float nextAttackTime = 0f;
     protected PoolObject poolObject;
     private GameObject target;
     private bool disabled;
@@ -44,8 +48,8 @@ public class Unit : HealthBar
         if (disabled) return;
         base.Update();
 
-        if (!Target)
-            Target = GetClosestEnemy();
+        //if (!Target)
+        Target = GetClosestEnemy();
         if (Target)
         {
             if (EnoughRangeToAttackTarget())
@@ -90,7 +94,7 @@ public class Unit : HealthBar
         Target.GetComponent<Unit>().GetDamage(attackDamage);
     }
 
-    void AttackTarget()
+    protected virtual void AttackTarget()
     {
         if (IsTargetDisabled())
         {
@@ -105,15 +109,20 @@ public class Unit : HealthBar
         }
     }
 
+    protected void InvokeOnAttack()
+    {
+        onAttack?.Invoke();
+    }
 
     private void RandomizeAttackRange()
     {
         attackRange += Random.Range(0f, attackRange / 8f);
     }
 
-    private float GetRandomizedNextAttackTime()
+    protected float GetRandomizedNextAttackTime()
     {
-        return Time.time + attackSpeed - Random.Range(0f, attackSpeed / 2f);
+        //return Time.time + attackSpeed - Random.Range(0f, attackSpeed / 2f);
+        return Time.time + attackSpeed;
     }
 
     private bool IsTargetDisabled()
@@ -159,7 +168,7 @@ public class Unit : HealthBar
         return Vector2.Distance(transform.position, enemy.transform.position) <= detectionRange;
     }
 
-    private GameObject[] GetEnemies()
+    protected GameObject[] GetEnemies()
     {
         if (targetTag == "Enemy")
             return PoolObject.instance.Enemies;

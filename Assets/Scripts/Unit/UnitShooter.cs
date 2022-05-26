@@ -6,13 +6,12 @@ public class UnitShooter : Unit
     public Transform bulletPosition;
     //public float attackDamage;
     //public float bulletSpeed;
-    public float tmp;
     public override void Attack()
     {
         Shoot(Target);
     }
 
-    void Shoot(GameObject target)
+    protected virtual void Shoot(GameObject target)
     {
         InstantiateBullet(target);
     }
@@ -48,7 +47,7 @@ public class UnitShooter : Unit
     bool AlignedOnYWithTarget()
     {
         float yDist = Mathf.Abs(transform.position.y - Target.transform.position.y);
-        float yRange = tmp;
+        float yRange = 0.01f;
         return yDist < yRange;
 
     }
@@ -61,7 +60,7 @@ public class UnitShooter : Unit
     {
         return InRangeWithTarget() && AlignedOnYWithTarget();
     }
-    private GameObject InstantiateBullet(GameObject target)
+    protected GameObject InstantiateBullet(GameObject target)
     {
         if (!bullet || !target)
             return null;
@@ -70,8 +69,10 @@ public class UnitShooter : Unit
 
         BulletScript newBulletScript = newBullet.GetComponent<BulletScript>();
         newBulletScript.target = target;
+        newBulletScript.SetTargetTag(targetTag);
         newBulletScript.attackDamage = attackDamage;
         newBulletScript.wayX = wayX;
+
         //newBulletScript.moveSpeed = bulletSpeed;
         //newBulletScript.piercingDamage = piercingDamage;
 

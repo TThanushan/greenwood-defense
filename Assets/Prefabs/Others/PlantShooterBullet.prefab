@@ -44,10 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8ad145a1a6cc04b919682c4bf465c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 2
   moveSpeed: 5
   attackDamage: 1
   wayX: 1
-  piercingDamage: 0
   target: {fileID: 0}
   effect: {fileID: 0}
 --- !u!1 &2116847985150317397

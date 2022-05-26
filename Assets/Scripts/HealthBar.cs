@@ -3,7 +3,7 @@
 public class HealthBar : MonoBehaviour
 {
     public float maxHealth;
-    public Gradient healthColorGradient;
+    //public Gradient healthColorGradient;
 
     private float currentHealth;
     private GameObject healthBar;
@@ -29,7 +29,7 @@ public class HealthBar : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void GetDamage(float damage)
+    public virtual void GetDamage(float damage)
     {
         currentHealth -= damage;
         OnHit?.Invoke();
