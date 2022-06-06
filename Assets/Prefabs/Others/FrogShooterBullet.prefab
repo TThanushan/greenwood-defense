@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -3772809968200008754}
   m_Layer: 0
   m_Name: FrogShooterBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e8ad145a1a6cc04b919682c4bf465c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackRange: 2
   moveSpeed: 3
   attackDamage: 1
-  piercingDamage: 0
+  wayX: 1
   target: {fileID: 0}
   effect: {fileID: 0}
 --- !u!1 &2116847985150317397

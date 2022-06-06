@@ -213,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5367232545533668775
 Transform:
   m_ObjectHideFlags: 0
@@ -274,11 +274,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 6
   attackRange: 2
   moveSpeed: 0.25
-  reward: 5
+  paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 1dd1b24d951e6504488872d722ec0642, type: 3}
   bulletPosition: {fileID: 1142343704}
   bulletShotEachTime: 50

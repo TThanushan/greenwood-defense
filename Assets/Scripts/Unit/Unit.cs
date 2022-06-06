@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : HealthBar
@@ -12,7 +13,7 @@ public class Unit : HealthBar
     [Header("Others")]
 
     public float moveSpeed = 0.5f;
-    public float reward = 5f;
+    //public float reward = 5f;
 
     public event System.Action onAttack;
 
@@ -23,10 +24,14 @@ public class Unit : HealthBar
     private GameObject target;
     private bool disabled;
 
+    [HideInInspector]
+    public bool paralysed;
     public bool Disabled { get => disabled; set => disabled = value; }
     public GameObject Target { get => target; set => target = value; }
 
-    public override void Awake()
+    private List<IEnumerator> coroutines;
+
+    protected override void Awake()
     {
         base.Awake();
         if (transform.CompareTag("Enemy"))
@@ -36,19 +41,29 @@ public class Unit : HealthBar
         }
 
     }
-    private void Start()
+    protected virtual void Start()
     {
         poolObject = PoolObject.instance;
         transform.GetComponent<HealthBar>().OnDeath += Disable;
         RandomizeAttackRange();
+        coroutines = new List<IEnumerator>();
     }
 
+    private void Reset()
+    {
+
+    }
+    protected bool IsTargetEnabled(GameObject target)
+    {
+        return !target || !target.GetComponent<Unit>().Disabled || target.activeSelf;
+    }
     protected override void Update()
     {
         if (disabled) return;
         base.Update();
 
-        //if (!Target)
+        if (paralysed)
+            return;
         Target = GetClosestEnemy();
         if (Target)
         {
@@ -61,21 +76,52 @@ public class Unit : HealthBar
             MoveToward();
     }
 
-    private void OnEnable()
+    public void AddCoroutinesToList(IEnumerator enumerator)
     {
-        RandomizeAttackRange();
+        coroutines.Add(enumerator);
     }
 
+    public void ParalyseEffect(bool isParalyse)
+    {
+        paralysed = isParalyse;
+        transform.GetComponent<Animator>().enabled = !isParalyse;
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        RandomizeAttackRange();
+        Disabled = false;
+    }
+
+    private void OnDisable()
+    {
+        //StopAllCoroutines();
+    }
+    IEnumerator DisableIE()
+    {
+        disabled = true;
+        ResetSpriteColor();
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
+
+    }
     public virtual void Disable()
     {
         StartCoroutine(DisableIE());
     }
 
-    IEnumerator DisableIE()
+
+    void ResetSpriteColor()
     {
-        disabled = true;
-        yield return new WaitForSeconds(2f);
-        gameObject.SetActive(false);
+        string[] spritePaths = { "SpriteBody/Sprite/UnitSprite", "SpriteBody/Sprite/Sprite" };
+        foreach (string path in spritePaths)
+        {
+            Transform spriteT = transform.Find(path);
+            if (!spriteT)
+                continue;
+            spriteT.GetComponent<SpriteRenderer>().color = Color.white;
+        }
     }
 
     private void MoveToward()
@@ -91,7 +137,9 @@ public class Unit : HealthBar
     }
     public virtual void Attack()
     {
-        Target.GetComponent<Unit>().GetDamage(attackDamage);
+        if (!Target)
+            return;
+        Target.GetComponent<Unit>().GetDamage(attackDamage, transform);
     }
 
     protected virtual void AttackTarget()
@@ -162,11 +210,7 @@ public class Unit : HealthBar
         return closestEnemy;
     }
 
-    private bool IsInRange(GameObject enemy)
-    {
-        float detectionRange = 0.5f;
-        return Vector2.Distance(transform.position, enemy.transform.position) <= detectionRange;
-    }
+
 
     protected GameObject[] GetEnemies()
     {

@@ -245,18 +245,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
+  damageTakenIncreasePercentage: 0
   attackDamage: 0
   attackSpeed: 5
   attackRange: 1
   moveSpeed: 0.15
-  reward: 5
-  areaOfEffectRange: 1.25
-  areaOfEffectDamage: 0.025
-  dotCount: 40
-  timeBetweenDamage: 0.1
+  paralysed: 0
+  effectRange: 1
+  effectDamage: 0.21
+  dotCount: 80
+  timeBetweenDotDamage: 0.05
   poisonParticlesEffect: {fileID: 4352566265116347071, guid: b38f542b524eb494d9e23cacfe6aef12,
     type: 3}
-  test: {fileID: 0}
+  poisonedColor: {r: 0.972549, g: 0.5137255, b: 1, a: 1}
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3
@@ -382,22 +383,22 @@ PrefabInstance:
     - target: {fileID: 718855255030355256, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 718855255030355256, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 718855255030355256, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 785.025
       objectReference: {fileID: 0}
     - target: {fileID: 718855255030355256, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -548
       objectReference: {fileID: 0}
     - target: {fileID: 718855255030355263, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
@@ -532,22 +533,22 @@ PrefabInstance:
     - target: {fileID: 2866307243219145440, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2866307243219145440, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2866307243219145440, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 44.975006
       objectReference: {fileID: 0}
     - target: {fileID: 2866307243219145440, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -548
       objectReference: {fileID: 0}
     - target: {fileID: 7304753815798666219, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}

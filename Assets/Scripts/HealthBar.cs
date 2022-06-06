@@ -5,39 +5,107 @@ public class HealthBar : MonoBehaviour
     public float maxHealth;
     //public Gradient healthColorGradient;
 
-    private float currentHealth;
+    protected float currentHealth;
     private GameObject healthBar;
+
+    private GameObject shieldBar;
+    public float shield;
 
     public event System.Action OnDeath;
     public event System.Action OnHit;
 
-    public virtual void Awake()
+    [HideInInspector]
+    public float damageTakenIncreasePercentage = 0f;
+    protected virtual void Awake()
     {
         if (!healthBar)
             healthBar = transform.Find("HealthBar/Canvas/Bar").gameObject;
+        if (!shieldBar)
+            shieldBar = transform.Find("HealthBar/Canvas/ShieldBar").gameObject;
+
         currentHealth = maxHealth;
     }
+
 
     protected virtual void Update()
     {
         UpdateHealthBarLength();
+        UpdateShieldBarWidth();
     }
 
-    private void OnEnable()
+    public void HealMaxHealthPercentage(float amount)
+    {
+        currentHealth *= 1 + amount / 100;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+    }
+
+
+    public void SetShield(float amount)
+    {
+        shield = amount;
+    }
+
+    public void SetShieldRelatedToCurrentHealthPercentage(float amount)
+    {
+        if (amount > shield)
+            shield = currentHealth - currentHealth * (1 - amount / 100);
+    }
+
+    void UpdateShieldBarWidth()
+    {
+        if (shield <= 0)
+        {
+            shieldBar.GetComponent<RectTransform>().sizeDelta = new Vector2(0f, 100f);
+            return;
+        }
+
+
+        shieldBar.GetComponent<RectTransform>().sizeDelta = new Vector2(GetShieldWidth(), 100f);
+        shieldBar.transform.localScale = new Vector3(1, shieldBar.transform.localScale.y, shieldBar.transform.localScale.z);
+    }
+
+    float GetShieldWidth()
+    {
+        // Set width using shield percentage on health (? on 100).
+        float width = 100f;
+        if (shield < currentHealth)
+            width = shield / currentHealth * 100f;
+        return width;
+    }
+    protected virtual void OnEnable()
     {
         healthBar.transform.localScale = new Vector3(0, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
         currentHealth = maxHealth;
     }
 
-    public virtual void GetDamage(float damage)
+    public virtual void GetDamage(float damage, Transform caller = null)
     {
-        currentHealth -= damage;
+        if (shield > 0)
+        {
+            shield -= damage;
+            if (shield < damage)
+            {
+                damage -= shield;
+                if (shield < 0)
+                    shield = 0;
+            }
+            else
+                damage = 0f;
+        }
+
+        currentHealth -= damage * GetDamageTakenIncreasePercentage();
         OnHit?.Invoke();
         if (currentHealth <= 0f)
         {
             OnDeath?.Invoke();
             currentHealth = 0f;
         }
+    }
+
+    float GetDamageTakenIncreasePercentage()
+    {
+        return 1f + damageTakenIncreasePercentage / 100f;
     }
 
     private void UpdateHealthBarLength()

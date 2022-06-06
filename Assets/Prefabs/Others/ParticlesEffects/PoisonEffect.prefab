@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4352566265116347071}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.7612861, y: 0.22399777, z: 0}
-  m_LocalScale: {x: 0.04374397, y: 0.04374397, z: 0.04374397}
+  m_LocalScale: {x: 0.08281171, y: 0.08281171, z: 0.08281171}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -86,7 +86,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_RenderMode: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -195,7 +195,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -248,7 +248,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 60
+      scalar: 250
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1055,7 +1055,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 25
+        scalar: 50
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -1120,22 +1120,22 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 1
-          inSlope: -0.98279804
-          outSlope: -0.98279804
-          tangentMode: 0
+          value: 0.49230957
+          inSlope: 0.5076904
+          outSlope: 0.5076904
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 1
+          inWeight: 0
+          outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0
-          inSlope: -1.0014858
-          outSlope: -1.0014858
-          tangentMode: 0
+          value: 1
+          inSlope: 0.5076904
+          outSlope: 0.5076904
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.9985163
-          outWeight: 0.33333334
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -1443,7 +1443,7 @@ ParticleSystem:
         serializedVersion: 2
         key0: {r: 0.36637214, g: 0.18098077, b: 0.46226418, a: 1}
         key1: {r: 0.27476844, g: 0.064079754, b: 0.3018868, a: 0.8117647}
-        key2: {r: 0, g: 0, b: 0, a: 0.61960787}
+        key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}

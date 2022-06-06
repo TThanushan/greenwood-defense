@@ -112,14 +112,13 @@ public class BulletScript : MonoBehaviour
     protected void DamageTarget()
     {
         OnDamageDealt(attackDamage);
-        target.GetComponent<HealthBar>().GetDamage(attackDamage);
-        print("DAMAGE:" + attackDamage.ToString());
+        target.GetComponent<HealthBar>().GetDamage(attackDamage, transform);
     }
 
     protected void DamageTarget(GameObject target)
     {
         OnDamageDealt(attackDamage);
-        target.GetComponent<HealthBar>().GetDamage(attackDamage);
+        target.GetComponent<HealthBar>().GetDamage(attackDamage, transform);
     }
 
     public virtual void OnDamageDealt(float damage)

@@ -19,19 +19,15 @@ public class BulletGoThrough : BulletScript
             gameObject.SetActive(false);
             return;
         }
-        print("hi");
         if (IsTargetInRange() && !enemyAlreadyDamaged.Contains(target.GetInstanceID()))
-        //if (IsTargetInRange())
         {
             enemyAlreadyDamaged.Add(target.GetInstanceID());
 
             DamageTarget();
             DestroyEffect();
-            //target = null;
             currentPiercing++;
             if (currentPiercing >= piercingCount)
             {
-                print("hi2");
                 gameObject.SetActive(false);
                 Reset();
             }

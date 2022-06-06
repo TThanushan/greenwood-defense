@@ -4,22 +4,22 @@ using UnityEngine;
 public class HitBasedUnit : Unit
 {
 
-    public enum Effect { DoubleHit, BlockNextAttack };
+    public enum Effect { DoubleHit, TripleHit, BlockNextAttack };
 
     [Header("Hit Based")]
     public Effect effect = Effect.DoubleHit;
-    public float hitCount;
+    private float hitCount;
     public float hitCountNeeded;
     public float timeBetweenHitEffect;
     private GameObject HitEffectBar;
 
 
     // BlockNextAttack
-    bool nextAttackBlocked;
+    bool isNextAttackBlocked;
     //public GameObject effectParticleEffect;
-    public GameObject blockEffectParticleEffect;
+    public GameObject blockEffect;
 
-    public override void Awake()
+    protected override void Awake()
     {
         base.Awake();
         if (!HitEffectBar)
@@ -36,18 +36,17 @@ public class HitBasedUnit : Unit
     private void UpdateHitBarLength()
     {
         HitEffectBar.transform.localScale = new Vector3(GetNewBarLength(), HitEffectBar.transform.localScale.y, HitEffectBar.transform.localScale.z);
-        print(GetNewBarLength());
     }
     private float GetNewBarLength()
     {
-        float barLenght = hitCount / hitCountNeeded;
-        return barLenght;
+        float barLength = hitCount / hitCountNeeded;
+        return barLength;
     }
 
     public override void Attack()
     {
         base.Attack();
-        if (effect == Effect.DoubleHit)
+        if (effect == Effect.DoubleHit || effect == Effect.TripleHit)
             IncreaseHitCount();
     }
 
@@ -66,6 +65,8 @@ public class HitBasedUnit : Unit
     {
         if (effect == Effect.DoubleHit)
             StartCoroutine(DoubleHitEffect(timeBetweenHitEffect));
+        else if (effect == Effect.TripleHit)
+            StartCoroutine(TripleHitEffect(timeBetweenHitEffect));
         else if (effect == Effect.BlockNextAttack)
             BlockNextAttack();
     }
@@ -75,6 +76,31 @@ public class HitBasedUnit : Unit
         InvokeOnAttack();
         Attack();
         yield return new WaitForSeconds(time);
+        if (!IsTargetEnabled(Target))
+            yield return null;
+        InvokeOnAttack();
+        nextAttackTime = GetRandomizedNextAttackTime();
+        Attack();
+        hitCount = 0f;
+
+    }
+
+    IEnumerator TripleHitEffect(float time)
+    {
+        if (!IsTargetEnabled(Target))
+            yield return null;
+        InvokeOnAttack();
+        Attack();
+        hitCount = 0f;
+        yield return new WaitForSeconds(time);
+        if (!IsTargetEnabled(Target))
+            yield return null;
+        InvokeOnAttack();
+        Attack();
+        hitCount = 0f;
+        yield return new WaitForSeconds(time);
+        if (!IsTargetEnabled(Target))
+            yield return null;
         InvokeOnAttack();
         nextAttackTime = GetRandomizedNextAttackTime();
         Attack();
@@ -84,17 +110,24 @@ public class HitBasedUnit : Unit
 
     void BlockNextAttack()
     {
-        nextAttackBlocked = true;
-        blockEffectParticleEffect.SetActive(true);
-
+        isNextAttackBlocked = true;
+        CreateBlockEffect();
     }
 
-    public override void GetDamage(float damage)
+
+    void CreateBlockEffect()
     {
-        if (nextAttackBlocked)
+        if (blockEffect)
         {
-            nextAttackBlocked = false;
-            blockEffectParticleEffect.SetActive(false);
+            GameObject newEffect = PoolObject.instance.GetPoolObject(blockEffect);
+            newEffect.transform.position = transform.position;
+        }
+    }
+    public override void GetDamage(float damage, Transform caller = null)
+    {
+        if (isNextAttackBlocked)
+        {
+            isNextAttackBlocked = false;
             return;
         }
         if (effect == Effect.BlockNextAttack)

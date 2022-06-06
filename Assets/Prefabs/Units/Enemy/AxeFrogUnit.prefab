@@ -155,7 +155,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -6056987297122131021, guid: cd947491a13509945aa1b644f9db3ef2,
     type: 3}
-  m_Color: {r: 1, g: 0.42745098, b: 0.94509804, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -332,9 +332,8 @@ MonoBehaviour:
   attackSpeed: 2
   attackRange: 0.24
   moveSpeed: 0.25
-  reward: 5
-  areaOfEffectRange: 0.24
-  areaOfEffectDamage: 2
+  effectRange: 0.35
+  effectDamage: 1
 --- !u!95 &3315706013935442866
 Animator:
   serializedVersion: 3

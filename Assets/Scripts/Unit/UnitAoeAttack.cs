@@ -3,8 +3,8 @@ using UnityEngine;
 public class UnitAoeAttack : Unit
 {
 
-    public float areaOfEffectRange;
-    public float areaOfEffectDamage;
+    public float effectRange;
+    public float effectDamage;
 
 
 
@@ -20,9 +20,9 @@ public class UnitAoeAttack : Unit
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector2.Distance(Target.transform.position, enemy.transform.position);
-            if (distance <= areaOfEffectRange)
+            if (distance <= effectRange)
             {
-                enemy.GetComponent<Unit>().GetDamage(areaOfEffectDamage);
+                enemy.GetComponent<Unit>().GetDamage(effectDamage, transform);
             }
         }
     }
