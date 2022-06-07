@@ -443,6 +443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 2
@@ -450,14 +451,14 @@ MonoBehaviour:
   moveSpeed: 0.15
   paralysed: 0
   effect: 2
-  hitCountNeeded: 3
+  hitCountNeeded: 1
   timeBetweenHitEffect: 0
   blockEffect: {fileID: 64473780753522552, guid: badfd888d8bc12741a03cac2431e2e57,
     type: 3}
   bigShieldMax: 2
   bigShieldRespawnTime: 6
-  bonusDefenseDamageReduction: 50
-  bonusDefenseDuration: 4
+  defenseBonusDamageReduction: 0
+  defenseBonusDuration: 0
   shieldEffect: {fileID: 0}
   healingSpeed: 0.1
   healingPercentage: 0.1

@@ -14,16 +14,29 @@ public class BulletScript : MonoBehaviour
     public GameObject target;
 
     public GameObject effect;
+    public SpriteRenderer spriteRenderer;
     string targetTag = "Ally";
 
     public static System.Action<float> damageEvent;
-
+    Color startColor;
 
     void FixedUpdate()
     {
         AttackTarget();
         Move();
 
+    }
+
+    private void OnEnable()
+    {
+        if (GetSpriteRenderer())
+            GetSpriteRenderer().color = startColor;
+    }
+
+    private void Awake()
+    {
+        if (GetSpriteRenderer())
+            startColor = GetSpriteRenderer().color;
     }
 
     private void Update()
@@ -151,7 +164,10 @@ public class BulletScript : MonoBehaviour
         obj.transform.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
     }
 
-
+    public SpriteRenderer GetSpriteRenderer()
+    {
+        return spriteRenderer;
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

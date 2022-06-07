@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PoolObject : MonoBehaviour
@@ -12,7 +11,7 @@ public class PoolObject : MonoBehaviour
 
     private GameObject[] enemies;
     private GameObject[] allies;
-    private List<GameObject> pool;
+    public List<GameObject> pool;
 
     void Awake()
     {

@@ -5,11 +5,11 @@ public class HealthBar : MonoBehaviour
     public float maxHealth;
     //public Gradient healthColorGradient;
 
-    protected float currentHealth;
+    public float currentHealth;
     private GameObject healthBar;
 
     private GameObject shieldBar;
-    public float shield;
+    private float shield;
 
     public event System.Action OnDeath;
     public event System.Action OnHit;

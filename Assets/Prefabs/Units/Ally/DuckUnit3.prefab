@@ -442,8 +442,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1405c10f17fe2af4490b75b50e3f7659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
-  shield: 0
+  maxHealth: 30
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 2
@@ -451,9 +451,10 @@ MonoBehaviour:
   moveSpeed: 0.15
   paralysed: 0
   effect: 2
-  hitCountNeeded: 3
+  hitCountNeeded: 2
   timeBetweenHitEffect: 0
-  blockEffect: {fileID: 0}
+  blockEffect: {fileID: 64473780753522552, guid: badfd888d8bc12741a03cac2431e2e57,
+    type: 3}
   bigShieldMax: 2
   bigShieldRespawnTime: 6
   defenseBonusDamageReduction: 0

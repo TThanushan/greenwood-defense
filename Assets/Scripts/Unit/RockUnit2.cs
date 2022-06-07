@@ -24,7 +24,7 @@ public class RockUnit2 : Unit
             ResetDefenseBonus();
     }
 
-    void ResetDefenseBonus()
+    protected virtual void ResetDefenseBonus()
     {
         isDefenseBonusEnabled = true;
         EnableDefenseBonusEffect(true);
@@ -46,6 +46,11 @@ public class RockUnit2 : Unit
         if (Disabled)
             yield return null;
         isDefenseBonusEnabled = false;
+        DisableDefenseBonusEffect();
+    }
+
+    protected virtual void DisableDefenseBonusEffect()
+    {
         EnableDefenseBonusEffect(false);
     }
     void EnableDefenseBonusEffect(bool val)

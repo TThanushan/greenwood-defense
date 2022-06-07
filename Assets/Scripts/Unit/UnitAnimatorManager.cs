@@ -51,10 +51,8 @@ public class UnitAnimatorManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GetSpriteBody().localPosition = Vector3.zero;
-        //print("1: " + unitSpriteTransform.localPosition);
-        //unitSpriteTransform.localPosition = startPos;
-        //print("2: " + unitSpriteTransform.localPosition);
+        animator.keepAnimatorControllerStateOnDisable = true;
+        GetSpriteBody().rotation = Quaternion.identity;
     }
 
     bool IsUnitDisabled()

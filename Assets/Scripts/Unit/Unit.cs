@@ -53,6 +53,11 @@ public class Unit : HealthBar
     {
 
     }
+
+    public void SetTargetTag(string tag)
+    {
+        targetTag = tag;
+    }
     protected bool IsTargetEnabled(GameObject target)
     {
         return !target || !target.GetComponent<Unit>().Disabled || target.activeSelf;
@@ -61,6 +66,8 @@ public class Unit : HealthBar
     {
         if (disabled) return;
         base.Update();
+
+        FlipUnitSpriteOnWayX();
 
         if (paralysed)
             return;
@@ -74,6 +81,27 @@ public class Unit : HealthBar
         }
         else
             MoveToward();
+    }
+
+    void FlipUnitSpriteOnWayX()
+    {
+        string[] spritePaths = { "SpriteBody/Sprite/UnitSprite", "SpriteBody/Sprite/Sprite", "SpriteBody/Sprite" };
+        foreach (string path in spritePaths)
+        {
+            Transform spriteT = transform.Find(path);
+            if (!spriteT)
+                continue;
+            SpriteRenderer spriteRenderer = spriteT.GetComponent<SpriteRenderer>();
+            if (spriteRenderer)
+            {
+                // TODO
+                if (targetTag == "Enemy")
+                    spriteRenderer.flipX = (wayX == 1);
+                else
+                    spriteRenderer.flipX = (wayX == -1);
+                break;
+            }
+        }
     }
 
     public void AddCoroutinesToList(IEnumerator enumerator)
@@ -111,7 +139,6 @@ public class Unit : HealthBar
         StartCoroutine(DisableIE());
     }
 
-
     void ResetSpriteColor()
     {
         string[] spritePaths = { "SpriteBody/Sprite/UnitSprite", "SpriteBody/Sprite/Sprite" };
@@ -124,7 +151,7 @@ public class Unit : HealthBar
         }
     }
 
-    private void MoveToward()
+    protected void MoveToward()
     {
         transform.Translate(new Vector2(moveSpeed * wayX * Time.deltaTime, 0));
     }
@@ -180,6 +207,8 @@ public class Unit : HealthBar
 
     public virtual bool EnoughRangeToAttackTarget()
     {
+        if (!Target)
+            return false;
         return Vector2.Distance(transform.position, Target.transform.position) <= attackRange;
     }
 

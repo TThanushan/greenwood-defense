@@ -50,6 +50,7 @@ MonoBehaviour:
   wayX: 1
   target: {fileID: 0}
   effect: {fileID: 0}
+  spriteRenderer: {fileID: 2116847985150317399}
 --- !u!1 &2116847985150317397
 GameObject:
   m_ObjectHideFlags: 0

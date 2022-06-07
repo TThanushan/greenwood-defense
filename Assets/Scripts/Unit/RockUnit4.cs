@@ -13,7 +13,6 @@ public class RockUnit4 : RockUnit3
     protected override void Awake()
     {
         base.Awake();
-        ResetInvulnerabilityCooldown();
         invulnerabilityBonusEffect = transform.Find("SpriteBody/invulnerabilityEffect").gameObject;
 
     }
@@ -38,9 +37,10 @@ public class RockUnit4 : RockUnit3
             return;
         base.GetDamage(damage, caller);
     }
-    void ResetDefenseBonus()
+    protected override void ResetDefenseBonus()
     {
-        isDefenseBonusEnabled = true;
+        base.ResetDefenseBonus();
+        isInvulnerabilityBonusEnabled = true;
         EnableDefenseBonusEffect(true);
         StartCoroutine(DisableInvulnerabilityBonus());
     }
@@ -50,11 +50,15 @@ public class RockUnit4 : RockUnit3
         yield return new WaitForSeconds(invulnerabilityBonusDuration);
         if (Disabled)
             yield return null;
-        isDefenseBonusEnabled = false;
+        isInvulnerabilityBonusEnabled = false;
+
         EnableDefenseBonusEffect(false);
     }
     void EnableDefenseBonusEffect(bool val)
     {
         invulnerabilityBonusEffect.SetActive(val);
     }
+
+
+
 }

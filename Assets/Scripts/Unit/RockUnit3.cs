@@ -3,15 +3,34 @@ using UnityEngine;
 public class RockUnit3 : RockUnit2
 {
     public float damageReflectedPercentage;
+    GameObject[] bullets;
+    GameObject reflectDamageEffect;
 
+
+    protected override void Start()
+    {
+        base.Start();
+        reflectDamageEffect = transform.Find("SpriteBody/ReflectDamageEffect").gameObject;
+        //InvokeRepeating("ReflectBullets", 0f, 0.0001f);
+    }
     protected override void Update()
     {
         base.Update();
-        if (isDefenseBonusEnabled)
-            ReflectBullets();
+        ReflectBullets();
+
+
     }
 
-
+    protected override void ResetDefenseBonus()
+    {
+        base.ResetDefenseBonus();
+        reflectDamageEffect.SetActive(true);
+    }
+    protected override void DisableDefenseBonusEffect()
+    {
+        base.DisableDefenseBonusEffect();
+        reflectDamageEffect.SetActive(false);
+    }
     public override void GetDamage(float damage, Transform caller = null)
     {
         base.GetDamage(damage);
@@ -23,25 +42,31 @@ public class RockUnit3 : RockUnit2
     {
         if (!isDefenseBonusEnabled)
             return;
+        bullets = GameObject.FindGameObjectsWithTag("Bullet");
 
-        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
-
+        float triggerRange = 0.25f;
         foreach (GameObject bullet in bullets)
         {
+            if (!bullet.activeSelf || !isDefenseBonusEnabled)
+                return;
             float distance = Vector2.Distance(transform.position, bullet.transform.position);
-            float triggerRange = 0.25f;
             if (distance <= triggerRange && IsBulletAimingAtMe(bullet))
             {
                 BulletScript bulletScript = bullet.GetComponent<BulletScript>();
                 bulletScript.wayX *= -1;
-                bulletScript.moveSpeed *= 1.25f;
+                //bulletScript.moveSpeed *= 1.25f;
                 bulletScript.SetTargetTag(targetTag);
+                bulletScript.GetSpriteRenderer().color = Color.white;
             }
         }
     }
 
     bool IsBulletAimingAtMe(GameObject bullet)
     {
+        if (!bullet.activeSelf)
+            return false;
+        //print("1:" + bullet.GetComponent<BulletScript>().target.GetInstanceID());
+        //print("2" + gameObject.GetInstanceID());
         return bullet.GetComponent<BulletScript>().target.GetInstanceID() == gameObject.GetInstanceID();
     }
 
@@ -59,5 +84,8 @@ public class RockUnit3 : RockUnit2
         }
     }
 
-
+    void EnableReflectDamageEffect(bool val)
+    {
+        reflectDamageEffect.SetActive(val);
+    }
 }

@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &300741374
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 300741375}
-  m_Layer: 0
-  m_Name: EggSpawnPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &300741375
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300741374}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.026, y: 0.19399999, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5367232546079401137}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334772599
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,8 +107,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5367232545347587151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.262, z: 0}
-  m_LocalScale: {x: 0.7650407, y: 0.7650407, z: 0.7650407}
+  m_LocalPosition: {x: 0, y: -0.025, z: 0}
+  m_LocalScale: {x: 0.5903972, y: 0.5903972, z: 0.5903972}
   m_Children: []
   m_Father: {fileID: 5367232546079401137}
   m_RootOrder: 0
@@ -204,11 +174,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5367232545533668775}
-  - component: {fileID: -1190662066750740026}
+  - component: {fileID: 1121429685934434523}
   - component: {fileID: 1829568272}
   - component: {fileID: 1829568273}
+  - component: {fileID: 1945179790}
   m_Layer: 0
-  m_Name: BlueBirdUnit2
+  m_Name: SmallBlueBirdUnit
   m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +201,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1190662066750740026
+--- !u!114 &1121429685934434523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,22 +210,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ced6ce1526475428a57279652eb537, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c3aff3500001b74d822255148fb0ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  shield: 0
+  maxHealth: 3
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 1
-  attackSpeed: 2
-  attackRange: 0.12
-  moveSpeed: 0.1
+  attackDamage: 0.5
+  attackSpeed: 1
+  attackRange: 0.15
+  moveSpeed: 0.25
   paralysed: 0
-  eggExplosionDamage: 5
-  eggPrefab: {fileID: 3962359380272746272, guid: 80729d17cd0f3db49b4b68ceb8230919,
-    type: 3}
-  eggReloadTime: 3
-  eggSpawnPos: {fileID: 300741375}
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3
@@ -286,6 +252,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72f2ce9cfc453746b5eb104f7b08488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1945179790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367232545533668792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60306d61eda71b142a052973962a2a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionRange: 0.46
+  explosionDamage: 5
+  explosionEffect: {fileID: 4352566265116347071, guid: 22bc6555adf93b449805c08f5bffd2cf,
+    type: 3}
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,7 +298,6 @@ Transform:
   - {fileID: 5367232545347587150}
   - {fileID: 1334772600}
   - {fileID: 2866307243430677289}
-  - {fileID: 300741375}
   m_Father: {fileID: 5367232545533668775}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -469,27 +450,27 @@ PrefabInstance:
     - target: {fileID: 718855255030355256, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 718855255030355256, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 718855255030355256, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 373.05
       objectReference: {fileID: 0}
     - target: {fileID: 718855255030355256, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -548
       objectReference: {fileID: 0}
     - target: {fileID: 718855255030355263, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2866307242526126200, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
@@ -604,7 +585,7 @@ PrefabInstance:
     - target: {fileID: 2866307242526126206, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.46999997
+      value: 0.115
       objectReference: {fileID: 0}
     - target: {fileID: 2866307242526126206, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
@@ -834,7 +815,7 @@ PrefabInstance:
     - target: {fileID: 5249401145586386962, guid: 99d62d5384a21654ea7698cc3afc901e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.43799996
+      value: 0.083
       objectReference: {fileID: 0}
     - target: {fileID: 5249401145586386962, guid: 99d62d5384a21654ea7698cc3afc901e,
         type: 3}
