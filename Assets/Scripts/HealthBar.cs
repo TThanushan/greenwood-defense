@@ -36,6 +36,7 @@ public class HealthBar : MonoBehaviour
     public void HealMaxHealthPercentage(float amount)
     {
         currentHealth *= 1 + amount / 100;
+
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
     }

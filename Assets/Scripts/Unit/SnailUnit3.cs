@@ -11,7 +11,7 @@ public class SnailUnit3 : SnailUnit2
         HealAlly(ally);
     }
 
-    void HealAlly(GameObject ally)
+    protected void HealAlly(GameObject ally)
     {
         HealthBar healthBarScript = ally.GetComponent<HealthBar>();
         healthBarScript.HealMaxHealthPercentage(healingPercentage);

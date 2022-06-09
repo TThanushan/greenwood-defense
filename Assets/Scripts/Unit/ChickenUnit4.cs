@@ -73,7 +73,6 @@ public class ChickenUnit4 : ChickenUnit3
     bool IsHealthThresholdReached()
     {
         float threshold = (1 - (healthThreshold / 100)) * maxHealth;
-        print(threshold);
         return currentHealth <= threshold;
     }
 

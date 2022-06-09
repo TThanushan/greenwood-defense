@@ -213,11 +213,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 2
-  attackSpeed: 0.07
+  attackSpeed: 1
   attackRange: 0.25
   moveSpeed: 0.5
+  moneyReward: 0
   paralysed: 0
 --- !u!95 &1829568272
 Animator:

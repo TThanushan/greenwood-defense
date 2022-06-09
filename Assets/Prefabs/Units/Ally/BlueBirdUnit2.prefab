@@ -137,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5367232545347587151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.262, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: 0}
   m_LocalScale: {x: 0.7650407, y: 0.7650407, z: 0.7650407}
   m_Children: []
   m_Father: {fileID: 5367232546079401137}
@@ -242,13 +242,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ced6ce1526475428a57279652eb537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  shield: 0
+  maxHealth: 20
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 2
-  attackRange: 0.12
-  moveSpeed: 0.1
+  attackRange: 0.3
+  moveSpeed: 0.25
+  moneyReward: 0
   paralysed: 0
   eggExplosionDamage: 5
   eggPrefab: {fileID: 3962359380272746272, guid: 80729d17cd0f3db49b4b68ceb8230919,
@@ -604,7 +605,7 @@ PrefabInstance:
     - target: {fileID: 2866307242526126206, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.46999997
+      value: 0.22799997
       objectReference: {fileID: 0}
     - target: {fileID: 2866307242526126206, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
@@ -834,7 +835,7 @@ PrefabInstance:
     - target: {fileID: 5249401145586386962, guid: 99d62d5384a21654ea7698cc3afc901e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.43799996
+      value: 0.19599997
       objectReference: {fileID: 0}
     - target: {fileID: 5249401145586386962, guid: 99d62d5384a21654ea7698cc3afc901e,
         type: 3}

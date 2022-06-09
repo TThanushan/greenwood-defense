@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RockUnit3 : RockUnit2
 {
+    [Header("ReflectDamage")]
     public float damageReflectedPercentage;
     GameObject[] bullets;
     GameObject reflectDamageEffect;

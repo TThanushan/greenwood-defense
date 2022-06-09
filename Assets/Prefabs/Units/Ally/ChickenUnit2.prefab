@@ -244,7 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c09646ba4dd4f64398820fd747651e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 10
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 4
   attackSpeed: 1
@@ -254,7 +255,7 @@ MonoBehaviour:
   effect: 0
   hitCountNeeded: 3
   timeBetweenHitEffect: 0.125
-  blockEffectParticleEffect: {fileID: 0}
+  blockEffect: {fileID: 0}
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

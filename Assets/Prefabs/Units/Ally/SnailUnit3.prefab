@@ -215,12 +215,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 15
-  shield: 0
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 0
   attackSpeed: 2
-  attackRange: 0.24
-  moveSpeed: 0.1
+  attackRange: 0.7
+  moveSpeed: 0.15
   paralysed: 0
   healthShieldBonusRespawnTime: 5
   healthShieldBonusPercentage: 15

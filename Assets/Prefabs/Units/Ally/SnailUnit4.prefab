@@ -219,13 +219,15 @@ MonoBehaviour:
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 2
-  attackRange: 0.24
-  moveSpeed: 0.1
+  attackRange: 0.7
+  moveSpeed: 0.15
   paralysed: 0
   healthShieldBonusRespawnTime: 5
   healthShieldBonusPercentage: 15
   bonusRange: 0.8
   healingPercentage: 10
+  constantHealingPercentage: 0.1
+  timeBetweenConstantHealing: 0.5
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3

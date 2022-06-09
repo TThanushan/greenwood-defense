@@ -42,12 +42,7 @@ public class BlueBirdUnit2 : Unit
         if (newEgg.GetComponent<EggBomb>())
         {
             EggBomb newEggScript = newEgg.GetComponent<EggBomb>();
-            newEggScript.SetTargetTag(targetTag);
             newEggScript.explosionDamage = eggExplosionDamage;
-        }
-        else if (newEgg.GetComponent<EggSpawner>())
-        {
-            newEgg.GetComponent<EggSpawner>().SetTargetTag(targetTag);
         }
         eggCooldown = eggReloadTime + Time.time;
 

@@ -221,11 +221,11 @@ MonoBehaviour:
   moveSpeed: 0.1
   paralysed: 0
   damageReductionPercentage: 50
-  defenseBonusDuration: 6
-  defenseBonusRespawnTime: 6
+  defenseBonusDuration: 10
+  defenseBonusRespawnTime: 4
   damageReflectedPercentage: 50
   invulnerabilityBonusDuration: 3
-  invulnerabilityBonusRespawnTime: 10
+  invulnerabilityBonusRespawnTime: 8
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3

@@ -242,13 +242,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7add702c2649748a5d3293a242b12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 100
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 0
   attackSpeed: 100000
-  attackRange: 0.2
+  attackRange: 0.3
   moveSpeed: 0.25
+  moneyReward: 0
   paralysed: 0
   eggExplosionDamage: 5
   eggPrefab: {fileID: 3962359380272746272, guid: f0b09a8cbd8eab04897b856c91c18999,

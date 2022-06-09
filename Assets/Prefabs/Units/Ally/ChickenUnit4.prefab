@@ -244,7 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6821ed1680105e9439e701dacb61dc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 50
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 1
@@ -254,7 +255,7 @@ MonoBehaviour:
   effect: 1
   hitCountNeeded: 3
   timeBetweenHitEffect: 0.125
-  blockEffectParticleEffect: {fileID: 0}
+  blockEffect: {fileID: 0}
   dodgeChance: 50
   dodgeEffect: {fileID: 64473780753522552, guid: 0bf5335b826f7584aadc9ef56cd940da,
     type: 3}

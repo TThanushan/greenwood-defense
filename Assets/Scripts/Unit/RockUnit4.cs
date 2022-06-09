@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class RockUnit4 : RockUnit3
 {
+    [Header("invulnerability")]
     public float invulnerabilityBonusDuration;
     public float invulnerabilityBonusRespawnTime;
     protected bool isInvulnerabilityBonusEnabled;

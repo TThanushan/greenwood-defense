@@ -242,12 +242,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7add702c2649748a5d3293a242b12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 40
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 4
-  attackRange: 0.15
+  attackRange: 0.3
   moveSpeed: 0.25
+  moneyReward: 0
   paralysed: 0
   eggExplosionDamage: 5
   eggPrefab: {fileID: 3962359380272746272, guid: 80729d17cd0f3db49b4b68ceb8230919,
@@ -256,6 +258,7 @@ MonoBehaviour:
   eggSpawnPos: {fileID: 300741375}
   travelTime: 3
   timeBetweenTravel: 7
+  groundPositionY: 0
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3

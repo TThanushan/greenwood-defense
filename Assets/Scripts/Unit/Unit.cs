@@ -14,6 +14,8 @@ public class Unit : HealthBar
 
     public float moveSpeed = 0.5f;
     //public float reward = 5f;
+    [Tooltip("Only Enemy give money.")]
+    public float moneyReward = 1f;
 
     public event System.Action onAttack;
 
@@ -45,8 +47,17 @@ public class Unit : HealthBar
     {
         poolObject = PoolObject.instance;
         transform.GetComponent<HealthBar>().OnDeath += Disable;
+        transform.GetComponent<HealthBar>().OnDeath += GiveMoneyReward;
+
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
+    }
+
+
+    void GiveMoneyReward()
+    {
+        if (gameObject.CompareTag("Enemy"))
+            PlayerStatsScript.instance.money += moneyReward;
     }
 
     private void Reset()
@@ -122,10 +133,6 @@ public class Unit : HealthBar
         Disabled = false;
     }
 
-    private void OnDisable()
-    {
-        //StopAllCoroutines();
-    }
     IEnumerator DisableIE()
     {
         disabled = true;
