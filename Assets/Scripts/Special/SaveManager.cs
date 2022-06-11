@@ -28,7 +28,13 @@ public class SaveManager : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
+        {
             ResetPlayerPrefs();
+            print("Reset player pref");
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+            SavePrefs();
     }
     public void Init()
     {
@@ -38,6 +44,9 @@ public class SaveManager : MonoBehaviour
             levels.Add(new Level());
         }
         levels[0].unlocked = 1;
+        // Player money.
+        PlayerPrefs.SetFloat(PlayerMoneyKey, 0);
+
     }
 
 

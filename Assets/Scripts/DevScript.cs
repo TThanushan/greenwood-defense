@@ -18,5 +18,25 @@ public class DevScript : MonoBehaviour
             else
                 Time.timeScale = speed;
         }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetData();
+        }
+
+        // Kill Enemy captain.
+        if (Input.GetKeyDown(KeyCode.K))
+            PoolObject.instance.enemyCaptain.Disabled = true;
+
+        // Kill player Captain.
+        if (Input.GetKeyDown(KeyCode.P))
+            PoolObject.instance.playerCaptain.Disabled = true;
+
+    }
+
+    void ResetData()
+    {
+        PlayerStatsScript.instance.money = 0f;
+
     }
 }

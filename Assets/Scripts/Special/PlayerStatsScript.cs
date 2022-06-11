@@ -36,7 +36,6 @@ public class PlayerStatsScript
     private float startMoney = 300;
 
 
-
     public void PauseGame()
     {
         pause = !pause;

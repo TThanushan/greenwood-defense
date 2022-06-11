@@ -216,10 +216,11 @@ MonoBehaviour:
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
-  attackSpeed: 1
+  attackSpeed: 5
   attackRange: 0.24
   moveSpeed: 0.25
   moneyReward: 0
+  manaReward: 1
   paralysed: 0
 --- !u!95 &1829568272
 Animator:

@@ -204,9 +204,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5367232545533668775}
+  - component: {fileID: 28054676}
   - component: {fileID: 1829568272}
   - component: {fileID: 1829568273}
-  - component: {fileID: 28054676}
   m_Layer: 0
   m_Name: TrunkUnit2
   m_TagString: Ally
@@ -230,6 +230,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &28054676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5367232545533668792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5869539bade2e44489aa16c38f29090, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHealth: 0
+  damageTakenIncreasePercentage: 0
+  attackDamage: 1
+  attackSpeed: 1
+  attackRange: 1.5
+  moveSpeed: 0.25
+  moneyReward: 1
+  manaReward: 1
+  paralysed: 0
+  bullet: {fileID: 2116847984675237283, guid: 193351484e92eb644a433263dea027b3, type: 3}
+  bulletPosition: {fileID: 1142343704}
+  bulletShotEachTime: 3
+  timeBetweenShoot: 0.125
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3
@@ -261,28 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72f2ce9cfc453746b5eb104f7b08488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &28054676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5367232545533668792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5869539bade2e44489aa16c38f29090, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  attackDamage: 1
-  attackSpeed: 1
-  attackRange: 1.5
-  moveSpeed: 0.25
-  reward: 5
-  bullet: {fileID: 2116847984675237283, guid: 193351484e92eb644a433263dea027b3, type: 3}
-  bulletPosition: {fileID: 1142343704}
-  bulletShotEachTime: 3
-  timeBetweenShoot: 0.125
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

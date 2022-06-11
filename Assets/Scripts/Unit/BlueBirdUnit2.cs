@@ -4,49 +4,38 @@ public class BlueBirdUnit2 : Unit
 {
     [Header("Egg")]
     public float eggExplosionDamage;
-    public GameObject eggPrefab;
-    public float eggReloadTime;
-    public Transform eggSpawnPos;
+    public float birdSpawnReloadTime;
+    public GameObject birdEffectPrefab;
+    public Transform spawnPos;
 
-    float eggCooldown;
+    protected float birdSpawnCooldown;
 
     protected override void Update()
     {
         base.Update();
-        DoEffect();
+        if (EnoughRangeToAttackTarget() && birdSpawnCooldown <= Time.time)
+            DoEffect();
     }
 
 
     protected virtual void DoEffect()
     {
-        if (EnoughRangeToAttackTarget())
-            DropEgg();
+        DropEgg();
 
     }
 
-    protected GameObject DropEgg()
+    protected virtual void DropEgg()
     {
-        if (eggCooldown > Time.time)
-            return null;
-        return InstantiateEgg();
+        SummonEffectBird();
     }
 
-
-    protected GameObject InstantiateEgg()
+    protected virtual void SummonEffectBird()
     {
-        if (!eggPrefab || !Target)
-            return null;
-        GameObject newEgg = poolObject.GetPoolObject(eggPrefab);
-        newEgg.transform.position = eggSpawnPos.transform.position;
-
-        if (newEgg.GetComponent<EggBomb>())
-        {
-            EggBomb newEggScript = newEgg.GetComponent<EggBomb>();
-            newEggScript.explosionDamage = eggExplosionDamage;
-        }
-        eggCooldown = eggReloadTime + Time.time;
-
-
-        return newEgg;
+        if (!birdEffectPrefab)
+            return;
+        GameObject newBird = poolObject.GetPoolObject(birdEffectPrefab);
+        newBird.transform.position = spawnPos.transform.position;
+        newBird.GetComponent<BlueBirdUnit2Effect>().SetStats(eggExplosionDamage);
+        birdSpawnCooldown = Time.time + birdSpawnReloadTime;
     }
 }

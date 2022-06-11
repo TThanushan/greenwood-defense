@@ -135,6 +135,7 @@ MonoBehaviour:
   birdPrefab: {fileID: 5367232545533668792, guid: 196e342e0b623604b853586e044a08bd,
     type: 3}
   targetTag: 
+  spawnNumber: 3
 --- !u!50 &8405848738043902299
 Rigidbody2D:
   serializedVersion: 4

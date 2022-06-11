@@ -3,72 +3,42 @@ using UnityEngine;
 public class BlueBirdUnit3 : BlueBirdUnit2
 {
 
-    public float travelTime;
     public float timeBetweenTravel;
-    public float groundPositionY;
+    public int nbSpawn = 3;
+    public float distBetweenDrop;
 
-    float currentTimeBetweenTravel;
-    bool isTraveling;
-    int originalWayX;
-    float originalMoveSpeed;
-    bool once;
-
-    protected override void Awake()
+    float travelDistCoef = 1;
+    protected override void DropEgg()
     {
-        base.Awake();
-        originalWayX = wayX;
-        originalMoveSpeed = moveSpeed;
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        if (!isTraveling && currentTimeBetweenTravel <= Time.time && EnoughRangeToAttackTarget())
-            DropEggsOnDistance();
-        if (isTraveling)
-            MoveToward();
+        float t = 0f;
+        float timeBetween = 0.25f;
+        for (int i = 0; i < nbSpawn; i++)
+        {
+            Invoke("SummonEffectBird", t);
+            t += timeBetween;
+        }
+        Invoke("ResetTravelDistCoef", birdSpawnReloadTime);
 
     }
 
-    protected override void DoEffect()
+    void ResetTravelDistCoef()
     {
-        if (isTraveling)
-            DropEgg();
+        travelDistCoef = 1f;
     }
 
-    void DropEggsOnDistance()
+    protected override void SummonEffectBird()
     {
-        currentTimeBetweenTravel = travelTime * 2 + timeBetweenTravel;
-        isTraveling = true;
-        Invoke("ReverseWayX", travelTime);
-
-        Invoke("StopTravel", travelTime * 2);
-    }
-    protected override void AttackTarget()
-    {
-        if (isTraveling)
+        if (!birdEffectPrefab)
             return;
-
-        base.AttackTarget();
-    }
-    void StopTravel()
-    {
-        isTraveling = false;
-        wayX = originalWayX;
-        moveSpeed = originalMoveSpeed;
-    }
-    void ReverseWayX()
-    {
-        wayX *= -1;
+        GameObject newBird = poolObject.GetPoolObject(birdEffectPrefab);
+        newBird.transform.position = spawnPos.transform.position;
+        BlueBirdUnit2Effect blueBirdUnit2Effect = newBird.GetComponent<BlueBirdUnit2Effect>();
+        blueBirdUnit2Effect.travelDistance.x *= travelDistCoef;
+        blueBirdUnit2Effect.SetStats(eggExplosionDamage, targetTag);
+        birdSpawnCooldown = Time.time + birdSpawnReloadTime;
+        travelDistCoef += distBetweenDrop;
     }
 
-
-    protected override void MoveTowardTarget()
-    {
-        if (isTraveling)
-            return;
-        base.MoveTowardTarget();
-    }
 
 
 }

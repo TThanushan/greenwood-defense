@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBeforeExplosion: 1
-  explosionRange: 0.46
+  explosionRange: 0.5
   explosionDamage: 5
   explosionEffect: {fileID: 4352566265116347071, guid: d087d9ac0b07dff43a2a44cb76a56c38,
     type: 3}

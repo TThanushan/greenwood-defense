@@ -7,14 +7,14 @@ public class EggSpawner : MonoBehaviour
     public GameObject birdPrefab;
 
     public string targetTag = "Enemy";
+    public int spawnNumber;
+
     float currentTimeBeforeExplosion;
     private void Update()
     {
         if (currentTimeBeforeExplosion <= Time.time)
-        {
-            SpawnBird();
+            SpawnBirds();
 
-        }
     }
     private void OnEnable()
     {
@@ -22,15 +22,35 @@ public class EggSpawner : MonoBehaviour
 
     }
 
-    void SpawnBird()
+
+    Vector2 GetRandomSpawnPosition(Vector2 spawnPosition)
     {
-        if (!birdPrefab)
-            return;
-        GameObject newBirdPrefab = PoolObject.instance.GetPoolObject(birdPrefab);
-        newBirdPrefab.transform.position = transform.position;
-        newBirdPrefab.GetComponent<Unit>().SetTargetTag(targetTag);
+        float radius = 0.1f;
+        Vector2 randomPos = spawnPosition + Random.insideUnitCircle * radius;
+
+        return randomPos;
+    }
+
+    void SpawnBirds()
+    {
+        for (int i = 0; i < spawnNumber; i++)
+        {
+            SpawnBird();
+            print("bip3");
+        }
         CreateEffect();
         gameObject.SetActive(false);
+    }
+
+    void SpawnBird()
+    {
+        print("bip1");
+        if (!birdPrefab)
+            return;
+        print("bip2");
+        GameObject newBirdPrefab = PoolObject.instance.GetPoolObject(birdPrefab);
+        newBirdPrefab.transform.position = GetRandomSpawnPosition(transform.position);
+        newBirdPrefab.GetComponent<Unit>().SetTargetTag(targetTag);
     }
 
 

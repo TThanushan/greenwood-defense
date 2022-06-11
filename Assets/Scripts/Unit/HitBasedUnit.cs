@@ -33,6 +33,25 @@ public class HitBasedUnit : Unit
         UpdateHitBarLength();
     }
 
+
+    void DisableHitEffectBar()
+    {
+        OnDeath -= DisableHitEffectBar;
+        transform.Find("EffectBar").gameObject.SetActive(false);
+    }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        transform.Find("EffectBar").gameObject.SetActive(true);
+        OnDeath += DisableHitEffectBar;
+        ResetStats();
+    }
+
+    private void ResetStats()
+    {
+        hitCount = 0f;
+    }
+
     private void UpdateHitBarLength()
     {
         HitEffectBar.transform.localScale = new Vector3(GetNewBarLength(), HitEffectBar.transform.localScale.y, HitEffectBar.transform.localScale.z);

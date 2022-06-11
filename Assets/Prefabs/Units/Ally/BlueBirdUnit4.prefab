@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300741374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.026, y: 0.466, z: 0}
+  m_LocalPosition: {x: 0, y: 0.627, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5367232546079401137}
@@ -137,7 +137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5367232545347587151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.552, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7650407, y: 0.7650407, z: 0.7650407}
   m_Children: []
   m_Father: {fileID: 5367232546079401137}
@@ -242,23 +242,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7add702c2649748a5d3293a242b12b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 40
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 0
-  attackSpeed: 100000
+  attackDamage: 1
+  attackSpeed: 4
   attackRange: 0.3
   moveSpeed: 0.25
   moneyReward: 0
   paralysed: 0
   eggExplosionDamage: 5
-  eggPrefab: {fileID: 3962359380272746272, guid: f0b09a8cbd8eab04897b856c91c18999,
+  birdSpawnReloadTime: 15
+  birdEffectPrefab: {fileID: 5367232545533668792, guid: daa973600fcddc340920476f75a00fb7,
     type: 3}
-  eggReloadTime: 1
-  eggSpawnPos: {fileID: 300741375}
-  travelTime: 3
+  spawnPos: {fileID: 300741375}
   timeBetweenTravel: 7
-  groundPositionY: 0
+  nbSpawn: 1
+  distBetweenDrop: 0.2
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3
@@ -608,7 +608,7 @@ PrefabInstance:
     - target: {fileID: 2866307242526126206, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.717
+      value: 0.18300003
       objectReference: {fileID: 0}
     - target: {fileID: 2866307242526126206, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}
@@ -838,7 +838,7 @@ PrefabInstance:
     - target: {fileID: 5249401145586386962, guid: 99d62d5384a21654ea7698cc3afc901e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.685
+      value: 0.151
       objectReference: {fileID: 0}
     - target: {fileID: 5249401145586386962, guid: 99d62d5384a21654ea7698cc3afc901e,
         type: 3}

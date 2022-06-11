@@ -33,6 +33,7 @@ public class HealthBar : MonoBehaviour
         UpdateShieldBarWidth();
     }
 
+
     public void HealMaxHealthPercentage(float amount)
     {
         currentHealth *= 1 + amount / 100;
@@ -74,10 +75,23 @@ public class HealthBar : MonoBehaviour
             width = shield / currentHealth * 100f;
         return width;
     }
+
+    void DisableHealthBar()
+    {
+        healthBar.SetActive(false);
+
+    }
+
     protected virtual void OnEnable()
     {
+        healthBar.SetActive(true);
+        OnDeath += DisableHealthBar;
         healthBar.transform.localScale = new Vector3(0, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
         currentHealth = maxHealth;
+    }
+    protected virtual void OnDisable()
+    {
+        OnDeath -= DisableHealthBar;
     }
 
     public virtual void GetDamage(float damage, Transform caller = null)

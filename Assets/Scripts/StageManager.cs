@@ -3,23 +3,55 @@ using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
-    public GameObject playerCaptain;
-    public GameObject enemyCaptain;
-    public bool isVictory;
-    public bool isGameOver;
+    public static StageManager instance;
+    bool isVictory;
+    bool isGameOver;
 
-    public GameObject levelCompletePanel;
-    public GameObject gameOverPanel;
+    GameObject levelCompletePanel;
+    GameObject gameOverPanel;
+    float goldEarnedInStage;
 
     PlayerStatsScript playerStatsScript;
-    Unit playerCaptainUnit;
-    Unit enemyCaptainUnit;
+    Unit playerCaptain;
+    Unit enemyCaptain;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
+
 
     private void Start()
     {
+        InitVal();
+    }
+
+    void InitVal()
+    {
         playerStatsScript = PlayerStatsScript.instance;
-        playerCaptainUnit = GameObject.Find("PlayerCaptain").GetComponent<Unit>();
-        enemyCaptainUnit = GameObject.Find("EnemyCaptain").GetComponent<Unit>();
+        playerCaptain = GameObject.Find("PlayerCaptain").GetComponent<Unit>();
+        enemyCaptain = GameObject.Find("EnemyCaptain").GetComponent<Unit>();
+
+        gameOverPanel = transform.Find("MiddleGroup/GameOverPanel").gameObject;
+        levelCompletePanel = transform.Find("MiddleGroup/LevelCompletePanel").gameObject;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += ResetGoldEarnedInStage;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= ResetGoldEarnedInStage;
+
+    }
+
+    void ResetGoldEarnedInStage(Scene scene, LoadSceneMode mode)
+    {
+        goldEarnedInStage = 0f;
     }
 
     private void Update()
@@ -28,19 +60,25 @@ public class StageManager : MonoBehaviour
         UpdatePlayerLife();
     }
 
+    public void GivePlayerMoney(float money)
+    {
+        playerStatsScript.money += money;
+        goldEarnedInStage += money;
+    }
+
     void UpdatePlayerLife()
     {
-        playerStatsScript.life = (int)playerCaptainUnit.currentHealth;
+        playerStatsScript.life = (int)playerCaptain.currentHealth;
     }
 
     bool HasPlayerLoose()
     {
-        return playerCaptainUnit.Disabled;
+        return playerCaptain.Disabled;
     }
 
     bool HasPlayerWin()
     {
-        return enemyCaptainUnit.Disabled;
+        return enemyCaptain.Disabled;
     }
 
     void CheckIsGameOver()
@@ -54,13 +92,20 @@ public class StageManager : MonoBehaviour
             DoVictory();
     }
 
+    void UpdateLevelPanelInfos(GameObject panel)
+    {
+
+        panel.transform.Find("TotalGoldText").GetComponent<TMPro.TextMeshProUGUI>().text = playerStatsScript.money.ToString();
+
+        panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString();
+    }
+
     void DoVictory()
     {
         isVictory = true;
         levelCompletePanel.SetActive(true);
-
+        UpdateLevelPanelInfos(levelCompletePanel);
         LevelScore.instance.CalculateScore();
-
         SaveData();
     }
 
@@ -68,6 +113,7 @@ public class StageManager : MonoBehaviour
     {
         isGameOver = true;
         gameOverPanel.SetActive(true);
+        UpdateLevelPanelInfos(gameOverPanel);
 
         Time.timeScale = 1;
         PlayerStatsScript.instance.PauseGame(true);

@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class MenuScript : MonoBehaviour
 {
     public static MenuScript instance;
-    public Animator fadeAnimator;
-    //public Transform loadingBarTransform;
-    public Image blackSquareFade;
-    public const int levelSelectionSceneIndex = 1;
+    Animator fadeAnimator;
+    // Transform loadingBarTransform;
+    Image blackSquareFade;
+    const int levelSelectionSceneIndex = 1;
 
     void Start()
     {

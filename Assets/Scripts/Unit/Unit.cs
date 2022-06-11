@@ -16,6 +16,8 @@ public class Unit : HealthBar
     //public float reward = 5f;
     [Tooltip("Only Enemy give money.")]
     public float moneyReward = 1f;
+    [Tooltip("Only Enemy give mana.")]
+    public float manaReward = 1f;
 
     public event System.Action onAttack;
 
@@ -23,6 +25,9 @@ public class Unit : HealthBar
     protected string targetTag = "Enemy";
     protected float nextAttackTime = 0f;
     protected PoolObject poolObject;
+
+    ManaBar manaBar;
+
     private GameObject target;
     private bool disabled;
 
@@ -46,23 +51,41 @@ public class Unit : HealthBar
     protected virtual void Start()
     {
         poolObject = PoolObject.instance;
-        transform.GetComponent<HealthBar>().OnDeath += Disable;
-        transform.GetComponent<HealthBar>().OnDeath += GiveMoneyReward;
-
+        manaBar = ManaBar.instance;
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
     }
 
+    private void OnDisable()
+    {
+        Unsubscribe();
+    }
+
+    void Subscribe()
+    {
+        transform.GetComponent<HealthBar>().OnDeath += Disable;
+        transform.GetComponent<HealthBar>().OnDeath += GiveMoneyReward;
+        transform.GetComponent<HealthBar>().OnDeath += GiveManaReward;
+    }
+
+    void Unsubscribe()
+    {
+        transform.GetComponent<HealthBar>().OnDeath -= Disable;
+        transform.GetComponent<HealthBar>().OnDeath -= GiveMoneyReward;
+        transform.GetComponent<HealthBar>().OnDeath -= GiveManaReward;
+
+    }
 
     void GiveMoneyReward()
     {
         if (gameObject.CompareTag("Enemy"))
-            PlayerStatsScript.instance.money += moneyReward;
+            poolObject.stageManager.GivePlayerMoney(moneyReward);
     }
 
-    private void Reset()
+    void GiveManaReward()
     {
-
+        if (gameObject.CompareTag("Enemy"))
+            poolObject.manaBar.currentMana += manaReward;
     }
 
     public void SetTargetTag(string tag)
@@ -131,7 +154,9 @@ public class Unit : HealthBar
         base.OnEnable();
         RandomizeAttackRange();
         Disabled = false;
+        Subscribe();
     }
+
 
     IEnumerator DisableIE()
     {
@@ -198,7 +223,7 @@ public class Unit : HealthBar
 
     private void RandomizeAttackRange()
     {
-        attackRange += Random.Range(0f, attackRange / 8f);
+        attackRange += Random.Range(0f, attackRange / 6f);
     }
 
     protected float GetRandomizedNextAttackTime()

@@ -12,14 +12,27 @@ public class PoolObject : MonoBehaviour
     private GameObject[] enemies;
     private GameObject[] allies;
     public List<GameObject> pool;
-
+    public PlayerStatsScript playerStatsScript;
+    public StageManager stageManager;
+    public ManaBar manaBar;
+    public Unit enemyCaptain;
+    public Unit playerCaptain;
     void Awake()
     {
         if (instance == null)
             instance = this;
         pool = new List<GameObject>();
+        enemyCaptain = GameObject.Find("EnemyCaptain").GetComponent<Unit>();
+        playerCaptain = GameObject.Find("PlayerCaptain").GetComponent<Unit>();
     }
 
+    private void Start()
+    {
+        playerStatsScript = PlayerStatsScript.instance;
+        manaBar = ManaBar.instance;
+        stageManager = StageManager.instance;
+
+    }
     private void Update()
     {
         FindAllEnemies();
