@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using TMPro;
+﻿using TMPro;
+using UnityEngine;
 
 public class ManaBar : MonoBehaviour
 {
@@ -29,7 +28,10 @@ public class ManaBar : MonoBehaviour
         UpdateCurrentManaText();
         RegenerateMana();
     }
-
+    private void Start()
+    {
+        regenerationSpeed += 0.1f * int.Parse(PoolObject.instance.GetStageNumber());
+    }
     private void UpdateCurrentManaText()
     {
         currentManaText.text = Mathf.FloorToInt(currentMana).ToString();

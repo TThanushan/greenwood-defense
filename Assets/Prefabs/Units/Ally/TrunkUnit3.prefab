@@ -274,11 +274,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 6
   attackRange: 2
   moveSpeed: 0.25
+  moneyReward: 1
+  manaReward: 1
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 1dd1b24d951e6504488872d722ec0642, type: 3}
   bulletPosition: {fileID: 1142343704}

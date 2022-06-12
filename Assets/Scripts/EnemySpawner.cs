@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -7,7 +8,6 @@ public class EnemySpawner : MonoBehaviour
     public Transform spawnPosition;
     public float randomTimeBetweenSpawn;
     private float nextSpawnTime = 0f;
-
     PoolObject poolObject;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,15 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    string GetStageNumber()
+    {
+        return SceneManager.GetActiveScene().name.Split(' ')[1];
+    }
+
+    float GetIncreasedHealthUsingStageNumber(float health)
+    {
+        return Mathf.FloorToInt(health * (1 + float.Parse(GetStageNumber()) / 100));
+    }
     void Spawn()
     {
         if (spawnBlocks.Length == 0)
@@ -37,9 +46,12 @@ public class EnemySpawner : MonoBehaviour
             isSpawning = IsSpawning(spawnBlock);
             if (!isSpawning)
                 continue;
-
             GameObject newEnemy = poolObject.GetPoolObject(spawnBlock.enemyPrefab);
+            Unit unit = newEnemy.GetComponent<Unit>();
+            unit.maxHealth = GetIncreasedHealthUsingStageNumber(unit.maxHealth);
+            unit.currentHealth = GetIncreasedHealthUsingStageNumber(unit.currentHealth);
             newEnemy.transform.position = GetRandomSpawnPosition();
+
             nextSpawnTime = timeBetweenSpawn + Time.time;
             nextSpawnTime += Random.Range(0, randomTimeBetweenSpawn);
 

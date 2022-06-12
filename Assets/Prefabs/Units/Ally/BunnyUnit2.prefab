@@ -217,9 +217,10 @@ MonoBehaviour:
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 1
-  attackRange: 1
+  attackRange: 1.5
   moveSpeed: 0.15
   moneyReward: 0
+  manaReward: 1
   paralysed: 0
   timeBetweenSpawn: 5
   bunnies:

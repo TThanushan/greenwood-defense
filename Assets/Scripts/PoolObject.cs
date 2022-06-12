@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PoolObject : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PoolObject : MonoBehaviour
     public ManaBar manaBar;
     public Unit enemyCaptain;
     public Unit playerCaptain;
+
+    public GameObject moneyRewardEffect;
+
     void Awake()
     {
         if (instance == null)
@@ -31,7 +35,6 @@ public class PoolObject : MonoBehaviour
         playerStatsScript = PlayerStatsScript.instance;
         manaBar = ManaBar.instance;
         stageManager = StageManager.instance;
-
     }
     private void Update()
     {
@@ -39,6 +42,10 @@ public class PoolObject : MonoBehaviour
         FindAllAllies();
     }
 
+    public string GetStageNumber()
+    {
+        return SceneManager.GetActiveScene().name.Split(' ')[1];
+    }
 
     public GameObject GetPoolObject(GameObject prefab)
     {

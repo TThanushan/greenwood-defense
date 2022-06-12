@@ -221,6 +221,8 @@ MonoBehaviour:
   attackSpeed: 2
   attackRange: 0.7
   moveSpeed: 0.15
+  moneyReward: 1
+  manaReward: 1
   paralysed: 0
   healthShieldBonusRespawnTime: 5
   healthShieldBonusPercentage: 15

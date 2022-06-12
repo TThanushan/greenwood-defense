@@ -250,6 +250,7 @@ MonoBehaviour:
   attackRange: 0.3
   moveSpeed: 0.25
   moneyReward: 0
+  manaReward: 1
   paralysed: 0
   eggExplosionDamage: 5
   birdSpawnReloadTime: 15

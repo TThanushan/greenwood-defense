@@ -224,7 +224,7 @@ Transform:
   m_GameObject: {fileID: 5367232545533668792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.979, y: -0.104, z: 0}
-  m_LocalScale: {x: 1.03, y: 1.03, z: 1.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5367232546079401137}
   - {fileID: 5367232544628360047}
@@ -250,6 +250,8 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 3
   moveSpeed: 0.2
+  moneyReward: 1
+  manaReward: 1
   paralysed: 0
   bullet: {fileID: 5044992576239302536, guid: 6bc1681f0bcd0ca4f8aa71efa9776e53, type: 3}
   bulletPosition: {fileID: 992659669}

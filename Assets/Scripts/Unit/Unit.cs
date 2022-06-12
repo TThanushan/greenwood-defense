@@ -54,6 +54,7 @@ public class Unit : HealthBar
         manaBar = ManaBar.instance;
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
+        FlipUnitSpriteOnWayX();
     }
 
     private void OnDisable()
@@ -88,6 +89,8 @@ public class Unit : HealthBar
             poolObject.manaBar.currentMana += manaReward;
     }
 
+
+
     public void SetTargetTag(string tag)
     {
         targetTag = tag;
@@ -101,7 +104,6 @@ public class Unit : HealthBar
         if (disabled) return;
         base.Update();
 
-        FlipUnitSpriteOnWayX();
 
         if (paralysed)
             return;

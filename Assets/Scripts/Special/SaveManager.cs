@@ -7,7 +7,7 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance;
     public int maxLevelUnlocked = 1;
     public List<Level> levels;
-    public const int levelsCount = 10;
+    public const int levelsCount = 50;
 
     const string MaxLevelUnlockedKey = "MaxLevelUnlockedKey";
     const string PlayerMoneyKey = "Money";

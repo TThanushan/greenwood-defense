@@ -621,9 +621,9 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 7241784478119512346, guid: 3bf43f1323578284db9a6b945bb36e6a,
       type: 3}
     chanceToSpawn: 10
-  timeBetweenSpawn: 5
+  timeBetweenSpawn: 10
   spawnPosition: {fileID: 78595160}
-  randomTimeBetweenSpawn: 4
+  randomTimeBetweenSpawn: 6
 --- !u!4 &304077391
 Transform:
   m_ObjectHideFlags: 0
@@ -1056,6 +1056,7 @@ MonoBehaviour:
   manaBar: {fileID: 0}
   enemyCaptain: {fileID: 0}
   playerCaptain: {fileID: 0}
+  moneyRewardEffect: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4275,6 +4276,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5367232545533668792, guid: b0126a79ac7416b45b7bd7628c164b68,
         type: 3}
+    - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
+      propertyPath: UnitButtons.Array.data[1].reloadTime
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1641679973, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: m_text
       value: x
@@ -4326,22 +4331,22 @@ PrefabInstance:
     - target: {fileID: 896537920897461777, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 896537920897461777, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 896537920897461777, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 254.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 896537920897461777, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 896537922165965297, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
@@ -4436,7 +4441,7 @@ PrefabInstance:
     - target: {fileID: 4224208561692200348, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4224208562024255627, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}

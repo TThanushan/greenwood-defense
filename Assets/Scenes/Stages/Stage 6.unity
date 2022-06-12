@@ -515,7 +515,7 @@ MonoBehaviour:
     chanceToSpawn: 7
   timeBetweenSpawn: 3
   spawnPosition: {fileID: 78595160}
-  randomTimeBetweenSpawn: 4
+  randomTimeBetweenSpawn: 6
 --- !u!4 &304077391
 Transform:
   m_ObjectHideFlags: 0
@@ -873,6 +873,7 @@ MonoBehaviour:
   manaBar: {fileID: 0}
   enemyCaptain: {fileID: 0}
   playerCaptain: {fileID: 0}
+  moneyRewardEffect: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3997,11 +3998,33 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: UnitButtons.Array.data[0].cost
-      value: 15
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
+      propertyPath: UnitButtons.Array.data[2].cost
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: UnitButtons.Array.data[4].cost
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
+      propertyPath: UnitButtons.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 5367232545533668792, guid: dfb74272a2c27e44bba5785966177a40,
+        type: 3}
+    - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
+      propertyPath: UnitButtons.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 5367232545533668792, guid: a10cd52ec8ff92941a96368c6c1c5e99,
+        type: 3}
+    - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
+      propertyPath: UnitButtons.Array.data[0].reloadTime
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
+      propertyPath: UnitButtons.Array.data[2].reloadTime
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1163179565, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: UnitButtons.Array.data[4].reloadTime
@@ -4167,8 +4190,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4224208560408486524, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
+      propertyPath: m_Name
+      value: BunnyUnit2SpawnButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224208560408486524, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224208561692200348, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_Name
+      value: DuckUnit2SpawnButton
       objectReference: {fileID: 0}
     - target: {fileID: 4224208561692200348, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
@@ -4194,6 +4227,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 340
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924346826169154771, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: BunnyUnit2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924346826900788019, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: DuckUnit2
       objectReference: {fileID: 0}
     - target: {fileID: 5359427527537722322, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
@@ -4229,121 +4272,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072929, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.76586
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072929, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.76586
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072929, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.76586
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072929, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 5.700001
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072929, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_text
-      value: x
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontStyle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_enableVertexGradient
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.topLeft.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.topLeft.g
-      value: 0.92070246
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.topLeft.r
-      value: 0.36320752
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.topRight.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.topRight.g
-      value: 0.92070246
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.topRight.r
-      value: 0.36320752
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.bottomLeft.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.bottomLeft.g
-      value: 0.42887634
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.bottomLeft.r
-      value: 0.09803921
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.bottomRight.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.bottomRight.g
-      value: 0.42887634
-      objectReference: {fileID: 0}
-    - target: {fileID: 6160283645630072930, guid: b93e3da3376e0b24d8ded505dd74e505,
-        type: 3}
-      propertyPath: m_fontColorGradient.bottomRight.r
-      value: 0.09803921
       objectReference: {fileID: 0}
     - target: {fileID: 6160283646466292287, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}

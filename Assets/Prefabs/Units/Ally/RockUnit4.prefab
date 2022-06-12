@@ -219,6 +219,8 @@ MonoBehaviour:
   attackSpeed: 100000
   attackRange: 0.24
   moveSpeed: 0.1
+  moneyReward: 1
+  manaReward: 1
   paralysed: 0
   damageReductionPercentage: 50
   defenseBonusDuration: 10

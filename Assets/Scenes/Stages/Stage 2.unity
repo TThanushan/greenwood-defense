@@ -624,9 +624,9 @@ MonoBehaviour:
   - enemyPrefab: {fileID: 7241784478119512346, guid: 0435ba058d14a3b43bb1c0cb5b47a4e4,
       type: 3}
     chanceToSpawn: 3
-  timeBetweenSpawn: 5
+  timeBetweenSpawn: 10
   spawnPosition: {fileID: 78595160}
-  randomTimeBetweenSpawn: 4
+  randomTimeBetweenSpawn: 6
 --- !u!4 &304077391
 Transform:
   m_ObjectHideFlags: 0
@@ -1128,6 +1128,7 @@ MonoBehaviour:
   manaBar: {fileID: 0}
   enemyCaptain: {fileID: 0}
   playerCaptain: {fileID: 0}
+  moneyRewardEffect: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
