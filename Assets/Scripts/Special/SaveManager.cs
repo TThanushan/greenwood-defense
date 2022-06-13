@@ -7,6 +7,9 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance;
     public int maxLevelUnlocked = 1;
     public List<Level> levels;
+    public List<Unit> units;
+    public List<string> unlockedUnits;
+
     public const int levelsCount = 50;
 
     const string MaxLevelUnlockedKey = "MaxLevelUnlockedKey";
@@ -18,10 +21,13 @@ public class SaveManager : MonoBehaviour
         else
             Destroy(gameObject);
         if (!SaveExist())
+        {
             Init();
+        }
         else
             LoadPrefs();
 
+        InitUnits();
 
     }
 
@@ -153,6 +159,50 @@ public class SaveManager : MonoBehaviour
     public bool HasCurrentLevelBeenPlayed()
     {
         return GetCurrentLevel().HasEverBeenPlayed();
+    }
+
+
+    void InitUnits()
+    {
+        units = new List<Unit>
+        {
+            new Unit("Chicken1", 25, 6, 150),
+            new Unit("Chicken2", 35, 8, 300),
+            new Unit("Chicken3", 45, 6, 450),
+            new Unit("Chicken4", 55, 6, 600),
+            new Unit("Duck1", 30, 8, 150),
+            new Unit("Duck2", 40, 10, 300),
+            new Unit("Duck3", 50, 12, 450),
+            new Unit("Duck4", 60, 14, 600),
+            new Unit("Trunk1", 30, 10, 150),
+            new Unit("Trunk2", 45, 12, 300),
+            new Unit("Trunk3", 60, 14, 450),
+            new Unit("Trunk4", 75, 16, 600),
+        };
+
+        unlockedUnits = new List<string>
+        {
+            "Chicken1",
+            "Duck1",
+            "Trunk2"
+        };
+    }
+
+    [System.Serializable]
+    public class Unit
+    {
+        public string name;
+        public float cost;
+        public float reloadTime;
+        public float upgradePrice;
+
+        public Unit(string name, float cost, float reloadTime, float upgradePrice)
+        {
+            this.name = name;
+            this.cost = cost;
+            this.reloadTime = reloadTime;
+            this.upgradePrice = upgradePrice;
+        }
     }
 
     [System.Serializable]

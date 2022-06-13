@@ -57,8 +57,9 @@ public class Unit : HealthBar
         FlipUnitSpriteOnWayX();
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
         Unsubscribe();
     }
 
