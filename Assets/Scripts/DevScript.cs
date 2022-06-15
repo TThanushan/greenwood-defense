@@ -24,6 +24,9 @@ public class DevScript : MonoBehaviour
             ResetData();
         }
 
+        if (Input.GetKeyDown(KeyCode.M))
+            PlayerStatsScript.instance.money += 100000;
+
         // Kill Enemy captain.
         if (Input.GetKeyDown(KeyCode.K))
             PoolObject.instance.enemyCaptain.Disabled = true;

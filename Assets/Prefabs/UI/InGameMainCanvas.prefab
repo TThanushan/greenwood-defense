@@ -2500,36 +2500,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosition: {x: -2.53, y: 0}
-  UnitButtons:
-  - name: 
-    cost: 35
-    reloadTime: 2
-    prefab: {fileID: 5367232545533668792, guid: 6730e4df0454291459876bcc2f35c3b1,
-      type: 3}
-    reloadBar: {fileID: 0}
-    enoughManaShade: {fileID: 0}
-  - name: 
-    cost: 25
-    reloadTime: 6
-    prefab: {fileID: 5367232545533668792, guid: 45e9b3a22aacdab4890b4614d8c4ca98,
-      type: 3}
-    reloadBar: {fileID: 0}
-    enoughManaShade: {fileID: 0}
-  - name: 
-    cost: 20
-    reloadTime: 8
-    prefab: {fileID: 5367232545533668792, guid: 929909e7345061f45a8b9dedc5e0d66d,
-      type: 3}
-    reloadBar: {fileID: 0}
-    enoughManaShade: {fileID: 0}
-  - name: 
-    cost: 30
-    reloadTime: 10
-    prefab: {fileID: 5367232545533668792, guid: 6a529060b96e81044ab198791807c25b,
-      type: 3}
-    reloadBar: {fileID: 0}
-    enoughManaShade: {fileID: 0}
-  buttonPrefab: {fileID: 0}
+  unitButtons: []
+  buttonPrefab: {fileID: 2641916048609594892, guid: 3ec630a1474cea64d94126d1f45ccc85,
+    type: 3}
 --- !u!1 &6160283645586809653
 GameObject:
   m_ObjectHideFlags: 0

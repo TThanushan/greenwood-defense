@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpgradesShop : MonoBehaviour
+public class UpgradesShopUIManager : MonoBehaviour
 {
     private SaveManager saveManager;
     public string selectedCard;
@@ -14,8 +14,8 @@ public class UpgradesShop : MonoBehaviour
     {
         if (!saveManager)
             saveManager = SaveManager.instance;
-        InitUpgradesCards();
         UpdateShopUI();
+        InitUpgradesCards();
     }
 
     void UpdateShopUI(string oldCardName = "")
@@ -32,16 +32,28 @@ public class UpgradesShop : MonoBehaviour
         transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = PlayerStatsScript.instance.money.ToString() + '$';
     }
 
-    void UpdateUpgradesCards()
+    void UpdateButtonName(string oldCardName)
+    {
+        if (selectedCard == "")
+            return;
+        Transform button = transform.Find("Buttons/UnitsButtonPanel/" + oldCardName);
+        button.name = selectedCard;
+    }
+
+    void UpdateUpgradesCardsForLockedUnits()
     {
         Transform unitsButtonPanel = transform.Find("Buttons/UnitsButtonPanel");
         foreach (Transform upgradeCardButton in unitsButtonPanel)
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
-            print(unitName);
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
             AddTriggers(upgradeCardButton);
         }
+    }
+    void UpdateUpgradesCards()
+    {
+        UpdateUpgradesCardsForLockedUnits();
+
     }
 
     void SetSelectedCardInfos()
@@ -58,7 +70,7 @@ public class UpgradesShop : MonoBehaviour
 
         //SaveManager.Unit nextUnit = GetUpgradeUnit(unitName);
         string name = unitName;
-        string effectText = saveManager.GetUnit(unitName).effectDescription;
+        string effectText = GetUnit(unitName).effectDescription;
         if (IsUnitUnlocked(unitName))
         {
             SaveManager.Unit upgradeUnit = GetUpgradeUnit(unitName);
@@ -107,49 +119,19 @@ public class UpgradesShop : MonoBehaviour
         entry.callback.AddListener((eventData) => { function(); });
         eventTrigger.triggers.Add(entry);
     }
-
-    void UpdateButtonName(string oldCardName)
-    {
-        if (selectedCard == "")
-            return;
-        Transform button = transform.Find("Buttons/UnitsButtonPanel/" + oldCardName);
-        button.name = selectedCard;
-    }
-
-
     void InitUpgradesCards()
     {
         Transform unitsButtonPanel = transform.Find("Buttons/UnitsButtonPanel");
         foreach (Transform upgradeCardButton in unitsButtonPanel)
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
-            AddTriggers(upgradeCardButton);
-            if (IsUnitUnlocked(unitName))
-            {
-                SetUpgradeButtonName(GetUnlockedUnit(unitName), upgradeCardButton.name);
-            }
-            if (!IsUnitUnlocked(unitName))
+            if (!saveManager.unlockedUnits.Contains(unitName))
                 SetActiveUpgradeCardButtonLock(upgradeCardButton);
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
-            //if (!saveManager.unlockedUnits.Contains(unitName))
+            AddTriggers(upgradeCardButton);
         }
     }
 
-    void SetUpgradeButtonName(string unitName, string oldName)
-    {
-        string path = "Buttons/UnitsButtonPanel/";
-        transform.Find(path + oldName).name = "UpgradeCard" + unitName;
-    }
-
-    string GetUnlockedUnit(string unitName)
-    {
-        foreach (string unitNameUnlocked in saveManager.unlockedUnits)
-        {
-            if (GetUnitNameWithoutNumbers(unitName) == GetUnitNameWithoutNumbers(unitNameUnlocked))
-                return unitNameUnlocked;
-        }
-        return unitName;
-    }
 
 
 
@@ -165,16 +147,8 @@ public class UpgradesShop : MonoBehaviour
 
     bool IsUnitUnlocked(string unitName)
     {
-        foreach (string name in saveManager.unlockedUnits)
-        {
-            string nameNoNumber = GetUnitNameWithoutNumbers(name);
-            if (nameNoNumber == GetUnitNameWithoutNumbers(unitName))
-                return true;
-        }
         return saveManager.unlockedUnits.Contains(unitName);
     }
-
-
 
     void EmptySelectedCardInfos()
     {
@@ -199,7 +173,7 @@ public class UpgradesShop : MonoBehaviour
         {
             level++;
             string nextUnitName = GetUnitNameWithoutNumbers(unitName) + level.ToString();
-            unit = saveManager.GetUnit(nextUnitName);
+            unit = GetUnit(nextUnitName);
         }
         return unit;
     }
@@ -223,7 +197,7 @@ public class UpgradesShop : MonoBehaviour
     {
         unitName = GetUnitNameFromSelectCard();
         upgradeUnitName = GetUpgradeUnit(unitName).name;
-        price = int.Parse(GetUnitPrice(unitName));
+        price = int.Parse(GetUnitPrice(upgradeUnitName));
     }
 
     void Upgrade(string upgradeUnitName, string unitName, float price)
@@ -237,17 +211,15 @@ public class UpgradesShop : MonoBehaviour
     {
         PlayerStatsScript.instance.money -= price;
         saveManager.unlockedUnits.Add(unitName);
+        print("bip");
     }
 
-    void DisableUpgradeCard(Button button = null)
+    void DisableUpgradeCard()
     {
-        if (button is null)
-            button = GetSelectedCard().Find("Button").GetComponent<Button>();
+        Button button = GetSelectedCard().Find("Button").GetComponent<Button>();
         button.interactable = false;
         Destroy(button.GetComponent<EventTrigger>());
     }
-
-
 
     void UpdateUIAfterUnlock(string upgradeUnitName)
     {
@@ -261,9 +233,6 @@ public class UpgradesShop : MonoBehaviour
 
     public void UnlockUnit()
     {
-        if (selectedCard == "")
-            return;
-
         if (IsUnitLevelMax())
             return;
         float price;
@@ -273,7 +242,12 @@ public class UpgradesShop : MonoBehaviour
 
         if (CanUpgrade(upgradeUnitName, price))
             return;
+        foreach (var unit in saveManager.unlockedUnits)
+        {
+            print(unit);
 
+        }
+        print(unitName);
         if (!IsUnitUnlocked(unitName))
         {
             Unlock(unitName, price);
@@ -316,6 +290,9 @@ public class UpgradesShop : MonoBehaviour
     }
 
 
+
+
+
     void SetActiveUpgradeCardButtonLock(Transform button, bool value = true)
     {
         button.Find("Lock").gameObject.SetActive(value);
@@ -323,25 +300,19 @@ public class UpgradesShop : MonoBehaviour
     }
 
 
-
     void SetUpgradeButtonTexts(Transform upgradeCardButton, string unitName)
     {
         string nameWithoutNumbers = GetUnitNameWithoutNumbers(unitName);
+        // Set unit sprite.
         upgradeCardButton.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + nameWithoutNumbers);
+        // Set title.
         upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = nameWithoutNumbers;
+
+
+        //Set Level.
         string lvl = GetUnitLevel(unitName);
         if (!IsUnitUnlocked(unitName))
             lvl = "1";
-        else if (IsUnitLevelMax(unitName))
-        {
-
-            Transform t = upgradeCardButton.Find("UpgradePrice/PriceText");
-            //GetSelectedCard().Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = "Max";
-            TextMeshProUGUI textMeshProUGUI = t.GetComponent<TMPro.TextMeshProUGUI>();
-            textMeshProUGUI.text = "Max";
-            DisableUpgradeCard(upgradeCardButton.Find("Button").GetComponent<Button>());
-        }
-        print("lvl + " + lvl + " " + unitName);
         upgradeCardButton.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/4";
         // Set upgrade price;
         if (!IsUnitLevelMax(unitName))
@@ -351,7 +322,16 @@ public class UpgradesShop : MonoBehaviour
 
 
 
+    SaveManager.Unit GetUnit(string unitName)
+    {
+        foreach (var unit in saveManager.units)
+        {
+            if (unit.name == unitName)
+                return unit;
+        }
 
+        return null;
+    }
 
     string GetUnitPrice(string unitName)
     {

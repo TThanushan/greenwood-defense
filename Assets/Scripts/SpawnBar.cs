@@ -5,18 +5,33 @@ using UnityEngine.UI;
 public class SpawnBar : MonoBehaviour
 {
     public Vector2 spawnPosition;
-    public UnitButton[] UnitButtons;
+    public UnitButton[] unitButtons;
     public GameObject buttonPrefab;
     private void Start()
     {
+        InitUnitButtons();
         GenerateButtons();
         OrderChildButtonsByCost();
-
     }
 
     private void Update()
     {
         UpdateUnitButtons();
+    }
+
+
+    void InitUnitButtons()
+    {
+        SaveManager saveManager = SaveManager.instance;
+        unitButtons = new UnitButton[saveManager.unlockedUnits.Count];
+        int i = 0;
+        foreach (string unitName in saveManager.unlockedUnits)
+        {
+            SaveManager.Unit unitS = saveManager.GetUnit(unitName);
+            UnitButton unitButton = new UnitButton(unitS.name, unitS.cost, unitS.reloadTime);
+            unitButtons[i] = unitButton;
+            i++;
+        }
     }
 
     private Transform GetCorrespondingChild(string name)
@@ -31,7 +46,7 @@ public class SpawnBar : MonoBehaviour
 
     public void SpawnUnit(string name)
     {
-        foreach (UnitButton unitButton in UnitButtons)
+        foreach (UnitButton unitButton in unitButtons)
         {
             if (unitButton.name == name && unitButton.ReadyToSpawn() && unitButton.HasEnoughMana())
             {
@@ -51,7 +66,7 @@ public class SpawnBar : MonoBehaviour
 
     private void UpdateUnitButtons()
     {
-        foreach (UnitButton unitButton in UnitButtons)
+        foreach (UnitButton unitButton in unitButtons)
         {
             unitButton.Update();
         }
@@ -60,7 +75,7 @@ public class SpawnBar : MonoBehaviour
     public void OrderChildButtonsByCost()
     {
         float lowest = Mathf.Infinity;
-        foreach (UnitButton unitButton in UnitButtons)
+        foreach (UnitButton unitButton in unitButtons)
         {
             if (unitButton.cost <= lowest)
             {
@@ -70,9 +85,12 @@ public class SpawnBar : MonoBehaviour
         }
     }
 
+
+
     void GenerateButtons()
     {
-        foreach (UnitButton unitButton in UnitButtons)
+
+        foreach (UnitButton unitButton in unitButtons)
         {
             GameObject button = Instantiate(buttonPrefab, transform);
             SetButtonName(button, unitButton);
@@ -84,7 +102,6 @@ public class SpawnBar : MonoBehaviour
             EnableButtonStars(button, unitButton);
         }
     }
-
 
 
     void SetButtonReloadBarAndEnougManaShade(GameObject button, UnitButton unitButton)
@@ -165,6 +182,13 @@ public class SpawnBar : MonoBehaviour
         public GameObject enoughManaShade;
 
         private float currentReloadTime = 0f;
+
+        public UnitButton(string name, float cost, float reloadTime)
+        {
+            this.name = name;
+            this.cost = cost;
+            this.reloadTime = reloadTime;
+        }
 
         public void Update()
         {

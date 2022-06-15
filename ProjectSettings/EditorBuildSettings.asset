@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Upgrades.unity
     guid: 44555a664417397418da2633797e46ea
   - enabled: 1
+    path: Assets/Scenes/Stages/Stage 11.unity
+    guid: 142437413901a7448abfa87f8105d4fd
+  - enabled: 1
     path: Assets/Scenes/Stages/Stage 1.unity
     guid: 23247d27d5a43724d8a92ac84b822840
   - enabled: 1
@@ -44,7 +47,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stages/Stage 10.unity
     guid: a4e81646625bf724892256af345cd110
-  - enabled: 1
-    path: Assets/Scenes/Stages/Stage 11.unity
-    guid: 142437413901a7448abfa87f8105d4fd
   m_configObjects: {}

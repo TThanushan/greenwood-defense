@@ -10,8 +10,8 @@ public class ChickenUnit4 : ChickenUnit3
     private Transform rageEffectParticle;
 
     [Header("Damage Bonus By Hit")]
-    public float damageBonus;
-    public float maxDamageBonus;
+    public float damageBonusPercentage;
+    public float maxDamageBonusPercentage;
     public float damageBonusDuration;
     private float currentDamageBonus;
 
@@ -45,13 +45,13 @@ public class ChickenUnit4 : ChickenUnit3
 
     void IncreaseAttackDamage()
     {
-        if (currentDamageBonus >= damageBonus)
+        if (currentDamageBonus >= damageBonusPercentage)
         {
-            currentDamageBonus = maxDamageBonus;
+            currentDamageBonus = maxDamageBonusPercentage;
             return;
         }
 
-        attackDamage *= 1 + (damageBonus / 100);
+        attackDamage *= 1 + (damageBonusPercentage / 100);
         damageBonusTimeExpiration = Time.time + damageBonusDuration;
     }
 
