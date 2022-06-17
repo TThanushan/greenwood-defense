@@ -19,9 +19,7 @@ public class EggSpawner : MonoBehaviour
     private void OnEnable()
     {
         currentTimeBeforeExplosion = Time.time + timeBeforeExplosion;
-
     }
-
 
     Vector2 GetRandomSpawnPosition(Vector2 spawnPosition)
     {
@@ -36,7 +34,6 @@ public class EggSpawner : MonoBehaviour
         for (int i = 0; i < spawnNumber; i++)
         {
             SpawnBird();
-            print("bip3");
         }
         CreateEffect();
         gameObject.SetActive(false);
@@ -44,7 +41,7 @@ public class EggSpawner : MonoBehaviour
 
     void SpawnBird()
     {
-        print("bip1");
+
         if (!birdPrefab)
             return;
         print("bip2");

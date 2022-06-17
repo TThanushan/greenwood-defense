@@ -232,7 +232,6 @@ public class SpawnBar : MonoBehaviour
         private void UpdateReloadBarLength()
         {
             if (!reloadBar) return;
-            print("bip");
             reloadBar.localScale = new Vector2(1f, currentReloadTime / reloadTime);
         }
     }

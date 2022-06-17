@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
+    public float levelCompleteMoneyReward = 100;
     public static StageManager instance;
     bool isVictory;
     bool isGameOver;
@@ -14,6 +15,8 @@ public class StageManager : MonoBehaviour
     PlayerStatsScript playerStatsScript;
     Unit playerCaptain;
     Unit enemyCaptain;
+    float rewardPreviouslyGiven;
+
 
     void Awake()
     {
@@ -28,12 +31,47 @@ public class StageManager : MonoBehaviour
         InitVal();
     }
 
+    public void GiveMoneyReward()
+    {
+        float reward = CalculateRewardAmount();
+        PlayerStatsScript.instance.money += reward;
+    }
+
+    float CalculateRewardAmount()
+    {
+        float reward = levelCompleteMoneyReward;
+        int stars = LevelScore.instance.HowManyStar();
+        reward = GetRewardAfterPercentage(reward, stars);
+        if (reward <= rewardPreviouslyGiven)
+            reward = 0f;
+        else
+            reward -= rewardPreviouslyGiven;
+        return reward;
+    }
+
+    float GetRewardPreviouslyGiven()
+    {
+        float reward = levelCompleteMoneyReward;
+        int savedLevelSCore = SaveManager.instance.GetLevelScore();
+        int stars = LevelScore.instance.HowManyStar(savedLevelSCore);
+        return GetRewardAfterPercentage(reward, stars);
+    }
+
+    float GetRewardAfterPercentage(float reward, int stars)
+    {
+        if (stars == 2)
+            reward *= 0.66f;
+        else if (stars == 1)
+            reward *= 0.33f;
+        else if (stars == 0)
+            reward = 0f;
+        return reward;
+    }
     void InitVal()
     {
         playerStatsScript = PlayerStatsScript.instance;
         playerCaptain = GameObject.Find("PlayerCaptain").GetComponent<Unit>();
         enemyCaptain = GameObject.Find("EnemyCaptain").GetComponent<Unit>();
-
         gameOverPanel = transform.Find("MiddleGroup/GameOverPanel").gameObject;
         levelCompletePanel = transform.Find("MiddleGroup/LevelCompletePanel").gameObject;
     }
@@ -94,18 +132,19 @@ public class StageManager : MonoBehaviour
 
     void UpdateLevelPanelInfos(GameObject panel)
     {
-
         panel.transform.Find("TotalGoldText").GetComponent<TMPro.TextMeshProUGUI>().text = playerStatsScript.money.ToString();
 
-        panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString();
+        panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage + CalculateRewardAmount()).ToString();
     }
 
     void DoVictory()
     {
         isVictory = true;
         levelCompletePanel.SetActive(true);
-        UpdateLevelPanelInfos(levelCompletePanel);
+        rewardPreviouslyGiven = GetRewardPreviouslyGiven();
         LevelScore.instance.CalculateScore();
+        GiveMoneyReward();
+        UpdateLevelPanelInfos(levelCompletePanel);
         SaveData();
     }
 

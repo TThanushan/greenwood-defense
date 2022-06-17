@@ -338,7 +338,7 @@ public class UpgradesShopUIManager : MonoBehaviour
         foreach (SaveManager.Unit unit in saveManager.units)
         {
             if (unit.name == unitName)
-                return unit.upgradePrice.ToString();
+                return unit.shopPrice.ToString();
         }
         return "0";
     }

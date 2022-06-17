@@ -25,7 +25,10 @@ public class DevScript : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.M))
+        {
+            print("give money");
             PlayerStatsScript.instance.money += 100000;
+        }
 
         // Kill Enemy captain.
         if (Input.GetKeyDown(KeyCode.K))

@@ -224,7 +224,8 @@ MonoBehaviour:
   paralysed: 0
   timeBetweenSpawn: 5
   bunnies:
-  - {fileID: 5367232545533668792, guid: 6d117c88ae22b6144936c79ff7b13174, type: 3}
+  - {fileID: 5367232545533668792, guid: b0ed46b4da93bb746915e33eb077e9af, type: 3}
+  - {fileID: 5367232545533668792, guid: 67bff60756210784fb6ca8f3604dc4e6, type: 3}
   spawnEffect: {fileID: 1370331870408332415, guid: aac374459f257634cb95b4188e330ef5,
     type: 3}
   spawnNumber: 8

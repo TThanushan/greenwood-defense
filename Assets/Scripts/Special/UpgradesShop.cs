@@ -38,7 +38,6 @@ public class UpgradesShop : MonoBehaviour
         foreach (Transform upgradeCardButton in unitsButtonPanel)
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
-            print(unitName);
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
             AddTriggers(upgradeCardButton);
         }
@@ -330,22 +329,28 @@ public class UpgradesShop : MonoBehaviour
         upgradeCardButton.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + nameWithoutNumbers);
         upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = nameWithoutNumbers;
         string lvl = GetUnitLevel(unitName);
+
+        string price = GetUnitPrice(unitName);
+        SaveManager.Unit upgradeUnit = GetUpgradeUnit(unitName);
+        if (upgradeUnit != null)
+            price = GetUnitPrice(upgradeUnit.name);
+
         if (!IsUnitUnlocked(unitName))
+        {
             lvl = "1";
+            price = GetUnitPrice(unitName);
+        }
         else if (IsUnitLevelMax(unitName))
         {
-
             Transform t = upgradeCardButton.Find("UpgradePrice/PriceText");
-            //GetSelectedCard().Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = "Max";
             TextMeshProUGUI textMeshProUGUI = t.GetComponent<TMPro.TextMeshProUGUI>();
             textMeshProUGUI.text = "Max";
             DisableUpgradeCard(upgradeCardButton.Find("Button").GetComponent<Button>());
         }
-        print("lvl + " + lvl + " " + unitName);
         upgradeCardButton.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/4";
         // Set upgrade price;
         if (!IsUnitLevelMax(unitName))
-            upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = GetUnitPrice(unitName) + '$';
+            upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = price + '$';
 
     }
 
@@ -358,7 +363,7 @@ public class UpgradesShop : MonoBehaviour
         foreach (SaveManager.Unit unit in saveManager.units)
         {
             if (unit.name == unitName)
-                return unit.upgradePrice.ToString();
+                return unit.shopPrice.ToString();
         }
         return "0";
     }

@@ -174,7 +174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5367232545533668775}
-  - component: {fileID: -3754439840432316142}
+  - component: {fileID: 4827705928579568427}
   - component: {fileID: 1829568272}
   - component: {fileID: 1829568273}
   - component: {fileID: 757288582}
@@ -202,7 +202,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3754439840432316142
+--- !u!114 &4827705928579568427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,13 +211,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94c0b398a30e77a45b99e91fb17b6b43, type: 3}
+  m_Script: {fileID: 11500000, guid: 7aa411fd87b7e754e83fc7df9d8eb14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 25
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 1
+  attackDamage: 0
   attackSpeed: 2
   attackRange: 0.7
   moveSpeed: 0.15
@@ -230,6 +230,8 @@ MonoBehaviour:
   healingPercentage: 10
   constantHealingPercentage: 0.1
   timeBetweenConstantHealing: 0.5
+  healthTriggerPercentage: 44
+  timeBetweenlowLifeGlobalHeal: 20
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3
