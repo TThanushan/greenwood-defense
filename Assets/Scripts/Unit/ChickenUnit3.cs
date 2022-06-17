@@ -5,15 +5,17 @@ public class ChickenUnit3 : HitBasedUnit
 {
     public float dodgeChance = 25f;
     public GameObject dodgeEffect;
-    bool IsDodgingAttack()
+    bool IsDodgingAttack(Transform enemyCaller = null)
     {
+        if (enemyCaller && enemyCaller.GetComponent<PoisonFrog>())
+            return false;
         int rand = Random.Range(0, 100);
         return rand <= dodgeChance;
     }
 
     public override void GetDamage(float damage, Transform caller = null)
     {
-        if (!IsDodgingAttack())
+        if (!IsDodgingAttack(caller))
             base.GetDamage(damage);
         else
             CreateDodgeEffect();

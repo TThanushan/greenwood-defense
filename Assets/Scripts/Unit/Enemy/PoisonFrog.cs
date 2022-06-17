@@ -1,34 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
-public class MushroomUnit2 : UnitAoeAttack
+public class PoisonFrog : Unit
 {
     [Header("Poison")]
+    public float poisonDamage;
     public int dotCount = 4;
     public float timeBetweenDotDamage = 1f;
-    public GameObject poisonParticlesEffect;
     public Color poisonedColor;
 
-    protected override void DamageEnemiesAroundTarget()
+    public override void Attack()
     {
-        CreatePoisonEffect();
-        GameObject[] enemies = GetEnemies();
-        foreach (GameObject enemy in enemies)
-        {
-            if (!IsTargetEnabled(enemy))
-                continue;
-            float distance = Vector2.Distance(Target.transform.position, enemy.transform.position);
-            if (distance <= effectRange)
-                ApplyEffect(enemy);
-        }
-    }
-    void CreatePoisonEffect()
-    {
-        if (poisonParticlesEffect)
-        {
-            GameObject newEffect = PoolObject.instance.GetPoolObject(poisonParticlesEffect);
-            newEffect.transform.position = transform.position;
-        }
+        base.Attack();
+        ApplyEffect(Target);
+
     }
 
     protected virtual void ApplyEffect(GameObject target)
@@ -47,7 +32,7 @@ public class MushroomUnit2 : UnitAoeAttack
         {
             if (!IsTargetEnabled(target))
                 yield return null;
-            target.GetComponent<Unit>().GetDamage(effectDamage, transform);
+            target.GetComponent<Unit>().GetDamage(poisonDamage, transform);
             yield return new WaitForSeconds(timeBetweenDotDamage);
         }
         ChangeTargetSpriteColor(target, false);
@@ -58,6 +43,16 @@ public class MushroomUnit2 : UnitAoeAttack
         Color color = Color.white;
         if (poisonOn)
             color = poisonedColor;
-        target.transform.Find("SpriteBody/Sprite/UnitSprite").GetComponent<SpriteRenderer>().color = color;
+
+        GetTargetSpriteRenderer(target).color = color;
     }
+
+    SpriteRenderer GetTargetSpriteRenderer(GameObject target)
+    {
+        Transform t = target.transform.Find("SpriteBody/Sprite/UnitSprite");
+        if (t is null)
+            t = target.transform.Find("SpriteBody/Sprite");
+        return t.GetComponent<SpriteRenderer>();
+    }
+
 }

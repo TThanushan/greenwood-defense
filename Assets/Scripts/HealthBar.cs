@@ -96,6 +96,8 @@ public class HealthBar : MonoBehaviour
 
     public virtual void GetDamage(float damage, Transform caller = null)
     {
+        if (currentHealth <= 0)
+            return;
         if (shield > 0)
         {
             shield -= damage;

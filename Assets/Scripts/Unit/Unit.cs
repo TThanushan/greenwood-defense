@@ -98,7 +98,8 @@ public class Unit : HealthBar
     }
     protected bool IsTargetEnabled(GameObject target)
     {
-        return !target || !target.GetComponent<Unit>().Disabled || target.activeSelf;
+        //return !target || !target.GetComponent<Unit>().Disabled || target.activeSelf;
+        return !target || !target.GetComponent<Unit>().Disabled;
     }
     protected override void Update()
     {
