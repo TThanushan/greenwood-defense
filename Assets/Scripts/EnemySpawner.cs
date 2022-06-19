@@ -1,27 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Stage;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public SpawnBlock[] spawnBlocks;
-    public float timeBetweenSpawn = 2f;
     public Transform spawnPosition;
-    public float randomTimeBetweenSpawn;
-    private float nextSpawnTime = 0f;
+    Stage stage;
     PoolObject poolObject;
-    // Start is called before the first frame update
     void Start()
     {
         poolObject = PoolObject.instance;
+        stage = (Stage)Resources.Load("Stages/" + SceneManager.GetActiveScene().name);
+        InitEnemyTypes();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (nextSpawnTime <= Time.time)
-        {
-            Spawn();
-        }
+        Spawn();
     }
 
     string GetStageNumber()
@@ -33,29 +28,41 @@ public class EnemySpawner : MonoBehaviour
     {
         return Mathf.FloorToInt(health * (1 + float.Parse(GetStageNumber()) / 100));
     }
+
+    void InitEnemyTypes()
+    {
+        foreach (EnemyType enemyType in stage.enemyTypes)
+        {
+            enemyType.Init();
+        }
+    }
+
     void Spawn()
     {
-        if (spawnBlocks.Length == 0)
+        EnemyType[] enemyTypes = stage.enemyTypes;
+
+        if (enemyTypes.Length == 0)
             return;
 
-        bool isSpawning = false;
-        while (!isSpawning)
+        foreach (EnemyType enemyType in enemyTypes)
         {
-            int index = Random.Range(0, spawnBlocks.Length);
-            SpawnBlock spawnBlock = spawnBlocks[index];
-            isSpawning = IsSpawning(spawnBlock);
-            if (!isSpawning)
+            if (!enemyType.ReadyToSpawn())
                 continue;
-            GameObject newEnemy = poolObject.GetPoolObject(spawnBlock.enemyPrefab);
-            Unit unit = newEnemy.GetComponent<Unit>();
-            unit.maxHealth = GetIncreasedHealthUsingStageNumber(unit.maxHealth);
-            unit.currentHealth = GetIncreasedHealthUsingStageNumber(unit.currentHealth);
+            GameObject newEnemy = poolObject.GetPoolObject(enemyType.Enemy);
             newEnemy.transform.position = GetRandomSpawnPosition();
 
-            nextSpawnTime = timeBetweenSpawn + Time.time;
-            nextSpawnTime += Random.Range(0, randomTimeBetweenSpawn);
-
+            UpdateUnitStatsUsingStageNumber(newEnemy);
+            enemyType.DecreaseCount();
+            enemyType.SetRandomNextEnemySpawnTime();
         }
+    }
+
+    void UpdateUnitStatsUsingStageNumber(GameObject enemy)
+    {
+        Unit unit = enemy.GetComponent<Unit>();
+        unit.maxHealth = GetIncreasedHealthUsingStageNumber(unit.maxHealth);
+        unit.currentHealth = GetIncreasedHealthUsingStageNumber(unit.currentHealth);
+
     }
 
     Vector2 GetRandomSpawnPosition()
@@ -65,21 +72,4 @@ public class EnemySpawner : MonoBehaviour
 
         return randomPos;
     }
-
-    bool IsSpawning(SpawnBlock spawnBlock)
-    {
-        return Random.Range(0, 10) <= spawnBlock.chanceToSpawn;
-
-    }
-
-    [System.Serializable]
-    public class SpawnBlock
-    {
-        public GameObject enemyPrefab;
-        // A random int to 0 to 10 will be generated, if smaller than chanceToSpawn,
-        // enemy will be spawned, loop will restard to select a random prefab.
-        [Range(0, 10)]
-        public float chanceToSpawn;
-    }
-
 }

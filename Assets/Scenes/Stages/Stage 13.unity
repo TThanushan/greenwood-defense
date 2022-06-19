@@ -309,12 +309,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2038cb212077f5141935c81b0c3c4813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stage: {fileID: 11400000, guid: 9f7650de52d0cbd43bf684d07d3f2120, type: 2}
   spawnBlocks:
-  - enemyPrefab: {fileID: 7241784478119512346, guid: 3bf43f1323578284db9a6b945bb36e6a,
+  - enemyPrefab: {fileID: 7241784478119512346, guid: d7ebebf5c255aa248b3dcf1b3f191e46,
       type: 3}
     chanceToSpawn: 10
-  timeBetweenSpawn: 10
+  - enemyPrefab: {fileID: 7241784478119512346, guid: 8cc19dbca1324864284af2ab908b1045,
+      type: 3}
+    chanceToSpawn: 10
+  - enemyPrefab: {fileID: 7241784478119512346, guid: 22954130344ca5c41b9cf4bd018e7ba6,
+      type: 3}
+    chanceToSpawn: 10
+  - enemyPrefab: {fileID: 7241784478119512346, guid: 8e7c246c0cb1dde4aa72a071d8a4cef9,
+      type: 3}
+    chanceToSpawn: 10
+  timeBetweenSpawn: 5
   spawnPosition: {fileID: 78595160}
   randomTimeBetweenSpawn: 6
 --- !u!4 &304077391
@@ -21644,6 +21652,10 @@ PrefabInstance:
     - target: {fileID: 1820298159, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: currentMana
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1820298159, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
+      propertyPath: regenerationSpeed
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 896537920215910342, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
