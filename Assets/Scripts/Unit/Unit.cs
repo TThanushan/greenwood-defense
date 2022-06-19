@@ -28,15 +28,16 @@ public class Unit : HealthBar
 
     ManaBar manaBar;
 
-    private GameObject target;
-    private bool disabled;
+    GameObject target;
+    bool disabled;
+    Color originalColor;
 
     [HideInInspector]
     public bool paralysed;
     public bool Disabled { get => disabled; set => disabled = value; }
     public GameObject Target { get => target; set => target = value; }
 
-    private List<IEnumerator> coroutines;
+    List<IEnumerator> coroutines;
 
     protected override void Awake()
     {
@@ -55,6 +56,7 @@ public class Unit : HealthBar
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
         FlipUnitSpriteOnWayX();
+        originalColor = GetUnitSpriteRenderer().color;
     }
 
     protected override void OnDisable()
@@ -121,24 +123,30 @@ public class Unit : HealthBar
             MoveToward();
     }
 
-    void FlipUnitSpriteOnWayX()
+    SpriteRenderer GetUnitSpriteRenderer()
     {
         string[] spritePaths = { "SpriteBody/Sprite/UnitSprite", "SpriteBody/Sprite/Sprite", "SpriteBody/Sprite" };
         foreach (string path in spritePaths)
         {
-            Transform spriteT = transform.Find(path);
-            if (!spriteT)
+            Transform t = transform.Find(path);
+            if (!t)
                 continue;
-            SpriteRenderer spriteRenderer = spriteT.GetComponent<SpriteRenderer>();
+            SpriteRenderer spriteRenderer = t.GetComponent<SpriteRenderer>();
             if (spriteRenderer)
-            {
-                // TODO
-                if (targetTag == "Enemy")
-                    spriteRenderer.flipX = (wayX == 1);
-                else
-                    spriteRenderer.flipX = (wayX == -1);
-                break;
-            }
+                return spriteRenderer;
+        }
+        return null;
+    }
+    void FlipUnitSpriteOnWayX()
+    {
+        SpriteRenderer spriteRenderer = GetUnitSpriteRenderer();
+        if (spriteRenderer)
+        {
+            // TODO
+            if (targetTag == "Enemy")
+                spriteRenderer.flipX = (wayX == 1);
+            else
+                spriteRenderer.flipX = (wayX == -1);
         }
     }
 
@@ -175,16 +183,15 @@ public class Unit : HealthBar
         StartCoroutine(DisableIE());
     }
 
-    void ResetSpriteColor()
+    public void ChangeSpriteColor(Color color)
     {
-        string[] spritePaths = { "SpriteBody/Sprite/UnitSprite", "SpriteBody/Sprite/Sprite" };
-        foreach (string path in spritePaths)
-        {
-            Transform spriteT = transform.Find(path);
-            if (!spriteT)
-                continue;
-            spriteT.GetComponent<SpriteRenderer>().color = Color.white;
-        }
+        GetUnitSpriteRenderer().color = color;
+    }
+    public void ResetSpriteColor()
+    {
+        SpriteRenderer spriteRenderer = GetUnitSpriteRenderer();
+        if (spriteRenderer)
+            spriteRenderer.color = originalColor;
     }
 
     protected void MoveToward()
@@ -225,7 +232,7 @@ public class Unit : HealthBar
         onAttack?.Invoke();
     }
 
-    private void RandomizeAttackRange()
+    void RandomizeAttackRange()
     {
         attackRange += Random.Range(0f, attackRange / 6f);
     }
@@ -236,7 +243,7 @@ public class Unit : HealthBar
         return Time.time + attackSpeed;
     }
 
-    private bool IsTargetDisabled()
+    bool IsTargetDisabled()
     {
         return Target.GetComponent<Unit>().Disabled;
     }
@@ -248,7 +255,7 @@ public class Unit : HealthBar
         return Vector2.Distance(transform.position, Target.transform.position) <= attackRange;
     }
 
-    private bool NextAttackReady()
+    bool NextAttackReady()
     {
         return nextAttackTime <= Time.time;
     }

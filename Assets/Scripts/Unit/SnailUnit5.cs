@@ -6,14 +6,15 @@ public class SnailUnit5 : SnailUnit4
     public float healthTriggerPercentage;
     //public float globalHealPercentage;
     public float timeBetweenlowLifeGlobalHeal;
+    public GameObject globalHealEffect;
 
     float lowLifeGlobalHealCooldown;
 
     protected override void Update()
     {
-        base.Update();
         if (IsAnyAllyLowLife() && lowLifeGlobalHealCooldown <= Time.time)
             StartLowLifeGlobalHeal();
+        base.Update();
 
     }
 
@@ -34,7 +35,6 @@ public class SnailUnit5 : SnailUnit4
 
     void StartLowLifeGlobalHeal()
     {
-        print("start global heal");
         GameObject[] allies = poolObject.Allies;
         if (allies == null || allies.Length == 0)
             return;
@@ -44,13 +44,22 @@ public class SnailUnit5 : SnailUnit4
             float distance = Vector2.Distance(transform.position, ally.transform.position);
             if (distance <= bonusRange)
             {
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 20; i++)
                 {
                     HealAlly(ally);
 
                 }
             }
         }
+        CreateEffect();
         lowLifeGlobalHealCooldown = Time.time + timeBetweenlowLifeGlobalHeal;
+    }
+
+    void CreateEffect()
+    {
+        if (!globalHealEffect)
+            return;
+        GameObject newEgg = PoolObject.instance.GetPoolObject(globalHealEffect);
+        newEgg.transform.position = transform.position;
     }
 }

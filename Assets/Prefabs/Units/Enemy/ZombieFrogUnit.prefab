@@ -5121,8 +5121,11 @@ MonoBehaviour:
   moneyReward: 1
   manaReward: 1
   paralysed: 0
+  poisonTime: 0
   attackDamageBonus: 100
   zombieAttackSpeed: 0.25
+  zombieActivationEffect: {fileID: 459091600923905559, guid: 3322ce432b78adf428595b6060168555,
+    type: 3}
 --- !u!95 &3315706013935442866
 Animator:
   serializedVersion: 3

@@ -25,12 +25,13 @@ public class RockUnit3 : RockUnit2
     protected override void ResetDefenseBonus()
     {
         base.ResetDefenseBonus();
-        reflectDamageEffect.SetActive(true);
+
+        EnableReflectDamageEffect(true);
     }
     protected override void DisableDefenseBonusEffect()
     {
         base.DisableDefenseBonusEffect();
-        reflectDamageEffect.SetActive(false);
+        EnableReflectDamageEffect(false);
     }
     public override void GetDamage(float damage, Transform caller = null)
     {
@@ -87,6 +88,8 @@ public class RockUnit3 : RockUnit2
 
     void EnableReflectDamageEffect(bool val)
     {
+        if (!reflectDamageEffect)
+            return;
         reflectDamageEffect.SetActive(val);
     }
 }

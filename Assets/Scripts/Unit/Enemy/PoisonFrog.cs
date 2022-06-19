@@ -31,7 +31,7 @@ public class PoisonFrog : Unit
         for (int i = 0; i < dotCount; i++)
         {
             if (!IsTargetEnabled(target))
-                yield return null;
+                break;
             target.GetComponent<Unit>().GetDamage(poisonDamage, transform);
             yield return new WaitForSeconds(timeBetweenDotDamage);
         }
@@ -40,19 +40,13 @@ public class PoisonFrog : Unit
 
     void ChangeTargetSpriteColor(GameObject target, bool poisonOn)
     {
-        Color color = Color.white;
         if (poisonOn)
-            color = poisonedColor;
+        {
 
-        GetTargetSpriteRenderer(target).color = color;
-    }
-
-    SpriteRenderer GetTargetSpriteRenderer(GameObject target)
-    {
-        Transform t = target.transform.Find("SpriteBody/Sprite/UnitSprite");
-        if (t is null)
-            t = target.transform.Find("SpriteBody/Sprite");
-        return t.GetComponent<SpriteRenderer>();
+            target.GetComponent<Unit>().ChangeSpriteColor(poisonedColor);
+        }
+        else
+            target.GetComponent<Unit>().ResetSpriteColor();
     }
 
 }

@@ -64,6 +64,8 @@ public class HitBasedUnit : Unit
 
     public override void Attack()
     {
+        if (!EnoughRangeToAttackTarget())
+            return;
         base.Attack();
         if (effect == Effect.DoubleHit || effect == Effect.TripleHit)
             IncreaseHitCount();
@@ -95,7 +97,7 @@ public class HitBasedUnit : Unit
         InvokeOnAttack();
         Attack();
         yield return new WaitForSeconds(time);
-        if (!IsTargetEnabled(Target))
+        if (!IsTargetEnabled(Target) || !EnoughRangeToAttackTarget())
             yield return null;
         InvokeOnAttack();
         nextAttackTime = GetRandomizedNextAttackTime();
@@ -106,19 +108,19 @@ public class HitBasedUnit : Unit
 
     IEnumerator TripleHitEffect(float time)
     {
-        if (!IsTargetEnabled(Target))
+        if (!IsTargetEnabled(Target) || !EnoughRangeToAttackTarget())
             yield return null;
         InvokeOnAttack();
         Attack();
         hitCount = 0f;
         yield return new WaitForSeconds(time);
-        if (!IsTargetEnabled(Target))
+        if (!IsTargetEnabled(Target) || !EnoughRangeToAttackTarget())
             yield return null;
         InvokeOnAttack();
         Attack();
         hitCount = 0f;
         yield return new WaitForSeconds(time);
-        if (!IsTargetEnabled(Target))
+        if (!IsTargetEnabled(Target) || !EnoughRangeToAttackTarget())
             yield return null;
         InvokeOnAttack();
         nextAttackTime = GetRandomizedNextAttackTime();

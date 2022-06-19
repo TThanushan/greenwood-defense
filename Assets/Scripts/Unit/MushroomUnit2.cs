@@ -43,10 +43,12 @@ public class MushroomUnit2 : UnitAoeAttack
         if (!IsTargetEnabled(target))
             yield return null;
         ChangeTargetSpriteColor(target, true);
+        Unit unit = target.GetComponent<Unit>();
         for (int i = 0; i < dotCount; i++)
         {
+
             if (!IsTargetEnabled(target))
-                yield return null;
+                break;
             target.GetComponent<Unit>().GetDamage(effectDamage, transform);
             yield return new WaitForSeconds(timeBetweenDotDamage);
         }
@@ -55,9 +57,9 @@ public class MushroomUnit2 : UnitAoeAttack
 
     void ChangeTargetSpriteColor(GameObject target, bool poisonOn)
     {
-        Color color = Color.white;
         if (poisonOn)
-            color = poisonedColor;
-        target.transform.Find("SpriteBody/Sprite/UnitSprite").GetComponent<SpriteRenderer>().color = color;
+            target.transform.Find("SpriteBody/Sprite/UnitSprite").GetComponent<SpriteRenderer>().color = poisonedColor;
+        else
+            target.GetComponent<Unit>().ResetSpriteColor();
     }
 }

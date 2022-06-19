@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 3378857849454132249}
   - component: {fileID: 1829568272}
   m_Layer: 0
-  m_Name: BlueBird2Effect
+  m_Name: BlueBird3Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,9 +276,10 @@ MonoBehaviour:
     type: 3}
   eggSpawnPos: {fileID: 300741375}
   eggExplosionDamage: 5
-  travelDistance: {x: 1, y: 0}
+  travelDistance: {x: 2, y: 0}
   travelSpeed: 0.013
-  timeBetweenDrop: 99999
+  dropCount: 10
+  timeBetweenDrop: 0.25
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3

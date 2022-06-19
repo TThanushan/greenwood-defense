@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300741374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.026, y: 0, z: 0}
+  m_LocalPosition: {x: -0.026, y: 0.557, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5367232546079401137}
@@ -254,11 +254,11 @@ MonoBehaviour:
   paralysed: 0
   eggExplosionDamage: 5
   birdSpawnReloadTime: 3
-  birdEffectPrefab: {fileID: 5367232545533668792, guid: dcbf588c08360a54095a9a22b09f8205,
+  birdEffectPrefab: {fileID: 5367232545533668792, guid: 739f105295c621e4b9448f4a6f9b6dec,
     type: 3}
   spawnPos: {fileID: 300741375}
   timeBetweenTravel: 7
-  nbSpawn: 6
+  nbSpawn: 1
   distBetweenDrop: 0
 --- !u!95 &1829568272
 Animator:

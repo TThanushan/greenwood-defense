@@ -5,7 +5,7 @@ public class ZombieFrog : Unit
     [Range(0, 100)]
     public float attackDamageBonus;
     public float zombieAttackSpeed;
-
+    public GameObject zombieActivationEffect;
     GameObject zombieEffect;
 
     float attackDamageSave;
@@ -14,7 +14,6 @@ public class ZombieFrog : Unit
     protected override void Start()
     {
         base.Start();
-        OnDeath += StartZombieEffect;
         zombieEffect = transform.Find("SpriteBody/Sprite/ZombieEffect").gameObject;
     }
 
@@ -27,6 +26,7 @@ public class ZombieFrog : Unit
         attackSpeedSave = attackSpeed;
         attackSpeed = zombieAttackSpeed;
         zombieEffect.SetActive(true);
+        CreateEffect();
     }
 
     public override void GetDamage(float damage, Transform caller = null)
@@ -44,8 +44,13 @@ public class ZombieFrog : Unit
         zombieEffect.SetActive(false);
     }
 
-    protected override void Update()
+    void CreateEffect()
     {
-        base.Update();
+        if (!zombieActivationEffect)
+            return;
+        GameObject newEgg = PoolObject.instance.GetPoolObject(zombieActivationEffect);
+        newEgg.transform.position = transform.position;
     }
+
+
 }

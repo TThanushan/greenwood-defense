@@ -27,6 +27,7 @@ public class BlueBirdUnit2Effect : MonoBehaviour
     }
     private void OnEnable()
     {
+        currentTimeBetweenDrop = timeBetweenDrop;
         initialTravelDistance = travelDistance;
         DetermineTravelDestination();
     }
