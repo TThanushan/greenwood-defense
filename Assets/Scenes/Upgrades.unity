@@ -46795,6 +46795,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3715788401226662628}
+    - target: {fileID: 8585300231893707424, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: priceOriginalColor
+      value: 
+      objectReference: {fileID: 11400000, guid: e7726428cd20e724b8a1de9343fb8ac2,
+        type: 2}
+    - target: {fileID: 8585300231893707424, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: tooExpensivePriceColor
+      value: 
+      objectReference: {fileID: 11400000, guid: ae390c8d888e4c440b30d90954cb76cc,
+        type: 2}
     - target: {fileID: 8585300231893707426, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Name

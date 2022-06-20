@@ -10,6 +10,8 @@ public class UpgradesShop : MonoBehaviour
     private SaveManager saveManager;
     public string selectedCard;
     public GameObject selectCursor;
+    public TMP_ColorGradient tooExpensivePriceColor;
+    public TMP_ColorGradient priceOriginalColor;
     private void Start()
     {
         if (!saveManager)
@@ -27,6 +29,7 @@ public class UpgradesShop : MonoBehaviour
         SetSelectedCardButtonCursor();
     }
 
+
     void SetPlayerGoldText()
     {
         transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = PlayerStatsScript.instance.money.ToString() + '$';
@@ -40,6 +43,7 @@ public class UpgradesShop : MonoBehaviour
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
             AddTriggers(upgradeCardButton);
+            UpdatePriceTextColor(upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>(), GetUpgradeUnit(unitName).name);
         }
     }
 
@@ -273,7 +277,7 @@ public class UpgradesShop : MonoBehaviour
         GetUnlockInfos(out string unitName, out string upgradeUnitName, out float price);
 
 
-        if (CanUpgrade(upgradeUnitName, price))
+        if (!CanUpgrade(upgradeUnitName))
             return;
 
         if (!IsUnitUnlocked(unitName))
@@ -300,9 +304,16 @@ public class UpgradesShop : MonoBehaviour
         saveManager.SavePrefs();
     }
 
-    bool CanUpgrade(string upgradeUnitName, float price)
+    bool CanUpgrade(string upgradeUnitName)
     {
-        return !DoesUnitExist(upgradeUnitName) || UnitAlreadyUnlocked(upgradeUnitName) || PlayerStatsScript.instance.money < price;
+        bool a = DoesUnitExist(upgradeUnitName);
+        bool b = !UnitAlreadyUnlocked(upgradeUnitName);
+        bool c = PlayerStatsScript.instance.money > int.Parse(GetUnitPrice(upgradeUnitName));
+        bool d = DoesUnitExist(upgradeUnitName) && (!UnitAlreadyUnlocked(upgradeUnitName) && PlayerStatsScript.instance.money > int.Parse(GetUnitPrice(upgradeUnitName)));
+        return DoesUnitExist(upgradeUnitName) && !UnitAlreadyUnlocked(upgradeUnitName) && PlayerStatsScript.instance.money >= int.Parse(GetUnitPrice(upgradeUnitName));
+
+        //return !DoesUnitExist(upgradeUnitName) || UnitAlreadyUnlocked(upgradeUnitName) || PlayerStatsScript.instance.money < price;
+        //"If unit doesn't exist or unit is already unlocked or player money is less than price"
     }
 
 
@@ -349,19 +360,27 @@ public class UpgradesShop : MonoBehaviour
         }
         else if (IsUnitLevelMax(unitName))
         {
-            Transform t = upgradeCardButton.Find("UpgradePrice/PriceText");
-            TextMeshProUGUI textMeshProUGUI = t.GetComponent<TMPro.TextMeshProUGUI>();
-            textMeshProUGUI.text = "Max";
+            upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = "Max";
             DisableUpgradeCard(upgradeCardButton.Find("Button").GetComponent<Button>());
         }
         upgradeCardButton.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/4";
-        // Set upgrade price;
+        TMPro.TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>();
         if (!IsUnitLevelMax(unitName))
-            upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = price + '$';
+        {
+            priceText.text = price + '$';
+            //UpdatePriceTextColor(priceText, upgradeUnit.name, upgradeUnit.shopPrice);
+        }
 
     }
 
 
+    void UpdatePriceTextColor(TMPro.TextMeshProUGUI text, string upgradeUnitName)
+    {
+        if (CanUpgrade(upgradeUnitName))
+            text.colorGradientPreset = priceOriginalColor;
+        else
+            text.colorGradientPreset = tooExpensivePriceColor;
+    }
 
 
 
