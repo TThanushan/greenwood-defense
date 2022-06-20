@@ -52,7 +52,7 @@ public class RockUnit3 : RockUnit2
             if (!bullet.activeSelf || !isDefenseBonusEnabled)
                 return;
             float distance = Vector2.Distance(transform.position, bullet.transform.position);
-            if (distance <= triggerRange && IsBulletAimingAtMe(bullet))
+            if (distance <= triggerRange && bullet && IsBulletAimingAtMe(bullet))
             {
                 BulletScript bulletScript = bullet.GetComponent<BulletScript>();
                 bulletScript.wayX *= -1;

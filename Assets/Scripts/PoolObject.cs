@@ -20,7 +20,7 @@ public class PoolObject : MonoBehaviour
     public Unit playerCaptain;
 
     public GameObject moneyRewardEffect;
-
+    public AudioManager audioManager;
     void Awake()
     {
         if (instance == null)
@@ -35,6 +35,7 @@ public class PoolObject : MonoBehaviour
         playerStatsScript = PlayerStatsScript.instance;
         manaBar = ManaBar.instance;
         stageManager = StageManager.instance;
+        audioManager = AudioManager.instance;
     }
     private void Update()
     {

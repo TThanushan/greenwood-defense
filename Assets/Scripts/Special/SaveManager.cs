@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
@@ -70,9 +69,10 @@ public class SaveManager : MonoBehaviour
     public void ResetPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
+        PlayerStatsScript.instance.money = 0f;
+
         maxLevelUnlocked = 1;
         Init();
-
         InitFirstTimeUnlockedUnits();
     }
     public int GetLevelScore(int index)
@@ -82,6 +82,7 @@ public class SaveManager : MonoBehaviour
 
     public int GetLevelScore()
     {
+        print(GetCurrentLevelNumber());
         return levels[GetCurrentLevelNumber()].score;
     }
 
@@ -191,8 +192,9 @@ public class SaveManager : MonoBehaviour
 
     public int GetCurrentLevelNumber()
     {
-        // - 1 since list start a 0.
-        return int.Parse(SceneManager.GetActiveScene().name.Split(' ')[1]) - 1;
+        return StageInfosManager.instance.GetCurrentStageNumber() - 1;
+        //// - 1 since list start a 0.
+        //return int.Parse(SceneManager.GetActiveScene().name.Split(' ')[1]) - 1;
     }
 
     Level GetCurrentLevel()

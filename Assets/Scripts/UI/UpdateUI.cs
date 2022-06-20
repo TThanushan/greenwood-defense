@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UpdateUI : MonoBehaviour
 {
@@ -24,14 +23,10 @@ public class UpdateUI : MonoBehaviour
         timeText.text = GetFormatedTime();
 
     }
-    string GetStageNumber()
-    {
-        return SceneManager.GetActiveScene().name.Split(' ')[1];
-    }
 
     string GetStageTitle()
     {
-        return "Stage " + GetStageNumber();
+        return StageInfosManager.instance.GetCurrentStageName();
     }
 
     public Vector2 GetMoneyTextPosition()

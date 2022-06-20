@@ -17,29 +17,26 @@ public class StageManager : MonoBehaviour
     Unit enemyCaptain;
     float rewardPreviouslyGiven;
 
-
     void Awake()
     {
         if (instance == null)
             instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
-
-
-
     private void Start()
     {
         InitVal();
+        TrackPlayer.instance.PlayMainTheme();
     }
 
     public void GiveMoneyReward()
     {
         float reward = CalculateRewardAmount();
         PlayerStatsScript.instance.money += reward;
-    }
-
-    void GiveGoldEarnedInStageMoney()
-    {
-        PlayerStatsScript.instance.money += goldEarnedInStage;
     }
 
     float CalculateRewardAmount()
@@ -51,6 +48,8 @@ public class StageManager : MonoBehaviour
             reward = 0f;
         else
             reward -= rewardPreviouslyGiven;
+        print("prevReward:" + rewardPreviouslyGiven);
+        print("Reward:" + reward);
         return reward;
     }
 
@@ -139,44 +138,62 @@ public class StageManager : MonoBehaviour
     {
         panel.transform.Find("TotalGoldText").GetComponent<TMPro.TextMeshProUGUI>().text = playerStatsScript.money.ToString();
 
-        panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage + CalculateRewardAmount()).ToString();
+        panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
+        if (panel.transform.Find("StageRewardText"))
+            panel.transform.Find("StageRewardText").GetComponent<TMPro.TextMeshProUGUI>().text = (CalculateRewardAmount()).ToString();
     }
 
     void DoVictory()
     {
+        Time.timeScale = 1;
         isVictory = true;
         levelCompletePanel.SetActive(true);
         rewardPreviouslyGiven = GetRewardPreviouslyGiven();
         LevelScore.instance.CalculateScore();
         GiveMoneyReward();
         UpdateLevelPanelInfos(levelCompletePanel);
-        SaveData();
+        UnlockNextStage();
+        SaveScoreIfHigher();
+        SaveManager.instance.SavePrefs();
+        AudioManager.instance.PlaySfx(Constants.VICTORY_SFX_NAME);
     }
 
     void DoGameOver()
     {
+        Time.timeScale = 1;
         isGameOver = true;
         gameOverPanel.SetActive(true);
         UpdateLevelPanelInfos(gameOverPanel);
-        GiveGoldEarnedInStageMoney();
-        Time.timeScale = 1;
         PlayerStatsScript.instance.PauseGame(true);
         gameOverPanel.SetActive(true);
+
+        SaveManager.instance.SavePrefs();
     }
 
     public void LoadNextLevel()
     {
-        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        MenuScript.instance.LoadScene(nextSceneIndex);
+        //int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        StageInfosManager.instance.SetCurrentStageToNextStage();
+        //MenuScript.instance.LoadScene(nextSceneIndex);
+        MenuScript.instance.LoadCurrentScene();
     }
 
-    void SaveData()
+    void UnlockNextStage()
     {
         int index = SaveManager.instance.GetCurrentLevelNumber();
         SaveManager.instance.UnlockLevel(index + 1);
-        if (LevelScore.instance.score > SaveManager.instance.GetLevelScore(index))
+    }
+
+    bool IsScoreHigherThanPrevious(int index)
+    {
+        return LevelScore.instance.score > SaveManager.instance.GetLevelScore(index);
+    }
+
+    void SaveScoreIfHigher()
+    {
+        int index = SaveManager.instance.GetCurrentLevelNumber();
+        if (IsScoreHigherThanPrevious(index))
             SaveManager.instance.SaveLevelScore(index, LevelScore.instance.score);
-        SaveManager.instance.SavePrefs();
     }
 
 }

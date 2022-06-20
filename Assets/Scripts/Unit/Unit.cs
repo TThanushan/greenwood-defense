@@ -20,11 +20,11 @@ public class Unit : HealthBar
     public float manaReward = 1f;
 
     public event System.Action onAttack;
+    public string deathSfxName;
 
     protected int wayX = 1;
     protected string targetTag = "Enemy";
     protected float nextAttackTime = 0f;
-    protected PoolObject poolObject;
 
     ManaBar manaBar;
 
@@ -137,6 +137,12 @@ public class Unit : HealthBar
         }
         return null;
     }
+
+    void PlayDeathSfx()
+    {
+        if (deathSfxName != "")
+            poolObject.audioManager.Play(deathSfxName, true);
+    }
     void FlipUnitSpriteOnWayX()
     {
         SpriteRenderer spriteRenderer = GetUnitSpriteRenderer();
@@ -173,9 +179,11 @@ public class Unit : HealthBar
     IEnumerator DisableIE()
     {
         disabled = true;
+        PlayDeathSfx();
         ResetSpriteColor();
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
+
 
     }
     public virtual void Disable()
@@ -234,7 +242,10 @@ public class Unit : HealthBar
 
     void RandomizeAttackRange()
     {
-        attackRange += Random.Range(0f, attackRange / 6f);
+        float randCoef = 6f;
+        if (targetTag == "Ally")
+            randCoef = 15f;
+        attackRange += Random.Range(0f, attackRange / randCoef);
     }
 
     protected float GetRandomizedNextAttackTime()

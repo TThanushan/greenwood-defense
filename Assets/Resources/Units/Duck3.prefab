@@ -451,6 +451,7 @@ MonoBehaviour:
   moveSpeed: 0.15
   moneyReward: 1
   manaReward: 1
+  deathSfxName: DuckDeath
   paralysed: 0
   effect: 2
   hitCountNeeded: 2

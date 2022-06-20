@@ -124,6 +124,7 @@ public class SpawnBar : MonoBehaviour
             eventID = EventTriggerType.PointerClick
         };
         entry.callback.AddListener((eventData) => { SpawnUnit(unitButton.name); });
+        entry.callback.AddListener((eventData) => { AudioManager.instance.PlaySfx(Constants.BUTTON_CLICK_SFX_NAME); });
         eventTrigger.triggers.Add(entry);
     }
     void SetButtonName(GameObject button, UnitButton unitButton)

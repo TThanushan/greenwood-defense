@@ -15,6 +15,8 @@ public class DevScript : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.T))
+            AudioManager.instance.PlaySfx(Constants.BUTTON_CLICK_SFX_NAME);
     }
 
     void SpeedManager()

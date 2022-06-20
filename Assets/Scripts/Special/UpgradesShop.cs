@@ -92,7 +92,12 @@ public class UpgradesShop : MonoBehaviour
     {
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SelectCard);
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetSelectedCardButtonCursor);
+        AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, PlayButtonClick);
+    }
 
+    public void PlayButtonClick()
+    {
+        AudioManager.instance.PlaySfx(Constants.BUTTON_CLICK_SFX_NAME);
     }
     void AddEventTriggerOnButton(GameObject button, System.Action function)
     {
@@ -290,7 +295,7 @@ public class UpgradesShop : MonoBehaviour
             EmptySelectedCardInfos();
         }
         SetActiveUpgradeCardButtonLock(GetSelectedCard(), false);
-
+        AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
         saveManager.SaveUnlockedUnits();
         saveManager.SavePrefs();
     }

@@ -30,7 +30,7 @@ public class ManaBar : MonoBehaviour
     }
     private void Start()
     {
-        regenerationSpeed += 0.1f * int.Parse(PoolObject.instance.GetStageNumber());
+        regenerationSpeed += 0.1f * StageInfosManager.instance.GetCurrentStageNumber();
     }
     private void UpdateCurrentManaText()
     {

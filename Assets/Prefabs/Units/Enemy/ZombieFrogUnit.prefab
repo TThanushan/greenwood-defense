@@ -5114,7 +5114,7 @@ MonoBehaviour:
   maxHealth: 30
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 6
+  attackDamage: 7
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 0.25

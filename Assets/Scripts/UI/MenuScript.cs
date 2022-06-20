@@ -11,6 +11,9 @@ public class MenuScript : MonoBehaviour
     Image blackSquareFade;
     const int levelSelectionSceneIndex = 1;
 
+    const string STAGE_SCENE_NAME = "Stage";
+
+    AudioManager audioManager;
     void Start()
     {
         if (!instance)
@@ -18,6 +21,7 @@ public class MenuScript : MonoBehaviour
         else
             Destroy(gameObject);
         Init();
+        audioManager = AudioManager.instance;
 
     }
 
@@ -27,6 +31,10 @@ public class MenuScript : MonoBehaviour
         blackSquareFade = transform.Find("MiddleGroup/FadeSceneBody/Canvas/blackSquareFade").GetComponent<Image>();
     }
 
+    public void PlaySfx(string sfxName)
+    {
+        audioManager.PlaySfx(sfxName);
+    }
     IEnumerator FadeInScene(int sceneIndex)
     {
         fadeAnimator.Play("FadeIn");
@@ -46,6 +54,11 @@ public class MenuScript : MonoBehaviour
         LoadScene(index);
     }
 
+    public void LoadStageScene()
+    {
+        LoadScene(STAGE_SCENE_NAME);
+    }
+
     public void LoadLevelSelectionScene()
     {
         LoadScene(levelSelectionSceneIndex);
@@ -56,7 +69,19 @@ public class MenuScript : MonoBehaviour
         LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void DisablePanel(GameObject panel)
+    {
+        panel.SetActive(false);
+    }
+    public void EnablePanel(GameObject panel)
+    {
+        panel.SetActive(true);
+    }
 
+    public void ReversePanelActive(GameObject panel)
+    {
+        panel.SetActive(!panel.activeSelf);
+    }
 
     void ResetTimeScale()
     {

@@ -248,11 +248,12 @@ MonoBehaviour:
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 5
-  attackSpeed: 1
+  attackSpeed: 0.25
   attackRange: 0.24
   moveSpeed: 0.5
   moneyReward: 1
   manaReward: 1
+  deathSfxName: ChickenDeath
   paralysed: 0
   effect: 1
   hitCountNeeded: 3

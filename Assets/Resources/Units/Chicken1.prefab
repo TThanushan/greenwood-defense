@@ -221,6 +221,7 @@ MonoBehaviour:
   moveSpeed: 0.35
   moneyReward: 0
   manaReward: 1
+  deathSfxName: ChickenDeath
   paralysed: 0
 --- !u!95 &1829568272
 Animator:

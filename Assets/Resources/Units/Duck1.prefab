@@ -252,6 +252,7 @@ MonoBehaviour:
   moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1
+  deathSfxName: DuckDeath
   paralysed: 0
 --- !u!95 &1829568272
 Animator:

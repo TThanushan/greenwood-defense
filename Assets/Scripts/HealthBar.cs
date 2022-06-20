@@ -16,6 +16,7 @@ public class HealthBar : MonoBehaviour
 
     [HideInInspector]
     public float damageTakenIncreasePercentage = 0f;
+    protected PoolObject poolObject;
     protected virtual void Awake()
     {
         if (!healthBar)
@@ -26,7 +27,10 @@ public class HealthBar : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-
+    private void Start()
+    {
+        poolObject = PoolObject.instance;
+    }
     protected virtual void Update()
     {
         UpdateHealthBarLength();
@@ -118,6 +122,8 @@ public class HealthBar : MonoBehaviour
             OnDeath?.Invoke();
             currentHealth = 0f;
         }
+        poolObject.audioManager.PlayHitSound();
+
     }
 
     float GetDamageTakenIncreasePercentage()

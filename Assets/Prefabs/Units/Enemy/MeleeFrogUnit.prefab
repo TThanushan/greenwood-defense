@@ -252,6 +252,7 @@ MonoBehaviour:
   moveSpeed: 0.25
   moneyReward: 1
   manaReward: 2
+  deathSfxName: FrogDeath
   paralysed: 0
 --- !u!95 &3315706013935442866
 Animator:

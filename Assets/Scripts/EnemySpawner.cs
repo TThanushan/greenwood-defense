@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using static Stage;
 
 public class EnemySpawner : MonoBehaviour
@@ -7,11 +6,14 @@ public class EnemySpawner : MonoBehaviour
     public Transform spawnPosition;
     Stage stage;
     PoolObject poolObject;
+
+    int stageNumber;
     void Start()
     {
         poolObject = PoolObject.instance;
-        stage = (Stage)Resources.Load("Stages/" + SceneManager.GetActiveScene().name);
+        stage = (Stage)Resources.Load("Stages/" + StageInfosManager.instance.GetCurrentStageName());
         InitEnemyTypes();
+        stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
     }
 
     void Update()
@@ -19,14 +21,10 @@ public class EnemySpawner : MonoBehaviour
         Spawn();
     }
 
-    string GetStageNumber()
-    {
-        return SceneManager.GetActiveScene().name.Split(' ')[1];
-    }
 
     float GetIncreasedHealthUsingStageNumber(float health)
     {
-        return Mathf.FloorToInt(health * (1 + float.Parse(GetStageNumber()) / 100));
+        return Mathf.FloorToInt(health * (1 + stageNumber / 100));
     }
 
     void InitEnemyTypes()
