@@ -255,7 +255,7 @@ MonoBehaviour:
   manaReward: 1
   paralysed: 0
   effectRange: 1
-  effectDamage: 0.15
+  effectDamage: 0.05
   dotCount: 80
   timeBetweenDotDamage: 0.05
   poisonParticlesEffect: {fileID: 4352566265116347071, guid: b38f542b524eb494d9e23cacfe6aef12,

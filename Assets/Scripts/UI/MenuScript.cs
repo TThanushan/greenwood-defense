@@ -56,6 +56,8 @@ public class MenuScript : MonoBehaviour
         LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
+
     void ResetTimeScale()
     {
         Time.timeScale = 1f;

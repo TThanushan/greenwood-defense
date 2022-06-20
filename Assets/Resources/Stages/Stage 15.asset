@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c3758e0101465b469d34a32817c40c7, type: 3}
+  m_Name: Stage 15
+  m_EditorClassIdentifier: 
+  enemyTypes:
+  - Enemy: {fileID: 7241784478119512346, guid: 3bf43f1323578284db9a6b945bb36e6a, type: 3}
+    TimeBetweenSpawn: 7.5
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 0
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 46.940887
+  - Enemy: {fileID: 7241784478119512346, guid: 0435ba058d14a3b43bb1c0cb5b47a4e4, type: 3}
+    TimeBetweenSpawn: 8
+    RandomTimeBetweenSpawn: 5
+    TimeBeforeFirstSpawn: 0
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 46.940887
+  - Enemy: {fileID: 7241784478119512346, guid: c99706978e443b9449d9f0bf0db244de, type: 3}
+    TimeBetweenSpawn: 9
+    RandomTimeBetweenSpawn: 5
+    TimeBeforeFirstSpawn: 2
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 46.940887
+  - Enemy: {fileID: 7241784478119512346, guid: 22954130344ca5c41b9cf4bd018e7ba6, type: 3}
+    TimeBetweenSpawn: 10
+    RandomTimeBetweenSpawn: 5
+    TimeBeforeFirstSpawn: 5
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 46.940887

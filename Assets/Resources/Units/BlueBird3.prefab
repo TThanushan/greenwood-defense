@@ -245,10 +245,10 @@ MonoBehaviour:
   maxHealth: 40
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 1
-  attackSpeed: 4
-  attackRange: 0.3
-  moveSpeed: 0.25
+  attackDamage: 3
+  attackSpeed: 2.5
+  attackRange: 0.35
+  moveSpeed: 0.3
   moneyReward: 0
   manaReward: 1
   paralysed: 0

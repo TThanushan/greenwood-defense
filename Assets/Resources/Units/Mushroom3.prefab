@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41e6db91763e6945a1eb9c60c717878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 10
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
@@ -255,7 +255,7 @@ MonoBehaviour:
   manaReward: 1
   paralysed: 0
   effectRange: 1
-  effectDamage: 0.005
+  effectDamage: 0.15
   dotCount: 80
   timeBetweenDotDamage: 0.05
   poisonParticlesEffect: {fileID: 4352566265116347071, guid: 065583c2f333d244fb609dabd1337892,

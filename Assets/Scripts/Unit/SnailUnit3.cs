@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SnailUnit3 : SnailUnit2
 {
+    [Header("Snail2")]
     [Range(0, 100)]
     public float healingPercentage;
 

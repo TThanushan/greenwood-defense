@@ -265,9 +265,7 @@ public class UpgradesShop : MonoBehaviour
 
         if (IsUnitLevelMax())
             return;
-        float price;
-        string unitName, upgradeUnitName;
-        GetUnlockInfos(out unitName, out upgradeUnitName, out price);
+        GetUnlockInfos(out string unitName, out string upgradeUnitName, out float price);
 
 
         if (CanUpgrade(upgradeUnitName, price))
@@ -279,7 +277,10 @@ public class UpgradesShop : MonoBehaviour
             upgradeUnitName = unitName;
         }
         else
+        {
+            price = GetUpgradeUnit(unitName).shopPrice;
             Upgrade(upgradeUnitName, unitName, price);
+        }
 
         UpdateUIAfterUnlock(upgradeUnitName);
         if (IsUnitLevelMax())
@@ -291,6 +292,7 @@ public class UpgradesShop : MonoBehaviour
         SetActiveUpgradeCardButtonLock(GetSelectedCard(), false);
 
         saveManager.SaveUnlockedUnits();
+        saveManager.SavePrefs();
     }
 
     bool CanUpgrade(string upgradeUnitName, float price)

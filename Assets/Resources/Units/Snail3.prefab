@@ -214,19 +214,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94c0b398a30e77a45b99e91fb17b6b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 30
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 0
   attackSpeed: 2
-  attackRange: 0.7
+  attackRange: 1
   moveSpeed: 0.15
   moneyReward: 1
   manaReward: 1
   paralysed: 0
   healthShieldBonusRespawnTime: 5
   healthShieldBonusPercentage: 15
-  bonusRange: 0.8
+  bonusRange: 1.25
   healingPercentage: 10
   constantHealingPercentage: 0.1
   timeBetweenConstantHealing: 0.5

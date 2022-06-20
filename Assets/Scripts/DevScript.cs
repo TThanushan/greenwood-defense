@@ -6,6 +6,15 @@ public class DevScript : MonoBehaviour
     {
 
         SpeedManager();
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+
+            PlayerStatsScript.instance.money = 500;
+            SaveManager.instance.SavePrefs();
+
+        }
+
     }
 
     void SpeedManager()
@@ -28,6 +37,13 @@ public class DevScript : MonoBehaviour
         {
             print("give money");
             PlayerStatsScript.instance.money += 100000;
+            SaveManager.instance.SavePrefs();
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            print("give money");
+            PlayerStatsScript.instance.money += 100;
+            SaveManager.instance.SavePrefs();
         }
 
         // Kill Enemy captain.

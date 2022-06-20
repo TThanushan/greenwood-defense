@@ -37,6 +37,11 @@ public class StageManager : MonoBehaviour
         PlayerStatsScript.instance.money += reward;
     }
 
+    void GiveGoldEarnedInStageMoney()
+    {
+        PlayerStatsScript.instance.money += goldEarnedInStage;
+    }
+
     float CalculateRewardAmount()
     {
         float reward = levelCompleteMoneyReward;
@@ -153,7 +158,7 @@ public class StageManager : MonoBehaviour
         isGameOver = true;
         gameOverPanel.SetActive(true);
         UpdateLevelPanelInfos(gameOverPanel);
-
+        GiveGoldEarnedInStageMoney();
         Time.timeScale = 1;
         PlayerStatsScript.instance.PauseGame(true);
         gameOverPanel.SetActive(true);

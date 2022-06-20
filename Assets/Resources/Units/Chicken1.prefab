@@ -218,7 +218,7 @@ MonoBehaviour:
   attackDamage: 1
   attackSpeed: 1
   attackRange: 0.25
-  moveSpeed: 0.25
+  moveSpeed: 0.35
   moneyReward: 0
   manaReward: 1
   paralysed: 0

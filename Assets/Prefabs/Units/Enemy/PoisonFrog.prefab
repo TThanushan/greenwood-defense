@@ -244,19 +244,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1c4653b32f08f34eaf64547e66a0f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
+  maxHealth: 20
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 0.25
-  moneyReward: 1
-  manaReward: 1
+  moneyReward: 4
+  manaReward: 10
   paralysed: 0
-  poisonDamage: 0.075
+  poisonDamage: 0.09
   dotCount: 80
-  timeBetweenDotDamage: 0.05
+  timeBetweenDotDamage: 0.025
   poisonedColor: {r: 0.972549, g: 0.5137255, b: 1, a: 1}
 --- !u!95 &3315706013935442866
 Animator:

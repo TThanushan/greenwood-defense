@@ -10,11 +10,12 @@ public class Stage : ScriptableObject
     public class EnemyType
     {
         public GameObject Enemy;
-        public float TimeBeforeFirstSpawn;
         public float TimeBetweenSpawn;
         public float RandomTimeBetweenSpawn;
-        public int EnemyCount;
+
+        public float TimeBeforeFirstSpawn;
         public bool InfiniteSpawning;
+        public int EnemyCount;
 
         [HideInInspector]
         public int currentEnemyCount;

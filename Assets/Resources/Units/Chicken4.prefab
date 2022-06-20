@@ -247,10 +247,10 @@ MonoBehaviour:
   maxHealth: 50
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 1
+  attackDamage: 5
   attackSpeed: 1
   attackRange: 0.24
-  moveSpeed: 0.25
+  moveSpeed: 0.5
   moneyReward: 1
   manaReward: 1
   paralysed: 0
@@ -263,8 +263,8 @@ MonoBehaviour:
     type: 3}
   healthThreshold: 25
   attackSpeedBonus: 500
-  damageBonus: 5
-  maxDamageBonus: 50
+  damageBonusPercentage: 0
+  maxDamageBonusPercentage: 0
   damageBonusDuration: 5
 --- !u!1 &5367232546079401138
 GameObject:

@@ -276,7 +276,7 @@ MonoBehaviour:
     type: 3}
   eggSpawnPos: {fileID: 300741375}
   eggExplosionDamage: 5
-  travelDistance: {x: 1, y: 0}
+  travelDistance: {x: 0.5, y: 0}
   travelSpeed: 0.013
   timeBetweenDrop: 99999
 --- !u!95 &1829568272
