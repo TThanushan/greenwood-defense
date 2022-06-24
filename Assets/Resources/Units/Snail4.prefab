@@ -219,10 +219,11 @@ MonoBehaviour:
   damageTakenIncreasePercentage: 0
   attackDamage: 0
   attackSpeed: 2
-  attackRange: 1
+  attackRange: 1.25
   moveSpeed: 0.15
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   healthShieldBonusRespawnTime: 5
   healthShieldBonusPercentage: 15
@@ -230,7 +231,7 @@ MonoBehaviour:
   healingPercentage: 10
   constantHealingPercentage: 0.1
   timeBetweenConstantHealing: 0.5
-  healthTriggerPercentage: 15
+  healthTriggerPercentage: 25
   timeBetweenlowLifeGlobalHeal: 20
   globalHealEffect: {fileID: 1062412604127685592, guid: fde6ec4b903c87b499785836b421c47a,
     type: 3}

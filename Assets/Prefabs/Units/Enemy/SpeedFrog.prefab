@@ -361,12 +361,13 @@ MonoBehaviour:
   maxHealth: 25
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 3
+  attackDamage: 7
   attackSpeed: 0.125
   attackRange: 0.24
   moveSpeed: 0.75
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
 --- !u!1 &7241784478665342992
 GameObject:

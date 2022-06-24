@@ -217,7 +217,7 @@ public class Unit : HealthBar
     {
         if (!Target)
             return;
-        Target.GetComponent<Unit>().GetDamage(attackDamage, transform);
+        Target.GetComponent<Unit>().GetDamage(attackDamage, transform, "Classic");
     }
 
     protected virtual void AttackTarget()

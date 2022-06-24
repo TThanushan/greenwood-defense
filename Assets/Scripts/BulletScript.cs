@@ -125,13 +125,13 @@ public class BulletScript : MonoBehaviour
     protected void DamageTarget()
     {
         OnDamageDealt(attackDamage);
-        target.GetComponent<HealthBar>().GetDamage(attackDamage, transform);
+        target.GetComponent<HealthBar>().GetDamage(attackDamage, transform, "Classic");
     }
 
     protected void DamageTarget(GameObject target)
     {
         OnDamageDealt(attackDamage);
-        target.GetComponent<HealthBar>().GetDamage(attackDamage, transform);
+        target.GetComponent<HealthBar>().GetDamage(attackDamage, transform, "Classic");
     }
 
     public virtual void OnDamageDealt(float damage)

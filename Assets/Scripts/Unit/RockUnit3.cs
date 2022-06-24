@@ -33,9 +33,9 @@ public class RockUnit3 : RockUnit2
         base.DisableDefenseBonusEffect();
         EnableReflectDamageEffect(false);
     }
-    public override void GetDamage(float damage, Transform caller = null)
+    public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
-        base.GetDamage(damage);
+        base.GetDamage(damage, caller, HitSoundName);
 
         ReflectDamage(damage, caller);
     }
@@ -81,7 +81,7 @@ public class RockUnit3 : RockUnit2
             if (caller.GetComponent<HealthBar>())
             {
                 damage *= 1 - damageReductionPercentage / 100;
-                caller.GetComponent<HealthBar>().GetDamage(damage);
+                caller.GetComponent<HealthBar>().GetDamage(damage, caller, "Classic");
             }
         }
     }

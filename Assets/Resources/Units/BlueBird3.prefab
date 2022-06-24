@@ -251,9 +251,10 @@ MonoBehaviour:
   moveSpeed: 0.3
   moneyReward: 0
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   eggExplosionDamage: 5
-  birdSpawnReloadTime: 3
+  birdSpawnReloadTime: 5
   birdEffectPrefab: {fileID: 5367232545533668792, guid: 739f105295c621e4b9448f4a6f9b6dec,
     type: 3}
   spawnPos: {fileID: 300741375}

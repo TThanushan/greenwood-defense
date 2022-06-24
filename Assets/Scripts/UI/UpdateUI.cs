@@ -13,7 +13,7 @@ public class UpdateUI : MonoBehaviour
     {
         playerStatsScript = PlayerStatsScript.instance;
         moneyText = transform.Find("RightGroup/MoneyTextGroup/MoneyText").GetComponent<TextMeshProUGUI>();
-        timeText = transform.Find("TopGroup/Time/TimeText").GetComponent<TextMeshProUGUI>();
+        timeText = transform.Find("LeftGroup/Time/TimeText").GetComponent<TextMeshProUGUI>();
         transform.Find("TopGroup/Title/TitleText").GetComponent<TextMeshProUGUI>().text = GetStageTitle();
     }
 

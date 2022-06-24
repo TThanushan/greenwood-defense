@@ -32,11 +32,11 @@ public class RockUnit4 : RockUnit3
             ResetDefenseBonus();
     }
 
-    public override void GetDamage(float damage, Transform caller = null)
+    public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         if (isInvulnerabilityBonusEnabled)
             return;
-        base.GetDamage(damage, caller);
+        base.GetDamage(damage, caller, HitSoundName);
     }
     protected override void ResetDefenseBonus()
     {

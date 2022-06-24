@@ -12,10 +12,13 @@ public class BlueBirdUnit2 : Unit
 
     protected override void Update()
     {
+        if (Disabled)
+            return;
         base.Update();
         if (EnoughRangeToAttackTarget() && birdSpawnCooldown <= Time.time)
             DoEffect();
     }
+
 
 
     protected virtual void DoEffect()

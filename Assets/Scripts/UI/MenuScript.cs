@@ -25,6 +25,8 @@ public class MenuScript : MonoBehaviour
 
     }
 
+
+
     void Init()
     {
         fadeAnimator = transform.Find("MiddleGroup/FadeSceneBody").transform.GetComponent<Animator>();

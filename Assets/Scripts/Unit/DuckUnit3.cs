@@ -26,8 +26,6 @@ public class DuckUnit3 : HitBasedUnit
         shieldEffect = transform.Find("SpriteBody/Shield").gameObject;
     }
 
-
-
     protected override void Update()
     {
         base.Update();
@@ -38,7 +36,6 @@ public class DuckUnit3 : HitBasedUnit
             bigShieldCooldown = Time.time + bigShieldRespawnTime;
 
     }
-
 
     void ResetBigShield()
     {
@@ -53,7 +50,7 @@ public class DuckUnit3 : HitBasedUnit
         ResetBigShield();
     }
 
-    public override void GetDamage(float damage, Transform caller = null)
+    public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         if (bigShieldcurrent > 0)
         {
@@ -78,7 +75,7 @@ public class DuckUnit3 : HitBasedUnit
 
         if (isDefenseBonusEnabled)
             damage *= 1 - defenseBonusDamageReduction / 100;
-        base.GetDamage(damage);
+        base.GetDamage(damage, caller, HitSoundName);
     }
 
     IEnumerator DisableDefenseBonus()

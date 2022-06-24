@@ -50,7 +50,8 @@ MonoBehaviour:
   wayX: 1
   target: {fileID: 0}
   effect: {fileID: 4352566265116347071, guid: bb0640d2d9b647045a45667d7bc78953, type: 3}
-  explosionRange: 0.5
+  spriteRenderer: {fileID: 0}
+  explosionRange: 1
 --- !u!1 &2116847985150317397
 GameObject:
   m_ObjectHideFlags: 0

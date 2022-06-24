@@ -37,7 +37,7 @@ public class EggBomb : MonoBehaviour
 
     protected void DamageTarget(GameObject target)
     {
-        target.GetComponent<HealthBar>().GetDamage(explosionDamage, transform);
+        target.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, "Classic");
     }
 
 

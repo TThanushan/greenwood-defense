@@ -34,7 +34,7 @@ public class ExplodeOnDeath : MonoBehaviour
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance <= explosionRange)
             {
-                enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform);
+                enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, "Classic");
             }
         }
         CreateEffect();

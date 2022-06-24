@@ -138,6 +138,8 @@ public class SaveManager : MonoBehaviour
         }
         // Player money.
         PlayerPrefs.SetFloat(PlayerMoneyKey, PlayerStatsScript.instance.money);
+
+        SaveUnlockedUnits();
     }
 
 

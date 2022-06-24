@@ -5077,7 +5077,7 @@ GameObject:
   - component: {fileID: 3315706013935442866}
   - component: {fileID: 3315706013935442867}
   m_Layer: 0
-  m_Name: ZombieFrogUnit
+  m_Name: ZombieFrogUnit 1save
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5111,10 +5111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3c54c22428abf4db1431bf551d0b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
+  maxHealth: 30
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 10
+  attackDamage: 7
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 0.25

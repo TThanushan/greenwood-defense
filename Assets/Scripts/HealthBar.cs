@@ -97,8 +97,13 @@ public class HealthBar : MonoBehaviour
     {
         OnDeath -= DisableHealthBar;
     }
+    protected bool IsCallerPoisoning(Transform caller)
+    {
+        return caller && (caller.GetComponent<PoisonFrog>() || caller.GetComponent<MushroomUnit2>());
+    }
 
-    public virtual void GetDamage(float damage, Transform caller = null)
+    //Caller can be null because the unit is calling getdamage on himself.
+    public virtual void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         if (currentHealth <= 0)
             return;
@@ -122,7 +127,8 @@ public class HealthBar : MonoBehaviour
             OnDeath?.Invoke();
             currentHealth = 0f;
         }
-        poolObject.audioManager.PlayHitSound();
+        if (HitSoundName == "Classic")
+            poolObject.audioManager.PlayHitSound();
 
     }
 

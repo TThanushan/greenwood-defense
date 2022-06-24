@@ -62,7 +62,7 @@ public class UpgradesShop : MonoBehaviour
         //SaveManager.Unit nextUnit = GetUpgradeUnit(unitName);
         string name = unitName;
         string effectText = saveManager.GetUnit(unitName).effectDescription;
-        if (IsUnitUnlocked(unitName))
+        if (IsUnitOfAnyLevelUnlocked(unitName))
         {
             SaveManager.Unit upgradeUnit = GetUpgradeUnit(unitName);
             name = upgradeUnit.name;
@@ -132,11 +132,11 @@ public class UpgradesShop : MonoBehaviour
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
             AddTriggers(upgradeCardButton);
-            if (IsUnitUnlocked(unitName))
+            if (IsUnitOfAnyLevelUnlocked(unitName))
             {
                 SetUpgradeButtonName(GetUnlockedUnit(unitName), upgradeCardButton.name);
             }
-            if (!IsUnitUnlocked(unitName))
+            if (!IsUnitOfAnyLevelUnlocked(unitName))
                 SetActiveUpgradeCardButtonLock(upgradeCardButton);
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
             //if (!saveManager.unlockedUnits.Contains(unitName))
@@ -171,7 +171,7 @@ public class UpgradesShop : MonoBehaviour
 
 
 
-    bool IsUnitUnlocked(string unitName)
+    bool IsUnitOfAnyLevelUnlocked(string unitName)
     {
         foreach (string name in saveManager.unlockedUnits)
         {
@@ -205,13 +205,29 @@ public class UpgradesShop : MonoBehaviour
         int level = int.Parse(GetUnitLevel(unitName));
         if (level < 4)
         {
-            level++;
+            if (IsUnitOfAnyLevelUnlocked(unitName))
+                level++;
+            string name = GetUnitNameWithoutNumbers(unitName) + level.ToString();
+            unit = saveManager.GetUnit(name);
+        }
+        return unit;
+    }
+
+
+    SaveManager.Unit GetPreviousUnit(string unitName)
+    {
+        if (unitName == "")
+            return null;
+        SaveManager.Unit unit = null;
+        int level = int.Parse(GetUnitLevel(unitName));
+        if (level > 1)
+        {
+            level--;
             string nextUnitName = GetUnitNameWithoutNumbers(unitName) + level.ToString();
             unit = saveManager.GetUnit(nextUnitName);
         }
         return unit;
     }
-
 
 
 
@@ -280,7 +296,7 @@ public class UpgradesShop : MonoBehaviour
         if (!CanUpgrade(upgradeUnitName))
             return;
 
-        if (!IsUnitUnlocked(unitName))
+        if (!IsUnitOfAnyLevelUnlocked(unitName))
         {
             Unlock(unitName, price);
             upgradeUnitName = unitName;
@@ -304,13 +320,12 @@ public class UpgradesShop : MonoBehaviour
         saveManager.SavePrefs();
     }
 
-    bool CanUpgrade(string upgradeUnitName)
+    bool CanUpgrade(string unitName)
     {
-        bool a = DoesUnitExist(upgradeUnitName);
-        bool b = !UnitAlreadyUnlocked(upgradeUnitName);
-        bool c = PlayerStatsScript.instance.money > int.Parse(GetUnitPrice(upgradeUnitName));
-        bool d = DoesUnitExist(upgradeUnitName) && (!UnitAlreadyUnlocked(upgradeUnitName) && PlayerStatsScript.instance.money > int.Parse(GetUnitPrice(upgradeUnitName)));
-        return DoesUnitExist(upgradeUnitName) && !UnitAlreadyUnlocked(upgradeUnitName) && PlayerStatsScript.instance.money >= int.Parse(GetUnitPrice(upgradeUnitName));
+        //SaveManager.Unit previousUnit = GetPreviousUnit(unitName);
+        //return DoesUnitExist(upgradeUnitName) && !UnitAlreadyUnlocked(upgradeUnitName) && PlayerStatsScript.instance.money >= GetUnit(upgradeUnitName).shopPrice;
+        //return DoesUnitExist(unitName) && !UnitAlreadyUnlocked(unitName) && PlayerStatsScript.instance.money >= GetUnit(unitName).shopPrice;
+        return DoesUnitExist(unitName) && !UnitAlreadyUnlocked(unitName) && PlayerStatsScript.instance.money >= GetUnit(unitName).shopPrice;
 
         //return !DoesUnitExist(upgradeUnitName) || UnitAlreadyUnlocked(upgradeUnitName) || PlayerStatsScript.instance.money < price;
         //"If unit doesn't exist or unit is already unlocked or player money is less than price"
@@ -353,7 +368,7 @@ public class UpgradesShop : MonoBehaviour
         if (upgradeUnit != null)
             price = GetUnitPrice(upgradeUnit.name);
 
-        if (!IsUnitUnlocked(unitName))
+        if (!IsUnitOfAnyLevelUnlocked(unitName))
         {
             lvl = "1";
             price = GetUnitPrice(unitName);
@@ -374,9 +389,10 @@ public class UpgradesShop : MonoBehaviour
     }
 
 
-    void UpdatePriceTextColor(TMPro.TextMeshProUGUI text, string upgradeUnitName)
+    void UpdatePriceTextColor(TMPro.TextMeshProUGUI text, string unitName)
     {
-        if (CanUpgrade(upgradeUnitName))
+        print(unitName + ":" + GetUnit(unitName).shopPrice);
+        if (CanUpgrade(unitName))
             text.colorGradientPreset = priceOriginalColor;
         else
             text.colorGradientPreset = tooExpensivePriceColor;
@@ -392,6 +408,17 @@ public class UpgradesShop : MonoBehaviour
                 return unit.shopPrice.ToString();
         }
         return "0";
+    }
+
+    SaveManager.Unit GetUnit(string unitName)
+    {
+
+        foreach (SaveManager.Unit unit in saveManager.units)
+        {
+            if (unit.name == unitName)
+                return unit;
+        }
+        return null;
     }
 
     string GetUnitLevel(string unitName)

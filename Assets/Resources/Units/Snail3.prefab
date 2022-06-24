@@ -223,6 +223,7 @@ MonoBehaviour:
   moveSpeed: 0.15
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   healthShieldBonusRespawnTime: 5
   healthShieldBonusPercentage: 15

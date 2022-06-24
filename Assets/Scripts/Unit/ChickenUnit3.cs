@@ -13,10 +13,10 @@ public class ChickenUnit3 : HitBasedUnit
         return rand <= dodgeChance;
     }
 
-    public override void GetDamage(float damage, Transform caller = null)
+    public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         if (!IsDodgingAttack(caller))
-            base.GetDamage(damage);
+            base.GetDamage(damage, caller, HitSoundName);
         else
             CreateDodgeEffect();
     }

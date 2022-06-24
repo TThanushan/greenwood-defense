@@ -129,6 +129,7 @@ public class HitBasedUnit : Unit
 
     }
 
+
     void BlockNextAttack()
     {
         isNextAttackBlocked = true;
@@ -144,16 +145,19 @@ public class HitBasedUnit : Unit
             newEffect.transform.position = transform.position;
         }
     }
-    public override void GetDamage(float damage, Transform caller = null)
+
+
+
+    public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         if (isNextAttackBlocked)
         {
             isNextAttackBlocked = false;
             return;
         }
-        if (effect == Effect.BlockNextAttack)
+        if (effect == Effect.BlockNextAttack && (!IsCallerPoisoning(caller)))
             IncreaseHitCount();
-        base.GetDamage(damage);
+        base.GetDamage(damage, caller, HitSoundName);
     }
 
     //protected void CreateParticleEffect()

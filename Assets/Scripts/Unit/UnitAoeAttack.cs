@@ -22,7 +22,7 @@ public class UnitAoeAttack : Unit
             float distance = Vector2.Distance(Target.transform.position, enemy.transform.position);
             if (distance <= effectRange)
             {
-                enemy.GetComponent<Unit>().GetDamage(effectDamage, transform);
+                enemy.GetComponent<Unit>().GetDamage(effectDamage, transform, "Classic");
             }
         }
     }

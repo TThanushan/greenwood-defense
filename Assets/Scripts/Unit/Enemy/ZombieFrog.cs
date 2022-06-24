@@ -19,6 +19,7 @@ public class ZombieFrog : Unit
 
     void StartZombieEffect()
     {
+        CreateEffect();
         currentHealth = maxHealth;
         attackDamageSave = attackDamage;
         attackDamage *= 1 + attackDamageBonus / 100;
@@ -26,14 +27,14 @@ public class ZombieFrog : Unit
         attackSpeedSave = attackSpeed;
         attackSpeed = zombieAttackSpeed;
         zombieEffect.SetActive(true);
-        CreateEffect();
+        nextAttackTime = 0f;
     }
 
-    public override void GetDamage(float damage, Transform caller = null)
+    public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         if (damage >= currentHealth && !zombieEffect.activeSelf)
             StartZombieEffect();
-        base.GetDamage(damage, caller);
+        base.GetDamage(damage, caller, HitSoundName);
     }
 
     public override void Disable()
