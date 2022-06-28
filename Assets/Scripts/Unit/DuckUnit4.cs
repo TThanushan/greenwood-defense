@@ -17,12 +17,12 @@ public class DuckUnit4 : DuckUnit3
     protected override void Update()
     {
         base.Update();
-        if (bigShieldcurrent > 0 && nextHealingTime <= Time.time)
+        if (isDefenseBonusEnabled && nextHealingTime <= Time.time)
         {
             Heal();
             healingEffect.SetActive(true);
         }
-        else if (bigShieldcurrent <= 0)
+        else if (!isDefenseBonusEnabled)
         {
             healingEffect.SetActive(false);
         }

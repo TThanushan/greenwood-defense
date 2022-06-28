@@ -458,10 +458,10 @@ MonoBehaviour:
   timeBetweenHitEffect: 0
   blockEffect: {fileID: 64473780753522552, guid: badfd888d8bc12741a03cac2431e2e57,
     type: 3}
-  bigShieldMax: 2
+  bigShieldMax: 5
   bigShieldRespawnTime: 6
-  defenseBonusDamageReduction: 0
-  defenseBonusDuration: 0
+  defenseBonusDamageReduction: 30
+  defenseBonusDuration: 3
   shieldEffect: {fileID: 0}
 --- !u!1 &5367232546079401138
 GameObject:

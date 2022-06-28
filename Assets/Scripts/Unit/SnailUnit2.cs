@@ -3,6 +3,7 @@ using UnityEngine;
 public class SnailUnit2 : Unit
 {
     public float healthShieldBonusRespawnTime;
+    public float healthShieldBonusHealthAmount;
     [Range(0, 100)]
     public float healthShieldBonusPercentage;
     public float bonusRange;
@@ -65,5 +66,6 @@ public class SnailUnit2 : Unit
     {
         HealthBar healthBarScript = ally.GetComponent<HealthBar>();
         healthBarScript.SetShieldRelatedToCurrentHealthPercentage(healthShieldBonusPercentage);
+        healthBarScript.SetShield(healthShieldBonusHealthAmount);
     }
 }

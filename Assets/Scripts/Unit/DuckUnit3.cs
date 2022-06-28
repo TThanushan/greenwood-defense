@@ -15,9 +15,8 @@ public class DuckUnit3 : HitBasedUnit
     public GameObject shieldEffect;
 
     GameObject defenseBonusEffect;
-    bool isDefenseBonusEnabled;
+    protected bool isDefenseBonusEnabled;
     bool isDefenseBonusEnabledOnce;
-
 
     protected override void Awake()
     {

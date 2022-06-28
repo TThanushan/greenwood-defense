@@ -7,7 +7,7 @@ public class SnailUnit5 : SnailUnit4
     //public float globalHealPercentage;
     public float timeBetweenlowLifeGlobalHeal;
     public GameObject globalHealEffect;
-
+    public float globalHealPercentage = 100f;
     float lowLifeGlobalHealCooldown;
 
     protected override void Update()
@@ -44,11 +44,7 @@ public class SnailUnit5 : SnailUnit4
             float distance = Vector2.Distance(transform.position, ally.transform.position);
             if (distance <= bonusRange)
             {
-                for (int i = 0; i < 20; i++)
-                {
-                    HealAlly(ally);
-
-                }
+                HealAlly(ally, globalHealPercentage);
             }
         }
         CreateEffect();

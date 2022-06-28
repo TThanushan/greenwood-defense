@@ -9,13 +9,13 @@ public class SnailUnit3 : SnailUnit2
     protected override void DoEffect(GameObject ally)
     {
         base.DoEffect(ally);
-        HealAlly(ally);
+        HealAlly(ally, healingPercentage);
     }
 
-    protected void HealAlly(GameObject ally)
+    protected void HealAlly(GameObject ally, float _healPercentage)
     {
         HealthBar healthBarScript = ally.GetComponent<HealthBar>();
-        healthBarScript.HealMaxHealthPercentage(healingPercentage);
+        healthBarScript.HealMaxHealthPercentage(_healPercentage);
     }
 
 }

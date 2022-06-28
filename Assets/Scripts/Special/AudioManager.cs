@@ -16,6 +16,18 @@ public class AudioManager : MonoBehaviour
         AudioListener.volume = 0.10f;
     }
 
+    int GetNumberOfAudioPlaying()
+    {
+        AudioSource[] audios = GetComponents<AudioSource>();
+        int i = 0;
+        foreach (AudioSource audioSource in audios)
+        {
+            if (audioSource.isPlaying)
+                i++;
+        }
+
+        return i;
+    }
 
     void Awake()
     {
@@ -56,7 +68,7 @@ public class AudioManager : MonoBehaviour
 
     public void Play(string _name, bool randomPitch = false, float pitchPower = 0.1f)
     {
-        if (SFXMuted)
+        if (SFXMuted || GetNumberOfAudioPlaying() > 25)
             return;
         Sound newS = sounds.Find(Sound => Sound.name == _name && Sound.source.isPlaying == false);
         //sound not playing wasn't found ?

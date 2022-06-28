@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
-  m_Color: {r: 0.31190643, g: 1, b: 0.033018887, a: 0.33333334}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.27058825}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -156,7 +156,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847,
     type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.24705882}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.24705882}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -458,12 +458,12 @@ MonoBehaviour:
   timeBetweenHitEffect: 0
   blockEffect: {fileID: 64473780753522552, guid: badfd888d8bc12741a03cac2431e2e57,
     type: 3}
-  bigShieldMax: 2
+  bigShieldMax: 10
   bigShieldRespawnTime: 6
-  defenseBonusDamageReduction: 0
-  defenseBonusDuration: 0
+  defenseBonusDamageReduction: 50
+  defenseBonusDuration: 3
   shieldEffect: {fileID: 0}
-  healingSpeed: 0.1
+  healingSpeed: 2
   healingPercentage: 0.1
 --- !u!1 &5367232546079401138
 GameObject:

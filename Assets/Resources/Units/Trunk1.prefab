@@ -219,9 +219,10 @@ MonoBehaviour:
   attackDamage: 1
   attackSpeed: 2
   attackRange: 1.5
-  moveSpeed: 0.25
+  moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 193351484e92eb644a433263dea027b3, type: 3}
   bulletPosition: {fileID: 5367232546079401137}

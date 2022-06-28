@@ -416,8 +416,9 @@ MonoBehaviour:
   attackSpeed: 0.25
   attackRange: 0.24
   moveSpeed: 0.5
-  moneyReward: 1
-  manaReward: 1
+  moneyReward: 6
+  manaReward: 11
+  deathSfxName: 
   paralysed: 0
 --- !u!95 &3315706013935442866
 Animator:

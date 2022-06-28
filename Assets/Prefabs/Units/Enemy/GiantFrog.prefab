@@ -5127,7 +5127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2309611109147799177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1272, z: 0}
+  m_LocalPosition: {x: 0.048900027, y: -0.1272, z: 0}
   m_LocalScale: {x: 0.21267782, y: 0.043034032, z: 0.21267782}
   m_Children: []
   m_Father: {fileID: 7670015549513501007}
@@ -5208,7 +5208,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2547382967714891847}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0063, y: 0.0754, z: 0}
+  m_LocalPosition: {x: 0.036, y: 0.195, z: 0}
   m_LocalScale: {x: 0.00088484486, y: 0.0015198623, z: 0.29871973}
   m_Children:
   - {fileID: 2547382969450703515}
@@ -5612,7 +5612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7670015549513501004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.117, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7670015549637140912}
@@ -5644,7 +5644,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7670015549637140913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.0489, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1012925209138260573}
@@ -5703,15 +5703,16 @@ MonoBehaviour:
   maxHealth: 1000
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 10
+  attackDamage: 30
   attackSpeed: 2
   attackRange: 1.05
   moveSpeed: 0.1
-  moneyReward: 5
-  manaReward: 10
+  moneyReward: 100
+  manaReward: 100
+  deathSfxName: 
   paralysed: 0
-  effectRange: 1
-  effectDamage: 1
+  effectRange: 1.15
+  effectDamage: 10
 --- !u!95 &2309611108585902830
 Animator:
   serializedVersion: 3

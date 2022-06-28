@@ -42,8 +42,10 @@ public class UpgradesShop : MonoBehaviour
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
-            AddTriggers(upgradeCardButton);
-            UpdatePriceTextColor(upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>(), GetUpgradeUnit(unitName).name);
+            //AddTriggers(upgradeCardButton);
+            SaveManager.Unit upgradeUnit = GetUpgradeUnit(unitName);
+            if (upgradeUnit != null)
+                UpdatePriceTextColor(upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>(), upgradeUnit.name);
         }
     }
 
@@ -81,6 +83,11 @@ public class UpgradesShop : MonoBehaviour
     {
         selectCursor.transform.position = new Vector2(100000, 100000);
     }
+    public void UnselectCard()
+    {
+        selectedCard = "";
+        selectCursor.transform.position = new Vector2(100000, 100000);
+    }
     public void SelectCard()
     {
         if (IsUnitLevelMax())
@@ -96,7 +103,7 @@ public class UpgradesShop : MonoBehaviour
     {
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SelectCard);
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetSelectedCardButtonCursor);
-        AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, PlayButtonClick);
+
     }
 
     public void PlayButtonClick()
@@ -212,24 +219,6 @@ public class UpgradesShop : MonoBehaviour
         }
         return unit;
     }
-
-
-    SaveManager.Unit GetPreviousUnit(string unitName)
-    {
-        if (unitName == "")
-            return null;
-        SaveManager.Unit unit = null;
-        int level = int.Parse(GetUnitLevel(unitName));
-        if (level > 1)
-        {
-            level--;
-            string nextUnitName = GetUnitNameWithoutNumbers(unitName) + level.ToString();
-            unit = saveManager.GetUnit(nextUnitName);
-        }
-        return unit;
-    }
-
-
 
     bool IsUnitLevelMax(string unitName)
     {
@@ -351,7 +340,6 @@ public class UpgradesShop : MonoBehaviour
     void SetActiveUpgradeCardButtonLock(Transform button, bool value = true)
     {
         button.Find("Lock").gameObject.SetActive(value);
-
     }
 
 
@@ -391,7 +379,6 @@ public class UpgradesShop : MonoBehaviour
 
     void UpdatePriceTextColor(TMPro.TextMeshProUGUI text, string unitName)
     {
-        print(unitName + ":" + GetUnit(unitName).shopPrice);
         if (CanUpgrade(unitName))
             text.colorGradientPreset = priceOriginalColor;
         else

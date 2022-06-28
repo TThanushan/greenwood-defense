@@ -226,7 +226,8 @@ MonoBehaviour:
   deathSfxName: 
   paralysed: 0
   healthShieldBonusRespawnTime: 5
-  healthShieldBonusPercentage: 15
+  healthShieldBonusHealthAmount: 2
+  healthShieldBonusPercentage: 20
   bonusRange: 1.25
   healingPercentage: 10
   constantHealingPercentage: 0.1
@@ -235,6 +236,7 @@ MonoBehaviour:
   timeBetweenlowLifeGlobalHeal: 20
   globalHealEffect: {fileID: 1062412604127685592, guid: fde6ec4b903c87b499785836b421c47a,
     type: 3}
+  globalHealPercentage: 100
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3

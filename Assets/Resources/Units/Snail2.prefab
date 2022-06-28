@@ -226,7 +226,8 @@ MonoBehaviour:
   deathSfxName: 
   paralysed: 0
   healthShieldBonusRespawnTime: 5
-  healthShieldBonusPercentage: 15
+  healthShieldBonusHealthAmount: 2
+  healthShieldBonusPercentage: 20
   bonusRange: 1.25
   healingPercentage: 10
 --- !u!95 &1829568272

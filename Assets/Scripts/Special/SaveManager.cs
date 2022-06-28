@@ -8,6 +8,8 @@ public class SaveManager : MonoBehaviour
     public int maxLevelUnlocked = 1;
     public List<Level> levels;
     public List<Unit> units;
+    public List<HeroUpgrade> heroUpgrades;
+    public List<string> unlockedHeroUpgrades;
     public List<string> unlockedUnits;
 
     public const int levelsCount = 50;
@@ -15,6 +17,7 @@ public class SaveManager : MonoBehaviour
     const string MaxLevelUnlockedKey = "MaxLevelUnlockedKey";
     const string PlayerMoneyKey = "Money";
     const string UnlockedUnitsKey = "UnlockedUnits";
+    const string UnlockedHeroUpgradesKey = "UnlockedHeroUpgrades";
     private void Awake()
     {
         if (!instance)
@@ -29,7 +32,7 @@ public class SaveManager : MonoBehaviour
             LoadPrefs();
 
         InitUnits();
-
+        InitsHeroUpgrades();
     }
 
     private void Update()
@@ -55,7 +58,9 @@ public class SaveManager : MonoBehaviour
         // Player money.
         PlayerPrefs.SetFloat(PlayerMoneyKey, 0);
         InitFirstTimeUnlockedUnits();
+        InitFirstTimeUnlockedHeroUpgrades();
         SaveUnlockedUnits();
+        SaveUnlockedHeroUpgrades();
     }
 
 
@@ -74,6 +79,7 @@ public class SaveManager : MonoBehaviour
         maxLevelUnlocked = 1;
         Init();
         InitFirstTimeUnlockedUnits();
+        InitFirstTimeUnlockedHeroUpgrades();
     }
     public int GetLevelScore(int index)
     {
@@ -154,6 +160,21 @@ public class SaveManager : MonoBehaviour
         return string.Join("|", units);
     }
 
+    public void SaveUnlockedHeroUpgrades()
+    {
+        PlayerPrefs.SetString(UnlockedHeroUpgradesKey, String.Join("|", unlockedHeroUpgrades));
+    }
+
+    public string GetUnlockedHeroUpgradesFromPrefs()
+    {
+        string units = PlayerPrefs.GetString(UnlockedHeroUpgradesKey);
+        return string.Join("|", units);
+    }
+    string[] GetUnlockedHeroUpgradesArray()
+    {
+        return GetUnlockedHeroUpgradesFromPrefs().Split('|');
+    }
+
     string[] GetUnlockedUnitsArray()
     {
         return GetUnlockedUnitsFromPrefs().Split('|');
@@ -180,6 +201,7 @@ public class SaveManager : MonoBehaviour
             i++;
         }
         LoadUnlockedUnits();
+        LoadUnlockedHeroUpgrades();
     }
 
     void LoadUnlockedUnits()
@@ -189,6 +211,16 @@ public class SaveManager : MonoBehaviour
         {
             if (name != "")
                 unlockedUnits.Add(name);
+        }
+    }
+
+    void LoadUnlockedHeroUpgrades()
+    {
+        string[] units = GetUnlockedHeroUpgradesArray();
+        foreach (string name in units)
+        {
+            if (name != "")
+                unlockedHeroUpgrades.Add(name);
         }
     }
 
@@ -220,26 +252,56 @@ public class SaveManager : MonoBehaviour
         return null;
     }
 
+    public HeroUpgrade GetHeroUpgrade(string heroUpgradeName)
+    {
+        foreach (HeroUpgrade heroUpgrade in heroUpgrades)
+        {
+            if (heroUpgrade.name == heroUpgradeName)
+                return heroUpgrade;
+        }
+        return null;
+    }
+
+    void InitsHeroUpgrades()
+    {
+        heroUpgrades = new List<HeroUpgrade>
+        {
+            new HeroUpgrade("ManaMax100", "Increase maximum mana to 110",0),
+            new HeroUpgrade("ManaMax110", "Increase maximum mana to 110",110),
+            new HeroUpgrade("ManaMax120", "Increase maximum mana to 120",120),
+            new HeroUpgrade("ManaMax130", "Increase maximum mana to 130",130),
+            new HeroUpgrade("ManaMax140", "Increase maximum mana to 140",140),
+            new HeroUpgrade("ManaMax150", "Increase maximum mana to 150",150),
+            new HeroUpgrade("ManaRegen0.0", "Increase mana regeneration of 0.1 per second",1500),
+            new HeroUpgrade("ManaRegen0.1", "Increase mana regeneration of 0.1 per second",150),
+            new HeroUpgrade("ManaRegen0.2", "Increase mana regeneration of 0.2 per second",160),
+            new HeroUpgrade("ManaRegen0.3", "Increase mana regeneration of 0.3 per second",170),
+            new HeroUpgrade("ManaRegen0.4", "Increase mana regeneration of 0.4 per second",180),
+            new HeroUpgrade("ManaRegen0.5", "Increase mana regeneration of 0.5 per second",190),
+
+        };
+    }
+
     void InitUnits()
     {
         units = new List<Unit>
         {
-            new Unit("Chicken1", 25, 6, 100),
+            new Unit("Chicken1", 25, 6, 100, "Fast dps unit."),
             new Unit("Chicken2", 35, 8, 200, "Every 3 attacks, double hit"),
             new Unit("Chicken3", 50, 10, 500, "Every 3 attacks, triple hit and 50% chance to dodge an attack"),
             new Unit("Chicken4", 70, 12, 1200, "When under 25% health, attack speed is increase by 500%, each hit increase attack damage by 5% until 50%)"),
 
-            new Unit("Duck1", 25, 8, 100),
+            new Unit("Duck1", 25, 8, 100, "Tank unit, high health."),
             new Unit("Duck2", 35, 10, 200, "Every 3 hit received, block next hit"),
             new Unit("Duck3", 45, 12, 400, "Start with a big shield that blocks the 5 next hit, when big shield is down, receive defense bonus for x seconds, big shield reappears after x seconds."),
             new Unit("Duck4", 60, 14, 1100, "Big shield now blocks 10 next hit instead of 5, when big shield is down, receive defense bonus for x seconds, big shield reappears after x seconds. When any shield is up, restore x% max health over time."),
 
-            new Unit("Trunk1", 30, 10, 100),
+            new Unit("Trunk1", 30, 10, 100, "Shoot bullet."),
             new Unit("Trunk2", 45, 12, 250, "Shoot 3 times in row (on every attack)."),
             new Unit("Trunk3", 65, 14, 600, "Increased shooting speed."),
             new Unit("Trunk4", 85, 16, 1500, "Gatling shooting."),
 
-            new Unit("Rock1", 35, 12, 150),
+            new Unit("Rock1", 35, 12, 150, "Tank unit, high health."),
             new Unit("Rock2", 55, 12, 350, "Become super resistant (damage received reduced by a percentage) for an amount of time."),
             new Unit("Rock3", 75, 12, 800, "When super resistant, sends back a percentage of damage received and projectiles are reflected."),
             new Unit("Rock4", 100, 12, 1700, "Become invulnerable for an amount of time."),
@@ -249,7 +311,7 @@ public class SaveManager : MonoBehaviour
             new Unit("Bunny3", 45, 10, 550, "Instead of unique rabbit (dps or tank), summon an army of weak rabbits."),
             new Unit("Bunny4", 60, 10, 1300, "Instead of an army of weak rabbits, summon an army of unique rabbits (dps or tank)."),
 
-            new Unit("Plant1", 35, 12, 175),
+            new Unit("Plant1", 35, 12, 175, "Shoot bullet at long distance."),
             new Unit("Plant2", 50, 14, 400, "Bullets go through 3 enemies."),
             new Unit("Plant3", 70, 16, 750, "Bullet pierce through all enemies on a distance."),
             new Unit("Plant4", 90, 18, 1600, "Shoot an explosive bullet."),
@@ -260,7 +322,7 @@ public class SaveManager : MonoBehaviour
             new Unit("Mushroom3", 85, 14, 2000, "Max health percentage damage, reduced inflicted damage and defense."),
             new Unit("Mushroom4", 130, 16, 3500, "After being poisoned for a certain amount of time, enemy are paralysed for a short amount of time."),
 
-            new Unit("BlueBird1", 25, 10, 125),
+            new Unit("BlueBird1", 25, 10, 125, "Dps unit."),
             new Unit("BlueBird2", 45, 12, 450, "Summon a bird that will drop an explosive egg on enemies."),
             new Unit("BlueBird3", 65, 14, 900, "Summon a bird that will drop multiple explosive eggs on enemies."),
             new Unit("BlueBird4", 90, 16, 1800, "Summon a bird that will drop multiple eggs that spawn small birds on enemies."),
@@ -273,12 +335,36 @@ public class SaveManager : MonoBehaviour
 
     }
 
+    [System.Serializable]
+    public class HeroUpgrade
+    {
+        public string name;
+        public string description;
+        public float shopPrice;
+        public HeroUpgrade(string name, string description, float shopPrice)
+        {
+            this.name = name;
+            this.shopPrice = shopPrice;
+            this.description = description;
+        }
+    }
+
     void InitFirstTimeUnlockedUnits()
     {
         unlockedUnits = new List<string>
         {
             "Chicken1",
             "Duck1",
+        };
+    }
+
+    void InitFirstTimeUnlockedHeroUpgrades()
+    {
+        print("add");
+        unlockedHeroUpgrades = new List<string>
+        {
+            "ManaMax100",
+            "ManaRegen0.0",
         };
     }
 

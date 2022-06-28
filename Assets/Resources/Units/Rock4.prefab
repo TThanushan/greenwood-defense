@@ -221,13 +221,14 @@ MonoBehaviour:
   moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   damageReductionPercentage: 50
   defenseBonusDuration: 10
   defenseBonusRespawnTime: 4
   damageReflectedPercentage: 50
-  invulnerabilityBonusDuration: 3
-  invulnerabilityBonusRespawnTime: 8
+  invulnerabilityBonusDuration: 2
+  invulnerabilityBonusRespawnTime: 10
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3

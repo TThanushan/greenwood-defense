@@ -28,7 +28,7 @@ public class SnailUnit4 : SnailUnit3
             float distance = Vector2.Distance(transform.position, ally.transform.position);
             if (distance <= bonusRange)
             {
-                HealAlly(ally);
+                HealAlly(ally, constantHealingPercentage);
             }
         }
 

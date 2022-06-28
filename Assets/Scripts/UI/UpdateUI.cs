@@ -21,7 +21,6 @@ public class UpdateUI : MonoBehaviour
     {
         moneyText.text = playerStatsScript.money.ToString();
         timeText.text = GetFormatedTime();
-
     }
 
     string GetStageTitle()
