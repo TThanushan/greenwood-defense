@@ -1,4 +1,6 @@
-﻿using TMPro;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 
 public class ManaBar : MonoBehaviour
@@ -22,6 +24,38 @@ public class ManaBar : MonoBehaviour
             currentManaText = transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>();
     }
 
+
+
+    void LoadStatsFromPrefs()
+    {
+        foreach (string name in SaveManager.instance.unlockedHeroUpgrades)
+        {
+            const string MANA_MAX = "ManaMax";
+            const string MANA_REGEN = "ManaRegen";
+            if (name.Contains(MANA_MAX))
+            {
+                maxMana = GetUpgradeNameNumbersOnly(name);
+                transform.Find("MaxManaText").GetComponent<TextMeshProUGUI>().text = "/" + maxMana.ToString();
+            }
+            else if (name.Contains(MANA_REGEN))
+            {
+                regenerationSpeed += GetUpgradeNameNumbersOnly(name);
+            }
+        }
+
+    }
+    float GetUpgradeNameNumbersOnly(string upgradeName)
+    {
+        string withoutNumbers = GetUpgradeNameWithoutNumbers(upgradeName);
+        withoutNumbers = upgradeName.Replace(withoutNumbers, "");
+        return float.Parse(withoutNumbers, CultureInfo.InvariantCulture.NumberFormat);
+    }
+    string GetUpgradeNameWithoutNumbers(string upgradeName)
+    {
+        string withoutNumbers = Regex.Replace(upgradeName, @"[\d-]", string.Empty);
+        withoutNumbers = withoutNumbers.Replace(".", "");
+        return withoutNumbers;
+    }
     private void Update()
     {
         UpdateManaBarLength();
@@ -31,6 +65,7 @@ public class ManaBar : MonoBehaviour
     private void Start()
     {
         regenerationSpeed += 0.1f * StageInfosManager.instance.GetCurrentStageNumber();
+        LoadStatsFromPrefs();
     }
     private void UpdateCurrentManaText()
     {

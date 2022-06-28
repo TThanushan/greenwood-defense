@@ -272,6 +272,7 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("ManaMax130", "Increase maximum mana to 130",130),
             new HeroUpgrade("ManaMax140", "Increase maximum mana to 140",140),
             new HeroUpgrade("ManaMax150", "Increase maximum mana to 150",150),
+            new HeroUpgrade("ManaMax160", "Increase maximum mana to 160",160),
             new HeroUpgrade("ManaRegen0.0", "Increase mana regeneration of 0.1 per second",1500),
             new HeroUpgrade("ManaRegen0.1", "Increase mana regeneration of 0.1 per second",150),
             new HeroUpgrade("ManaRegen0.2", "Increase mana regeneration of 0.2 per second",160),

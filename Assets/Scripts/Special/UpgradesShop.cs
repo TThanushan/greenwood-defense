@@ -20,7 +20,7 @@ public class UpgradesShop : MonoBehaviour
         UpdateShopUI();
     }
 
-    void UpdateShopUI(string oldCardName = "")
+    public void UpdateShopUI(string oldCardName = "")
     {
         SetPlayerGoldText();
         UpdateButtonName(oldCardName);
@@ -42,7 +42,6 @@ public class UpgradesShop : MonoBehaviour
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
-            //AddTriggers(upgradeCardButton);
             SaveManager.Unit upgradeUnit = GetUpgradeUnit(unitName);
             if (upgradeUnit != null)
                 UpdatePriceTextColor(upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>(), upgradeUnit.name);
@@ -311,13 +310,7 @@ public class UpgradesShop : MonoBehaviour
 
     bool CanUpgrade(string unitName)
     {
-        //SaveManager.Unit previousUnit = GetPreviousUnit(unitName);
-        //return DoesUnitExist(upgradeUnitName) && !UnitAlreadyUnlocked(upgradeUnitName) && PlayerStatsScript.instance.money >= GetUnit(upgradeUnitName).shopPrice;
-        //return DoesUnitExist(unitName) && !UnitAlreadyUnlocked(unitName) && PlayerStatsScript.instance.money >= GetUnit(unitName).shopPrice;
         return DoesUnitExist(unitName) && !UnitAlreadyUnlocked(unitName) && PlayerStatsScript.instance.money >= GetUnit(unitName).shopPrice;
-
-        //return !DoesUnitExist(upgradeUnitName) || UnitAlreadyUnlocked(upgradeUnitName) || PlayerStatsScript.instance.money < price;
-        //"If unit doesn't exist or unit is already unlocked or player money is less than price"
     }
 
 
