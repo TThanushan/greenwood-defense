@@ -273,13 +273,17 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("ManaMax140", "Increase maximum mana to 140",140),
             new HeroUpgrade("ManaMax150", "Increase maximum mana to 150",150),
             new HeroUpgrade("ManaMax160", "Increase maximum mana to 160",160),
-            new HeroUpgrade("ManaRegen0.0", "Increase mana regeneration of 0.1 per second",1500),
-            new HeroUpgrade("ManaRegen0.1", "Increase mana regeneration of 0.1 per second",150),
-            new HeroUpgrade("ManaRegen0.2", "Increase mana regeneration of 0.2 per second",160),
-            new HeroUpgrade("ManaRegen0.3", "Increase mana regeneration of 0.3 per second",170),
-            new HeroUpgrade("ManaRegen0.4", "Increase mana regeneration of 0.4 per second",180),
-            new HeroUpgrade("ManaRegen0.5", "Increase mana regeneration of 0.5 per second",190),
-
+            new HeroUpgrade("ManaRegen0.0", "Increase mana regeneration of 0.0 per second",1500),
+            new HeroUpgrade("ManaRegen0.5", "Increase mana regeneration of 0.5 per second",150),
+            new HeroUpgrade("ManaRegen1.0", "Increase mana regeneration of 1.0 per second",160),
+            new HeroUpgrade("ManaRegen1.5", "Increase mana regeneration of 1.5 per second",170),
+            new HeroUpgrade("ManaRegen2.0", "Increase mana regeneration of 2.0 per second",180),
+            new HeroUpgrade("ManaRegen2.5", "Increase mana regeneration of 2.5 per second",190),
+            new HeroUpgrade("UnitCooldownReduction10", "Reduce unit spawn cooldown by 10%",200),
+            new HeroUpgrade("UnitCooldownReduction20", "Reduce unit spawn cooldown by 20%",400),
+            new HeroUpgrade("UnitCooldownReduction30", "Reduce unit spawn cooldown by 30%",600),
+            new HeroUpgrade("UnitCooldownReduction40", "Reduce unit spawn cooldown by 40%",800),
+            new HeroUpgrade("UnitCooldownReduction50", "Reduce unit spawn cooldown by 50%",1000),
         };
     }
 

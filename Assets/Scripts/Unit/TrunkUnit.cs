@@ -16,6 +16,8 @@ public class TrunkUnit : UnitShooter
     {
         for (int i = 0; i < bulletShotEachTime; i++)
         {
+            if (!InRangeWithTarget())
+                break;
             InstantiateBullet(target);
             yield return new WaitForSeconds(timeBetweenShoot);
         }

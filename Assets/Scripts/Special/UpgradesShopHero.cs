@@ -312,6 +312,7 @@ public class UpgradesShopHero : MonoBehaviour
         }
         if (IsUpgradeMax(GetUpgradeNameFromSelectCard()))
         {
+            AudioManager.instance.PlaySfx("UnitLevelMax");
             DisableUpgradeCard();
             UnselectCard();
         }

@@ -98,5 +98,11 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: UnitLevelMax
+    clip: {fileID: 8300000, guid: 69c8c616fc0a4554e95fd93c691882ad, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   musicMuted: 0
   SFXMuted: 0

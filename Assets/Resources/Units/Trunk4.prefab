@@ -286,8 +286,8 @@ MonoBehaviour:
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 1dd1b24d951e6504488872d722ec0642, type: 3}
   bulletPosition: {fileID: 1142343704}
-  bulletShotEachTime: 1
-  timeBetweenShoot: 0
+  bulletShotEachTime: 300
+  timeBetweenShoot: 0.1
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

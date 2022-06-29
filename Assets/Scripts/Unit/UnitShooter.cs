@@ -52,7 +52,7 @@ public class UnitShooter : Unit
 
     }
 
-    bool InRangeWithTarget()
+    protected bool InRangeWithTarget()
     {
         return Vector2.Distance(transform.position, Target.transform.position) <= attackRange;
     }

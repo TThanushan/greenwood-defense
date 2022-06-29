@@ -301,6 +301,7 @@ public class UpgradesShop : MonoBehaviour
             DisableUpgradeCard();
             HideSelectedCardButtonCursor();
             EmptySelectedCardInfos();
+            AudioManager.instance.PlaySfx("UnitLevelMax");
         }
         SetActiveUpgradeCardButtonLock(GetSelectedCard(), false);
         AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
