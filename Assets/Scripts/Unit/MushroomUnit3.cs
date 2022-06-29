@@ -20,10 +20,8 @@ public class MushroomUnit3 : MushroomUnit2
         if (!IsTargetEnabled(target))
             yield return null;
         Unit unit = target.GetComponent<Unit>();
-        float initialDamage = unit.attackDamage;
         unit.attackDamage *= 1 - (damageReductionPercentage / 100f);
-        yield return new WaitForSeconds(GetPoisonDuration());
-        unit.attackDamage = initialDamage;
+        unit.InvokeResetAttackDamage(GetPoisonDuration());
     }
 
     protected float GetPoisonDuration()

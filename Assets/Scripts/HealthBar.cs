@@ -16,6 +16,7 @@ public class HealthBar : MonoBehaviour
 
     [HideInInspector]
     public float damageTakenIncreasePercentage = 0f;
+    public float initialDamageTakenIncreasePercentage;
     protected PoolObject poolObject;
     protected virtual void Awake()
     {
@@ -30,6 +31,7 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {
         poolObject = PoolObject.instance;
+        initialDamageTakenIncreasePercentage = damageTakenIncreasePercentage;
     }
     protected virtual void Update()
     {
@@ -76,10 +78,7 @@ public class HealthBar : MonoBehaviour
     float GetShieldWidth()
     {
         // Set width using shield percentage on health (? on 100).
-        float width = 100f;
-        if (shield < currentHealth)
-            width = shield / currentHealth * 100f;
-        return width;
+        return shield / maxHealth * 100f;
     }
 
     void DisableHealthBar()
@@ -134,6 +133,15 @@ public class HealthBar : MonoBehaviour
 
     }
 
+    void ResetDamageTakenIncreasePercentage()
+    {
+        damageTakenIncreasePercentage = initialDamageTakenIncreasePercentage;
+    }
+
+    public void InvokeResetDamageTakenIncreasePercentage(float time)
+    {
+        Invoke("ResetDamageTakenIncreasePercentage", time);
+    }
     float GetDamageTakenIncreasePercentage()
     {
         return 1f + damageTakenIncreasePercentage / 100f;

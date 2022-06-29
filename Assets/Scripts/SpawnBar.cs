@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -24,14 +26,40 @@ public class SpawnBar : MonoBehaviour
     {
         SaveManager saveManager = SaveManager.instance;
         unitButtons = new UnitButton[saveManager.unlockedUnits.Count];
+        float cooldownReduction = 1 - GetCooldownReductionShop() / 100;
         int i = 0;
         foreach (string unitName in saveManager.unlockedUnits)
         {
             SaveManager.Unit unitS = saveManager.GetUnit(unitName);
-            UnitButton unitButton = new UnitButton(unitS.name, unitS.cost, unitS.reloadTime);
+            UnitButton unitButton = new UnitButton(unitS.name, unitS.cost, unitS.reloadTime * cooldownReduction);
             unitButtons[i] = unitButton;
             i++;
         }
+    }
+
+    float GetCooldownReductionShop()
+    {
+
+        foreach (string name in SaveManager.instance.unlockedHeroUpgrades)
+        {
+            if (GetUpgradeNameWithoutNumbers(name) == "UnitCooldownReduction")
+                return GetUpgradeNameNumbersOnly(name);
+        }
+        return 0f;
+
+    }
+    string GetUpgradeNameWithoutNumbers(string upgradeName)
+    {
+        string withoutNumbers = Regex.Replace(upgradeName, @"[\d-]", string.Empty);
+        withoutNumbers = withoutNumbers.Replace(".", "");
+        return withoutNumbers;
+    }
+
+    float GetUpgradeNameNumbersOnly(string upgradeName)
+    {
+        string withoutNumbers = GetUpgradeNameWithoutNumbers(upgradeName);
+        withoutNumbers = upgradeName.Replace(withoutNumbers, "");
+        return float.Parse(withoutNumbers, CultureInfo.InvariantCulture.NumberFormat);
     }
 
     private Transform GetCorrespondingChild(string name)

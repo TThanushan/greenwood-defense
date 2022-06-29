@@ -5082,17 +5082,19 @@ MonoBehaviour:
   maxHealth: 90
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 2
   attackRange: 0.24
   moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
-  damageReductionPercentage: 50
+  damageReductionPercentage: 65
   defenseBonusDuration: 6
-  defenseBonusRespawnTime: 6
-  damageReflectedPercentage: 50
+  defenseBonusRespawnTime: 4
+  damageReflectedPercentage: 20
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3

@@ -22,10 +22,8 @@ public class MushroomUnit4 : MushroomUnit3
         if (!IsTargetEnabled(target))
             yield return null;
         Unit unit = target.GetComponent<Unit>();
-        float initialPercentage = unit.damageTakenIncreasePercentage;
         unit.damageTakenIncreasePercentage = damageTakenIncreasePercentageEffect;
-        yield return new WaitForSeconds(GetPoisonDuration());
-        unit.attackDamage = initialPercentage;
+        unit.InvokeResetDamageTakenIncreasePercentage(GetPoisonDuration());
     }
 
     IEnumerator PoisonDamageMaxHealthPercentage(GameObject target)
@@ -39,7 +37,7 @@ public class MushroomUnit4 : MushroomUnit3
                 break;
             Unit unit = target.GetComponent<Unit>();
             float damage = unit.maxHealth * (maxHealthPercentageDamage / 100) + effectDamage;
-            unit.GetDamage(damage, transform, "Classic");
+            unit.GetDamage(damage, transform);
             yield return new WaitForSeconds(timeBetweenDotDamage);
 
         }

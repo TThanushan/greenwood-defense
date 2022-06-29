@@ -249,13 +249,13 @@ MonoBehaviour:
   damageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 5
-  attackRange: 1
+  attackRange: 1.35
   moveSpeed: 0.15
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
   paralysed: 0
-  effectRange: 1
+  effectRange: 1.35
   effectDamage: 0.2
   dotCount: 80
   timeBetweenDotDamage: 0.05

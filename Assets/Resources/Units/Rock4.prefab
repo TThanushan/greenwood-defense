@@ -215,6 +215,7 @@ MonoBehaviour:
   maxHealth: 150
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 0
   attackSpeed: 100000
   attackRange: 0.24
@@ -223,10 +224,10 @@ MonoBehaviour:
   manaReward: 1
   deathSfxName: 
   paralysed: 0
-  damageReductionPercentage: 50
+  damageReductionPercentage: 80
   defenseBonusDuration: 10
-  defenseBonusRespawnTime: 4
-  damageReflectedPercentage: 50
+  defenseBonusRespawnTime: 2
+  damageReflectedPercentage: 35
   invulnerabilityBonusDuration: 2
   invulnerabilityBonusRespawnTime: 10
 --- !u!95 &1829568272

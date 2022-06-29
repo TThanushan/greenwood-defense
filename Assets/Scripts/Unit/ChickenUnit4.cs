@@ -17,7 +17,7 @@ public class ChickenUnit4 : ChickenUnit3
 
     private float damageBonusTimeExpiration;
     private float startAttackDamage;
-
+    Transform AttackBonusBar;
 
     protected override void Awake()
     {
@@ -26,6 +26,7 @@ public class ChickenUnit4 : ChickenUnit3
         startAttackSpeed = attackSpeed;
 
         rageEffectParticle = transform.Find("SpriteBody/RageEffect");
+        AttackBonusBar = transform.Find("AttackBonusEffectBar/Canvas/Bar");
     }
 
     protected override void Update()
@@ -34,6 +35,7 @@ public class ChickenUnit4 : ChickenUnit3
         if (damageBonusTimeExpiration <= Time.time)
             attackDamage = startAttackDamage;
         RageEffect();
+        UpdateAttackBonusBarLength();
     }
 
 
@@ -43,16 +45,39 @@ public class ChickenUnit4 : ChickenUnit3
         IncreaseAttackDamage();
     }
 
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        OnDeath += DisableAttackBonusBar;
+        AttackBonusBar.parent.gameObject.SetActive(true);
+    }
+
+    void DisableAttackBonusBar()
+    {
+        OnDeath -= DisableAttackBonusBar;
+        AttackBonusBar.parent.gameObject.SetActive(false);
+    }
+    float GetMaxBonusPercentage()
+    {
+        return initialAttackDamage * (1 + maxDamageBonusPercentage / 100);
+    }
+    float GetDamageBonusPercentage()
+    {
+        return initialAttackDamage * (1 - (1 - (damageBonusPercentage / 100)));
+
+    }
     void IncreaseAttackDamage()
     {
-        if (currentDamageBonus >= damageBonusPercentage)
+        damageBonusTimeExpiration = Time.time + damageBonusDuration;
+        if (attackDamage >= GetMaxBonusPercentage())
         {
-            currentDamageBonus = maxDamageBonusPercentage;
+            attackDamage = GetMaxBonusPercentage();
             return;
         }
-
-        attackDamage *= 1 + (damageBonusPercentage / 100);
-        damageBonusTimeExpiration = Time.time + damageBonusDuration;
+        if (currentDamageBonus == 0)
+            currentDamageBonus += GetDamageBonusPercentage();
+        attackDamage += currentDamageBonus;
     }
 
 
@@ -72,7 +97,7 @@ public class ChickenUnit4 : ChickenUnit3
 
     bool IsHealthThresholdReached()
     {
-        float threshold = (1 - (healthThreshold / 100)) * maxHealth;
+        float threshold = (healthThreshold / 100) * maxHealth;
         return currentHealth <= threshold;
     }
 
@@ -83,5 +108,18 @@ public class ChickenUnit4 : ChickenUnit3
             GameObject newEffect = PoolObject.instance.GetPoolObject(dodgeEffect);
             newEffect.transform.position = transform.position;
         }
+    }
+
+    private void UpdateAttackBonusBarLength()
+    {
+        AttackBonusBar.localScale = new Vector3(GetAttackBonusNewBarLength(), AttackBonusBar.localScale.y, AttackBonusBar.localScale.z);
+    }
+
+    private float GetAttackBonusNewBarLength()
+    {
+        float max = GetMaxBonusPercentage() - initialAttackDamage;
+        float current = attackDamage - initialAttackDamage;
+        float barLenght = current / max;
+        return barLenght;
     }
 }

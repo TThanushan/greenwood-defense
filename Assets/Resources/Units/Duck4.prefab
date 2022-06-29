@@ -445,6 +445,7 @@ MonoBehaviour:
   maxHealth: 120
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 2
   attackSpeed: 2
   attackRange: 0.16
@@ -463,8 +464,8 @@ MonoBehaviour:
   defenseBonusDamageReduction: 50
   defenseBonusDuration: 3
   shieldEffect: {fileID: 0}
-  healingSpeed: 2
-  healingPercentage: 0.1
+  healingSpeed: 0.25
+  healingPercentage: 2.5
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,7 +46,8 @@ public class BlueBirdUnit2Effect : MonoBehaviour
     {
         if (!DestinationReached())
         {
-            transform.position = Vector2.MoveTowards(transform.position, travelDestination, travelSpeed);
+            float step = travelSpeed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, travelDestination, step);
             DropLoop();
         }
         else if (DestinationReached())

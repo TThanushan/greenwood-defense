@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -251,7 +252,12 @@ public class SaveManager : MonoBehaviour
 
         return null;
     }
-
+    string GetUpgradeNameWithoutNumbers(string upgradeName)
+    {
+        string withoutNumbers = Regex.Replace(upgradeName, @"[\d-]", string.Empty);
+        withoutNumbers = withoutNumbers.Replace(".", "");
+        return withoutNumbers;
+    }
     public HeroUpgrade GetHeroUpgrade(string heroUpgradeName)
     {
         foreach (HeroUpgrade heroUpgrade in heroUpgrades)
@@ -262,6 +268,7 @@ public class SaveManager : MonoBehaviour
         return null;
     }
 
+    // When adding new upgrades, don't forget to reset player prefs to init new first level upgrades.
     void InitsHeroUpgrades()
     {
         heroUpgrades = new List<HeroUpgrade>
@@ -279,6 +286,7 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("ManaRegen1.5", "Increase mana regeneration of 1.5 per second",170),
             new HeroUpgrade("ManaRegen2.0", "Increase mana regeneration of 2.0 per second",180),
             new HeroUpgrade("ManaRegen2.5", "Increase mana regeneration of 2.5 per second",190),
+            new HeroUpgrade("UnitCooldownReduction0", "Reduce unit spawn cooldown by 0%",0),
             new HeroUpgrade("UnitCooldownReduction10", "Reduce unit spawn cooldown by 10%",200),
             new HeroUpgrade("UnitCooldownReduction20", "Reduce unit spawn cooldown by 20%",400),
             new HeroUpgrade("UnitCooldownReduction30", "Reduce unit spawn cooldown by 30%",600),
@@ -365,11 +373,12 @@ public class SaveManager : MonoBehaviour
 
     void InitFirstTimeUnlockedHeroUpgrades()
     {
-        print("add");
         unlockedHeroUpgrades = new List<string>
         {
             "ManaMax100",
             "ManaRegen0.0",
+            "UnitCooldownReduction0",
+
         };
     }
 

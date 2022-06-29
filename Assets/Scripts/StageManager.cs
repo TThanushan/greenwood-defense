@@ -48,8 +48,6 @@ public class StageManager : MonoBehaviour
             reward = 0f;
         else
             reward -= rewardPreviouslyGiven;
-        print("prevReward:" + rewardPreviouslyGiven);
-        print("Reward:" + reward);
         return reward;
     }
 

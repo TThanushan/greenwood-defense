@@ -26,11 +26,10 @@ public class Unit : HealthBar
     protected string targetTag = "Enemy";
     protected float nextAttackTime = 0f;
 
-    ManaBar manaBar;
-
     GameObject target;
     bool disabled;
     Color originalColor;
+    protected float initialAttackDamage;
 
     [HideInInspector]
     public bool paralysed;
@@ -38,7 +37,6 @@ public class Unit : HealthBar
     public GameObject Target { get => target; set => target = value; }
 
     List<IEnumerator> coroutines;
-
     protected override void Awake()
     {
         base.Awake();
@@ -52,17 +50,23 @@ public class Unit : HealthBar
     protected virtual void Start()
     {
         poolObject = PoolObject.instance;
-        manaBar = ManaBar.instance;
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
         FlipUnitSpriteOnWayX();
         originalColor = GetUnitSpriteRenderer().color;
+        initialAttackDamage = attackDamage;
     }
 
     protected override void OnDisable()
     {
         base.OnDisable();
         Unsubscribe();
+    }
+
+
+    public void InvokeResetSpriteColor(float time)
+    {
+        Invoke("ResetSpriteColor", time);
     }
 
     void Subscribe()
@@ -79,6 +83,17 @@ public class Unit : HealthBar
         transform.GetComponent<HealthBar>().OnDeath -= GiveManaReward;
 
     }
+
+    void ResetAttackDamage()
+    {
+        attackDamage = initialAttackDamage;
+    }
+
+    public void InvokeResetAttackDamage(float time)
+    {
+        Invoke("ResetAttackDamage", time);
+    }
+
 
     void GiveMoneyReward()
     {
@@ -242,10 +257,7 @@ public class Unit : HealthBar
 
     void RandomizeAttackRange()
     {
-        float randCoef = 6f;
-        if (targetTag == "Ally")
-            randCoef = 15f;
-        attackRange += Random.Range(0f, attackRange / randCoef);
+        attackRange += Random.Range(0f, 0.2f);
     }
 
     protected float GetRandomizedNextAttackTime()

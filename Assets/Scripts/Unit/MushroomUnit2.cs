@@ -44,9 +44,9 @@ public class MushroomUnit2 : UnitAoeAttack
             yield return null;
         ChangeTargetSpriteColor(target, true);
         Unit unit = target.GetComponent<Unit>();
+        unit.InvokeResetSpriteColor(GetPoisonDuration());
         for (int i = 0; i < dotCount; i++)
         {
-
             if (!IsTargetEnabled(target))
                 break;
             target.GetComponent<Unit>().GetDamage(effectDamage, transform);
@@ -61,5 +61,10 @@ public class MushroomUnit2 : UnitAoeAttack
             target.transform.Find("SpriteBody/Sprite/UnitSprite").GetComponent<SpriteRenderer>().color = poisonedColor;
         else
             target.GetComponent<Unit>().ResetSpriteColor();
+    }
+
+    float GetPoisonDuration()
+    {
+        return timeBetweenDotDamage * dotCount;
     }
 }

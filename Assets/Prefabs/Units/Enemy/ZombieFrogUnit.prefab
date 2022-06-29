@@ -5114,6 +5114,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 10
   attackSpeed: 1
   attackRange: 0.24
@@ -5124,6 +5125,7 @@ MonoBehaviour:
   paralysed: 0
   attackDamageBonus: 100
   zombieAttackSpeed: 0.125
+  zombieMoveSpeed: 0.75
   zombieActivationEffect: {fileID: 459091600923905559, guid: 3322ce432b78adf428595b6060168555,
     type: 3}
 --- !u!95 &3315706013935442866
