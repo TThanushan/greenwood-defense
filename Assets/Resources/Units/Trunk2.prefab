@@ -245,8 +245,9 @@ MonoBehaviour:
   maxHealth: 6
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
-  attackSpeed: 2
+  attackSpeed: 0.5
   attackRange: 1.5
   moveSpeed: 0.2
   moneyReward: 1

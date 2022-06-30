@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 1829568273}
   - component: {fileID: 28054676}
   m_Layer: 0
-  m_Name: Trunk4
+  m_Name: Trunk4 save
   m_TagString: Ally
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,9 +276,8 @@ MonoBehaviour:
   maxHealth: 10
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  initialDamageTakenIncreasePercentage: 0
-  attackDamage: 1.25
-  attackSpeed: 6
+  attackDamage: 1
+  attackSpeed: 0.035
   attackRange: 2
   moveSpeed: 0.2
   moneyReward: 1
@@ -287,8 +286,8 @@ MonoBehaviour:
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 1dd1b24d951e6504488872d722ec0642, type: 3}
   bulletPosition: {fileID: 1142343704}
-  bulletShotEachTime: 100
-  timeBetweenShoot: 0.05
+  bulletShotEachTime: 300
+  timeBetweenShoot: 0.1
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0
