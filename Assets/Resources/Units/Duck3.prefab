@@ -445,10 +445,11 @@ MonoBehaviour:
   maxHealth: 75
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 2
   attackSpeed: 3
   attackRange: 0.16
-  moveSpeed: 0.15
+  moveSpeed: 0.25
   moneyReward: 1
   manaReward: 1
   deathSfxName: DuckDeath

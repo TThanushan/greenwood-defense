@@ -16,6 +16,14 @@ MonoBehaviour:
   - Enemy: {fileID: 7241784478119512346, guid: 3bf43f1323578284db9a6b945bb36e6a, type: 3}
     TimeBetweenSpawn: 9.5
     RandomTimeBetweenSpawn: 3.5
+    TimeBeforeFirstSpawn: 2
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 46.940887
+  - Enemy: {fileID: 7241784478119512346, guid: cc27ae804451fec4aa6d5c0a98178bfc, type: 3}
+    TimeBetweenSpawn: 9.5
+    RandomTimeBetweenSpawn: 3.5
     TimeBeforeFirstSpawn: 0
     InfiniteSpawning: 1
     EnemyCount: 0

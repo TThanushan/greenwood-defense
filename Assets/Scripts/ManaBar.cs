@@ -64,7 +64,7 @@ public class ManaBar : MonoBehaviour
     }
     private void Start()
     {
-        regenerationSpeed += 0.1f * StageInfosManager.instance.GetCurrentStageNumber();
+        //regenerationSpeed += 0.1f * StageInfosManager.instance.GetCurrentStageNumber();
         LoadStatsFromPrefs();
     }
     private void UpdateCurrentManaText()

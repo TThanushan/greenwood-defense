@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 3315706013935442866}
   - component: {fileID: 3315706013935442867}
   m_Layer: 0
-  m_Name: MeleeFrogUnit save
+  m_Name: MeleeFrogUnit
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -258,7 +258,7 @@ public class Unit : HealthBar
     void RandomizeAttackRange()
     {
         if (targetTag == "Enemy")
-            attackRange += Random.Range(0f, 0.2f);
+            attackRange += Random.Range(0f, 0.05f);
     }
 
     protected float GetRandomizedNextAttackTime()

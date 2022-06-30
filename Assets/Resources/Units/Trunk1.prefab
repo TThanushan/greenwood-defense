@@ -218,7 +218,7 @@ MonoBehaviour:
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
-  attackSpeed: 1
+  attackSpeed: 1.5
   attackRange: 1.5
   moveSpeed: 0.2
   moneyReward: 1
