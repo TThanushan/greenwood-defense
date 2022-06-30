@@ -20,6 +20,8 @@ public class FatFrog : Unit
         {
             SpawnFrog();
         }
+
+        //ShakeCamera.instance.Shake(0.025f, 0.25f);
     }
     void SpawnFrog()
     {

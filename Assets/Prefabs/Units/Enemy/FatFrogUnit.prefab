@@ -252,7 +252,7 @@ MonoBehaviour:
   attackRange: 0.2
   moveSpeed: 0.15
   moneyReward: 10
-  manaReward: 15
+  manaReward: 10
   deathSfxName: 
   paralysed: 0
   spawnNumber: 10

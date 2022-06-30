@@ -246,12 +246,14 @@ MonoBehaviour:
   maxHealth: 8
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 0.5
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 0.25
   moneyReward: 1
-  manaReward: 2
+  manaReward: 1
+  deathSfxName: 
   paralysed: 0
 --- !u!95 &3315706013935442866
 Animator:

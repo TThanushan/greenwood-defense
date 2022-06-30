@@ -289,6 +289,11 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("ManaMax230", "Increase maximum mana to 230",340),
             new HeroUpgrade("ManaMax240", "Increase maximum mana to 240",360),
             new HeroUpgrade("ManaMax250", "Increase maximum mana to 250",380),
+            new HeroUpgrade("StartMana0", "Start stage with 0 mana.",0),
+            new HeroUpgrade("StartMana25", "Start stage with 25% of maximum mana.",250),
+            new HeroUpgrade("StartMana50", "Start stage with 50% of maximum mana.",500),
+            new HeroUpgrade("StartMana75", "Start stage with 75% of maximum mana.",750),
+            new HeroUpgrade("StartMana100", "Start stage with 100% of maximum mana.",1000),
             new HeroUpgrade("ManaRegen0.0", "Increase mana regeneration of 0.0 per second",0),
             new HeroUpgrade("ManaRegen0.5", "Increase mana regeneration of 0.5 per second",100),
             new HeroUpgrade("ManaRegen1.0", "Increase mana regeneration of 1.0 per second",150),
@@ -347,7 +352,7 @@ public class SaveManager : MonoBehaviour
             new Unit("Mushroom1", 50, 10, 700, "Aoe damage poison."),
             new Unit("Mushroom2", 75, 12, 1400, "Reduce enemies inflicted damage."),
             new Unit("Mushroom3", 110, 14, 2000, "Max health percentage damage, reduced inflicted damage and defense."),
-            new Unit("Mushroom4", 170, 16, 3500, "After being poisoned for a certain amount of time, enemy are paralysed for a short amount of time."),
+            new Unit("Mushroom4", 200, 16, 3500, "After being poisoned for a certain amount of time, enemy are paralysed for a short amount of time."),
 
             new Unit("BlueBird1", 20, 10, 125, "Dps unit."),
             new Unit("BlueBird2", 45, 12, 450, "Summon a bird that will drop an explosive egg on enemies."),
@@ -392,6 +397,7 @@ public class SaveManager : MonoBehaviour
             "ManaMax100",
             "ManaRegen0.0",
             "UnitCooldownReduction0",
+            "StartMana0",
 
         };
     }

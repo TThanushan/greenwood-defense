@@ -304,6 +304,7 @@ public class UpgradesShopHero : MonoBehaviour
             saveManager.unlockedHeroUpgrades.Add(nextHeroUpgrade.name);
             PlayerStatsScript.instance.money -= nextHeroUpgrade.shopPrice;
             saveManager.SaveUnlockedHeroUpgrades();
+            saveManager.SavePrefs();
             string oldCardName = selectedCard;
             selectedCard = "UpgradeCard" + nextHeroUpgrade.name;
             UpdateButtonName(oldCardName);

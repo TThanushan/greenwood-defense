@@ -66,6 +66,16 @@ public class ManaBar : MonoBehaviour
     {
         //regenerationSpeed += 0.1f * StageInfosManager.instance.GetCurrentStageNumber();
         LoadStatsFromPrefs();
+        InitCurrentManaUsingStartManaBonus();
+    }
+
+    void InitCurrentManaUsingStartManaBonus()
+    {
+        foreach (string name in SaveManager.instance.unlockedHeroUpgrades)
+        {
+            if (name.Contains("StartMana"))
+                currentMana = maxMana * (1 + (GetUpgradeNameNumbersOnly(name) / 100)) - maxMana;
+        }
     }
     private void UpdateCurrentManaText()
     {

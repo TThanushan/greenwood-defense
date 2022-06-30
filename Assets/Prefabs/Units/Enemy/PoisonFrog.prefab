@@ -253,7 +253,7 @@ MonoBehaviour:
   attackRange: 0.24
   moveSpeed: 0.25
   moneyReward: 4
-  manaReward: 10
+  manaReward: 4
   deathSfxName: 
   paralysed: 0
   poisonDamage: 0.09

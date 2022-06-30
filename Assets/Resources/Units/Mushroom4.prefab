@@ -247,6 +247,7 @@ MonoBehaviour:
   maxHealth: 30
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 5
   attackRange: 1.35
@@ -264,7 +265,7 @@ MonoBehaviour:
   poisonedColor: {r: 0.41176474, g: 1, b: 0.42959663, a: 1}
   damageReductionPercentage: 30
   damageTakenIncreasePercentageEffect: 20
-  maxHealthPercentageDamage: 1
+  maxHealthPercentageDamage: 0.2
   timeBeforeParalyse: 1
   paralyseDuration: 1
 --- !u!95 &1829568272
