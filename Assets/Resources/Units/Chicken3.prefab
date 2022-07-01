@@ -153,7 +153,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8376950309795017778, guid: e9bc56968b3e09641802c735a70ec7fd,
+  m_Sprite: {fileID: 4708139201872045666, guid: 15830ccfe3393c943a43b86c97f0e9dd,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -211,7 +211,7 @@ Animator:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bfacb2de6d3a752458bb0ba8453040a4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 909d28a1415dbe848b49f1e04e8918f4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -247,6 +247,7 @@ MonoBehaviour:
   maxHealth: 20
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 4
   attackSpeed: 0.5
   attackRange: 0.24

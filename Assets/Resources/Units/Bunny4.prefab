@@ -153,7 +153,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2053501823536692338, guid: aec37b825939c4640ba5db40252ff5e7,
+  m_Sprite: {fileID: -8983082101902942191, guid: 1dfd68d8f5d0744469e4c416ebea95cb,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -215,12 +215,14 @@ MonoBehaviour:
   maxHealth: 10
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 1
   attackRange: 1.75
   moveSpeed: 0.15
   moneyReward: 0
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   timeBetweenSpawn: 5
   bunnies:
