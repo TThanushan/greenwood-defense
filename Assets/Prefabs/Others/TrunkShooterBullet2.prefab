@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2116847984675237308}
   - component: {fileID: -3772809968200008754}
   m_Layer: 0
-  m_Name: TrunkShooterBullet
+  m_Name: TrunkShooterBullet2
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   wayX: 1
   target: {fileID: 0}
   effect: {fileID: 0}
+  spriteRenderer: {fileID: 0}
 --- !u!1 &2116847985150317397
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +122,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f817ba5aabd773e4f914480bdd62d0c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c7ccae2af3629646bbeeba1b43c7507, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0

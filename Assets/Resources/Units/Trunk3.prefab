@@ -361,7 +361,7 @@ MonoBehaviour:
   manaReward: 1
   deathSfxName: 
   paralysed: 0
-  bullet: {fileID: 2116847984675237283, guid: 1dd1b24d951e6504488872d722ec0642, type: 3}
+  bullet: {fileID: 2116847984675237283, guid: 1d7042430b5e7fa4dadf78b0606a0d32, type: 3}
   bulletPosition: {fileID: 1142343704}
   bulletShotEachTime: 100
   timeBetweenShoot: 0.05
