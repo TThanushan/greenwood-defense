@@ -217,6 +217,7 @@ MonoBehaviour:
   maxHealth: 40
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 0
   attackSpeed: 2
   attackRange: 1.25
@@ -247,7 +248,7 @@ Animator:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e37348324ca08e147ad7eb1b9e5dd0fb, type: 2}
+  m_Controller: {fileID: 9100000, guid: d74c22ee71d2387448fdd3d0cd035f16, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

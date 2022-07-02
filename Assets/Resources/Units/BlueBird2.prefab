@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3944408015643112240, guid: 9f8778d0d44049a459735824f24042e0,
+  m_Sprite: {fileID: 2227309599351404590, guid: 3de50fc2eee0cb24182e044a5f84abac,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -245,12 +245,14 @@ MonoBehaviour:
   maxHealth: 20
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 3
   attackSpeed: 2
   attackRange: 0.35
   moveSpeed: 0.3
   moneyReward: 0
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   eggExplosionDamage: 5
   birdSpawnReloadTime: 3
@@ -267,7 +269,7 @@ Animator:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5d62c40927182844cb408782ffac12d2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8f80dca71b441cf4992edf28ddcf7369, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
