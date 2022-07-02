@@ -5119,8 +5119,8 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 0.25
-  moneyReward: 9
-  manaReward: 9
+  moneyReward: 10
+  manaReward: 10
   deathSfxName: 
   paralysed: 0
   attackDamageBonus: 100

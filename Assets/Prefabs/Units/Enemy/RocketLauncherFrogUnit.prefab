@@ -86,8 +86,8 @@ MonoBehaviour:
   attackSpeed: 2
   attackRange: 1
   moveSpeed: 0.25
-  moneyReward: 7
-  manaReward: 7
+  moneyReward: 8
+  manaReward: 8
   deathSfxName: 
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 0fb4855820be7024cbd7755bf891dddf, type: 3}

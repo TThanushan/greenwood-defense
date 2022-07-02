@@ -334,7 +334,7 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 0.25
-  moneyReward: 1
+  moneyReward: 2
   manaReward: 1
   deathSfxName: FrogDeath
   paralysed: 0
