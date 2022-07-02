@@ -108,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 5367232545347587151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7650407, y: 0.7650407, z: 0.7650407}
+  m_LocalScale: {x: 0.82938063, y: 0.82938063, z: 0.82938063}
   m_Children: []
   m_Father: {fileID: 5367232546079401137}
   m_RootOrder: 0
@@ -155,7 +155,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 2053501823536692338, guid: aec37b825939c4640ba5db40252ff5e7,
     type: 3}
-  m_Color: {r: 0.504717, g: 0.61185205, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -213,11 +213,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 15
+  currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 0.25
   attackSpeed: 1
   attackRange: 0.17
   moveSpeed: 0.35
+  moneyReward: 1
+  manaReward: 1
+  deathSfxName: 
   paralysed: 0
 --- !u!95 &1829568272
 Animator:

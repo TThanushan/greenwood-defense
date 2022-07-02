@@ -153,13 +153,13 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8376950309795017778, guid: e9bc56968b3e09641802c735a70ec7fd,
+  m_Sprite: {fileID: -4262321621248827038, guid: 52738e3c3b22e5545b4b36586db4012b,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.32, y: 0.34}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -247,6 +247,7 @@ MonoBehaviour:
   maxHealth: 10
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 2
   attackSpeed: 0.8
   attackRange: 0.25

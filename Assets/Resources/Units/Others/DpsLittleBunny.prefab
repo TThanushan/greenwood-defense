@@ -155,7 +155,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 2053501823536692338, guid: aec37b825939c4640ba5db40252ff5e7,
     type: 3}
-  m_Color: {r: 1, g: 0.7430248, b: 0.4575472, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -215,12 +215,14 @@ MonoBehaviour:
   maxHealth: 5
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 0.25
   attackSpeed: 0.125
   attackRange: 0.17
   moveSpeed: 0.5
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
 --- !u!95 &1829568272
 Animator:
