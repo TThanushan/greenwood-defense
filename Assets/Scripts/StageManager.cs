@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -76,6 +78,27 @@ public class StageManager : MonoBehaviour
         enemyCaptain = GameObject.Find("EnemyCaptain").GetComponent<Unit>();
         gameOverPanel = transform.Find("MiddleGroup/GameOverPanel").gameObject;
         levelCompletePanel = transform.Find("MiddleGroup/LevelCompletePanel").gameObject;
+        InitLevelCompleteMoneyReward();
+    }
+
+    void InitLevelCompleteMoneyReward()
+    {
+        float currentStageNb = GetNumbersOnly(StageInfosManager.instance.currentStage);
+        int rewardCoef = (int)currentStageNb / 5;
+        levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + rewardCoef * 50;
+    }
+
+    float GetNumbersOnly(string numberString)
+    {
+        string withoutNumbers = GetWithoutNumbers(numberString);
+        withoutNumbers = numberString.Replace(withoutNumbers, "");
+        return float.Parse(withoutNumbers, CultureInfo.InvariantCulture.NumberFormat);
+    }
+    string GetWithoutNumbers(string numberString)
+    {
+        string withoutNumbers = Regex.Replace(numberString, @"[\d-]", string.Empty);
+        withoutNumbers = withoutNumbers.Replace(".", "");
+        return withoutNumbers;
     }
 
     private void OnEnable()
