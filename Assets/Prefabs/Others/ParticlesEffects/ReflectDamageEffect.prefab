@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2201261012416595166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0036, y: 0.0003, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.029858083, y: 0.029858083, z: 0.01005191}
   m_Children: []
   m_Father: {fileID: 3118637554571103178}
@@ -1480,7 +1480,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -1869290018219920624, guid: 3421078018dc3934a8c1ab3b7bf89aa0,
+    - sprite: {fileID: 2618392116465800555, guid: 312b3c2ff6b27ae4fb3d9168c4cd81d7,
         type: 3}
     flipU: 0
     flipV: 0

@@ -258,7 +258,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5467963913646556450, guid: daf3a34e52af9394d953d7b098baacc1,
+  m_Sprite: {fileID: 5787268622391447995, guid: e4de6ad325b058b4b988142e7eede7fb,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -316,7 +316,7 @@ Animator:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 7bd94df8d772da44c8ce840c2cb6b886, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7ebbe78ad8ca4974ea7075e864d77a50, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -750,6 +750,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StarsCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866307242526126205, guid: f855b83f1dedfd64e9276a054428c4fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2866307242526126206, guid: f855b83f1dedfd64e9276a054428c4fb,
         type: 3}

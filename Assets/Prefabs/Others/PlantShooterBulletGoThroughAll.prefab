@@ -218,6 +218,7 @@ MonoBehaviour:
   wayX: 1
   target: {fileID: 0}
   effect: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   piercingCount: 1000
 --- !u!114 &1870398952
 MonoBehaviour:
@@ -303,7 +304,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d700391178f61c3488cd257e7e7a81bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f93ac926be211e846a52610473eeab30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0

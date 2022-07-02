@@ -183,7 +183,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 8800081985865436245, guid: 419f1f3d5fcf8204389dd119348a56e1,
+  m_Sprite: {fileID: 2243585140178276723, guid: fe8f0260fd3e6e04288d224940575b84,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -246,16 +246,19 @@ MonoBehaviour:
   maxHealth: 60
   currentHealth: 0
   damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 2
   attackRange: 0.24
   moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   damageReductionPercentage: 50
   defenseBonusDuration: 3
   defenseBonusRespawnTime: 6
+  defenseColor: {r: 0.62352943, g: 0.27450982, b: 0.27450982, a: 1}
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 3
@@ -266,7 +269,7 @@ Animator:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d808c676ca0f4ef46b70cab87b1dda42, type: 2}
+  m_Controller: {fileID: 9100000, guid: 91ff5c5bbecdeac4cabecc2a2e0e8688, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

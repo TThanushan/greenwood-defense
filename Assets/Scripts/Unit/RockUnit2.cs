@@ -7,6 +7,7 @@ public class RockUnit2 : Unit
     public float defenseBonusDuration;
     public float defenseBonusRespawnTime;
     protected bool isDefenseBonusEnabled;
+    public Color defenseColor;
     float defenseBonusCooldown;
     GameObject defenseBonusEffect;
 
@@ -57,7 +58,8 @@ public class RockUnit2 : Unit
     {
         Color col = Color.white;
         if (val)
-            col = new Color(0, 0.41f, 1);
+            col = defenseColor;
+        //col = new Color(0, 0.41f, 1);
         defenseBonusEffect.gameObject.GetComponent<SpriteRenderer>().color = col;
     }
 }
