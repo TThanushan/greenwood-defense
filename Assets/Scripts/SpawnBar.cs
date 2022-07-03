@@ -169,11 +169,6 @@ public class SpawnBar : MonoBehaviour
 
     void SetButtonSprite(GameObject button, string spriteName)
     {
-        for (int i = 0; i < 5; i++)
-        {
-            spriteName = spriteName.Replace(i.ToString(), "");
-        }
-
         button.transform.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + spriteName);
     }
     void EnableButtonStars(GameObject button, UnitButton unitButton)

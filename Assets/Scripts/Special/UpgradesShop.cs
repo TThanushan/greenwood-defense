@@ -89,11 +89,6 @@ public class UpgradesShop : MonoBehaviour
     }
     public void SelectCard()
     {
-        if (IsUnitLevelMax())
-        {
-            selectedCard = "";
-            return;
-        }
         selectedCard = EventSystem.current.currentSelectedGameObject.transform.parent.name;
         SetSelectedCardInfos();
     }
@@ -341,7 +336,7 @@ public class UpgradesShop : MonoBehaviour
     void SetUpgradeButtonTexts(Transform upgradeCardButton, string unitName)
     {
         string nameWithoutNumbers = GetUnitNameWithoutNumbers(unitName);
-        upgradeCardButton.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + nameWithoutNumbers);
+        upgradeCardButton.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + unitName);
         upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = nameWithoutNumbers;
         string lvl = GetUnitLevel(unitName);
 

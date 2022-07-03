@@ -1,24 +1,30 @@
 fileFormatVersion: 2
-guid: 603abb83490921841976d0f1b2045f23
+guid: 9b0499fd3a0892046926ed19c78cfea3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3974224528455760076
-    second: Wall Jump (32x32)_0
+      213: 6868122594974341346
+    second: Hit (32x32)_0
   - first:
-      213: 403085039841989221
-    second: Wall Jump (32x32)_1
+      213: 7167584040609486739
+    second: Hit (32x32)_1
   - first:
-      213: -6018873884784744797
-    second: Wall Jump (32x32)_2
+      213: -1675461080110260169
+    second: Hit (32x32)_2
   - first:
-      213: -674972067355074983
-    second: Wall Jump (32x32)_3
+      213: 8480664182131228983
+    second: Hit (32x32)_3
   - first:
-      213: 4366178942990776957
-    second: Wall Jump (32x32)_4
+      213: -953560442851353963
+    second: Hit (32x32)_4
+  - first:
+      213: -3450976776972242761
+    second: Hit (32x32)_5
+  - first:
+      213: 7062579536633761780
+    second: Hit (32x32)_6
   externalObjects: {}
-  serializedVersion: 10
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -38,6 +44,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -47,8 +54,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -69,9 +76,13 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -101,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wall Jump (32x32)_0
+      name: Hit (32x32)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,14 +126,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3d23dab70d776640aba60ea9a9735a8
-      internalID: 3974224528455760076
+      spriteID: 7c97e2002a1af9b4c850b1c40a07ba34
+      internalID: 6868122594974341346
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall Jump (32x32)_1
+      name: Hit (32x32)_1
       rect:
         serializedVersion: 2
         x: 32
@@ -136,14 +147,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fadd2ea57ae354a41a17bd8897bdd5aa
-      internalID: 403085039841989221
+      spriteID: 61ac590503a4b944a8f51e333e65ac76
+      internalID: 7167584040609486739
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall Jump (32x32)_2
+      name: Hit (32x32)_2
       rect:
         serializedVersion: 2
         x: 64
@@ -157,14 +168,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0516a2f488c059645923015334f56405
-      internalID: -6018873884784744797
+      spriteID: 523cd66b5dcaaba438ab6288680ab156
+      internalID: -1675461080110260169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall Jump (32x32)_3
+      name: Hit (32x32)_3
       rect:
         serializedVersion: 2
         x: 96
@@ -178,14 +189,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ca694e0aa35eea489081c249c513715
-      internalID: -674972067355074983
+      spriteID: 4ffa431ee42dc2b4d8c40ce836ef4b6a
+      internalID: 8480664182131228983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wall Jump (32x32)_4
+      name: Hit (32x32)_4
       rect:
         serializedVersion: 2
         x: 128
@@ -199,8 +210,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 417e34c5ae3ae5e4ab0013a2f0d52a69
-      internalID: 4366178942990776957
+      spriteID: 0b34c45b0653cb84f88ad2c595ef604c
+      internalID: -953560442851353963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hit (32x32)_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3e3bfe67aa890c429e6be296ab03094
+      internalID: -3450976776972242761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hit (32x32)_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad0aad21861d378499965c694f12301f
+      internalID: 7062579536633761780
       vertices: []
       indices: 
       edges: []

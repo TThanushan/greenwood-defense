@@ -3572,6 +3572,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1677906840}
     m_Modifications:
+    - target: {fileID: 1570036293192179767, guid: 50e0fa6e4cd48e24eb2629a5cbc35ea9,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570036293192179767, guid: 50e0fa6e4cd48e24eb2629a5cbc35ea9,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 1570036293192179767, guid: 50e0fa6e4cd48e24eb2629a5cbc35ea9,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1654837020841091665, guid: 0e120e9378520ec49985b42decb80630,
+        type: 3}
+    - target: {fileID: 1570036293192179767, guid: 50e0fa6e4cd48e24eb2629a5cbc35ea9,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1570036294210976026, guid: 50e0fa6e4cd48e24eb2629a5cbc35ea9,
         type: 3}
       propertyPath: m_Name
@@ -24965,6 +24986,11 @@ PrefabInstance:
       propertyPath: currentMana
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2086754543, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6367560908665664636, guid: e14e5af401c71134ea2fba5fae8b3a46,
+        type: 3}
     - target: {fileID: 37252590450478984, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_AnchoredPosition.y
