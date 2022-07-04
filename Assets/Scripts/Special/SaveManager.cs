@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
@@ -12,13 +11,13 @@ public class SaveManager : MonoBehaviour
     public List<HeroUpgrade> heroUpgrades;
     public List<string> unlockedHeroUpgrades;
     public List<string> unlockedUnits;
-
+    int isTutorialDone;
     public const int levelsCount = 50;
-
-    const string MaxLevelUnlockedKey = "MaxLevelUnlockedKey";
-    const string PlayerMoneyKey = "Money";
-    const string UnlockedUnitsKey = "UnlockedUnits";
-    const string UnlockedHeroUpgradesKey = "UnlockedHeroUpgrades";
+    const string MAX_LEVEL_UNLOCKED_KEY = "MaxLevelUnlockedKey";
+    const string PLAYER_MONEY_KEY = "Money";
+    const string UNLOCKED_UNITS_KEY = "UnlockedUnits";
+    const string UNLOCKED_HERO_UPGRADES_KEY = "UnlockedHeroUpgrades";
+    const string IS_TUTORIAL_DONE_KEY = "IsTutorialDone";
     private void Awake()
     {
         if (!instance)
@@ -57,14 +56,13 @@ public class SaveManager : MonoBehaviour
         }
         levels[0].unlocked = 1;
         // Player money.
-        PlayerPrefs.SetFloat(PlayerMoneyKey, 0);
+        PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, 0);
         InitFirstTimeUnlockedUnits();
         InitFirstTimeUnlockedHeroUpgrades();
         SaveUnlockedUnits();
         SaveUnlockedHeroUpgrades();
+        PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, 0);
     }
-
-
 
     void OnApplicationQuit()
     {
@@ -111,28 +109,26 @@ public class SaveManager : MonoBehaviour
         return "Stage " + (maxLevelUnlocked + 1).ToString();
     }
 
-
     public void SetTutorialDone()
     {
-        PlayerPrefs.SetString("Tutorial", "Done");
+        isTutorialDone = 1;
     }
-
 
     public bool IsTutorialDone()
     {
-        return PlayerPrefs.HasKey("Tutorial") && PlayerPrefs.GetString("Tutorial") == "Done";
+        return isTutorialDone == 1;
     }
 
 
     public bool SaveExist()
     {
-        return PlayerPrefs.HasKey(MaxLevelUnlockedKey) && PlayerPrefs.HasKey("Level1Unlocked");
+        return PlayerPrefs.HasKey(MAX_LEVEL_UNLOCKED_KEY) && PlayerPrefs.HasKey("Level1Unlocked");
     }
     public void SavePrefs()
     {
         //const string MaxLevelUnlockedKey = "MaxLevelUnlocked";
 
-        PlayerPrefs.SetInt(MaxLevelUnlockedKey, maxLevelUnlocked);
+        PlayerPrefs.SetInt(MAX_LEVEL_UNLOCKED_KEY, maxLevelUnlocked);
         string key;
         for (int i = 0; i < levels.Count - 1; i++)
         {
@@ -145,31 +141,32 @@ public class SaveManager : MonoBehaviour
 
         }
         // Player money.
-        PlayerPrefs.SetFloat(PlayerMoneyKey, PlayerStatsScript.instance.money);
+        PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, PlayerStatsScript.instance.money);
 
+        PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, isTutorialDone);
         SaveUnlockedUnits();
     }
 
 
     public void SaveUnlockedUnits()
     {
-        PlayerPrefs.SetString(UnlockedUnitsKey, String.Join("|", unlockedUnits));
+        PlayerPrefs.SetString(UNLOCKED_UNITS_KEY, String.Join("|", unlockedUnits));
     }
 
     public string GetUnlockedUnitsFromPrefs()
     {
-        string units = PlayerPrefs.GetString(UnlockedUnitsKey);
+        string units = PlayerPrefs.GetString(UNLOCKED_UNITS_KEY);
         return string.Join("|", units);
     }
 
     public void SaveUnlockedHeroUpgrades()
     {
-        PlayerPrefs.SetString(UnlockedHeroUpgradesKey, String.Join("|", unlockedHeroUpgrades));
+        PlayerPrefs.SetString(UNLOCKED_HERO_UPGRADES_KEY, String.Join("|", unlockedHeroUpgrades));
     }
 
     public string GetUnlockedHeroUpgradesFromPrefs()
     {
-        string units = PlayerPrefs.GetString(UnlockedHeroUpgradesKey);
+        string units = PlayerPrefs.GetString(UNLOCKED_HERO_UPGRADES_KEY);
         return string.Join("|", units);
     }
     string[] GetUnlockedHeroUpgradesArray()
@@ -187,8 +184,8 @@ public class SaveManager : MonoBehaviour
         string key = "Level" + i.ToString();
 
         levels = new List<Level>();
-        maxLevelUnlocked = PlayerPrefs.GetInt(MaxLevelUnlockedKey, 1);
-        PlayerStatsScript.instance.money = PlayerPrefs.GetFloat(PlayerMoneyKey, 0);
+        maxLevelUnlocked = PlayerPrefs.GetInt(MAX_LEVEL_UNLOCKED_KEY, 1);
+        PlayerStatsScript.instance.money = PlayerPrefs.GetFloat(PLAYER_MONEY_KEY, 0);
 
         while (PlayerPrefs.HasKey(key + "Unlocked"))
         {
@@ -202,6 +199,7 @@ public class SaveManager : MonoBehaviour
             levels.Add(newLevel);
             i++;
         }
+        isTutorialDone = PlayerPrefs.GetInt(IS_TUTORIAL_DONE_KEY);
         LoadUnlockedUnits();
         LoadUnlockedHeroUpgrades();
     }
@@ -253,12 +251,7 @@ public class SaveManager : MonoBehaviour
 
         return null;
     }
-    string GetUpgradeNameWithoutNumbers(string upgradeName)
-    {
-        string withoutNumbers = Regex.Replace(upgradeName, @"[\d-]", string.Empty);
-        withoutNumbers = withoutNumbers.Replace(".", "");
-        return withoutNumbers;
-    }
+
     public HeroUpgrade GetHeroUpgrade(string heroUpgradeName)
     {
         foreach (HeroUpgrade heroUpgrade in heroUpgrades)
