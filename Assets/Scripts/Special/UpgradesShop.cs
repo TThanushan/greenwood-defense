@@ -12,6 +12,8 @@ public class UpgradesShop : MonoBehaviour
     public GameObject selectCursor;
     public TMP_ColorGradient tooExpensivePriceColor;
     public TMP_ColorGradient priceOriginalColor;
+    public GameObject upgradeEffect;
+
     private void Start()
     {
         if (!saveManager)
@@ -61,16 +63,17 @@ public class UpgradesShop : MonoBehaviour
         }
 
         //SaveManager.Unit nextUnit = GetUpgradeUnit(unitName);
-        string name = unitName;
+        //string name = unitName;
         string effectText = saveManager.GetUnit(unitName).effectDescription;
         if (IsUnitOfAnyLevelUnlocked(unitName))
         {
             SaveManager.Unit upgradeUnit = GetUpgradeUnit(unitName);
-            name = upgradeUnit.name;
+            //name = upgradeUnit.name;
             effectText = upgradeUnit.effectDescription;
         }
 
-        selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = name + " : ";
+        //selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = name + " : ";
+        selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = "Next level : ";
         selectedCardInfos.Find("Description").GetComponent<TextMeshProUGUI>().text = effectText;
     }
     void SetSelectedCardButtonCursor()
@@ -144,6 +147,12 @@ public class UpgradesShop : MonoBehaviour
         }
     }
 
+    void CreateUpgradeEffect()
+    {
+        GameObject effect = Instantiate(upgradeEffect);
+        effect.transform.position = selectCursor.transform.position;
+
+    }
     void SetUpgradeButtonName(string unitName, string oldName)
     {
         string path = "Buttons/UnitsButtonPanel/";
@@ -291,6 +300,7 @@ public class UpgradesShop : MonoBehaviour
         }
 
         UpdateUIAfterUnlock(upgradeUnitName);
+        CreateUpgradeEffect();
         if (IsUnitLevelMax())
         {
             DisableUpgradeCard();
@@ -302,6 +312,7 @@ public class UpgradesShop : MonoBehaviour
         AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
         saveManager.SaveUnlockedUnits();
         saveManager.SavePrefs();
+
     }
 
     bool CanUpgrade(string unitName)

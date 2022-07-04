@@ -4,7 +4,6 @@ public class LevelScore : MonoBehaviour
 {
     public static LevelScore instance;
     public int score;
-
     public int threeStar = 75;
     public int twoStar = 50;
     public int oneStar = 25;
@@ -23,6 +22,7 @@ public class LevelScore : MonoBehaviour
         //score = (int)(decimal.Divide(pScript.life, pScript.StartLife) * 10);
 
     }
+
 
     public int HowManyStar()
     {

@@ -6,5 +6,6 @@ public static class Constants
     public const string VICTORY_SFX_NAME = "Victory";
     public const string BUY_SFX_NAME = "Buy";
     public const int LEVEL_COMPLETE_REWARD = 100;
+    public const int MAX_SCORE = 100;
 
 }

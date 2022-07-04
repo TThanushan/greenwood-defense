@@ -12,6 +12,7 @@ public class UpgradesShopHero : MonoBehaviour
     public GameObject selectCursor;
     public TMP_ColorGradient tooExpensivePriceColor;
     public TMP_ColorGradient priceOriginalColor;
+    public GameObject upgradeEffect;
 
 
     private void Start()
@@ -56,7 +57,9 @@ public class UpgradesShopHero : MonoBehaviour
     void UpdateUpgradeCardLevelText(Transform button, string upgradeName)
     {
         string lvl = GetUpgradeLevel(upgradeName).ToString();
+        lvl = (int.Parse(lvl) - 1).ToString();
         string maxlvl = GetMaxLevel(upgradeName).ToString();
+        maxlvl = (int.Parse(maxlvl) - 1).ToString();
         button.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/" + maxlvl;
     }
 
@@ -135,16 +138,14 @@ public class UpgradesShopHero : MonoBehaviour
             return;
         }
 
-        string name = upgradeName;
         string effectText = GetNextHeroUpgrade(upgradeName).description;
         if (IsAnyUpgradeUnlocked(upgradeName))
         {
             SaveManager.HeroUpgrade upgradeUnit = GetNextHeroUpgrade(upgradeName);
-            name = upgradeUnit.name;
             effectText = upgradeUnit.description;
         }
 
-        selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = name + " : ";
+        selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = "Next level : ";
         selectedCardInfos.Find("Description").GetComponent<TextMeshProUGUI>().text = effectText;
     }
 
@@ -290,6 +291,12 @@ public class UpgradesShopHero : MonoBehaviour
         selectedCard = "";
         selectCursor.transform.position = new Vector2(100000, 100000);
     }
+    void CreateUpgradeEffect()
+    {
+        GameObject effect = Instantiate(upgradeEffect);
+        effect.transform.position = selectCursor.transform.position;
+
+    }
 
     public void UnlockUpgrade()
     {
@@ -311,6 +318,8 @@ public class UpgradesShopHero : MonoBehaviour
             UpdateShopUI();
             AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
         }
+        CreateUpgradeEffect();
+
         if (IsUpgradeMax(GetUpgradeNameFromSelectCard()))
         {
             AudioManager.instance.PlaySfx("UnitLevelMax");

@@ -89,7 +89,6 @@ public class SaveManager : MonoBehaviour
 
     public int GetLevelScore()
     {
-        print(GetCurrentLevelNumber());
         return levels[GetCurrentLevelNumber()].score;
     }
 
@@ -100,6 +99,8 @@ public class SaveManager : MonoBehaviour
 
     public void UnlockLevel(int index)
     {
+        if (index >= levels.Count)
+            return;
         levels[index].unlocked = 1;
         if (index >= maxLevelUnlocked)
             maxLevelUnlocked = index + 1;

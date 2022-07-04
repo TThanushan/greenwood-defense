@@ -3,21 +3,19 @@
 public class DisableScript : MonoBehaviour
 {
 
-    public float destroyTime = 1f;
-    float destroyTimeCount;
+    public float disableTime = 1f;
+    float disableTimeCount;
 
     void OnEnable()
     {
-        destroyTimeCount = destroyTime;
+        disableTimeCount = disableTime;
     }
 
     void Update()
     {
-        //if (PlayerStatsScript.instance.IsGamePaused)
-        //    return;
-        if (destroyTimeCount <= 0f)
+        if (disableTimeCount <= 0f)
             Destroy();
-        destroyTimeCount -= Time.deltaTime;
+        disableTimeCount -= Time.deltaTime;
     }
 
     void Destroy()

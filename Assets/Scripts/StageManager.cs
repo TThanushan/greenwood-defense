@@ -84,6 +84,11 @@ public class StageManager : MonoBehaviour
     void InitLevelCompleteMoneyReward()
     {
         float currentStageNb = GetNumbersOnly(StageInfosManager.instance.currentStage);
+        if (currentStageNb == 1)
+        {
+            levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + 400;
+            return;
+        }
         int rewardCoef = (int)currentStageNb / 5;
         levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + rewardCoef * 50;
     }
@@ -161,22 +166,25 @@ public class StageManager : MonoBehaviour
 
         panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
         if (panel.transform.Find("StageRewardText"))
-            panel.transform.Find("StageRewardText").GetComponent<TMPro.TextMeshProUGUI>().text = (CalculateRewardAmount()).ToString();
+            panel.transform.Find("StageRewardText").GetComponent<TMPro.TextMeshProUGUI>().text = '+' + (CalculateRewardAmount()).ToString() + '$';
     }
 
     void DoVictory()
     {
+
         Time.timeScale = 1;
         isVictory = true;
         levelCompletePanel.SetActive(true);
         rewardPreviouslyGiven = GetRewardPreviouslyGiven();
         LevelScore.instance.CalculateScore();
+
         GiveMoneyReward();
         UpdateLevelPanelInfos(levelCompletePanel);
         UnlockNextStage();
         SaveScoreIfHigher();
         SaveManager.instance.SavePrefs();
         AudioManager.instance.PlaySfx(Constants.VICTORY_SFX_NAME);
+        levelCompletePanel.GetComponent<LevelComplete>().enabled = true;
     }
 
     void DoGameOver()

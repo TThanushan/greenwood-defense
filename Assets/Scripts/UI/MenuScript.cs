@@ -26,7 +26,10 @@ public class MenuScript : MonoBehaviour
     }
 
 
-
+    public void ResetSave()
+    {
+        SaveManager.instance.ResetPlayerPrefs();
+    }
     void Init()
     {
         fadeAnimator = transform.Find("MiddleGroup/FadeSceneBody").transform.GetComponent<Animator>();

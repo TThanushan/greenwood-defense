@@ -52,19 +52,19 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Hit1
     clip: {fileID: 8300000, guid: c209e8c41a1403c4386e4bcc603a376f, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Hit2
     clip: {fileID: 8300000, guid: 64652f23310790947896259b6a3b6847, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Hit3
     clip: {fileID: 8300000, guid: 3f285fc8365c6604dbffb2320eee4e50, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -102,6 +102,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 69c8c616fc0a4554e95fd93c691882ad, type: 3}
     volume: 1
     pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: StarUnlocked
+    clip: {fileID: 8300000, guid: c209e8c41a1403c4386e4bcc603a376f, type: 3}
+    volume: 1
+    pitch: 0.8
     loop: 0
     source: {fileID: 0}
   musicMuted: 0
