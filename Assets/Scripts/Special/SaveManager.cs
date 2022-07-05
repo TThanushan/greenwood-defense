@@ -37,15 +37,15 @@ public class SaveManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            ResetPlayerPrefs();
-            print("Reset player pref");
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-            print(PlayerStatsScript.instance.money);
-        if (Input.GetKeyDown(KeyCode.S))
-            SavePrefs();
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    ResetPlayerPrefs();
+        //    print("Reset player pref");
+        //}
+        //if (Input.GetKeyDown(KeyCode.V))
+        //    print(PlayerStatsScript.instance.money);
+        //if (Input.GetKeyDown(KeyCode.S))
+        //    SavePrefs();
     }
     public void Init()
     {
@@ -74,7 +74,7 @@ public class SaveManager : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         PlayerStatsScript.instance.money = 0f;
-
+        isTutorialDone = 0;
         maxLevelUnlocked = 1;
         Init();
         InitFirstTimeUnlockedUnits();

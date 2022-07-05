@@ -1,0 +1,303 @@
+fileFormatVersion: 2
+guid: 1aa270ade39210e4c93d4e6a8a0d5922
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -171779780284492156
+    second: Illustration of touch screen hands gesture in thin line_0
+  - first:
+      213: -4881771031152517969
+    second: Illustration of touch screen hands gesture in thin line_1
+  - first:
+      213: -6556498995207838252
+    second: Illustration of touch screen hands gesture in thin line_2
+  - first:
+      213: -8707568252960421597
+    second: Illustration of touch screen hands gesture in thin line_3
+  - first:
+      213: -5909967923343655679
+    second: Illustration of touch screen hands gesture in thin line_4
+  - first:
+      213: -6131455409565135828
+    second: Illustration of touch screen hands gesture in thin line_5
+  - first:
+      213: 405918302252831104
+    second: Illustration of touch screen hands gesture in thin line_6
+  - first:
+      213: 3732499747013230779
+    second: Illustration of touch screen hands gesture in thin line_7
+  - first:
+      213: 3547771240773284748
+    second: Illustration of touch screen hands gesture in thin line_8
+  - first:
+      213: -8176760699341912904
+    second: Illustration of touch screen hands gesture in thin line_9
+  - first:
+      213: 3049145278126366910
+    second: Illustration of touch screen hands gesture in thin line_10
+  - first:
+      213: -8014376147783776466
+    second: Illustration of touch screen hands gesture in thin line_11
+  - first:
+      213: 4141451471436263475
+    second: Illustration of touch screen hands gesture in thin line_12
+  - first:
+      213: 6587170392290306763
+    second: Illustration of touch screen hands gesture in thin line_13
+  - first:
+      213: 4181233933812507839
+    second: Illustration of touch screen hands gesture in thin line_14
+  - first:
+      213: -9166785440914745323
+    second: Illustration of touch screen hands gesture in thin line_15
+  - first:
+      213: 2126141144142836066
+    second: Illustration of touch screen hands gesture in thin line_16
+  - first:
+      213: -1459274069050712014
+    second: Illustration of touch screen hands gesture in thin line_17
+  - first:
+      213: -7340834476962735816
+    second: Illustration of touch screen hands gesture in thin line_18
+  - first:
+      213: -9016752140825896471
+    second: Illustration of touch screen hands gesture in thin line_19
+  - first:
+      213: 7345858729679662181
+    second: Illustration of touch screen hands gesture in thin line_20
+  - first:
+      213: -8816953410944560887
+    second: Illustration of touch screen hands gesture in thin line_21
+  - first:
+      213: 5684891733320968352
+    second: Illustration of touch screen hands gesture in thin line_22
+  - first:
+      213: -1237439210092041211
+    second: Illustration of touch screen hands gesture in thin line_23
+  - first:
+      213: -5900708760277096606
+    second: Illustration of touch screen hands gesture in thin line_24
+  - first:
+      213: -9157522974599856087
+    second: Illustration of touch screen hands gesture in thin line_25
+  - first:
+      213: 5104667114231785893
+    second: Illustration of touch screen hands gesture in thin line_26
+  - first:
+      213: -956791877770403345
+    second: Illustration of touch screen hands gesture in thin line_27
+  - first:
+      213: -6745590850504593783
+    second: Illustration of touch screen hands gesture in thin line_28
+  - first:
+      213: 3580739161588882200
+    second: Illustration of touch screen hands gesture in thin line_29
+  - first:
+      213: 6361992146300086578
+    second: Illustration of touch screen hands gesture in thin line_30
+  - first:
+      213: -5483048299424006891
+    second: Illustration of touch screen hands gesture in thin line_31
+  - first:
+      213: -2053682422755559153
+    second: Illustration of touch screen hands gesture in thin line_32
+  - first:
+      213: 5872704254733817005
+    second: Illustration of touch screen hands gesture in thin line_33
+  - first:
+      213: -6810631252543648388
+    second: Illustration of touch screen hands gesture in thin line_34
+  - first:
+      213: 3061675471894854001
+    second: Illustration of touch screen hands gesture in thin line_35
+  - first:
+      213: -2430802547651172586
+    second: Illustration of touch screen hands gesture in thin line_36
+  - first:
+      213: 3199394412907765308
+    second: Illustration of touch screen hands gesture in thin line_37
+  - first:
+      213: 6914374971451808757
+    second: Illustration of touch screen hands gesture in thin line_38
+  - first:
+      213: -5729637971618625056
+    second: Illustration of touch screen hands gesture in thin line_39
+  - first:
+      213: -6048663647274441290
+    second: Illustration of touch screen hands gesture in thin line_40
+  - first:
+      213: 3384250392423981125
+    second: Illustration of touch screen hands gesture in thin line_41
+  - first:
+      213: 2283715561201099601
+    second: Illustration of touch screen hands gesture in thin line_42
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Illustration of touch screen hands gesture in thin line_0
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 3707
+        width: 406
+        height: 665
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4865c803337bd9df0800000000000000
+      internalID: -171779780284492156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Illustration of touch screen hands gesture in thin line_1
+      rect:
+        serializedVersion: 2
+        x: 1399
+        y: 3707
+        width: 406
+        height: 665
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fac9c55ac17704cb0800000000000000
+      internalID: -4881771031152517969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

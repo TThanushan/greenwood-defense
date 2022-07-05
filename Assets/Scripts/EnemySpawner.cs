@@ -18,7 +18,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        Spawn();
+        TrySpawn();
     }
 
 
@@ -35,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    void Spawn()
+    void TrySpawn()
     {
         EnemyType[] enemyTypes = stage.enemyTypes;
 
@@ -46,13 +46,17 @@ public class EnemySpawner : MonoBehaviour
         {
             if (!enemyType.ReadyToSpawn())
                 continue;
-            GameObject newEnemy = poolObject.GetPoolObject(enemyType.Enemy);
-            newEnemy.transform.position = GetRandomSpawnPosition();
-
-            UpdateUnitStatsUsingStageNumber(newEnemy);
-            enemyType.DecreaseCount();
-            enemyType.SetRandomNextEnemySpawnTime();
+            Spawn(enemyType);
         }
+    }
+
+    public void Spawn(EnemyType enemyType)
+    {
+        GameObject newEnemy = poolObject.GetPoolObject(enemyType.Enemy);
+        newEnemy.transform.position = GetRandomSpawnPosition();
+        UpdateUnitStatsUsingStageNumber(newEnemy);
+        enemyType.DecreaseCount();
+        enemyType.SetRandomNextEnemySpawnTime();
     }
 
     void UpdateUnitStatsUsingStageNumber(GameObject enemy)

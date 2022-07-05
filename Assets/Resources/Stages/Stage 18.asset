@@ -41,7 +41,7 @@ MonoBehaviour:
     TimeBetweenSpawn: 9.5
     RandomTimeBetweenSpawn: 4.5
     TimeBeforeFirstSpawn: 0
-    InfiniteSpawning: 1
-    EnemyCount: 0
+    InfiniteSpawning: 0
+    EnemyCount: 3
     currentEnemyCount: 0
     nextEnemySpawnTime: 46.940887

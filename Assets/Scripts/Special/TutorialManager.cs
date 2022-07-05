@@ -1,65 +1,207 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
 
     public int tutorialIndex = 0;
     GameObject mainCanvas;
-
+    Camera mainCamera;
+    int lastIndexShown = -1;
+    EnemySpawner enemySpawner;
+    PoolObject poolObject;
+    bool enemySpawned;
+    GameObject levelCompleteMenuButton;
+    GameObject duckUnitRef;
     private void Start()
     {
+        if (SaveManager.instance.IsTutorialDone())
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        PoolObject.instance.enemyCaptain.currentHealth = 25;
+        PoolObject.instance.enemyCaptain.maxHealth = 25;
+
         mainCanvas = GameObject.Find("InGameMainCanvas");
-        DontDestroyOnLoad(gameObject);
+        transform.parent = mainCanvas.transform;
+        transform.Find("SkipTutorialButton").position = Vector3.zero;
+
+        ResetTutoPartCanvasScale();
+        levelCompleteMenuButton = mainCanvas.transform.Find("MiddleGroup/LevelCompletePanel/NextLevelButton").gameObject;
+        levelCompleteMenuButton.transform.parent.Find("NextLevelButton").localScale = Vector3.zero;
+        mainCamera = Camera.main;
+        enemySpawner = GameObject.Find("Spawner").GetComponent<EnemySpawner>();
+        enemySpawner.gameObject.SetActive(false);
+        poolObject = PoolObject.instance;
+        ShowTutoPart();
+
     }
-    void HideUI(bool value = false)
+
+    void ResetTutoPartCanvasScale()
     {
-        mainCanvas.transform.Find("TopGroup").gameObject.SetActive(value);
-        mainCanvas.transform.Find("LeftGroup").gameObject.SetActive(value);
-        mainCanvas.transform.Find("RightGroup").gameObject.SetActive(value);
+        transform.localScale = Vector3.one;
+        foreach (Transform tutoPart in transform)
+        {
+            if (tutoPart.name == "SkipTutorialButton")
+                continue;
+            tutoPart.Find("Canvas").localScale = Vector3.one;
+            tutoPart.Find("Canvas").position = Vector3.zero;
+            if (tutoPart.name == name)
+                tutoPart.gameObject.SetActive(true);
+        }
     }
-    void EndTutorial()
+
+    private void Update()
+    {
+        UpdateTutorial();
+    }
+    //void HideUI(bool value = false)
+    //{
+    //    mainCanvas.transform.Find("TopGroup").gameObject.SetActive(value);
+    //    mainCanvas.transform.Find("LeftGroup").gameObject.SetActive(value);
+    //    mainCanvas.transform.Find("RightGroup").gameObject.SetActive(value);
+    //}
+
+    public void SkipTutorial()
+    {
+
+    }
+
+    public void EndTutorial()
     {
         SaveManager.instance.SetTutorialDone();
+        //enemySpawner.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
 
+
+    void ShowTutoPart()
+    {
+        if (lastIndexShown == tutorialIndex)
+            return;
+        string name = "P" + tutorialIndex;
+        HideAllTutoPart(name);
+        lastIndexShown = tutorialIndex;
+    }
+
+    public void HideAllTutoPart(string name = "")
+    {
+        foreach (Transform tutoPart in transform)
+        {
+            if (tutoPart.name == "SkipTutorialButton")
+                continue;
+            tutoPart.gameObject.SetActive(false);
+            if (tutoPart.name == name)
+                tutoPart.gameObject.SetActive(true);
+        }
+    }
+
     void UpdateTutorial()
     {
-        if (tutorialIndex == 0)
+        //// Hide UI element.
+        //HideUI();
+        if (Time.time < 2)
+            return;
+        IsConditionFilled();
+
+
+        //if (tutorialIndex == 8 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
+        //{ tutorialIndex++; return; }
+
+        // msg "You passively regen mana, killing enemy units also regen mana.".
+        // Wait until collision between units.
+        // Wait a bit until duck has fight a bit.
+        // Highligth the chicken unit buttom, with msg "You soldier need help, summon a chicken.".
+
+
+    }
+
+    bool IsConditionFilled()
+    {
+        // Highlight the ally captain, with msg "Protect the king"
+        // Tell player to click on the right of the screen (until its all the way on the right)
+        // Highlight the enemy captain, with msg "Defeat the frog captain to win"
+        // Make two melee frog spawn, with msg "Carefull, the enemy is sending soldiers."
+        // Tell player to click on the left of the screen (until its all the way on the left).
+        // Set player current mana to 30.
+        // Highligth the duck unit button, with msg "Summon a unit".
+        // Highligth mana bar with msg "Summoning unit cost mana.".
+        // msg "Summon more units to defeat the enemy"
+        // Wait until menu button of levelCompletePanel appeared.
+        //  > highligth menu button
+        //  > hide next level button
+
+        if (
+           (tutorialIndex == 0 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
+        || (tutorialIndex == 1 && mainCamera.transform.position.x >= 3.06)
+        || (tutorialIndex == 2 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
+        || (tutorialIndex == 3 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
+        || (tutorialIndex == 4 && mainCamera.transform.position.x <= 0)
+        || (tutorialIndex == 5 && poolObject.Allies.Length > 1)
+        || (tutorialIndex == 6 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
+        || (tutorialIndex == 7 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
+        )
         {
-            // Hide UI element.
-            HideUI();
+            if (tutorialIndex == 6)
+                enemySpawner.gameObject.SetActive(true);
+            tutorialIndex++;
+            if (tutorialIndex != 8)
+                ShowTutoPart();
+            else
+                HideAllTutoPart();
+            return true;
+        }
+        else if (tutorialIndex == 8 && levelCompleteMenuButton.activeSelf)
+        {
+            //SwitchParent();
+            HideAllTutoPart();
+            RemoveParentAndDontDestroyOnLoad();
+            ShowTutoPart();
+            tutorialIndex++;
+        }
+        else if (tutorialIndex == 9 && SceneManager.GetActiveScene().name == "LevelSelect")
+        {
+            //SwitchParent();
+            transform.parent = GameObject.Find("MainCanvas").transform;
+            //Disable other button.
+            transform.parent.Find("MiddleGroup/Buttons/Battle").gameObject.SetActive(false);
+            transform.parent.Find("MiddleGroup/Buttons/Menu").gameObject.SetActive(false);
+            transform.parent.Find("MiddleGroup/Buttons/Reset").gameObject.SetActive(false);
+            transform.position = Vector3.zero;
+            transform.localScale = Vector3.one;
 
-            // Highlight the ally captain, with msg "Protect the king"
+            RemoveParentAndDontDestroyOnLoad();
 
-            // Tell player to click on the right of the screen (until its all the way on the right)
-
-            // Highlight the enemy captain, with msg "Defeat the frog captain to win"
-
-            // Make two melee frog spawn, with msg "Carefull, the enemy is sending two soldiers."
-
-            // Tell player to click on the left of the screen (until its all the way on the left).
-
-            // Set player current mana to 30.
-
-            // {Show mana bar UI.
-
-            // {Show duck unit button.
-
-            // Highligth the duck unit button, with msg "Quick defend your king by summoning a duck!".
-
-            // Highligth duck unit button mana cost with msg "Summoning a duck cost 20 mana.".
-
-            // msg "You passively regen mana, killing enemy units also regen mana.".
-
-            // Wait until collision between units.
-
-            // Wait a bit until duck has fight a bit.
-
-            // Highligth the chicken unit buttom, with msg "You soldier need help, summon a chicken.".
-
+            ShowTutoPart();
+            tutorialIndex++;
 
         }
+        else if (tutorialIndex == 10 && SceneManager.GetActiveScene().name == "Upgrades")
+        {
+            //Remove after.
+            EndTutorial();
+        }
+
+        // TODO
+        return false;
+    }
+
+    void RemoveParentAndDontDestroyOnLoad()
+    {
+        transform.parent = null;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void SwitchParent()
+    {
+        if (SceneManager.GetActiveScene().name == "Stage")
+        {
+
+        }
+        else if (SceneManager.GetActiveScene().name == "LevelSelect")
+            transform.parent = GameObject.Find("MainCanvas").transform;
     }
 }

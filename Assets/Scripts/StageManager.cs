@@ -166,7 +166,7 @@ public class StageManager : MonoBehaviour
 
         panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
         if (panel.transform.Find("StageRewardText"))
-            panel.transform.Find("StageRewardText").GetComponent<TMPro.TextMeshProUGUI>().text = '+' + (CalculateRewardAmount()).ToString() + '$';
+            panel.transform.Find("StageRewardText").GetComponent<TMPro.TextMeshProUGUI>().text = '+' + Mathf.Round((CalculateRewardAmount())).ToString() + '$';
     }
 
     void DoVictory()
