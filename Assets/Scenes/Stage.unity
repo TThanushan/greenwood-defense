@@ -9490,10 +9490,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 37252590450478984, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.2
+      objectReference: {fileID: 0}
     - target: {fileID: 359715656646848805, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 614904598849535128, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 857690937406579731, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
@@ -9545,10 +9555,20 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2112484502003901437, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 28
+      objectReference: {fileID: 0}
     - target: {fileID: 2567246129509381127, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2583232937368745229, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_text
+      value: 'Gold from units:'
       objectReference: {fileID: 0}
     - target: {fileID: 2635602850779207884, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
@@ -9565,10 +9585,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5245901919697076572, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5268122865650065674, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355558342560634842, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 440.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355558342560634842, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -130
+      objectReference: {fileID: 0}
+    - target: {fileID: 5577591835216006074, guid: b93e3da3376e0b24d8ded505dd74e505,
+        type: 3}
+      propertyPath: m_text
+      value: 'Gold from units :'
       objectReference: {fileID: 0}
     - target: {fileID: 5682544002518299864, guid: b93e3da3376e0b24d8ded505dd74e505,
         type: 3}
