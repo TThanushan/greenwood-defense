@@ -32,6 +32,8 @@ public class StageInfosManager : MonoBehaviour
     }
     public void SetCurrentStageNumber(int number)
     {
+        if (number > Constants.MAX_STAGE_NUMBER)
+            return;
         currentStage = "Stage " + number.ToString();
     }
 

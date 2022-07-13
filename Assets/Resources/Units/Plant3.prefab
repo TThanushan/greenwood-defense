@@ -247,7 +247,7 @@ MonoBehaviour:
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 7
+  attackDamage: 6
   attackSpeed: 3
   attackRange: 3
   moveSpeed: 0.2

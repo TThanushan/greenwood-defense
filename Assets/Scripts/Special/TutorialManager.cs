@@ -66,13 +66,14 @@ public class TutorialManager : MonoBehaviour
 
     public void SkipTutorial()
     {
-
+        HideAllTutoPart();
+        EndTutorial();
     }
 
     public void EndTutorial()
     {
         SaveManager.instance.SetTutorialDone();
-        //enemySpawner.gameObject.SetActive(true);
+        enemySpawner.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 
@@ -148,42 +149,43 @@ public class TutorialManager : MonoBehaviour
             if (tutorialIndex == 6)
                 enemySpawner.gameObject.SetActive(true);
             tutorialIndex++;
-            if (tutorialIndex != 8)
-                ShowTutoPart();
-            else
-                HideAllTutoPart();
+            HideAllTutoPart();
+            ShowTutoPart();
             return true;
         }
-        else if (tutorialIndex == 8 && levelCompleteMenuButton.activeSelf)
-        {
-            //SwitchParent();
-            HideAllTutoPart();
-            RemoveParentAndDontDestroyOnLoad();
-            ShowTutoPart();
-            tutorialIndex++;
-        }
-        else if (tutorialIndex == 9 && SceneManager.GetActiveScene().name == "LevelSelect")
-        {
-            //SwitchParent();
-            transform.parent = GameObject.Find("MainCanvas").transform;
-            //Disable other button.
-            transform.parent.Find("MiddleGroup/Buttons/Battle").gameObject.SetActive(false);
-            transform.parent.Find("MiddleGroup/Buttons/Menu").gameObject.SetActive(false);
-            transform.parent.Find("MiddleGroup/Buttons/Reset").gameObject.SetActive(false);
-            transform.position = Vector3.zero;
-            transform.localScale = Vector3.one;
-
-            RemoveParentAndDontDestroyOnLoad();
-
-            ShowTutoPart();
-            tutorialIndex++;
-
-        }
-        else if (tutorialIndex == 10 && SceneManager.GetActiveScene().name == "Upgrades")
-        {
-            //Remove after.
+        else if (tutorialIndex == 8)
             EndTutorial();
-        }
+
+        //else if (tutorialIndex == 8 && levelCompleteMenuButton.activeSelf)
+        //{
+        //    //SwitchParent();
+        //    HideAllTutoPart();
+        //    RemoveParentAndDontDestroyOnLoad();
+        //    ShowTutoPart();
+        //    tutorialIndex++;
+        //}
+        //else if (tutorialIndex == 9 && SceneManager.GetActiveScene().name == "LevelSelect")
+        //{
+        //    //SwitchParent();
+        //    transform.parent = GameObject.Find("MainCanvas").transform;
+        //    //Disable other button.
+        //    transform.parent.Find("MiddleGroup/Buttons/Battle").gameObject.SetActive(false);
+        //    transform.parent.Find("MiddleGroup/Buttons/Menu").gameObject.SetActive(false);
+        //    transform.parent.Find("MiddleGroup/Buttons/Reset").gameObject.SetActive(false);
+        //    transform.position = Vector3.zero;
+        //    transform.localScale = Vector3.one;
+
+        //    RemoveParentAndDontDestroyOnLoad();
+
+        //    ShowTutoPart();
+        //    tutorialIndex++;
+
+        //}
+        //else if (tutorialIndex == 10 && SceneManager.GetActiveScene().name == "Upgrades")
+        //{
+        //    //Remove after.
+        //    EndTutorial();
+        //}
 
         // TODO
         return false;

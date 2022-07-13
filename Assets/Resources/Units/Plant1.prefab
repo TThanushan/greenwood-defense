@@ -216,12 +216,14 @@ MonoBehaviour:
   maxHealth: 5
   currentHealth: 0
   damageTakenIncreasePercentage: 0
-  attackDamage: 3
+  initialDamageTakenIncreasePercentage: 0
+  attackDamage: 2
   attackSpeed: 3
   attackRange: 3
   moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1
+  deathSfxName: 
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 90b48a72e8ed2714eb55d2cfae6aaf1d, type: 3}
   bulletPosition: {fileID: 5367232546079401137}

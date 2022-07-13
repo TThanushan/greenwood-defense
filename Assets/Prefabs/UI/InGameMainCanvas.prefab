@@ -7104,7 +7104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ec751ccfb558349ac5a9dd03b69b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelCompleteMoneyReward: 100
 --- !u!114 &3287100727829779316
 MonoBehaviour:
   m_ObjectHideFlags: 0

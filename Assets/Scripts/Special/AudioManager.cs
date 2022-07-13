@@ -7,8 +7,6 @@ public class AudioManager : MonoBehaviour
 
     public List<Sound> sounds;
 
-    public bool musicMuted = false;
-
     public bool SFXMuted = false;
 
     void Start()
@@ -95,6 +93,7 @@ public class AudioManager : MonoBehaviour
                 newS.source.pitch = UnityEngine.Random.Range(1f - pitchPower, 1f + pitchPower);
             newS.source.Play();
         }
+
     }
 
     public void PlayHitSound(string name = "")
@@ -110,17 +109,16 @@ public class AudioManager : MonoBehaviour
         PlaySfx(names[i]);
     }
 
-    public void MuteSfxVolume(GameObject _image)
+    public void MuteSfxVolume()
     {
         SFXMuted = !SFXMuted;
-        if (_image != null)
-            _image.SetActive(SFXMuted);
     }
 
     public void MuteSfxVolume(bool value)
     {
         SFXMuted = value;
     }
+
 
     public void ChangeMainVolume(float _volume)
     {

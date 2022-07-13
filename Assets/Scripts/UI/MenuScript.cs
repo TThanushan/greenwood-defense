@@ -47,6 +47,18 @@ public class MenuScript : MonoBehaviour
         //yield return new WaitUntil(() => loadingBarTransform.localPosition.x == 0);
         SceneManager.LoadScene(sceneIndex);
     }
+
+    public void MuteSFX()
+    {
+        audioManager.MuteSfxVolume();
+    }
+
+    public void MuteMusic()
+    {
+        TrackPlayer.instance.MuteMusic();
+
+    }
+
     public void LoadScene(int sceneIndex)
     {
         ResetTimeScale();
@@ -91,5 +103,20 @@ public class MenuScript : MonoBehaviour
     void ResetTimeScale()
     {
         Time.timeScale = 1f;
+    }
+
+    public void SpeedGame(GameObject _gameObject)
+    {
+        float maxSpeed = 2f;
+        if (Time.timeScale != maxSpeed)
+        {
+            Time.timeScale = maxSpeed;
+            _gameObject.SetActive(true);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            _gameObject.SetActive(false);
+        }
     }
 }

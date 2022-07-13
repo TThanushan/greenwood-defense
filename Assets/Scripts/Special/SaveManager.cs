@@ -337,10 +337,10 @@ public class SaveManager : MonoBehaviour
             new Unit("Bunny3", 60, 10, 550, "Instead of unique rabbit (dps or tank), summon an army of weak rabbits."),
             new Unit("Bunny4", 105, 10, 1300, "Instead of an army of weak rabbits, summon an army of unique rabbits (dps or tank)."),
 
-            new Unit("Plant1", 30, 12, 175, "Shoot bullet at long distance."),
-            new Unit("Plant2", 55, 14, 400, "Bullets go through 3 enemies."),
-            new Unit("Plant3", 90, 16, 750, "Bullet pierce through all enemies on a distance."),
-            new Unit("Plant4", 140, 18, 1600, "Shoot an explosive bullet."),
+            new Unit("Plant1", 30, 15, 175, "Shoot bullet at long distance."),
+            new Unit("Plant2", 55, 17, 400, "Bullets go through 3 enemies."),
+            new Unit("Plant3", 90, 19, 750, "Bullet pierce through all enemies on a distance."),
+            new Unit("Plant4", 140, 20, 1600, "Shoot an explosive bullet."),
 
 
             new Unit("Mushroom1", 50, 10, 700, "Aoe damage poison."),

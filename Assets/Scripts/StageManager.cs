@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
-    public float levelCompleteMoneyReward = 100;
+    float levelCompleteMoneyReward = 100;
     public static StageManager instance;
     bool isVictory;
     bool isGameOver;
