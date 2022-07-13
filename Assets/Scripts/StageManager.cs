@@ -86,7 +86,7 @@ public class StageManager : MonoBehaviour
         float currentStageNb = GetNumbersOnly(StageInfosManager.instance.currentStage);
         if (currentStageNb == 1)
         {
-            levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + 400;
+            levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + Constants.FIRST_STAGE_REWARD_BONUS;
             return;
         }
         int rewardCoef = (int)currentStageNb / 5;
