@@ -63,6 +63,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -436,6 +437,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Idle Chicken4(32x34)_11: -3910398858530033619
+      Idle Chicken4(32x34)_1: -5466994463233434428
+      Idle Chicken4(32x34)_12: -400760082196933558
+      Idle Chicken4(32x34)_3: 8094603150561622695
+      Idle Chicken4(32x34)_6: -5839251861621032112
+      Idle Chicken4(32x34)_7: 8330961649020076441
+      Idle Chicken4(32x34)_0: 2086413386511618321
+      Idle Chicken4(32x34)_2: 4744390936408440725
+      Idle Chicken4(32x34)_5: 6427318390388678149
+      Idle Chicken4(32x34)_9: -1765290079719906210
+      Idle Chicken4(32x34)_10: 204023335069060668
+      Idle Chicken4(32x34)_4: 2933600192009487448
+      Idle Chicken4(32x34)_8: 5369344394776712325
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

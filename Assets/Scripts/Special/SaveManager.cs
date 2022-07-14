@@ -56,6 +56,7 @@ public class SaveManager : MonoBehaviour
         }
         levels[0].unlocked = 1;
         // Player money.
+
         PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, 0);
         InitFirstTimeUnlockedUnits();
         InitFirstTimeUnlockedHeroUpgrades();
@@ -338,10 +339,9 @@ public class SaveManager : MonoBehaviour
             new Unit("Bunny4", 105, 10, 1300, "Instead of an army of weak rabbits, summon an army of unique rabbits (dps or tank)."),
 
             new Unit("Plant1", 30, 15, 175, "Shoot bullet at long distance."),
-            new Unit("Plant2", 55, 17, 400, "Bullets go through 3 enemies."),
-            new Unit("Plant3", 90, 19, 750, "Bullet pierce through all enemies on a distance."),
-            new Unit("Plant4", 140, 20, 1600, "Shoot an explosive bullet."),
-
+            new Unit("Plant2", 55, 17, 500, "Bullets go through 3 enemies."),
+            new Unit("Plant3", 90, 19, 1000, "Bullet pierce through all enemies on a distance."),
+            new Unit("Plant4", 140, 20, 2500, "Shoot an explosive bullet."),
 
             new Unit("Mushroom1", 50, 10, 700, "Aoe damage poison."),
             new Unit("Mushroom2", 75, 12, 1400, "Reduce enemies inflicted damage."),

@@ -20,7 +20,7 @@ MonoBehaviour:
     InfiniteSpawning: 1
     EnemyCount: 0
     currentEnemyCount: 0
-    nextEnemySpawnTime: 46.940887
+    nextEnemySpawnTime: 97.90087
   - Enemy: {fileID: 7241784478119512346, guid: 0435ba058d14a3b43bb1c0cb5b47a4e4, type: 3}
     TimeBetweenSpawn: 8
     RandomTimeBetweenSpawn: 5
@@ -28,7 +28,7 @@ MonoBehaviour:
     InfiniteSpawning: 1
     EnemyCount: 0
     currentEnemyCount: 0
-    nextEnemySpawnTime: 46.940887
+    nextEnemySpawnTime: 105.60581
   - Enemy: {fileID: 7241784478119512346, guid: c99706978e443b9449d9f0bf0db244de, type: 3}
     TimeBetweenSpawn: 9
     RandomTimeBetweenSpawn: 5
@@ -36,12 +36,12 @@ MonoBehaviour:
     InfiniteSpawning: 1
     EnemyCount: 0
     currentEnemyCount: 0
-    nextEnemySpawnTime: 46.940887
+    nextEnemySpawnTime: 101.486565
   - Enemy: {fileID: 7241784478119512346, guid: 22954130344ca5c41b9cf4bd018e7ba6, type: 3}
     TimeBetweenSpawn: 10
     RandomTimeBetweenSpawn: 5
     TimeBeforeFirstSpawn: 5
     InfiniteSpawning: 0
-    EnemyCount: 2
+    EnemyCount: 1
     currentEnemyCount: 0
-    nextEnemySpawnTime: 46.940887
+    nextEnemySpawnTime: 16.015173

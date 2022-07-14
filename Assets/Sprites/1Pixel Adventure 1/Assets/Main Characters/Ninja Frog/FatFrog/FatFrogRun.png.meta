@@ -72,6 +72,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -508,6 +509,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      FatFrogRun_9: 4371764069694134964
+      FatFrogRun_13: -2573389525070240199
+      FatFrogRun_7: -5557772375931968277
+      FatFrogRun_3: -568918268988657856
+      FatFrogRun_5: -3764507035271870451
+      FatFrogRun_11: -7479689947140850134
+      FatFrogRun_8: 1207247903815691184
+      FatFrogRun_14: -8883167081417945857
+      FatFrogRun_0: 2466446758096289075
+      FatFrogRun_12: 5253932700038761111
+      FatFrogRun_15: -4459196754768026046
+      FatFrogRun_4: 3881123989778698758
+      FatFrogRun_2: 9113925469497393755
+      FatFrogRun_10: 7032427881056226367
+      FatFrogRun_1: -6889030459017075087
+      FatFrogRun_6: -3681853190884399464
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

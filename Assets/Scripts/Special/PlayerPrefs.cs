@@ -1,193 +1,225 @@
-//#if UNITY_WEBGL && !UNITY_EDITOR
-//using System;
-//using System.Collections.Generic;
-//using System.IO;
-//using System.Linq;
-//using System.Runtime.InteropServices;
-//using System.Text;
-//using UnityEngine;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using UnityEngine;
 
-//public static class PlayerPrefs
-//{
-//    public static string savePathName = "12345";
-//    public static string DataPath => "/idbfs/" + savePathName + "/NGSave.dat";
+// ***************************************************
+// ** PUT YOUR SAVE PATH NAME IN THE VARIABLE BELOW **
+// ***************************************************
 
-//    [Serializable]
-//    private class PlayerPrefsData
-//    {
-//        public List<KeyValue> data;
-//    }
+// This class acts sort of as an emulator for
+// PlayerPrefs, but saves to a specified
+// place in IndexedDB so saved games don't
+// get wiped when game updates are uploaded
 
-//    [Serializable]
-//    private class KeyValue
-//    {
-//        public string Key;
-//        public string Value;
-//    }
+// PlayerPrefs is similar (but not identical)
+// to a hash of ints, floats, and strings, so
+// this uses a Dictionary in C# (like a hash)
 
-//    static Dictionary<string, string> saveData = new Dictionary<string, string>();
+// Note that in this implementation all of
+// the values are stored as strings even if
+// they're really int or float, but they
+// get parsed when values are returned
 
-//    // This is the static constructor for the class
-//    // When invoked, it looks for a savegame file
-//    // and reads the keys and values
-//    static PlayerPrefs()
-//    {
-//        // Open the savegame file and read all of the lines
-//        // into fileContents
-//        // First make sure the directory and save file exist,
-//        // and make them if they don't already
+// Also note that I call Save() any time
+// a value gets changed, because I think
+// the risk of not saving stuff leading to
+// bugginess outweighs the computational
+// cost of saving more frequently.
+// That could potentially be changed fairly
+// easily as long as you know it's happening
+// and that you just need to comment out the
+// Save() statements at the end of the Set
+// methods.
 
-//        if (File.Exists(DataPath))
-//        {
-//            // Read the file if it already existed
-//            string data = System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(DataPath));
+public static class PlayerPrefs
+{
+    public static string savePathName = "849132";
+    public static string DataPath => "/idbfs/" + savePathName + "/NGSave.dat";
 
-//            // If you want to use encryption/decryption, add your
-//            // code for decrypting here
-//            // ******* decryption algorithm ********
+    [Serializable]
+    private class PlayerPrefsData
+    {
+        public List<KeyValue> data;
+    }
 
-//            PlayerPrefsData ppd = JsonUtility.FromJson<PlayerPrefsData>(data);
-//            if (ppd != null)
-//            {
-//                saveData = ppd.data.ToDictionary(t => t.Key, t => t.Value);
-//            }
-//            else Debug.LogError("WebGL PlayerPrefs wrong format!");
-//        }
-//    }
+    [Serializable]
+    private class KeyValue
+    {
+        public string Key;
+        public string Value;
+    }
 
-//    [DllImport("__Internal")]
-//    private static extern void FlushIDBFS();
+    static Dictionary<string, string> saveData = new Dictionary<string, string>();
 
-//    // This saves the saveData to the player's IndexedDB
-//    public static void Save()
-//    {
-//        PlayerPrefsData ppd = new PlayerPrefsData
-//        { data = saveData.Keys.Select(t => new KeyValue { Key = t, Value = saveData[t] }).ToList() };
+    // This is the static constructor for the class
+    // When invoked, it looks for a savegame file
+    // and reads the keys and values
+    static PlayerPrefs()
+    {
+        // Open the savegame file and read all of the lines
+        // into fileContents
+        // First make sure the directory and save file exist,
+        // and make them if they don't already
 
-//        // If you want to use encryption/decryption, add your
-//        // code for encrypting here
-//        // ******* encryption algorithm ********
+        if (File.Exists(DataPath))
+        {
+            // Read the file if it already existed
+            string data = System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(DataPath));
 
-//        // Write fileContents to the save file
-//        string data = JsonUtility.ToJson(ppd);
-//        byte[] bytedata = Encoding.UTF8.GetBytes(data);
+            // If you want to use encryption/decryption, add your
+            // code for decrypting here
+            // ******* decryption algorithm ********
 
-//        File.WriteAllBytes(DataPath, bytedata);
+            PlayerPrefsData ppd = JsonUtility.FromJson<PlayerPrefsData>(data);
+            if (ppd != null)
+            {
+                saveData = ppd.data.ToDictionary(t => t.Key, t => t.Value);
+            }
+            else Debug.LogError("WebGL PlayerPrefs wrong format!");
+        }
+    }
 
-//        FlushIDBFS();
-//    }
+    [DllImport("__Internal")]
+    private static extern void FlushIDBFS();
 
-//    // The following methods emulate what PlayerPrefs does
-//    public static void DeleteAll()
-//    {
-//        saveData.Clear();
-//    }
+    // This saves the saveData to the player's IndexedDB
+    public static void Save()
+    {
+        PlayerPrefsData ppd = new PlayerPrefsData
+        { data = saveData.Keys.Select(t => new KeyValue { Key = t, Value = saveData[t] }).ToList() };
 
-//    public static void DeleteKey(string key)
-//    {
-//        saveData.Remove(key);
-//    }
+        // If you want to use encryption/decryption, add your
+        // code for encrypting here
+        // ******* encryption algorithm ********
 
-//    public static float GetFloat(string key)
-//    {
-//        return float.Parse(saveData[key]);
-//    }
+        // Write fileContents to the save file
+        string data = JsonUtility.ToJson(ppd);
+        byte[] bytedata = Encoding.UTF8.GetBytes(data);
 
-//    public static float GetFloat(string key, float defaultValue)
-//    {
-//        if (saveData.ContainsKey(key))
-//        {
-//            return float.Parse(saveData[key]);
-//        }
-//        else
-//        {
-//            return defaultValue;
-//        }
-//    }
+        File.WriteAllBytes(DataPath, bytedata);
 
-//    public static int GetInt(string key)
-//    {
-//        return int.Parse(saveData[key]);
-//    }
+        FlushIDBFS();
+    }
 
-//    public static int GetInt(string key, int defaultValue)
-//    {
-//        if (saveData.ContainsKey(key))
-//        {
-//            return int.Parse(saveData[key]);
-//        }
-//        else
-//        {
-//            return defaultValue;
-//        }
-//    }
+    // The following methods emulate what PlayerPrefs does
+    public static void DeleteAll()
+    {
+        saveData.Clear();
+    }
 
-//    public static string GetString(string key)
-//    {
-//        return saveData[key];
-//    }
+    public static void DeleteKey(string key)
+    {
+        saveData.Remove(key);
+    }
 
-//    public static string GetString(string key, string defaultValue)
-//    {
-//        if (saveData.ContainsKey(key))
-//        {
-//            return saveData[key];
-//        }
-//        else
-//        {
-//            return defaultValue;
-//        }
-//    }
+    public static float GetFloat(string key)
+    {
+        return float.Parse(saveData[key]);
+    }
 
-//    public static bool HasKey(string key)
-//    {
-//        return saveData.ContainsKey(key);
-//    }
+    public static float GetFloat(string key, float defaultValue)
+    {
+        if (saveData.ContainsKey(key))
+        {
+            return float.Parse(saveData[key]);
+        }
+        else
+        {
+            return defaultValue;
+        }
+    }
 
-//    public static void SetFloat(string key, float setValue)
-//    {
-//        if (saveData.ContainsKey(key))
-//        {
-//            saveData[key] = setValue.ToString();
-//        }
-//        else
-//        {
-//            saveData.Add(key, setValue.ToString());
-//        }
-//    }
+    public static int GetInt(string key)
+    {
+        return int.Parse(saveData[key]);
+    }
 
-//    public static void SetInt(string key, int setValue)
-//    {
-//        if (saveData.ContainsKey(key))
-//        {
-//            saveData[key] = setValue.ToString();
-//        }
-//        else
-//        {
-//            saveData.Add(key, setValue.ToString());
-//        }
-//    }
+    public static int GetInt(string key, int defaultValue)
+    {
+        if (saveData.ContainsKey(key))
+        {
+            return int.Parse(saveData[key]);
+        }
+        else
+        {
+            return defaultValue;
+        }
+    }
 
-//    public static void SetString(string key, string setValue)
-//    {
-//        if (saveData.ContainsKey(key))
-//        {
-//            saveData[key] = setValue;
-//        }
-//        else
-//        {
-//            saveData.Add(key, setValue);
-//        }
-//    }
-//}
-//#endif
+    public static string GetString(string key)
+    {
+        return saveData[key];
+    }
 
-//File: FlushIDBFS.jslib
+    public static string GetString(string key, string defaultValue)
+    {
+        if (saveData.ContainsKey(key))
+        {
+            return saveData[key];
+        }
+        else
+        {
+            return defaultValue;
+        }
+    }
 
-//var FlushIDBFS = {
-//FlushIDBFS: function()
-//{
-//        FS.syncfs(false, function(err) { });
-//    },
-//};
-//mergeInto(LibraryManager.library, FlushIDBFS);
+    public static bool HasKey(string key)
+    {
+        return saveData.ContainsKey(key);
+    }
+
+    public static void SetFloat(string key, float setValue)
+    {
+        if (saveData.ContainsKey(key))
+        {
+            saveData[key] = setValue.ToString();
+        }
+        else
+        {
+            saveData.Add(key, setValue.ToString());
+        }
+    }
+
+    public static void SetInt(string key, int setValue)
+    {
+        if (saveData.ContainsKey(key))
+        {
+            saveData[key] = setValue.ToString();
+        }
+        else
+        {
+            saveData.Add(key, setValue.ToString());
+        }
+    }
+
+    public static void SetString(string key, string setValue)
+    {
+        if (saveData.ContainsKey(key))
+        {
+            saveData[key] = setValue;
+        }
+        else
+        {
+            saveData.Add(key, setValue);
+        }
+    }
+}
+#endif
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class StartScript : MonoBehaviour
+{
+    public void startGame()
+    {
+        SceneManager.LoadScene("Level Select", LoadSceneMode.Single);
+    }
+}
+
+

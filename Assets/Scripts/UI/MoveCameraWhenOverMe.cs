@@ -5,11 +5,11 @@ public class MoveCameraWhenOverMe : MonoBehaviour
 
     public float xLimit;
     public float translationSpeed;
-    Camera camera;
+    Camera _camera;
     TweenPosition tweenPosition;
     private void Awake()
     {
-        camera = Camera.main;
+        _camera = Camera.main;
         //tweenPosition = transform.GetComponent<TweenPosition>();
     }
 
@@ -20,7 +20,7 @@ public class MoveCameraWhenOverMe : MonoBehaviour
     public void TranslateCamera()
     {
         if ((translationSpeed > 0 && Camera.main.transform.position.x < xLimit) || (translationSpeed < 0 && Camera.main.transform.position.x > xLimit))
-            camera.transform.Translate(translationSpeed, 0, 0);
+            _camera.transform.Translate(translationSpeed, 0, 0);
         //tweenPosition.Tween();
 
     }
