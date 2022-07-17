@@ -6,18 +6,22 @@ public class SaveManager : MonoBehaviour
 {
     public static SaveManager instance;
     public int maxLevelUnlocked = 1;
+
+    public bool isAutoSave;
     public List<Level> levels;
     public List<Unit> units;
     public List<HeroUpgrade> heroUpgrades;
     public List<string> unlockedHeroUpgrades;
     public List<string> unlockedUnits;
     int isTutorialDone;
-    public const int levelsCount = 50;
     const string MAX_LEVEL_UNLOCKED_KEY = "MaxLevelUnlockedKey";
     const string PLAYER_MONEY_KEY = "Money";
     const string UNLOCKED_UNITS_KEY = "UnlockedUnits";
     const string UNLOCKED_HERO_UPGRADES_KEY = "UnlockedHeroUpgrades";
     const string IS_TUTORIAL_DONE_KEY = "IsTutorialDone";
+    const string AUTO_SAVE_KEY = "IsAutoSave";
+
+    public float money;
     private void Awake()
     {
         if (!instance)
@@ -34,7 +38,10 @@ public class SaveManager : MonoBehaviour
         InitUnits();
         InitsHeroUpgrades();
     }
-
+    public bool SaveExist()
+    {
+        return PlayerPrefs.HasKey(MAX_LEVEL_UNLOCKED_KEY) && PlayerPrefs.HasKey("Level1Unlocked");
+    }
     private void Update()
     {
         //if (Input.GetKeyDown(KeyCode.R))
@@ -43,43 +50,60 @@ public class SaveManager : MonoBehaviour
         //    print("Reset player pref");
         //}
         //if (Input.GetKeyDown(KeyCode.V))
-        //    print(PlayerStatsScript.instance.money);
+        //    print(saveManager.money);
         //if (Input.GetKeyDown(KeyCode.S))
         //    SavePrefs();
     }
+
     public void Init()
     {
         levels = new List<Level>();
-        for (int i = 0; i < levelsCount; i++)
+        for (int i = 0; i <= Constants.MAX_STAGE_NUMBER; i++)
         {
             levels.Add(new Level());
         }
         levels[0].unlocked = 1;
         // Player money.
-
+        maxLevelUnlocked = 1;
         PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, 0);
         InitFirstTimeUnlockedUnits();
         InitFirstTimeUnlockedHeroUpgrades();
         SaveUnlockedUnits();
         SaveUnlockedHeroUpgrades();
+        isTutorialDone = 0;
+        isAutoSave = true;
+        SaveLevels();
+        SaveIsAutoSave();
+        money = 0f;
         PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, 0);
     }
 
     void OnApplicationQuit()
     {
-        SavePrefs();
-
+        SavePrefIfAutoSave();
     }
+
+    public void SavePrefIfAutoSave()
+    {
+        if (isAutoSave)
+            SavePrefs();
+    }
+
+
 
     public void ResetPlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
-        PlayerStatsScript.instance.money = 0f;
-        isTutorialDone = 0;
-        maxLevelUnlocked = 1;
         Init();
-        InitFirstTimeUnlockedUnits();
-        InitFirstTimeUnlockedHeroUpgrades();
+
+        //Old
+        //PlayerPrefs.DeleteAll();
+        //SaveManager.instance.money = 0f;
+        //isTutorialDone = 0;
+        //maxLevelUnlocked = 1;
+        //Init();
+        //InitFirstTimeUnlockedUnits();
+        //InitFirstTimeUnlockedHeroUpgrades();
     }
     public int GetLevelScore(int index)
     {
@@ -91,6 +115,11 @@ public class SaveManager : MonoBehaviour
         return levels[GetCurrentLevelNumber()].score;
     }
 
+    public void SaveLevelScoreIfAutoSave(int index, int score)
+    {
+        if (isAutoSave)
+            SaveLevelScore(index, score);
+    }
     public void SaveLevelScore(int index, int score)
     {
         levels[index].score = score;
@@ -121,33 +150,39 @@ public class SaveManager : MonoBehaviour
     }
 
 
-    public bool SaveExist()
+    void SaveLevels()
     {
-        return PlayerPrefs.HasKey(MAX_LEVEL_UNLOCKED_KEY) && PlayerPrefs.HasKey("Level1Unlocked");
-    }
-    public void SavePrefs()
-    {
-        //const string MaxLevelUnlockedKey = "MaxLevelUnlocked";
-
-        PlayerPrefs.SetInt(MAX_LEVEL_UNLOCKED_KEY, maxLevelUnlocked);
         string key;
         for (int i = 0; i < levels.Count - 1; i++)
         {
             key = "Level" + i.ToString();
             // Is level unlocked.
             PlayerPrefs.SetInt(key + "Unlocked", levels[i].unlocked);
-
             // Level score.
             PlayerPrefs.SetInt(key + "Score", levels[i].score);
-
         }
-        // Player money.
-        PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, PlayerStatsScript.instance.money);
+    }
+    public void SavePrefs()
+    {
+        Debug.Log("save prefs");
 
-        PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, isTutorialDone);
+        SaveLevels();
+        SaveIsAutoSave();
         SaveUnlockedUnits();
+        SaveUnlockedHeroUpgrades();
+
+
+        PlayerPrefs.SetInt(MAX_LEVEL_UNLOCKED_KEY, maxLevelUnlocked);
+        PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, money);
+        PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, isTutorialDone);
+        PlayerPrefs.Save();
     }
 
+    public void SaveIsAutoSave()
+    {
+        int autoSaveInt = (isAutoSave == true) ? 1 : 0;
+        PlayerPrefs.SetInt(AUTO_SAVE_KEY, autoSaveInt);
+    }
 
     public void SaveUnlockedUnits()
     {
@@ -181,26 +216,22 @@ public class SaveManager : MonoBehaviour
     }
     public void LoadPrefs()
     {
-        int i = 0;
-        string key = "Level" + i.ToString();
-
         levels = new List<Level>();
         maxLevelUnlocked = PlayerPrefs.GetInt(MAX_LEVEL_UNLOCKED_KEY, 1);
-        PlayerStatsScript.instance.money = PlayerPrefs.GetFloat(PLAYER_MONEY_KEY, 0);
+        money = PlayerPrefs.GetFloat(PLAYER_MONEY_KEY, 0);
 
-        while (PlayerPrefs.HasKey(key + "Unlocked"))
+        for (int i = 0; i < Constants.MAX_STAGE_NUMBER; i++)
         {
-            key = "Level" + i.ToString();
-            Level newLevel = new Level
+            string key = "Level" + i.ToString();
+            Level newLevel = new()
             {
                 unlocked = PlayerPrefs.GetInt(key + "Unlocked"),
                 score = PlayerPrefs.GetInt(key + "Score")
             };
-
             levels.Add(newLevel);
-            i++;
         }
         isTutorialDone = PlayerPrefs.GetInt(IS_TUTORIAL_DONE_KEY);
+        isAutoSave = (PlayerPrefs.GetInt(AUTO_SAVE_KEY) == 1) ? true : false;
         LoadUnlockedUnits();
         LoadUnlockedHeroUpgrades();
     }
@@ -208,6 +239,7 @@ public class SaveManager : MonoBehaviour
     void LoadUnlockedUnits()
     {
         string[] units = GetUnlockedUnitsArray();
+        unlockedUnits.Clear();
         foreach (string name in units)
         {
             if (name != "")
@@ -218,6 +250,7 @@ public class SaveManager : MonoBehaviour
     void LoadUnlockedHeroUpgrades()
     {
         string[] units = GetUnlockedHeroUpgradesArray();
+        unlockedHeroUpgrades.Clear();
         foreach (string name in units)
         {
             if (name != "")
@@ -316,12 +349,12 @@ public class SaveManager : MonoBehaviour
             new Unit("Chicken1", 15, 6, 100, "Fast dps unit."),
             new Unit("Chicken2", 30, 8, 200, "Every 3 attacks, double hit"),
             new Unit("Chicken3", 60, 10, 500, "Every 3 attacks, triple hit and 50% chance to dodge an attack"),
-            new Unit("Chicken4", 100, 12, 1200, "When under 25% health, attack speed is increase by 500%, each hit increase attack damage by 5% until 50%)"),
+            new Unit("Chicken4", 100, 12, 1600, "When under 25% health, attack speed is increase by 500%, each hit increase attack damage by 5% until 50%)"),
 
             new Unit("Duck1", 20, 8, 100, "Tank unit, high health."),
             new Unit("Duck2", 35, 10, 200, "Every 3 hit received, block next hit"),
             new Unit("Duck3", 55, 12, 400, "Start with a big shield that blocks the 5 next hit, when big shield is down, receive defense bonus for x seconds, big shield reappears after x seconds."),
-            new Unit("Duck4", 85, 14, 1100, "Big shield now blocks 10 next hit instead of 5, when big shield is down, receive defense bonus for x seconds, big shield reappears after x seconds. When any shield is up, restore x% max health over time."),
+            new Unit("Duck4", 85, 14, 1200, "Big shield now blocks 10 next hit instead of 5, when big shield is down, receive defense bonus for x seconds, big shield reappears after x seconds. When any shield is up, restore x% max health over time."),
 
             new Unit("Trunk1", 25, 10, 150, "Shoot bullet."),
             new Unit("Trunk2", 50, 12, 250, "Shoot 3 times in row (on every attack)."),
@@ -335,8 +368,8 @@ public class SaveManager : MonoBehaviour
 
             new Unit("Bunny1", 20, 10, 100, "Summon weak rabbit."),
             new Unit("Bunny2", 35, 10, 300, "Instead of weak rabbit, randomly summon unique rabbit (dps or tank)."),
-            new Unit("Bunny3", 60, 10, 550, "Instead of unique rabbit (dps or tank), summon an army of weak rabbits."),
-            new Unit("Bunny4", 105, 10, 1300, "Instead of an army of weak rabbits, summon an army of unique rabbits (dps or tank)."),
+            new Unit("Bunny3", 60, 10, 750, "Instead of unique rabbit (dps or tank), summon an army of weak rabbits."),
+            new Unit("Bunny4", 105, 10, 1400, "Instead of an army of weak rabbits, summon an army of unique rabbits (dps or tank)."),
 
             new Unit("Plant1", 30, 15, 175, "Shoot bullet at long distance."),
             new Unit("Plant2", 55, 17, 500, "Bullets go through 3 enemies."),

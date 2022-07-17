@@ -17041,14 +17041,14 @@ Canvas:
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 1
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_AdditionalShaderChannelsFlag: -1
+  m_SortingLayerID: -607949813
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!1 &747530137
 GameObject:
@@ -43148,14 +43148,14 @@ Canvas:
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 1
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_AdditionalShaderChannelsFlag: -1
+  m_SortingLayerID: -607949813
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!1001 &1851042910
 PrefabInstance:
@@ -45995,14 +45995,14 @@ Canvas:
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 1
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_AdditionalShaderChannelsFlag: -1
+  m_SortingLayerID: -607949813
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!1001 &1959910999
 PrefabInstance:
@@ -51114,6 +51114,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 231.7
       objectReference: {fileID: 0}
+    - target: {fileID: 459213264781944243, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213264781944244, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213264781944244, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213264781944244, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213264781944244, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213264781944244, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 459213264781944245, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -51143,6 +51173,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265555632454, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265555632454, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265555632454, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265555632454, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265555632454, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 459213265555632455, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51204,6 +51259,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 459213265636757469, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265636757469, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265636757469, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265636757469, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265636757469, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 459213265809011876, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -51234,6 +51314,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 459213265809011877, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265809011877, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265809011877, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265809011877, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213265809011877, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 459213266334452172, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -51264,6 +51369,31 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 459213266334452173, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266334452173, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266334452173, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266334452173, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266334452173, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 459213266394227596, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -51293,6 +51423,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266394227597, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266394227597, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266394227597, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266394227597, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266394227597, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266642770298, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266642770298, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266642770298, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266642770298, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266642770298, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 459213266642770299, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51354,6 +51534,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 459213266649594329, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266649594329, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266649594329, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266649594329, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266649594329, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266649594334, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 459213266745121654, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -51383,6 +51593,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266745121655, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266745121655, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266745121655, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266745121655, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverridePixelPerfect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 459213266745121655, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 1414904122799675538, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51586,12 +51821,12 @@ PrefabInstance:
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51606,7 +51841,7 @@ PrefabInstance:
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51632,7 +51867,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
-      objectReference: {fileID: 2981654173394761988}
+      objectReference: {fileID: 2981654173394761989}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[5].m_Target
@@ -51647,7 +51882,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 3715788401226662628}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
@@ -51686,7 +51921,7 @@ PrefabInstance:
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
-      value: UpdateShopUI
+      value: UnselectCard
       objectReference: {fileID: 0}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51706,7 +51941,7 @@ PrefabInstance:
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
-      value: 
+      value: EnablePanel
       objectReference: {fileID: 0}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51721,7 +51956,7 @@ PrefabInstance:
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
-      value: UpgradesShopHero, Assembly-CSharp
+      value: UpgradesShop, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51757,7 +51992,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2981654173394761992}
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -51786,7 +52021,7 @@ PrefabInstance:
     - target: {fileID: 1477944910275650901, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1821517288111742611, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51928,7 +52163,7 @@ PrefabInstance:
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -51948,11 +52183,16 @@ PrefabInstance:
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[6].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_Mode
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
@@ -51969,12 +52209,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 2981654173394761988}
+      objectReference: {fileID: 2981654173394761989}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
-      objectReference: {fileID: 2981654173394761989}
+      objectReference: {fileID: 2981654173394761988}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[4].m_Target
@@ -51984,10 +52224,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
-      objectReference: {fileID: 3715788401226662628}
+      objectReference: {fileID: 2981654173394761988}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[6].m_Target
+      value: 
+      objectReference: {fileID: 3715788401226662628}
+    - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_Target
       value: 
       objectReference: {fileID: 3715788401226662628}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
@@ -52017,6 +52262,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: UnselectCard
       objectReference: {fileID: 0}
@@ -52033,22 +52283,27 @@ PrefabInstance:
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
-      value: EnablePanel
+      value: UpdateShopUI
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[6].m_MethodName
+      value: EnablePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_MethodName
       value: DisablePanel
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UpgradesShopHero, Assembly-CSharp
+      value: UpgradesShop, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName
-      value: UpgradesShop, Assembly-CSharp
+      value: UpgradesShopHero, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
@@ -52058,11 +52313,16 @@ PrefabInstance:
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
-      value: MenuScript, Assembly-CSharp
+      value: UpgradesShopHero, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[6].m_TargetAssemblyTypeName
+      value: MenuScript, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_TargetAssemblyTypeName
       value: MenuScript, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
@@ -52074,10 +52334,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 2981654173394761991}
+      objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 2981654173394761991}
+    - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 2981654173394761992}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
@@ -52098,11 +52363,16 @@ PrefabInstance:
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[6].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173041733964, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[7].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173041733966, guid: ccaf64eccb685c5498c5263c60138216,
@@ -52291,6 +52561,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173329420790, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173329420790, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173329420790, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_SortingLayerID
+      value: -607949813
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173329420790, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173329420790, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173426134025, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}

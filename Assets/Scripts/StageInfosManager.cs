@@ -23,7 +23,8 @@ public class StageInfosManager : MonoBehaviour
 
     public void SetCurrentStageToNextStage()
     {
-        currentStage = "Stage " + (GetCurrentStageNumber() + 1).ToString();
+        SetCurrentStageNumber(GetCurrentStageNumber() + 1);
+        //currentStage = "Stage " + (GetCurrentStageNumber() + 1).ToString();
     }
 
     public void SetCurrentStageName(string stage)

@@ -3,6 +3,7 @@ using UnityEngine;
 public class UnitShooter : Unit
 {
     public GameObject bullet;
+    public GameObject bullet2;
     public Transform bulletPosition;
     //public float attackDamage;
     //public float bulletSpeed;
@@ -13,7 +14,8 @@ public class UnitShooter : Unit
 
     protected virtual void Shoot(GameObject target)
     {
-        InstantiateBullet(target);
+        InstantiateBullet(target, bullet);
+        InstantiateBullet(target, bullet2);
     }
 
     protected override void Update()
@@ -60,6 +62,25 @@ public class UnitShooter : Unit
     {
         return InRangeWithTarget() && AlignedOnYWithTarget();
     }
+    protected GameObject InstantiateBullet(GameObject target, GameObject _bullet)
+    {
+        if (!_bullet || !target)
+            return null;
+        GameObject newBullet = poolObject.GetPoolObject(_bullet);
+        newBullet.transform.position = bulletPosition.transform.position;
+
+        BulletScript newBulletScript = newBullet.GetComponent<BulletScript>();
+        newBulletScript.target = target;
+        newBulletScript.SetTargetTag(targetTag);
+        newBulletScript.attackDamage = attackDamage;
+        newBulletScript.wayX = wayX;
+
+        //newBulletScript.moveSpeed = bulletSpeed;
+        //newBulletScript.piercingDamage = piercingDamage;
+
+        return newBullet;
+    }
+
     protected GameObject InstantiateBullet(GameObject target)
     {
         if (!bullet || !target)
@@ -78,4 +99,5 @@ public class UnitShooter : Unit
 
         return newBullet;
     }
+
 }

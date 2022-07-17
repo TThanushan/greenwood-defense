@@ -56,6 +56,7 @@ public class LevelComplete : MonoBehaviour
             return;
         transform.Find("NextLevelButton").gameObject.SetActive(true);
         transform.Find("MenuButton").gameObject.SetActive(true);
+        transform.Find("UpgradesButton").gameObject.SetActive(true);
 
         animationDone = true;
 

@@ -34,7 +34,7 @@ public class UpgradesShop : MonoBehaviour
 
     void SetPlayerGoldText()
     {
-        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = PlayerStatsScript.instance.money.ToString() + '$';
+        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = saveManager.money.ToString() + '$';
     }
 
     void UpdateUpgradesCards()
@@ -244,14 +244,14 @@ public class UpgradesShop : MonoBehaviour
 
     void Upgrade(string upgradeUnitName, string unitName, float price)
     {
-        PlayerStatsScript.instance.money -= price;
+        saveManager.money -= price;
         saveManager.unlockedUnits.Add(upgradeUnitName);
         saveManager.unlockedUnits.Remove(unitName);
     }
 
     void Unlock(string unitName, float price)
     {
-        PlayerStatsScript.instance.money -= price;
+        saveManager.money -= price;
         saveManager.unlockedUnits.Add(unitName);
     }
 
@@ -310,14 +310,14 @@ public class UpgradesShop : MonoBehaviour
         }
         SetActiveUpgradeCardButtonLock(GetSelectedCard(), false);
         AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
-        saveManager.SaveUnlockedUnits();
-        saveManager.SavePrefs();
+        //saveManager.SaveUnlockedUnits();
+        saveManager.SavePrefIfAutoSave();
 
     }
 
     bool CanUpgrade(string unitName)
     {
-        return DoesUnitExist(unitName) && !UnitAlreadyUnlocked(unitName) && PlayerStatsScript.instance.money >= GetUnit(unitName).shopPrice;
+        return DoesUnitExist(unitName) && !UnitAlreadyUnlocked(unitName) && saveManager.money >= GetUnit(unitName).shopPrice;
     }
 
 

@@ -26,7 +26,8 @@ public class MenuScript : MonoBehaviour
     }
 
 
-    public void ResetSave()
+    public void
+        Save()
     {
         SaveManager.instance.ResetPlayerPrefs();
     }
@@ -119,4 +120,10 @@ public class MenuScript : MonoBehaviour
             _gameObject.SetActive(false);
         }
     }
+
+    public void ResetSave()
+    {
+        SaveManager.instance.ResetPlayerPrefs();
+    }
+
 }

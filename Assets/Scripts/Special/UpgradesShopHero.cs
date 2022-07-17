@@ -66,7 +66,7 @@ public class UpgradesShopHero : MonoBehaviour
     void UpdatePriceTextColor(TextMeshProUGUI text, string upgradeName)
     {
 
-        if (PlayerStatsScript.instance.money >= saveManager.GetHeroUpgrade(upgradeName).shopPrice)
+        if (saveManager.money >= saveManager.GetHeroUpgrade(upgradeName).shopPrice)
             text.colorGradientPreset = priceOriginalColor;
         else
             text.colorGradientPreset = tooExpensivePriceColor;
@@ -74,7 +74,7 @@ public class UpgradesShopHero : MonoBehaviour
 
     void SetPlayerGoldText()
     {
-        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = PlayerStatsScript.instance.money.ToString() + '$';
+        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = saveManager.money.ToString() + '$';
     }
 
     void InitUpgradesCards()
@@ -309,9 +309,9 @@ public class UpgradesShopHero : MonoBehaviour
         {
             saveManager.unlockedHeroUpgrades.Remove(currentHeroUpgradeName);
             saveManager.unlockedHeroUpgrades.Add(nextHeroUpgrade.name);
-            PlayerStatsScript.instance.money -= nextHeroUpgrade.shopPrice;
-            saveManager.SaveUnlockedHeroUpgrades();
-            saveManager.SavePrefs();
+            saveManager.money -= nextHeroUpgrade.shopPrice;
+            //saveManager.SaveUnlockedHeroUpgrades();
+            saveManager.SavePrefIfAutoSave();
             string oldCardName = selectedCard;
             selectedCard = "UpgradeCard" + nextHeroUpgrade.name;
             UpdateButtonName(oldCardName);
@@ -349,7 +349,7 @@ public class UpgradesShopHero : MonoBehaviour
     {
         if (IsAlreadyUnlocked(upgradeName))
             return false;
-        bool enoughMoney = PlayerStatsScript.instance.money >= saveManager.GetHeroUpgrade(upgradeName).shopPrice;
+        bool enoughMoney = saveManager.money >= saveManager.GetHeroUpgrade(upgradeName).shopPrice;
         return enoughMoney;
 
     }

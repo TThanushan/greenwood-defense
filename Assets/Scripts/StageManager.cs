@@ -13,6 +13,7 @@ public class StageManager : MonoBehaviour
     GameObject levelCompletePanel;
     GameObject gameOverPanel;
     float goldEarnedInStage;
+    SaveManager saveManager;
 
     PlayerStatsScript playerStatsScript;
     Unit playerCaptain;
@@ -38,7 +39,7 @@ public class StageManager : MonoBehaviour
     public void GiveMoneyReward()
     {
         float reward = CalculateRewardAmount();
-        PlayerStatsScript.instance.money += reward;
+        saveManager.money += reward;
     }
 
     float CalculateRewardAmount()
@@ -56,7 +57,7 @@ public class StageManager : MonoBehaviour
     float GetRewardPreviouslyGiven()
     {
         float reward = levelCompleteMoneyReward;
-        int savedLevelSCore = SaveManager.instance.GetLevelScore();
+        int savedLevelSCore = saveManager.GetLevelScore();
         int stars = LevelScore.instance.HowManyStar(savedLevelSCore);
         return GetRewardAfterPercentage(reward, stars);
     }
@@ -78,6 +79,7 @@ public class StageManager : MonoBehaviour
         enemyCaptain = GameObject.Find("EnemyCaptain").GetComponent<Unit>();
         gameOverPanel = transform.Find("MiddleGroup/GameOverPanel").gameObject;
         levelCompletePanel = transform.Find("MiddleGroup/LevelCompletePanel").gameObject;
+        saveManager = SaveManager.instance;
         InitLevelCompleteMoneyReward();
     }
 
@@ -90,7 +92,7 @@ public class StageManager : MonoBehaviour
             return;
         }
         int rewardCoef = (int)currentStageNb / 5;
-        levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + rewardCoef * 50;
+        levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + rewardCoef * Constants.REWARD_BONUS_EVERY_X_STAGE;
     }
 
     float GetNumbersOnly(string numberString)
@@ -130,7 +132,7 @@ public class StageManager : MonoBehaviour
 
     public void GivePlayerMoney(float money)
     {
-        playerStatsScript.money += money;
+        saveManager.money += money;
         goldEarnedInStage += money;
     }
 
@@ -162,7 +164,7 @@ public class StageManager : MonoBehaviour
 
     void UpdateLevelPanelInfos(GameObject panel)
     {
-        panel.transform.Find("TotalGoldText").GetComponent<TMPro.TextMeshProUGUI>().text = playerStatsScript.money.ToString();
+        panel.transform.Find("TotalGoldText").GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.money.ToString();
 
         panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
         if (panel.transform.Find("StageRewardText"))
@@ -182,7 +184,7 @@ public class StageManager : MonoBehaviour
         UpdateLevelPanelInfos(levelCompletePanel);
         UnlockNextStage();
         SaveScoreIfHigher();
-        SaveManager.instance.SavePrefs();
+        saveManager.SavePrefIfAutoSave();
         AudioManager.instance.PlaySfx(Constants.VICTORY_SFX_NAME);
         levelCompletePanel.GetComponent<LevelComplete>().enabled = true;
     }
@@ -193,36 +195,38 @@ public class StageManager : MonoBehaviour
         isGameOver = true;
         gameOverPanel.SetActive(true);
         UpdateLevelPanelInfos(gameOverPanel);
-        PlayerStatsScript.instance.PauseGame(true);
         gameOverPanel.SetActive(true);
 
-        SaveManager.instance.SavePrefs();
+        saveManager.SavePrefIfAutoSave();
     }
 
     public void LoadNextLevel()
     {
         //int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        int currentStageNumber = StageInfosManager.instance.GetCurrentStageNumber();
         StageInfosManager.instance.SetCurrentStageToNextStage();
+        if (currentStageNumber == Constants.MAX_STAGE_NUMBER)
+            MenuScript.instance.LoadLevelSelectionScene();
+        else
+            MenuScript.instance.LoadCurrentScene();
         //MenuScript.instance.LoadScene(nextSceneIndex);
-        MenuScript.instance.LoadCurrentScene();
     }
-
     void UnlockNextStage()
     {
-        int index = SaveManager.instance.GetCurrentLevelNumber();
-        SaveManager.instance.UnlockLevel(index + 1);
+        int index = saveManager.GetCurrentLevelNumber();
+        saveManager.UnlockLevel(index + 1);
     }
 
     bool IsScoreHigherThanPrevious(int index)
     {
-        return LevelScore.instance.score > SaveManager.instance.GetLevelScore(index);
+        return LevelScore.instance.score > saveManager.GetLevelScore(index);
     }
 
     void SaveScoreIfHigher()
     {
-        int index = SaveManager.instance.GetCurrentLevelNumber();
+        int index = saveManager.GetCurrentLevelNumber();
         if (IsScoreHigherThanPrevious(index))
-            SaveManager.instance.SaveLevelScore(index, LevelScore.instance.score);
+            saveManager.SaveLevelScore(index, LevelScore.instance.score);
     }
 
 }

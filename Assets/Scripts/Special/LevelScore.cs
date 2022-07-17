@@ -17,10 +17,7 @@ public class LevelScore : MonoBehaviour
 
     public void CalculateScore()
     {
-        PlayerStatsScript pScript = PlayerStatsScript.instance;
         score = (int)(PoolObject.instance.playerCaptain.currentHealth / PoolObject.instance.playerCaptain.maxHealth * 100);
-        //score = (int)(decimal.Divide(pScript.life, pScript.StartLife) * 10);
-
     }
 
 

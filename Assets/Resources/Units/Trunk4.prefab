@@ -294,9 +294,10 @@ MonoBehaviour:
   deathSfxName: 
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 7c673131600f0b14f85a1ce6fe27bf09, type: 3}
+  bullet2: {fileID: 0}
   bulletPosition: {fileID: 1142343704}
-  bulletShotEachTime: 100
-  timeBetweenShoot: 0.05
+  bulletShotEachTime: 500
+  timeBetweenShoot: 0.02
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

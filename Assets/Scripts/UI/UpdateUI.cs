@@ -19,7 +19,7 @@ public class UpdateUI : MonoBehaviour
 
     private void Update()
     {
-        moneyText.text = playerStatsScript.money.ToString();
+        moneyText.text = SaveManager.instance.money.ToString();
         timeText.text = GetFormatedTime();
     }
 
