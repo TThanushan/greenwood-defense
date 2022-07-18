@@ -164,7 +164,7 @@ public class SaveManager : MonoBehaviour
     }
     public void SavePrefs()
     {
-        Debug.Log("save prefs");
+        Debug.LogError("save prefs");
 
         SaveLevels();
         SaveIsAutoSave();

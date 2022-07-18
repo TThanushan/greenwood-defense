@@ -187,6 +187,8 @@ public class StageManager : MonoBehaviour
         saveManager.SavePrefIfAutoSave();
         AudioManager.instance.PlaySfx(Constants.VICTORY_SFX_NAME);
         levelCompletePanel.GetComponent<LevelComplete>().enabled = true;
+        GameObject.FindGameObjectWithTag("Spawner").SetActive(false);
+
     }
 
     void DoGameOver()

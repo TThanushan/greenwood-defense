@@ -21,7 +21,9 @@ public class LevelSelectUI : MonoBehaviour
 
     public void SavePrefs()
     {
+        Debug.LogError("levelSelectUI save pref");
         SaveManager.instance.SavePrefs();
+        LoadLastSave();
     }
 
     public void ReverseIsAutoSave()
