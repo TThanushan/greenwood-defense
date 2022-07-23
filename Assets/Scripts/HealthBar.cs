@@ -14,17 +14,23 @@ public class HealthBar : MonoBehaviour
     public event System.Action OnDeath;
     public event System.Action OnHit;
 
-    [HideInInspector]
     public float damageTakenIncreasePercentage = 0f;
+    [HideInInspector]
     public float initialDamageTakenIncreasePercentage;
     protected PoolObject poolObject;
+
+
+    // Player captain only.
+    private float bigShieldCurrent;
+    private GameObject bigShield;
     protected virtual void Awake()
     {
         if (!healthBar)
             healthBar = transform.Find("HealthBar/Canvas/Bar").gameObject;
         if (!shieldBar)
             shieldBar = transform.Find("HealthBar/Canvas/ShieldBar").gameObject;
-
+        if (name == "PlayerCaptain")
+            bigShield = transform.Find("SpriteBody/BigShield").gameObject;
         currentHealth = maxHealth;
     }
 
@@ -37,8 +43,23 @@ public class HealthBar : MonoBehaviour
     {
         UpdateHealthBarLength();
         UpdateShieldBarWidth();
+        if (name == "PlayerCaptain")
+            UpdateBigShieldCurrent();
     }
-
+    public void SetBigShieldCurrent(float val)
+    {
+        bigShieldCurrent = val;
+        if (bigShield)
+            bigShield.SetActive(true);
+    }
+    public void UpdateBigShieldCurrent()
+    {
+        if (bigShieldCurrent <= 0)
+        {
+            bigShieldCurrent = 0;
+            bigShield.SetActive(false);
+        }
+    }
 
     public void HealMaxHealthPercentage(float amount)
     {
@@ -108,6 +129,11 @@ public class HealthBar : MonoBehaviour
     {
         if (currentHealth <= 0)
             return;
+        if (bigShieldCurrent > 0)
+        {
+            bigShieldCurrent--;
+            damage = 0;
+        }
         if (shield > 0)
         {
             shield -= damage;

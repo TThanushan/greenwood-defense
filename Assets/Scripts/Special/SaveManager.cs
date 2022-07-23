@@ -339,6 +339,30 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("UnitCooldownReduction30", "Reduce unit spawn cooldown by 30%",600),
             new HeroUpgrade("UnitCooldownReduction40", "Reduce unit spawn cooldown by 40%",800),
             new HeroUpgrade("UnitCooldownReduction50", "Reduce unit spawn cooldown by 50%",1000),
+            new HeroUpgrade("MaxHealth100", "Increase your captain max health to 100", 300),
+            new HeroUpgrade("MaxHealth200", "Increase your captain max health to 200", 600),
+            new HeroUpgrade("MaxHealth300", "Increase your captain max health to 300", 900),
+            new HeroUpgrade("MaxHealth400", "Increase your captain max health to 400", 1200),
+            new HeroUpgrade("MaxHealth500", "Increase your captain max health to 500", 1500),
+            new HeroUpgrade("DamageReduction0", "Reduce the damage taken by your captain by 0%", 0),
+            new HeroUpgrade("DamageReduction10", "Reduce the damage taken by your captain by 10%", 200),
+            new HeroUpgrade("DamageReduction20", "Reduce the damage taken by your captain by 20%", 600),
+            new HeroUpgrade("DamageReduction30", "Reduce the damage taken by your captain by 30%", 900),
+            new HeroUpgrade("DamageReduction40", "Reduce the damage taken by your captain by 40%", 1300),
+            new HeroUpgrade("DamageReduction50", "Reduce the damage taken by your captain by 50%", 1600),
+            new HeroUpgrade("MoneyIncomeIncrease0", "Increase the gold dropped by units by 0%", 0),
+            new HeroUpgrade("MoneyIncomeIncrease10", "Increase the gold dropped by units by 10%", 300),
+            new HeroUpgrade("MoneyIncomeIncrease20", "Increase the gold dropped by units by 20%", 600),
+            new HeroUpgrade("MoneyIncomeIncrease30", "Increase the gold dropped by units by 30%", 900),
+            new HeroUpgrade("MoneyIncomeIncrease40", "Increase the gold dropped by units by 40%", 1200),
+            new HeroUpgrade("MoneyIncomeIncrease50", "Increase the gold dropped by units by 50%", 1500),
+            new HeroUpgrade("Shield0", "Your captain gains a shield that blocks the first 0 hit", 0),
+            new HeroUpgrade("Shield5", "Your captain gains a shield that blocks the first 5 hit", 300),
+            new HeroUpgrade("Shield10", "Your captain gains a shield that blocks the first 10 hit", 900),
+            new HeroUpgrade("Shield20", "Your captain gains a shield that blocks the first 20 hit", 1200),
+            new HeroUpgrade("Shield30", "Your captain gains a shield that blocks the first 30 hit", 1600),
+
+
         };
     }
 
@@ -425,7 +449,10 @@ public class SaveManager : MonoBehaviour
             "ManaRegen0.0",
             "UnitCooldownReduction0",
             "StartMana0",
-
+            "MaxHealth100",
+            "DamageReduction0",
+            "MoneyIncomeIncrease0",
+            "Shield0"
         };
     }
 

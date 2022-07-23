@@ -20,6 +20,8 @@ public class StageManager : MonoBehaviour
     Unit enemyCaptain;
     float rewardPreviouslyGiven;
 
+    float moneyIncomeIncrease = 1f;
+
     void Awake()
     {
         if (instance == null)
@@ -34,6 +36,33 @@ public class StageManager : MonoBehaviour
     {
         InitVal();
         TrackPlayer.instance.PlayMainTheme();
+        LoadStatsFromPrefs();
+    }
+
+    void LoadStatsFromPrefs()
+    {
+        foreach (string name in SaveManager.instance.unlockedHeroUpgrades)
+        {
+            const string MONEY_INCOME_INCREASE = "MoneyIncomeIncrease";
+            if (name.Contains(MONEY_INCOME_INCREASE))
+            {
+                moneyIncomeIncrease = 1 + GetUpgradeNameNumbersOnly(name) / 100;
+                return;
+            }
+        }
+
+    }
+    float GetUpgradeNameNumbersOnly(string upgradeName)
+    {
+        string withoutNumbers = GetUpgradeNameWithoutNumbers(upgradeName);
+        withoutNumbers = upgradeName.Replace(withoutNumbers, "");
+        return float.Parse(withoutNumbers, CultureInfo.InvariantCulture.NumberFormat);
+    }
+    string GetUpgradeNameWithoutNumbers(string upgradeName)
+    {
+        string withoutNumbers = Regex.Replace(upgradeName, @"[\d-]", string.Empty);
+        withoutNumbers = withoutNumbers.Replace(".", "");
+        return withoutNumbers;
     }
 
     public void GiveMoneyReward()
@@ -132,6 +161,7 @@ public class StageManager : MonoBehaviour
 
     public void GivePlayerMoney(float money)
     {
+        money *= moneyIncomeIncrease;
         saveManager.money += money;
         goldEarnedInStage += money;
     }

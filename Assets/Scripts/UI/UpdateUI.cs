@@ -7,11 +7,9 @@ public class UpdateUI : MonoBehaviour
     TextMeshProUGUI timeText;
 
     float timer;
-    PlayerStatsScript playerStatsScript;
 
     private void Start()
     {
-        playerStatsScript = PlayerStatsScript.instance;
         moneyText = transform.Find("RightGroup/MoneyTextGroup/MoneyText").GetComponent<TextMeshProUGUI>();
         timeText = transform.Find("LeftGroup/Time/TimeText").GetComponent<TextMeshProUGUI>();
         transform.Find("TopGroup/Title/TitleText").GetComponent<TextMeshProUGUI>().text = GetStageTitle();
@@ -19,7 +17,8 @@ public class UpdateUI : MonoBehaviour
 
     private void Update()
     {
-        moneyText.text = SaveManager.instance.money.ToString();
+        int money = (int)SaveManager.instance.money;
+        moneyText.text = money.ToString();
         timeText.text = GetFormatedTime();
     }
 

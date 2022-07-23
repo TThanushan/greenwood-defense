@@ -22,6 +22,21 @@ public class Stage : ScriptableObject
         [HideInInspector]
         public float nextEnemySpawnTime = 0f;
 
+        public EnemyType()
+        {
+
+        }
+
+        public EnemyType(GameObject enemy, float timeBetweenSpawn, float randomTimeBetweenSpawn, float timeBeforeFirstSpawn, bool infiniteSpawning, int enemyCount)
+        {
+            Enemy = enemy;
+            TimeBetweenSpawn = timeBetweenSpawn;
+            RandomTimeBetweenSpawn = randomTimeBetweenSpawn;
+            TimeBeforeFirstSpawn = timeBeforeFirstSpawn;
+            InfiniteSpawning = infiniteSpawning;
+            EnemyCount = enemyCount;
+        }
+
         public void Init()
         {
             nextEnemySpawnTime = TimeBeforeFirstSpawn;
@@ -42,8 +57,6 @@ public class Stage : ScriptableObject
         {
             float randomSpawnTime = Random.Range(0, RandomTimeBetweenSpawn);
             nextEnemySpawnTime = Time.time + TimeBetweenSpawn + randomSpawnTime;
-
         }
     }
-
 }
