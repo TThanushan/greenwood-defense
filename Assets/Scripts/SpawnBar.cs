@@ -72,11 +72,19 @@ public class SpawnBar : MonoBehaviour
         return null;
     }
 
+    string GetSimplifiedName(string name)
+    {
+        return GetUpgradeNameWithoutNumbers(name).Replace("UnitButton", "");
+    }
+
+
+
     public void SpawnUnit(string name)
     {
+        name = GetSimplifiedName(name);
         foreach (UnitButton unitButton in unitButtons)
         {
-            if (unitButton.name == name && unitButton.ReadyToSpawn() && unitButton.HasEnoughMana())
+            if (GetSimplifiedName(unitButton.name) == name && unitButton.ReadyToSpawn() && unitButton.HasEnoughMana())
             {
                 SpawnUnit(unitButton.prefab);
                 unitButton.ResetCurrentReloadTime();
@@ -85,12 +93,28 @@ public class SpawnBar : MonoBehaviour
         }
     }
 
+    UnitButton GetUnitButton(string name)
+    {
+        name = GetSimplifiedName(name);
+        foreach (UnitButton unitButton in unitButtons)
+        {
+            if (GetSimplifiedName(unitButton.name) == name)
+                return unitButton;
+        }
+        return null;
+    }
+
+    public void SpawnUnitForFree(string name)
+    {
+        SpawnUnit(GetUnitButton(name).prefab);
+    }
     private void SpawnUnit(GameObject prefab)
     {
         GameObject newUnit = PoolObject.instance.GetPoolObject(prefab);
         float randomYPos = spawnPosition.y + UnityEngine.Random.Range(-0.1f, 0.3f);
         newUnit.transform.position = new Vector2(spawnPosition.x, randomYPos);
     }
+
 
     private void UpdateUnitButtons()
     {
@@ -260,10 +284,4 @@ public class SpawnBar : MonoBehaviour
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-
-        Gizmos.DrawWireSphere(spawnPosition, 0.25f);
-    }
 }

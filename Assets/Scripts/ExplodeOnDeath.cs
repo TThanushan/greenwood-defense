@@ -9,6 +9,14 @@ public class ExplodeOnDeath : MonoBehaviour
     string targetTag = "Enemy";
     bool once;
     HealthBar healthBar;
+
+    private void Awake()
+    {
+        if (tag == "Enemy")
+            targetTag = "Ally";
+        else
+            targetTag = "Enemy";
+    }
     private void OnEnable()
     {
         once = true;

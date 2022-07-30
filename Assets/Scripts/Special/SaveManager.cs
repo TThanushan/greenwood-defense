@@ -164,7 +164,6 @@ public class SaveManager : MonoBehaviour
     }
     public void SavePrefs()
     {
-        Debug.LogError("save prefs");
 
         SaveLevels();
         SaveIsAutoSave();
@@ -361,11 +360,50 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("Shield10", "Your captain gains a shield that blocks the first 10 hit", 900),
             new HeroUpgrade("Shield20", "Your captain gains a shield that blocks the first 20 hit", 1200),
             new HeroUpgrade("Shield30", "Your captain gains a shield that blocks the first 30 hit", 1600),
-
+            new HeroUpgrade("Phoenix0", "Your captain comeback to life once per stage (Must be bought again after using it)", 0),
+            new HeroUpgrade("Phoenix1", "Your captain comeback to life once per stage (Must be bought again after using it)", 1600),
+            new HeroUpgrade("AbilityRandomSpawn0", "Spawn for free 1 random unit", 0, 0, 100),
+            new HeroUpgrade("AbilityRandomSpawn1", "Spawn for free 1 random unit", 1600, 0, 100),
+            new HeroUpgrade("AbilityRandomSpawn2", "Spawn for free 2 random unit", 1600, 0, 100),
+            new HeroUpgrade("AbilityRandomSpawn3", "Spawn for free 3 random unit", 1600, 0, 100),
+            new HeroUpgrade("AbilityRandomSpawn4", "Spawn for free 4 random unit", 1600, 0, 100),
+            new HeroUpgrade("AbilityDamageBuff0", "Increase units damage for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityDamageBuff1", "Increase units damage for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityDamageBuff2", "Increase units damage for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityDamageBuff3", "Increase units damage for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityDamageBuff4", "Increase units damage for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityParalysis0", "Paralyse enemies for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityParalysis1", "Paralyse enemies for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityParalysis2", "Paralyse enemies for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityParalysis3", "Paralyse enemies for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityParalysis4", "Paralyse enemies for x seconds", 1600, 0, 100),
+            new HeroUpgrade("AbilityLightning0", "Makes the lightning fall all enemies and makes them take x amount of damage", 1600, 0, 100),
+            new HeroUpgrade("AbilityLightning1", "Makes the lightning fall all enemies and makes them take x amount of damage", 1600, 0, 100),
+            new HeroUpgrade("AbilityLightning2", "Makes the lightning fall all enemies and makes them take x amount of damage", 1600, 0, 100),
+            new HeroUpgrade("AbilityLightning3", "Makes the lightning fall all enemies and makes them take x amount of damage", 1600, 0, 100),
+            new HeroUpgrade("AbilityLightning4", "Makes the lightning fall all enemies and makes them take x amount of damage", 1600, 0, 100),
 
         };
     }
-
+    void InitFirstTimeUnlockedHeroUpgrades()
+    {
+        unlockedHeroUpgrades = new List<string>
+        {
+            "ManaMax100",
+            "ManaRegen0.0",
+            "UnitCooldownReduction0",
+            "StartMana0",
+            "MaxHealth100",
+            "DamageReduction0",
+            "MoneyIncomeIncrease0",
+            "Shield0",
+            "Phoenix0",
+            "AbilityRandomSpawn0",
+            "AbilityDamageBuff0",
+            "AbilityParalysis0",
+            "AbilityLightning0"
+        };
+    }
     void InitUnits()
     {
         units = new List<Unit>
@@ -424,11 +462,15 @@ public class SaveManager : MonoBehaviour
         public string name;
         public string description;
         public float shopPrice;
-        public HeroUpgrade(string name, string description, float shopPrice)
+        public float cost;
+        public float reloadTime;
+        public HeroUpgrade(string name, string description, float shopPrice, float cost = 0, float reloadTime = 0)
         {
             this.name = name;
             this.shopPrice = shopPrice;
             this.description = description;
+            this.cost = cost;
+            this.reloadTime = reloadTime;
         }
     }
 
@@ -441,20 +483,7 @@ public class SaveManager : MonoBehaviour
         };
     }
 
-    void InitFirstTimeUnlockedHeroUpgrades()
-    {
-        unlockedHeroUpgrades = new List<string>
-        {
-            "ManaMax100",
-            "ManaRegen0.0",
-            "UnitCooldownReduction0",
-            "StartMana0",
-            "MaxHealth100",
-            "DamageReduction0",
-            "MoneyIncomeIncrease0",
-            "Shield0"
-        };
-    }
+
 
     [System.Serializable]
     public class Unit

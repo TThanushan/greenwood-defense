@@ -16,6 +16,7 @@ public class StageGenerator : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             GenerateStages();
+            print("generate stage " + stageNumber);
 
         }
     }
@@ -23,25 +24,83 @@ public class StageGenerator : MonoBehaviour
     void GenerateStages()
     {
         int maxPrefabsIndex = GetMaxPrefabIndex();
-        List<EnemyType> enemyTypes = new List<EnemyType>(maxPrefabsIndex);
+        List<EnemyType> enemyTypes = new List<EnemyType>(maxPrefabsIndex + 1);
         for (int currentPrefabIndex = 0; currentPrefabIndex < maxPrefabsIndex; currentPrefabIndex++)
         {
-            EnemyType enemyType = new()
-            {
-                Enemy = prefabs[currentPrefabIndex],
-                TimeBetweenSpawn = GetTimeBetweenSpawn(currentPrefabIndex),
-                RandomTimeBetweenSpawn = GetRandomTimeBetweenSpawn(currentPrefabIndex)
-            };
+            //print(prefabs[currentPrefabIndex].name);
+            //EnemyType enemyType = new()
+            //{
+            //    Enemy = prefabs[currentPrefabIndex],
+            //    TimeBetweenSpawn = GetTimeBetweenSpawn(currentPrefabIndex),
+            //    RandomTimeBetweenSpawn = GetRandomTimeBetweenSpawn(currentPrefabIndex),
+            //    EnemyCount = GetSpawnCount(currentPrefabIndex),
+            //    InfiniteSpawning = IsSpawningInfinitly(currentPrefabIndex),
 
-            enemyTypes.Add(enemyType);
+            //};
+
+            //enemyTypes.Add(enemyType);
+            AddEnemyType(currentPrefabIndex, ref prefabs, ref enemyTypes);
         }
 
+        // Add boss.
+        if (stageNumber / 50 >= 1)
+        {
+            print("bip");
+            int index = 0;
+            if (stageNumber == 100)
+                index = 1;
+            print("bip2");
+            AddEnemyType(index, ref bossPrefabs, ref enemyTypes);
+            //EnemyType enemyType = new()
+            //{
+            //    Enemy = bossPrefabs[index],
+            //    TimeBetweenSpawn = GetTimeBetweenSpawn(index),
+            //    RandomTimeBetweenSpawn = GetRandomTimeBetweenSpawn(index),
+            //    EnemyCount = GetSpawnCount(index),
+            //    InfiniteSpawning = IsSpawningInfinitly(index),
+
+            //};
+            //enemyTypes.Add(enemyType);
+        }
         stageWhereToSave.enemyTypes = enemyTypes.ToArray();
+    }
+
+    void AddEnemyType(int index, ref GameObject[] prefabs, ref List<EnemyType> enemyTypes)
+    {
+        print(prefabs[index].name);
+        EnemyType enemyType = new()
+        {
+            Enemy = prefabs[index],
+            TimeBetweenSpawn = GetTimeBetweenSpawn(index),
+            RandomTimeBetweenSpawn = GetRandomTimeBetweenSpawn(index),
+            EnemyCount = GetSpawnCount(index),
+            InfiniteSpawning = IsSpawningInfinitly(index),
+
+        };
+
+        enemyTypes.Add(enemyType);
+    }
+
+
+    bool IsSpawningInfinitly(int currentPrefabIndex)
+    {
+        return GetSpawnCount(currentPrefabIndex) <= 0;
+    }
+
+    int GetSpawnCount(int currentPrefabIndex)
+    {
+        int count = 0;
+        //print(Mathf.RoundToInt(stageNumber / 5) + " == " + currentPrefabIndex);
+        float fiveDiv = stageNumber / 5f;
+        print(stageNumber / 5f);
+        print("stage " + stageNumber + " " + fiveDiv + "===" + Mathf.RoundToInt(fiveDiv));
+        if (fiveDiv == Mathf.RoundToInt(fiveDiv) && Mathf.RoundToInt(fiveDiv) == currentPrefabIndex)
+            count = 1;
+        return count;
     }
 
     int GetMaxPrefabIndex()
     {
-        print("stage number : " + stageNumber);
         return stageNumber / 5 + 1;
     }
 

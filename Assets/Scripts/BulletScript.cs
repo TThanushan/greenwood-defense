@@ -112,7 +112,7 @@ public class BulletScript : MonoBehaviour
     {
         Vector2 dir = target.transform.position - transform.position;
         float distanceThisFrame = moveSpeed * Time.deltaTime;
-        return dir.magnitude <= (distanceThisFrame * 3);
+        return dir.magnitude <= (distanceThisFrame * attackRange);
     }
 
     protected bool IsTargetInRange(GameObject target)

@@ -23,6 +23,7 @@ public class Unit : HealthBar
     public string deathSfxName;
 
     protected int wayX = 1;
+
     protected string targetTag = "Enemy";
     protected float nextAttackTime = 0f;
 
@@ -82,6 +83,12 @@ public class Unit : HealthBar
         transform.GetComponent<HealthBar>().OnDeath -= GiveMoneyReward;
         transform.GetComponent<HealthBar>().OnDeath -= GiveManaReward;
 
+    }
+
+    public void BuffAttackDamage(float attackDamagePercentageBonus, float duration)
+    {
+        attackDamage *= 1f + attackDamagePercentageBonus / 100f;
+        InvokeResetAttackDamage(duration);
     }
 
     void ResetAttackDamage()
@@ -316,6 +323,13 @@ public class Unit : HealthBar
             return PoolObject.instance.Allies;
     }
 
+    protected GameObject[] GetAllies()
+    {
+        if (targetTag == "Ally")
+            return PoolObject.instance.Enemies;
+        else
+            return PoolObject.instance.Allies;
+    }
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

@@ -29,7 +29,7 @@ public class HealthBar : MonoBehaviour
             healthBar = transform.Find("HealthBar/Canvas/Bar").gameObject;
         if (!shieldBar)
             shieldBar = transform.Find("HealthBar/Canvas/ShieldBar").gameObject;
-        if (name == "PlayerCaptain")
+        if (transform.Find("SpriteBody/BigShield"))
             bigShield = transform.Find("SpriteBody/BigShield").gameObject;
         currentHealth = maxHealth;
     }
@@ -39,11 +39,17 @@ public class HealthBar : MonoBehaviour
         poolObject = PoolObject.instance;
         initialDamageTakenIncreasePercentage = damageTakenIncreasePercentage;
     }
+    public void Heal(float amount)
+    {
+        currentHealth += amount;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+    }
     protected virtual void Update()
     {
         UpdateHealthBarLength();
         UpdateShieldBarWidth();
-        if (name == "PlayerCaptain")
+        if (bigShield)
             UpdateBigShieldCurrent();
     }
     public void SetBigShieldCurrent(float val)
