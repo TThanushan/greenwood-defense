@@ -31,6 +31,7 @@ public class Unit : HealthBar
     bool disabled;
     Color originalColor;
     protected float initialAttackDamage;
+    protected float initialAttackSpeed;
 
     [HideInInspector]
     public bool paralysed;
@@ -41,12 +42,42 @@ public class Unit : HealthBar
     protected override void Awake()
     {
         base.Awake();
+        UpdateTag();
+
+    }
+
+    void UpdateTag()
+    {
         if (transform.CompareTag("Enemy"))
         {
             targetTag = "Ally";
             wayX = -1;
         }
+        else
+        {
+            targetTag = "Enemy";
+            wayX = 1;
 
+        }
+    }
+
+    protected override void Update()
+    {
+        if (disabled) return;
+        base.Update();
+
+        if (paralysed)
+            return;
+        Target = GetClosestEnemy();
+        if (Target)
+        {
+            if (EnoughRangeToAttackTarget())
+                AttackTarget();
+            else
+                MoveTowardTarget();
+        }
+        else
+            MoveToward();
     }
     protected virtual void Start()
     {
@@ -54,8 +85,15 @@ public class Unit : HealthBar
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
         FlipUnitSpriteOnWayX();
-        originalColor = GetUnitSpriteRenderer().color;
+        if (GetUnitSpriteRenderer())
+            originalColor = GetUnitSpriteRenderer().color;
         initialAttackDamage = attackDamage;
+        initialAttackSpeed = attackSpeed;
+    }
+
+    public virtual bool ProjectileAffectMe()
+    {
+        return true;
     }
 
     protected override void OnDisable()
@@ -64,7 +102,24 @@ public class Unit : HealthBar
         Unsubscribe();
     }
 
+    public float GetInitialAttackSpeed()
+    {
+        return initialAttackSpeed;
+    }
 
+    //public void SetTargetTagFully(string _tag)
+    //{
+    //    targetTag = _tag;
+
+    //}
+    public void RotateSprite()
+    {
+        Transform spriteTransform = transform.Find("SpriteBody/Sprite").transform;
+        if (spriteTransform.rotation.y != 180f)
+            spriteTransform.rotation = Quaternion.Euler(spriteTransform.rotation.x, 180f, spriteTransform.rotation.z);
+        else
+            spriteTransform.rotation = Quaternion.Euler(spriteTransform.rotation.x, 0f, spriteTransform.rotation.z);
+    }
     public void InvokeResetSpriteColor(float time)
     {
         Invoke("ResetSpriteColor", time);
@@ -85,9 +140,9 @@ public class Unit : HealthBar
 
     }
 
-    public void BuffAttackDamage(float attackDamagePercentageBonus, float duration)
+    public void BuffAttackDamage(float _attackDamage, float duration)
     {
-        attackDamage *= 1f + attackDamagePercentageBonus / 100f;
+        attackDamage += _attackDamage;
         InvokeResetAttackDamage(duration);
     }
 
@@ -96,11 +151,19 @@ public class Unit : HealthBar
         attackDamage = initialAttackDamage;
     }
 
+    void ResetAttackSpeed()
+    {
+        attackSpeed = initialAttackSpeed;
+    }
+
     public void InvokeResetAttackDamage(float time)
     {
         Invoke("ResetAttackDamage", time);
     }
-
+    public void InvokeResetAttackSpeed(float time)
+    {
+        Invoke("ResetAttackSpeed", time);
+    }
 
     void GiveMoneyReward()
     {
@@ -119,33 +182,18 @@ public class Unit : HealthBar
     public void SetTargetTag(string tag)
     {
         targetTag = tag;
+        if (targetTag == "Enemy")
+            transform.tag = "Ally";
+        else
+            transform.tag = "Enemy";
     }
     protected bool IsTargetEnabled(GameObject target)
     {
         //return !target || !target.GetComponent<Unit>().Disabled || target.activeSelf;
         return !target || !target.GetComponent<Unit>().Disabled;
     }
-    protected override void Update()
-    {
-        if (disabled) return;
-        base.Update();
 
-
-        if (paralysed)
-            return;
-        Target = GetClosestEnemy();
-        if (Target)
-        {
-            if (EnoughRangeToAttackTarget())
-                AttackTarget();
-            else
-                MoveTowardTarget();
-        }
-        else
-            MoveToward();
-    }
-
-    SpriteRenderer GetUnitSpriteRenderer()
+    protected SpriteRenderer GetUnitSpriteRenderer()
     {
         string[] spritePaths = { "SpriteBody/Sprite/UnitSprite", "SpriteBody/Sprite/Sprite", "SpriteBody/Sprite" };
         foreach (string path in spritePaths)

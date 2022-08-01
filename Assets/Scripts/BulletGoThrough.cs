@@ -19,7 +19,7 @@ public class BulletGoThrough : BulletScript
             gameObject.SetActive(false);
             return;
         }
-        if (IsTargetInRange() && !enemyAlreadyDamaged.Contains(target.GetInstanceID()))
+        if (IsTargetInRange() && target.GetComponent<Unit>().ProjectileAffectMe() && !enemyAlreadyDamaged.Contains(target.GetInstanceID()))
         {
             enemyAlreadyDamaged.Add(target.GetInstanceID());
 

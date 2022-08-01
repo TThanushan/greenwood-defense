@@ -2,7 +2,7 @@
 
 public class HealthBar : MonoBehaviour
 {
-    public float maxHealth;
+    public float maxHealth = 5f;
     //public Gradient healthColorGradient;
 
     public float currentHealth;

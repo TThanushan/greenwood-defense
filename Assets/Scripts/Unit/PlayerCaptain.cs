@@ -38,6 +38,4 @@ public class PlayerCaptain : Unit
         poolObject.GetPoolObject(phoenixEffect).transform.position = transform.position;
         transform.Find("SpriteBody/PhoenixEnabled").gameObject.SetActive(false);
     }
-
-
 }

@@ -17,6 +17,8 @@ public class NinjaFrog : Unit
 
     void DoEffect()
     {
+        if (Target.name == "PlayerCaptain")
+            return;
         CreateEffect();
         // Spawn log.
         SpawnDummyLog();

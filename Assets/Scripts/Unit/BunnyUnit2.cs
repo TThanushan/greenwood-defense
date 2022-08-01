@@ -28,12 +28,16 @@ public class BunnyUnit2 : Unit
             int index = Random.Range(0, bunnies.Length);
             GameObject newBunny = poolObject.GetPoolObject(bunnies[index]);
             Vector3 spawnPosition = transform.position;
-            spawnPosition.x += Random.Range(-0.08f, 0.08f);
-            spawnPosition.y += Random.Range(-0.08f, 0.08f);
-
-            newBunny.transform.position = spawnPosition;
+            newBunny.transform.position = GetRandomPosition(transform.position, -0.08f, 0.08f, -0.08f, 0.08f);
         }
         CreateEffect();
+    }
+
+    Vector2 GetRandomPosition(Vector2 pos, float xRangeA, float xRangeB, float yRangeA, float yRangeB)
+    {
+        pos.x += Random.Range(xRangeA, xRangeB);
+        pos.y += Random.Range(yRangeA, yRangeB);
+        return pos;
     }
 
     void CreateEffect()

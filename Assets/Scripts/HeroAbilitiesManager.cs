@@ -166,9 +166,9 @@ public class HeroAbilitiesManager : MonoBehaviour
             Unit unit = ally.GetComponent<Unit>();
             if (!unit || unit.Disabled)
                 continue;
-            float percentageBonus = 1 + GetUpgradeNameNumbersOnly(GetAbility("DamageBuff").name) / 100;
+            float damageBonus = GetUpgradeNameNumbersOnly(GetAbility("DamageBuff").name);
             float duration = 5f;
-            unit.BuffAttackDamage(percentageBonus, duration);
+            unit.BuffAttackDamage(damageBonus, duration);
         }
     }
 

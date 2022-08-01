@@ -15,16 +15,31 @@ public class BulletScript : MonoBehaviour
 
     public GameObject effect;
     public SpriteRenderer spriteRenderer;
+
+    public bool moveTowardTarget;
     string targetTag = "Ally";
 
     public static System.Action<float> damageEvent;
     Color startColor;
 
+    float timeBeforeMove;
+
     void FixedUpdate()
     {
+        if (timeBeforeMove > Time.time)
+            return;
+        target = GetClosestEnemy();
         AttackTarget();
-        Move();
+        if (moveTowardTarget)
+            MoveTowardTarget();
+        else
+            Move();
 
+    }
+
+    public void WaitBeforeMove(float duration)
+    {
+        timeBeforeMove = duration + Time.time;
     }
 
     private void OnEnable()
@@ -39,9 +54,15 @@ public class BulletScript : MonoBehaviour
             startColor = GetSpriteRenderer().color;
     }
 
+    void MoveTowardTarget()
+    {
+        if (!target) return;
+        Vector2 dir = target.transform.position - transform.position;
+        transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
+    }
+
     private void Update()
     {
-        target = GetClosestEnemy();
     }
 
     public void SetTargetTag(string tag)
@@ -50,6 +71,7 @@ public class BulletScript : MonoBehaviour
     }
     private void Move()
     {
+
         transform.Translate(new Vector2(moveSpeed * wayX * Time.deltaTime, 0));
     }
 
@@ -60,7 +82,7 @@ public class BulletScript : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        if (IsTargetInRange())
+        if (IsTargetInRange() && target.GetComponent<Unit>().ProjectileAffectMe())
         {
             DamageTarget();
             DestroyEffect();

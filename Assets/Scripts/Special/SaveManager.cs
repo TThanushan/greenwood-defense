@@ -451,7 +451,39 @@ public class SaveManager : MonoBehaviour
             new Unit("Snail1", 15, 10, 75, "Give close allies additional health."),
             new Unit("Snail2", 30, 12, 300, "Every certain amount of time, heal close allies."),
             new Unit("Snail3", 50, 14, 600, "Constantly heal close allies."),
-            new Unit("Snail4", 75, 16, 1000f, "When an close ally is low life, start a strong global healing.")
+            new Unit("Snail4", 75, 16, 1000f, "When an close ally is low life, start a strong global healing."),
+
+            new Unit("FireSkull1", 75, 16, 1000f, "Shoot fireball that explode (small radius)."),
+            new Unit("FireSkull2", 75, 16, 1000f, "Spawn fireball around him, after x seconds fireballs rush toward the closest enemies."),
+            new Unit("FireSkull3", 75, 16, 1000f, "Summon a meteor on enemies (aoe damage explosion)."),
+            new Unit("FireSkull4", 75, 16, 1000f, "Explosion that do enormous amount of damage then leave for x seconds magma on ground that damage enemies."),
+
+
+            new Unit("Chameleon1", 75, 16, 1000f, "Each hit reduced 40% attack speed of the enemy touched (non cumulative)."),
+            new Unit("Chameleon2", 75, 16, 1000f, "(Color red) : Rage effect, attack speed and damage increased."),
+            new Unit("Chameleon3", 75, 16, 1000f, "(color:yellow) life steal on each hit."),
+            new Unit("Chameleon4", 75, 16, 1000f, "All previous state is kept for x second."),
+
+            new Unit("Rhinoceros1", 75, 16, 1000f, "More hp and faster than rock, charge: when up run faster, next attack is stronger, reload every x seconds (spawn with effect on)."),
+            new Unit("Rhinoceros2", 75, 16, 1000f, "Charge now also knock back enemy."),
+            new Unit("Rhinoceros3", 75, 16, 1000f, "Charge is now aoe, stop after running x seconds. (keep hitting enemies on his way)."),
+            new Unit("Rhinoceros4", 75, 16, 1000f, "After charge is done, gain high defense bonus (ex: 80% damage reduction)."),
+
+            new Unit("Pig1", 75, 16, 1000f, "Generate money every x seconds."),
+            new Unit("Pig2", 75, 16, 1000f, "Generate mana every x seconds."),
+            new Unit("Pig3", 75, 16, 1000f, "Reduce units spawn cooldown."),
+            new Unit("Pig4", 75, 16, 1000f, "Increase 10% max mana (when pig is killed, mana max return to initial and current max over the initial is lost)."),
+
+            new Unit("Slime1", 75, 16, 1000f, "When taking damage, chance to spawn a really small slime (chance rate scale with level)."),
+            new Unit("Slime2", 75, 16, 1000f, "When killed, spawn two medium slime."),
+            new Unit("Slime3", 75, 16, 1000f, "When medium slime are killed, the spawn two small slime."),
+            new Unit("Slime4", 75, 16, 1000f, "Each spawn a specialized slime (dps, tank etc)."),
+
+            new Unit("Ghost1", 75, 16, 1000f, "When far from enemy units, cannot be touched."),
+            new Unit("Ghost2", 75, 16, 1000f, "Invincible  for x seconds, every x seconds (scale with level)."),
+            new Unit("Ghost3", 75, 16, 1000f, "First enemy hit join ally camp, every x seconds."),
+            new Unit("Ghost4", 75, 16, 1000f, "Aoe attacks : inflict 20% max health, heal for 20% of damage inflict, reload every x seconds."),
+
         };
 
     }

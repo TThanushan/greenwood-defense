@@ -11,7 +11,7 @@ public class Rocket : BulletScript
             gameObject.SetActive(false);
             return;
         }
-        if (IsTargetInRange())
+        if (IsTargetInRange() && target.GetComponent<Unit>().ProjectileAffectMe())
         {
             DamageEnemiesAround();
             DestroyEffect();

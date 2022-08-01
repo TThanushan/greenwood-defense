@@ -56,6 +56,8 @@ public class UnitShooter : Unit
 
     protected bool InRangeWithTarget()
     {
+        if (!Target)
+            return false;
         return Vector2.Distance(transform.position, Target.transform.position) <= attackRange;
     }
     public override bool EnoughRangeToAttackTarget()

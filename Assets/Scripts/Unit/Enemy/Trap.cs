@@ -10,7 +10,7 @@ public class Trap : MonoBehaviour
     public float explosionRange;
     public GameObject triggerEffect;
     public float triggerRange;
-
+    public bool destroyOnTrigger;
     public void SetTargetTag(string _targetTag)
     {
         targetTag = _targetTag;
@@ -31,8 +31,11 @@ public class Trap : MonoBehaviour
                 DamageEnemiesAround();
 
             }
-            target = null;
-            gameObject.SetActive(false);
+            if (destroyOnTrigger)
+            {
+                target = null;
+                gameObject.SetActive(false);
+            }
         }
 
     }
@@ -106,5 +109,11 @@ public class Trap : MonoBehaviour
             return PoolObject.instance.Enemies;
         else
             return PoolObject.instance.Allies;
+    }
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+
+        Gizmos.DrawWireSphere(transform.position, triggerRange);
     }
 }
