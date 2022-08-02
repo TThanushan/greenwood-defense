@@ -7,7 +7,7 @@ public class ChickenUnit3 : HitBasedUnit
     public GameObject dodgeEffect;
     bool IsDodgingAttack(Transform enemyCaller = null)
     {
-        if (enemyCaller && enemyCaller.GetComponent<PoisonFrog>())
+        if (enemyCaller && enemyCaller.GetComponent<PoisonFrogUnit>())
             return false;
         int rand = Random.Range(0, 100);
         return rand <= dodgeChance;

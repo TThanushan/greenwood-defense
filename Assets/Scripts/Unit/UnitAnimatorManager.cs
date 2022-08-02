@@ -11,7 +11,7 @@ public class UnitAnimatorManager : MonoBehaviour
     {
         unit = GetComponent<Unit>();
         animator = GetComponent<Animator>();
-        GetComponent<Unit>().onAttack += PlayAttackAnimation;
+        GetComponent<Unit>().OnAttack += PlayAttackAnimation;
         GetComponent<Unit>().OnDeath += PlayDeathAnimation;
         unitSpriteTransform = GetSpriteBody();
     }

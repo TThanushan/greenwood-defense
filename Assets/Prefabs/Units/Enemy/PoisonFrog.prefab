@@ -211,9 +211,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7241784478119512325}
-  - component: {fileID: -1820931857571139516}
   - component: {fileID: 3315706013935442866}
   - component: {fileID: 3315706013935442867}
+  - component: {fileID: 3529985688701018469}
   m_Layer: 0
   m_Name: PoisonFrog
   m_TagString: Enemy
@@ -238,34 +238,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1820931857571139516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7241784478119512346}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1c4653b32f08f34eaf64547e66a0f30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 20
-  currentHealth: 0
-  damageTakenIncreasePercentage: 0
-  initialDamageTakenIncreasePercentage: 0
-  attackDamage: 1
-  attackSpeed: 1
-  attackRange: 0.24
-  moveSpeed: 0.25
-  moneyReward: 10
-  manaReward: 6
-  deathSfxName: 
-  paralysed: 0
-  poisonDamage: 0.09
-  dotCount: 80
-  timeBetweenDotDamage: 0.025
-  poisonedColor: {r: 0.972549, g: 0.5137255, b: 1, a: 1}
 --- !u!95 &3315706013935442866
 Animator:
   serializedVersion: 4
@@ -298,6 +270,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72f2ce9cfc453746b5eb104f7b08488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3529985688701018469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7241784478119512346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e79c9a5930b3548ae14dc665a639a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  currentHealth: 0
+  damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
+  attackDamage: 1
+  attackSpeed: 1
+  attackRange: 0.24
+  moveSpeed: 0.5
+  moneyReward: 1
+  manaReward: 1
+  deathSfxName: 
+  paralysed: 0
+  poisonDamage: 0.05
+  dotCount: 80
+  timeBetweenDotDamage: 1
+  poisonedColor: {r: 0.93539894, g: 0.6179246, b: 1, a: 1}
 --- !u!1 &7241784478665342992
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class Unit : HealthBar
     [Tooltip("Only Enemy give mana.")]
     public float manaReward = 1f;
 
-    public event System.Action onAttack;
+    public event System.Action OnAttack;
     public string deathSfxName;
 
     protected int wayX = 1;
@@ -230,7 +230,13 @@ public class Unit : HealthBar
     {
         coroutines.Add(enumerator);
     }
-
+    protected void CreateEffect(GameObject effect)
+    {
+        if (!effect)
+            return;
+        GameObject newEffect = PoolObject.instance.GetPoolObject(effect);
+        newEffect.transform.position = transform.position;
+    }
     public void ParalyseEffect(bool isParalyse)
     {
         paralysed = isParalyse;
@@ -299,7 +305,7 @@ public class Unit : HealthBar
         }
         if (NextAttackReady())
         {
-            onAttack?.Invoke();
+            OnAttack?.Invoke();
             nextAttackTime = GetRandomizedNextAttackTime();
             Attack();
         }
@@ -307,7 +313,7 @@ public class Unit : HealthBar
 
     protected void InvokeOnAttack()
     {
-        onAttack?.Invoke();
+        OnAttack?.Invoke();
     }
 
     void RandomizeAttackRange()

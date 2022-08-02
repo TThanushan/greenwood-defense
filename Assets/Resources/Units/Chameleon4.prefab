@@ -293,15 +293,15 @@ MonoBehaviour:
   manaReward: 1
   deathSfxName: 
   paralysed: 0
-  cycleMax: 2
+  cycleMax: 3
   attackSpeedReduction: 40
   effectDuration: 4
-  cycleDuration0: 3
+  cycleDuration0: 5
   attackSpeedBuff: 90
   attackDamageBuff: 100
-  cycleDuration1: 3
+  cycleDuration1: 5
   lifeStealPercentage: 400
-  cycleDuration2: 3
+  cycleDuration2: 5
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

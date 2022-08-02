@@ -127,7 +127,7 @@ public class HealthBar : MonoBehaviour
     }
     protected bool IsCallerPoisoning(Transform caller)
     {
-        return caller && (caller.GetComponent<PoisonFrog>() || caller.GetComponent<MushroomUnit2>());
+        return caller && (caller.GetComponent<PoisonFrogUnit>() || caller.GetComponent<MushroomUnit2>());
     }
 
     //Caller can be null because the unit is calling getdamage on himself.

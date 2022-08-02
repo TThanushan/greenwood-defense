@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5367232545533668775}
   - component: {fileID: 1829568272}
   - component: {fileID: 1829568273}
-  - component: {fileID: 751789052}
+  - component: {fileID: 8516424195738142720}
   m_Layer: 0
   m_Name: Ghost1
   m_TagString: Ally
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72f2ce9cfc453746b5eb104f7b08488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &751789052
+--- !u!114 &8516424195738142720
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,10 +246,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eccf29745ff20ee44a1a002107783b02, type: 3}
+  m_Script: {fileID: 11500000, guid: 031dc68790b8dc945941fd58bb0c553c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 5
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
