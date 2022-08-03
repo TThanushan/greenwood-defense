@@ -20,7 +20,18 @@ public class SnailUnit2 : Unit
 
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        OnDeath += DisableHitEffectBar;
+        HitEffectBar.transform.parent.transform.parent.gameObject.SetActive(true);
 
+    }
+    void DisableHitEffectBar()
+    {
+        OnDeath -= DisableHitEffectBar;
+        HitEffectBar.transform.parent.transform.parent.gameObject.SetActive(false);
+    }
     private void UpdateEffectBarLength()
     {
         HitEffectBar.transform.localScale = new Vector3(GetNewBarLength(), HitEffectBar.transform.localScale.y, HitEffectBar.transform.localScale.z);

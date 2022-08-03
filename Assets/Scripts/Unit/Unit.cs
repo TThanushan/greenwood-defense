@@ -12,7 +12,7 @@ public class Unit : HealthBar
 
     [Header("Others")]
 
-    public float moveSpeed = 0.5f;
+    public float moveSpeed = 0.15f;
     //public float reward = 5f;
     [Tooltip("Only Enemy give money.")]
     public float moneyReward = 1f;
