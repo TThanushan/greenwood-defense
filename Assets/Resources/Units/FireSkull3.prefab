@@ -188,7 +188,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9070499791870808695, guid: 045eb5e1f0cbc424e9a8eed9eaf27bf8,
+  m_Sprite: {fileID: -9070499791870808695, guid: e569021749a6b214e9b3c945d5622e9f,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -246,7 +246,7 @@ Animator:
   m_GameObject: {fileID: 5367232545533668792}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9649edc4e85a9124cbb7e837d586c3db, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1de827e0d5ff87e44987c1db9173525f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
   attackDamage: 1
   attackSpeed: 1
   attackRange: 1.5
-  moveSpeed: 0.5
+  moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
@@ -297,6 +297,7 @@ MonoBehaviour:
   bulletPosition: {fileID: 5367232546079401137}
   timeBetweenEffect: 5
   smallFireBallCount: 5
+  smallFireBallDamage: 5
   smallFireBall: {fileID: 2116847984675237283, guid: 6a85d9f14f8578d45a0a40844b6f8dc0,
     type: 3}
   triggerEffect: {fileID: 0}
