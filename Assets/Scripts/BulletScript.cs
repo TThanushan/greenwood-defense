@@ -17,7 +17,7 @@ public class BulletScript : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     public bool moveTowardTarget;
-    string targetTag = "Ally";
+    protected string targetTag = "Ally";
 
     public static System.Action<float> damageEvent;
     Color startColor;
@@ -61,9 +61,6 @@ public class BulletScript : MonoBehaviour
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
     }
 
-    private void Update()
-    {
-    }
 
     public void SetTargetTag(string tag)
     {

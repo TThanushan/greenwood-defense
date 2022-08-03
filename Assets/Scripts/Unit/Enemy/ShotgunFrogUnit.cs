@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ShotgunFrogUnit : UnitShooter
 {
-    //Declare public float to edit in unity editor
     public float maxSpread;
     public int spreadAmount;
     public float pelletFireVel;
@@ -10,9 +9,6 @@ public class ShotgunFrogUnit : UnitShooter
     protected override void Update()
     {
         base.Update();
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
-            ShootInSpread();
     }
 
     void ShootInSpread()

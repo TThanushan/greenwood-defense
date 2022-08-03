@@ -20,7 +20,7 @@ public class Rocket : BulletScript
         }
     }
 
-    private void DamageEnemiesAround()
+    protected virtual void DamageEnemiesAround()
     {
         GameObject[] enemies = GetEnemies();
         foreach (GameObject enemy in enemies)

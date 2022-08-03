@@ -19,16 +19,10 @@ public class RhinocerosUnit4 : RhinocerosUnit3
         OnChargeEnd += ResetDefenseBonus;
         defenseBonusEffect = transform.Find("SpriteBody/Sprite").gameObject;
     }
-    protected override void Update()
-    {
-        base.Update();
-        //if (!isDefenseBonusEnabled && !ChargeReady())
-        //    ResetDefenseBonus();
-    }
+
 
     void ResetDefenseBonus()
     {
-        print("reset");
         isDefenseBonusEnabled = true;
         EnableDefenseBonusEffect(true);
         StartCoroutine(DisableDefenseBonus());
@@ -43,7 +37,6 @@ public class RhinocerosUnit4 : RhinocerosUnit3
 
     IEnumerator DisableDefenseBonus()
     {
-        //defenseBonusCooldown = Time.time + defenseBonusDuration + defenseBonusRespawnTime;
         yield return new WaitForSeconds(defenseBonusDuration);
         if (Disabled)
             yield return null;

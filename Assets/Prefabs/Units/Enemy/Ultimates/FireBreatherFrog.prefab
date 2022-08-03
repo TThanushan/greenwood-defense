@@ -1,5 +1,151 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &249981792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 249981793}
+  m_Layer: 0
+  m_Name: MeteorSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &249981793
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249981792}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0.041, y: 0.261, z: 0}
+  m_LocalScale: {x: 0.7650407, y: 0.7650407, z: 0.7650407}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7670015549513501007}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &569084755
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569084756}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &569084756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569084755}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0526, y: -0.045, z: 0}
+  m_LocalScale: {x: 0.25491637, y: 0.25491637, z: 0.25491637}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7670015549637140912}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1430190695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1430190696}
+  - component: {fileID: 1430190697}
+  m_Layer: 0
+  m_Name: UnitSprite (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1430190696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430190695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0615, y: -0.0303, z: 0}
+  m_LocalScale: {x: 0.25491637, y: 0.25491637, z: 0.25491637}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7670015549637140912}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1430190697
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430190695}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 252151829
+  m_SortingLayer: -1
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 86ca89326aacdbb49825fbfbd45f74d4, type: 3}
+  m_Color: {r: 1, g: 0.61511725, b: 0.3066038, a: 1}
+  m_FlipX: 1
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &1012925207429406588
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1012925209138260573
 Transform:
   m_ObjectHideFlags: 0
@@ -5639,6 +5785,7 @@ Transform:
   m_Children:
   - {fileID: 7670015549637140912}
   - {fileID: 2309611109147799174}
+  - {fileID: 249981793}
   m_Father: {fileID: 7670015550058184793}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5673,6 +5820,8 @@ Transform:
   - {fileID: 1012925209138260573}
   - {fileID: 1012925207429406589}
   - {fileID: 3296062400165586226}
+  - {fileID: 1430190696}
+  - {fileID: 569084756}
   m_Father: {fileID: 7670015549513501007}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5685,11 +5834,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7670015550058184793}
-  - component: {fileID: 851101411911694486}
   - component: {fileID: 2309611108585902830}
   - component: {fileID: 2309611108585902831}
+  - component: {fileID: 1561189775}
   m_Layer: 0
-  m_Name: GiantFrog
+  m_Name: FireBreatherFrog
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5704,7 +5853,7 @@ Transform:
   m_GameObject: {fileID: 7670015550058184774}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.124, y: 0.461, z: 0}
-  m_LocalScale: {x: 4.5493436, y: 4.5493436, z: 4.5493436}
+  m_LocalScale: {x: 2.3412628, y: 2.3412628, z: 2.3412628}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7670015549513501007}
@@ -5712,32 +5861,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &851101411911694486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7670015550058184774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c79f3edfd2e4d0419f0c4cd8672d542, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 1500
-  currentHealth: 0
-  damageTakenIncreasePercentage: 0
-  initialDamageTakenIncreasePercentage: 0
-  attackDamage: 60
-  attackSpeed: 2
-  attackRange: 1.05
-  moveSpeed: 0.1
-  moneyReward: 100
-  manaReward: 100
-  deathSfxName: 
-  paralysed: 0
-  effectRange: 1.15
-  effectDamage: 30
 --- !u!95 &2309611108585902830
 Animator:
   serializedVersion: 4
@@ -5748,7 +5871,7 @@ Animator:
   m_GameObject: {fileID: 7670015550058184774}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fe0428bffb118374397ec7be3f2c6aa9, type: 2}
+  m_Controller: {fileID: 9100000, guid: f3471db94a3ddd14b8d052197be19e0b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5770,3 +5893,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72f2ce9cfc453746b5eb104f7b08488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1561189775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7670015550058184774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079fe36556b9ea54dafd1c862795d0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3000
+  currentHealth: 0
+  damageTakenIncreasePercentage: 0
+  initialDamageTakenIncreasePercentage: 0
+  attackDamage: 1
+  attackSpeed: 0.125
+  attackRange: 1.2
+  moveSpeed: 0.1
+  moneyReward: 1
+  manaReward: 1
+  deathSfxName: 
+  paralysed: 0
+  bullet: {fileID: 6471964120560958441, guid: 9b057d5f620c55b44a98560539a940be, type: 3}
+  bullet2: {fileID: 0}
+  bulletPosition: {fileID: 569084756}
+  maxSpread: 10
+  spreadAmount: 15
+  pelletFireVel: 40
+  fireBreathDuration: 3
+  timeBetweenFireBreath: 5
+  timeBetweenEffect3: 10
+  meteor: {fileID: 2116847984675237283, guid: 92abf3637711cd140b93a11ba574d707, type: 3}
+  triggerEffect3: {fileID: 0}
+  meteorDamage: 200
+  magmaDamage: 0.05
+  meteorSpawnPos: {fileID: 249981793}

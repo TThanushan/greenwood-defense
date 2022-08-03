@@ -34,12 +34,12 @@ public class GhostUnit3 : GhostUnit2
         nextAttackConvertEnemyTag = false;
         nextEffectTime = Time.time + timeBetweenEffect;
     }
-    protected virtual void CreateEffect(GameObject effect)
-    {
-        if (effect)
-        {
-            GameObject newEffect = PoolObject.instance.GetPoolObject(effect);
-            newEffect.transform.position = transform.position;
-        }
-    }
+    //protected virtual void CreateEffect(GameObject effect)
+    //{
+    //    if (effect)
+    //    {
+    //        GameObject newEffect = PoolObject.instance.GetPoolObject(effect);
+    //        newEffect.transform.position = transform.position;
+    //    }
+    //}
 }
