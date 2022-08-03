@@ -6,9 +6,19 @@ using UnityEngine.UI;
 
 public class SpawnBar : MonoBehaviour
 {
+    public static SpawnBar instance;
     public Vector2 spawnPosition;
     public UnitButton[] unitButtons;
     public GameObject buttonPrefab;
+
+    private void Awake()
+    {
+        if (!instance)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
     private void Start()
     {
         InitUnitButtons();
@@ -20,7 +30,6 @@ public class SpawnBar : MonoBehaviour
     {
         UpdateUnitButtons();
     }
-
 
     void InitUnitButtons()
     {
@@ -37,6 +46,29 @@ public class SpawnBar : MonoBehaviour
         }
     }
 
+    public void ReduceMaxCooldown(float percentageReduction)
+    {
+        foreach (UnitButton unitButton in unitButtons)
+        {
+            unitButton.reloadTime *= 1f - percentageReduction / 100f;
+        }
+    }
+    public void IncreaseMaxCooldown(float percentageReduction)
+    {
+        foreach (UnitButton unitButton in unitButtons)
+        {
+            unitButton.reloadTime *= 1f + percentageReduction / 100f;
+        }
+    }
+
+    public void ResetUnitButtonsMaxReloadTime()
+    {
+        foreach (UnitButton unitButton in unitButtons)
+        {
+            unitButton.reloadTime = unitButton.reloadTimeInitial;
+        }
+    }
+
     float GetCooldownReductionShop()
     {
 
@@ -48,6 +80,7 @@ public class SpawnBar : MonoBehaviour
         return 0f;
 
     }
+
     string GetUpgradeNameWithoutNumbers(string upgradeName)
     {
         string withoutNumbers = Regex.Replace(upgradeName, @"[\d-]", string.Empty);
@@ -76,8 +109,6 @@ public class SpawnBar : MonoBehaviour
     {
         return GetUpgradeNameWithoutNumbers(name).Replace("UnitButton", "");
     }
-
-
 
     public void SpawnUnit(string name)
     {
@@ -115,7 +146,6 @@ public class SpawnBar : MonoBehaviour
         newUnit.transform.position = new Vector2(spawnPosition.x, randomYPos);
     }
 
-
     private void UpdateUnitButtons()
     {
         foreach (UnitButton unitButton in unitButtons)
@@ -137,8 +167,6 @@ public class SpawnBar : MonoBehaviour
         }
     }
 
-
-
     void GenerateButtons()
     {
 
@@ -154,8 +182,6 @@ public class SpawnBar : MonoBehaviour
             EnableButtonStars(button, unitButton);
         }
     }
-
-
     void SetButtonReloadBarAndEnougManaShade(GameObject button, UnitButton unitButton)
     {
         unitButton.reloadBar = button.transform.Find("ReloadBar/Bar");
@@ -221,6 +247,7 @@ public class SpawnBar : MonoBehaviour
         public string name;
         public float cost;
         public float reloadTime;
+        public float reloadTimeInitial;
 
         [HideInInspector]
         public GameObject prefab;
@@ -236,6 +263,7 @@ public class SpawnBar : MonoBehaviour
             this.name = name;
             this.cost = cost;
             this.reloadTime = reloadTime;
+            reloadTimeInitial = reloadTime;
         }
 
         public void Update()

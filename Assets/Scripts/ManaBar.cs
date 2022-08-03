@@ -44,6 +44,12 @@ public class ManaBar : MonoBehaviour
         }
 
     }
+
+    public void UpdateManaMaxText()
+    {
+        transform.Find("MaxManaText").GetComponent<TextMeshProUGUI>().text = "/" + maxMana.ToString();
+    }
+
     float GetUpgradeNameNumbersOnly(string upgradeName)
     {
         string withoutNumbers = GetUpgradeNameWithoutNumbers(upgradeName);
