@@ -5994,6 +5994,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 3939612983096211847, guid: e5331c5568324f1408b083c59e0ab161,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5331c5568324f1408b083c59e0ab161, type: 3}
 --- !u!1001 &182286689
@@ -25345,6 +25350,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShareBetweenScenes
       objectReference: {fileID: 0}
+    - target: {fileID: 2985511611478847744, guid: 0c0afb9b44dc8ae41905f4c936156656,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2985511611478847750, guid: 0c0afb9b44dc8ae41905f4c936156656,
         type: 3}
       propertyPath: m_RootOrder
@@ -39880,6 +39890,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285617736384995782, guid: 4b42c63fb2917844e815d09d63e258bb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b42c63fb2917844e815d09d63e258bb, type: 3}
@@ -74161,6 +74176,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981654173196485036, guid: ccaf64eccb685c5498c5263c60138216,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2981654173279872396, guid: ccaf64eccb685c5498c5263c60138216,
         type: 3}
