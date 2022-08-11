@@ -11,6 +11,10 @@ public class HeroAbilitiesManager : MonoBehaviour
 
     public AbilityButton[] abilityButtons;
     public GameObject buttonPrefab;
+    public GameObject lightingEffect;
+    public GameObject damageBuffEffect;
+    public GameObject stunEffect;
+
     private void Start()
     {
         InitAbilityButtons();
@@ -160,6 +164,7 @@ public class HeroAbilitiesManager : MonoBehaviour
     void DamageBuff()
     {
         print("DamageBuff");
+        PoolObject poolObject = PoolObject.instance;
 
         foreach (GameObject ally in PoolObject.instance.Allies)
         {
@@ -169,12 +174,22 @@ public class HeroAbilitiesManager : MonoBehaviour
             float damageBonus = GetUpgradeNameNumbersOnly(GetAbility("DamageBuff").name);
             float duration = 5f;
             unit.BuffAttackDamage(damageBonus, duration);
+            GameObject effect = poolObject.GetPoolObject(damageBuffEffect);
+            effect.GetComponent<MoveTowardTarget>().target = unit.gameObject;
+            effect.GetComponent<DisableScript>().disableTime = duration;
+
+            // Reset disable time;
+            effect.SetActive(false);
+            effect.SetActive(true);
+
         }
     }
 
     void Paralysis()
     {
         print("Paralysis");
+        PoolObject poolObject = PoolObject.instance;
+
         foreach (GameObject enemy in PoolObject.instance.Enemies)
         {
             Unit unit = enemy.GetComponent<Unit>();
@@ -184,6 +199,14 @@ public class HeroAbilitiesManager : MonoBehaviour
             unit.ParalyseEffect(true);
             float paralyseDuration = 3f;
             StartCoroutine(Paralyse(unit, paralyseDuration));
+
+            GameObject effect = poolObject.GetPoolObject(stunEffect);
+            effect.GetComponent<MoveTowardTarget>().target = unit.gameObject;
+            effect.GetComponent<DisableScript>().disableTime = paralyseDuration;
+
+            // Reset disable time;
+            effect.SetActive(false);
+            effect.SetActive(true);
         }
     }
 
@@ -197,6 +220,7 @@ public class HeroAbilitiesManager : MonoBehaviour
 
     void Lightning()
     {
+        PoolObject poolObject = PoolObject.instance;
         print("Lightning");
         float damage = GetUpgradeNameNumbersOnly(GetAbility("Lightning").name) * 20f;
         foreach (GameObject enemy in PoolObject.instance.Enemies)
@@ -205,6 +229,8 @@ public class HeroAbilitiesManager : MonoBehaviour
             if (!unit || unit.Disabled || enemy.name == "EnemyCaptain")
                 continue;
             unit.GetDamage(damage, null);
+            poolObject.GetPoolObject(lightingEffect).transform.position = new Vector2(unit.transform.position.x, unit.transform.position.y + 0.5f);
+
         }
     }
     void RandomSpawn()

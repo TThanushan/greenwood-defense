@@ -39,7 +39,7 @@ public class UpgradesShop : MonoBehaviour
 
     void UpdateUpgradesCards()
     {
-        Transform unitsButtonPanel = transform.Find("Buttons/UnitsButtonPanel");
+        Transform unitsButtonPanel = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH);
         foreach (Transform upgradeCardButton in unitsButtonPanel)
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
@@ -76,7 +76,7 @@ public class UpgradesShop : MonoBehaviour
         selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = "Next level : ";
         selectedCardInfos.Find("Description").GetComponent<TextMeshProUGUI>().text = effectText;
     }
-    void SetSelectedCardButtonCursor()
+    public void SetSelectedCardButtonCursor()
     {
         if (selectedCard != "")
             selectCursor.transform.position = GetSelectedCard().position;
@@ -124,14 +124,15 @@ public class UpgradesShop : MonoBehaviour
     {
         if (selectedCard == "")
             return;
-        Transform button = transform.Find("Buttons/UnitsButtonPanel/" + oldCardName);
+        Transform button = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH + '/' + oldCardName);
         button.name = selectedCard;
     }
 
 
     void InitUpgradesCards()
     {
-        Transform unitsButtonPanel = transform.Find("Buttons/UnitsButtonPanel");
+        //Transform unitsButtonPanel = transform.Find("Buttons/UnitsButtonPanel");
+        Transform unitsButtonPanel = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH);
         foreach (Transform upgradeCardButton in unitsButtonPanel)
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
@@ -155,7 +156,8 @@ public class UpgradesShop : MonoBehaviour
     }
     void SetUpgradeButtonName(string unitName, string oldName)
     {
-        string path = "Buttons/UnitsButtonPanel/";
+        //string path = "Buttons/UnitsButtonPanel/";
+        string path = Constants.UNITS_BUTTON_PANEL_PATH + '/';
         transform.Find(path + oldName).name = "UpgradeCard" + unitName;
     }
 
@@ -176,7 +178,7 @@ public class UpgradesShop : MonoBehaviour
     {
         if (selectedCard == "")
             return null;
-        return transform.Find("Buttons/UnitsButtonPanel/" + selectedCard);
+        return transform.Find(Constants.UNITS_BUTTON_PANEL_PATH + '/' + selectedCard);
     }
 
 

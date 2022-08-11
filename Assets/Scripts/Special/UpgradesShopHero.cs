@@ -31,7 +31,7 @@ public class UpgradesShopHero : MonoBehaviour
 
     void UpdateButton()
     {
-        Transform unitsButtonPanel = transform.Find("Buttons/HeroButtonPanel");
+        Transform unitsButtonPanel = transform.Find(Constants.HERO_BUTTON_PANEL_PATH);
         foreach (Transform upgradeCardButton in unitsButtonPanel)
         {
             string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
@@ -79,7 +79,8 @@ public class UpgradesShopHero : MonoBehaviour
 
     void InitUpgradesCards()
     {
-        Transform unitsButtonPanel = transform.Find("Buttons/HeroButtonPanel");
+        //Transform unitsButtonPanel = transform.Find("Buttons/HeroButtonPanel");
+        Transform unitsButtonPanel = transform.Find(Constants.HERO_BUTTON_PANEL_PATH);
         foreach (Transform upgradeCardButton in unitsButtonPanel)
         {
             string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
@@ -115,7 +116,7 @@ public class UpgradesShopHero : MonoBehaviour
 
         return null;
     }
-    void SetSelectedCardButtonCursor()
+    public void SetSelectedCardButtonCursor()
     {
         if (selectedCard != "")
             selectCursor.transform.position = GetSelectedCard().position;
@@ -190,7 +191,7 @@ public class UpgradesShopHero : MonoBehaviour
     {
         if (selectedCard == "")
             return null;
-        return transform.Find("Buttons/HeroButtonPanel/" + selectedCard);
+        return transform.Find(Constants.HERO_BUTTON_PANEL_PATH + '/' + selectedCard);
     }
     void AddTriggers(Transform upgradeCardButton)
     {
@@ -332,7 +333,7 @@ public class UpgradesShopHero : MonoBehaviour
     {
         if (selectedCard == "")
             return;
-        Transform button = transform.Find("Buttons/HeroButtonPanel/" + oldCardName);
+        Transform button = transform.Find(Constants.HERO_BUTTON_PANEL_PATH + '/' + oldCardName);
         button.name = selectedCard;
     }
 

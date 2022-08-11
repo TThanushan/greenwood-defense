@@ -21,7 +21,7 @@ public class UpgradesShopHeroSave : MonoBehaviour
     }
     void InitUpgradesCards()
     {
-        Transform unitsButtonPanel = transform.Find("Buttons/UnitsButtonPanel");
+        Transform unitsButtonPanel = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH);
         foreach (Transform upgradeCardButton in unitsButtonPanel)
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
@@ -160,7 +160,7 @@ public class UpgradesShopHeroSave : MonoBehaviour
     {
         if (selectedCard == "")
             return null;
-        return transform.Find("Buttons/UnitsButtonPanel/" + selectedCard);
+        return transform.Find(Constants.HERO_BUTTON_PANEL_PATH + '/' + selectedCard);
     }
 
     string GetUpgradeNameWithoutNumbers(string unitName)
