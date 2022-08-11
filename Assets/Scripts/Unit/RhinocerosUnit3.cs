@@ -27,7 +27,7 @@ public class RhinocerosUnit3 : RhinocerosUnit2
             nextAttackTime = 0f;
             currentCount++;
             if (currentCount == count)
-                OnChargeEnd.Invoke();
+                OnChargeEnd?.Invoke();
         }
 
         base.Attack();
