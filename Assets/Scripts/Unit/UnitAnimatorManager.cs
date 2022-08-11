@@ -46,7 +46,10 @@ public class UnitAnimatorManager : MonoBehaviour
         string clipName = animatorClipInfo[0].clip.name;
         //if (!GetComponent<Unit>().Target && clipName != "Run" && clipName != "Attack")
         if (!unit.Target || !unit.EnoughRangeToAttackTarget() && clipName != "Attack")
-            animator.Play("Run");
+        {
+            if (animator.HasState(0, Animator.StringToHash("Run")))
+                animator.Play("Run");
+        }
     }
 
     private void OnEnable()

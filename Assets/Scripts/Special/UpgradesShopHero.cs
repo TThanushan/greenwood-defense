@@ -136,6 +136,8 @@ public class UpgradesShopHero : MonoBehaviour
         {
             selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = "";
             selectedCardInfos.Find("Description").GetComponent<TextMeshProUGUI>().text = "";
+            selectedCardInfos.Find("ManaCost").GetComponent<TextMeshProUGUI>().text = "";
+
             return;
         }
 

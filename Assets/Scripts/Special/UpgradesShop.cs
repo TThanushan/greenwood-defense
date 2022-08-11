@@ -52,15 +52,25 @@ public class UpgradesShop : MonoBehaviour
 
     void SetSelectedCardInfos()
     {
-        if (selectedCard == "")
-            return;
+        //if (selectedCard == "")
+        //    return;
         Transform selectedCardInfos = transform.Find("SelectedCardInfos");
         string unitName = GetUnitNameFromSelectCard();
-        if (IsUnitLevelMax(unitName))
+        if (selectedCard == "")
+        {
+            selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = "";
+            selectedCardInfos.Find("Description").GetComponent<TextMeshProUGUI>().text = "";
+            selectedCardInfos.Find("ManaCost").GetComponent<TextMeshProUGUI>().text = "";
+
+            return;
+        }
+        else if (IsUnitLevelMax(unitName))
         {
             GetSelectedCard().Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = "Max";
             return;
         }
+
+
 
         //SaveManager.Unit nextUnit = GetUpgradeUnit(unitName);
         //string name = unitName;
@@ -75,6 +85,12 @@ public class UpgradesShop : MonoBehaviour
         //selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = name + " : ";
         selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = "Next level : ";
         selectedCardInfos.Find("Description").GetComponent<TextMeshProUGUI>().text = effectText;
+        string manaCostText = string.Concat("Mana : ", GetUnit(unitName).cost);
+        if (GetUnit(unitName).cost != GetUpgradeUnit(unitName).cost)
+            manaCostText += " -> " + GetUpgradeUnit(unitName).cost.ToString();
+
+        selectedCardInfos.Find("ManaCost").GetComponent<TextMeshProUGUI>().text = manaCostText;
+
     }
     public void SetSelectedCardButtonCursor()
     {
