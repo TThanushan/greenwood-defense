@@ -32,6 +32,7 @@ public class Unit : HealthBar
     Color originalColor;
     protected float initialAttackDamage;
     protected float initialAttackSpeed;
+    protected float initialMoveSpeed;
 
     [HideInInspector]
     public bool paralysed;
@@ -89,6 +90,7 @@ public class Unit : HealthBar
             originalColor = GetUnitSpriteRenderer().color;
         initialAttackDamage = attackDamage;
         initialAttackSpeed = attackSpeed;
+        initialMoveSpeed = moveSpeed;
     }
 
     public virtual bool ProjectileAffectMe()
@@ -156,6 +158,16 @@ public class Unit : HealthBar
         attackSpeed = initialAttackSpeed;
     }
 
+    protected void ChangeMoveSpeedIfUnchanged(float newMoveSpeed)
+    {
+        if (moveSpeed == initialMoveSpeed)
+            moveSpeed = newMoveSpeed;
+    }
+
+    void ResetMoveSpeed()
+    {
+        moveSpeed = initialMoveSpeed;
+    }
     public void InvokeResetAttackDamage(float time)
     {
         Invoke("ResetAttackDamage", time);
@@ -163,6 +175,10 @@ public class Unit : HealthBar
     public void InvokeResetAttackSpeed(float time)
     {
         Invoke("ResetAttackSpeed", time);
+    }
+    public void InvokeResetMoveSpeed(float time)
+    {
+        Invoke("ResetMoveSpeed", time);
     }
 
     void GiveMoneyReward()

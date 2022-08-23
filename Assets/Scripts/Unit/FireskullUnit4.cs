@@ -30,14 +30,11 @@ public class FireskullUnit4 : FireskullUnit3
     private void DamageEnemiesAround()
     {
         GameObject[] enemies = GetEnemies();
-        print("bip2");
         foreach (GameObject enemy in enemies)
         {
-            print("bip1");
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance <= explosionRange)
             {
-                print("bip");
                 print(enemy.name);
                 enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, "Classic");
                 InstantiateTrap(enemy);

@@ -28,7 +28,7 @@ public class ChameleonUnit : Unit
     GameObject lifeStealSprite;
     GameObject attackSpeedReductionSprite;
 
-    private GameObject HitEffectBar;
+    private GameObject hitEffectBar;
 
     public override void Attack()
     {
@@ -44,19 +44,19 @@ public class ChameleonUnit : Unit
         {
             if (currentStateIndex == 0 || currentStateIndex == 1)
                 SlowTargetAttackSpeed();
-            if (currentStateIndex == 2 || currentStateIndex == 3)
+            if (currentStateIndex == 0 || currentStateIndex == 2)
                 LifeSteal(attackDamage);
         }
     }
     protected override void Awake()
     {
         base.Awake();
-        if (!HitEffectBar)
+        if (!hitEffectBar)
         {
             if (unitLevel == 1)
                 transform.Find("EffectBar").gameObject.SetActive(false);
             else
-                HitEffectBar = transform.Find("EffectBar/Canvas/Bar").gameObject;
+                hitEffectBar = transform.Find("EffectBar/Canvas/Bar").gameObject;
         }
 
         rageEffectSprite = transform.Find("SpriteBody/SwordSprite").gameObject;
@@ -74,15 +74,17 @@ public class ChameleonUnit : Unit
     protected override void OnEnable()
     {
         base.OnEnable();
-        OnDeath += DisableHitEffectBar;
-        HitEffectBar.transform.parent.transform.parent.gameObject.SetActive(true);
+        OnDeath += DisablehitEffectBar;
+        if (!hitEffectBar)
+            return;
+        hitEffectBar.transform.parent.transform.parent.gameObject.SetActive(true);
 
     }
     private void UpdateEffectBarLength()
     {
-        if (!HitEffectBar)
+        if (!hitEffectBar)
             return;
-        HitEffectBar.transform.localScale = new Vector3(GetNewBarLength(), HitEffectBar.transform.localScale.y, HitEffectBar.transform.localScale.z);
+        hitEffectBar.transform.localScale = new Vector3(GetNewBarLength(), hitEffectBar.transform.localScale.y, hitEffectBar.transform.localScale.z);
     }
     private float GetNewBarLength()
     {
@@ -149,10 +151,12 @@ public class ChameleonUnit : Unit
     }
 
 
-    void DisableHitEffectBar()
+    void DisablehitEffectBar()
     {
-        OnDeath -= DisableHitEffectBar;
-        HitEffectBar.transform.parent.transform.parent.gameObject.SetActive(false);
+        OnDeath -= DisablehitEffectBar;
+        if (!hitEffectBar)
+            return;
+        hitEffectBar.transform.parent.transform.parent.gameObject.SetActive(false);
     }
     void DisableAllSprite()
     {

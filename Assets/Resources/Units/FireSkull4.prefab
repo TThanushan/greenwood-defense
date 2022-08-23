@@ -280,14 +280,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72709d3ed9cec68478b42be1b71cb0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 40
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 1
-  attackSpeed: 1
+  attackDamage: 40
+  attackSpeed: 1.5
   attackRange: 1.5
-  moveSpeed: 0.2
+  moveSpeed: 0.26
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
@@ -297,18 +297,18 @@ MonoBehaviour:
   bulletPosition: {fileID: 5367232546079401137}
   timeBetweenEffect: 5
   smallFireBallCount: 5
-  smallFireBallDamage: 5
+  smallFireBallDamage: 12
   smallFireBall: {fileID: 2116847984675237283, guid: 6a85d9f14f8578d45a0a40844b6f8dc0,
     type: 3}
   triggerEffect: {fileID: 0}
-  timeBetweenEffect3: 10
+  timeBetweenEffect3: 20
   meteor: {fileID: 2116847984675237283, guid: f64435efd12bd4346bec577bb467ba6e, type: 3}
   triggerEffect3: {fileID: 0}
-  meteorDamage: 20
+  meteorDamage: 75
   meteorSpawnPos: {fileID: 732898105}
-  explosionDamage: 50
+  explosionDamage: 150
   explosionRange: 2
-  timeBetweenEffect4: 20
+  timeBetweenEffect4: 30
   magma: {fileID: 1339922518811141910, guid: c9b8fedd221145a49ac2bb6903454bfb, type: 3}
   triggerEffect4: {fileID: 8565796419568195749, guid: 67759003c2d57c04daee341fc2866c17,
     type: 3}

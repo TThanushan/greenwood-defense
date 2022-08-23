@@ -280,14 +280,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f70ebd47ce38ec44a1593d6c1ae901e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 30
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 1
-  attackSpeed: 1
+  attackDamage: 30
+  attackSpeed: 1.5
   attackRange: 1.5
-  moveSpeed: 0.2
+  moveSpeed: 0.25
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
@@ -297,14 +297,14 @@ MonoBehaviour:
   bulletPosition: {fileID: 5367232546079401137}
   timeBetweenEffect: 5
   smallFireBallCount: 5
-  smallFireBallDamage: 5
+  smallFireBallDamage: 8
   smallFireBall: {fileID: 2116847984675237283, guid: 6a85d9f14f8578d45a0a40844b6f8dc0,
     type: 3}
   triggerEffect: {fileID: 0}
-  timeBetweenEffect3: 10
+  timeBetweenEffect3: 20
   meteor: {fileID: 2116847984675237283, guid: f64435efd12bd4346bec577bb467ba6e, type: 3}
   triggerEffect3: {fileID: 0}
-  meteorDamage: 20
+  meteorDamage: 50
   meteorSpawnPos: {fileID: 732898105}
 --- !u!1 &5367232546079401138
 GameObject:

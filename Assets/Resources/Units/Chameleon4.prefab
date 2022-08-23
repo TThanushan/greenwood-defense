@@ -534,25 +534,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a7c17ecd104144896a52e8d6fbcba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 60
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 1
+  attackDamage: 6
   attackSpeed: 1
   attackRange: 0.22
-  moveSpeed: 0.15
+  moveSpeed: 0.3
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
   paralysed: 0
   unitLevel: 4
   cycleDuration: 5
-  attackSpeedReduction: 70
+  attackSpeedReduction: 80
   effectDuration: 4
-  attackSpeedBuff: 60
-  attackDamageBuff: 60
-  lifeStealPercentage: 300
+  attackSpeedBuff: 70
+  attackDamageBuff: 70
+  lifeStealPercentage: 250
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

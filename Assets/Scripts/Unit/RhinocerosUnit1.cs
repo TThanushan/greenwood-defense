@@ -5,7 +5,7 @@ public class RhinocerosUnit1 : Unit
     [Header("Charge")]
     public float damageBonus = 5;
     public float timeBetweenCharge = 5;
-
+    public float moveSpeedBonus = 1;
     protected float nextChargeTime;
     GameObject chargeEffect;
 
@@ -13,12 +13,16 @@ public class RhinocerosUnit1 : Unit
     {
         base.Start();
         chargeEffect = transform.Find("SpriteBody/ChargeEffect").gameObject;
+
     }
     protected override void Update()
     {
         base.Update();
         chargeEffect.SetActive(ChargeReady());
-
+        if (ChargeReady())
+            ChangeMoveSpeedIfUnchanged(moveSpeedBonus);
+        else
+            moveSpeed = initialMoveSpeed;
     }
 
     protected bool ChargeReady()

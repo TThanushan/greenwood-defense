@@ -217,12 +217,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3aff3500001b74d822255148fb0ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 15
+  maxHealth: 20
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
-  attackSpeed: 2
+  attackSpeed: 1
   attackRange: 0.2
   moveSpeed: 0.35
   moneyReward: 0

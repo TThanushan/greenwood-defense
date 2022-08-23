@@ -417,19 +417,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c24db54666611794dbe92b79f86b6038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 20
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 1
   attackRange: 1.25
-  moveSpeed: 0.1
+  moveSpeed: 0.25
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
   paralysed: 0
-  timeBetweenSpawn: 3
+  timeBetweenSpawn: 0.5
   bunnies:
   - {fileID: 5394764171028466942, guid: eeba66788a0a9184fa3a466b3d608434, type: 3}
   - {fileID: 5394764171028466942, guid: 98cf1b1807d28e54a8b775e5af7ee7b5, type: 3}
@@ -439,7 +439,7 @@ MonoBehaviour:
   spawnAll: 1
   moneyGenerated: 1
   manaGenerated: 1
-  reducedPercentage: 10
+  reducedPercentage: 20
   manaMaxIncrease: 20
 --- !u!1 &5367232546079401138
 GameObject:

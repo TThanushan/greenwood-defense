@@ -419,20 +419,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7541c61eb52902447a61c078ff969943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 13
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 1
-  attackSpeed: 1
+  attackDamage: 3
+  attackSpeed: 0.5
   attackRange: 0.24
-  moveSpeed: 0.25
+  moveSpeed: 0.45
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
   paralysed: 0
   invulnerabilityBonusDuration: 5
-  invulnerabilityBonusRespawnTime: 15
+  invulnerabilityBonusRespawnTime: 10
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

@@ -332,6 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1339922518811141911}
   - component: {fileID: 262186788}
+  - component: {fileID: 5704858993521997033}
   m_Layer: 0
   m_Name: Magma
   m_TagString: Untagged
@@ -374,6 +375,19 @@ MonoBehaviour:
   triggerEffect: {fileID: 0}
   triggerRange: 0.125
   destroyOnTrigger: 0
+--- !u!114 &5704858993521997033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339922518811141910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ccc894ad7c5a44d84eeef5474acc0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableTime: 20
 --- !u!1 &1339922520311502491
 GameObject:
   m_ObjectHideFlags: 0
