@@ -21,6 +21,8 @@ public class PoolObject : MonoBehaviour
 
     public GameObject moneyRewardEffect;
     public AudioManager audioManager;
+    public GameObject damageText;
+
     void Awake()
     {
         if (instance == null)
@@ -41,6 +43,16 @@ public class PoolObject : MonoBehaviour
     {
         FindAllEnemies();
         FindAllAllies();
+    }
+
+    public GameObject DisplayDamageText(float damage)
+    {
+        if (!damageText)
+            return null;
+
+        GameObject obj = GetPoolObject(damageText);
+        obj.transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().text = damage.ToString();
+        return obj;
     }
 
     public string GetStageNumber()

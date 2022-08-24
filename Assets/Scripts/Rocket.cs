@@ -3,11 +3,13 @@ using UnityEngine;
 public class Rocket : BulletScript
 {
     public float explosionRange;
+    public float maxTargetDistance;
 
     protected override void AttackTarget()
     {
-        if (target == null && gameObject.activeSelf)
+        if (target == null && gameObject.activeSelf || (maxTargetDistance > 0 && Vector2.Distance(transform.position, target.transform.position) > maxTargetDistance))
         {
+            DisableDestroyEffect();
             gameObject.SetActive(false);
             return;
         }
@@ -19,6 +21,16 @@ public class Rocket : BulletScript
             gameObject.SetActive(false);
         }
     }
+
+    void DisableDestroyEffect()
+    {
+        if (effect)
+        {
+            GameObject newEffect = PoolObject.instance.GetPoolObject(effect);
+            newEffect.transform.position = transform.position;
+        }
+    }
+
 
     protected virtual void DamageEnemiesAround()
     {

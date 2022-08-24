@@ -162,6 +162,7 @@ public class StageManager : MonoBehaviour
     public void GivePlayerMoney(float money)
     {
         money *= moneyIncomeIncrease;
+        money = Mathf.Round(money);
         saveManager.money += money;
         goldEarnedInStage += money;
     }

@@ -20,6 +20,8 @@ public class ChameleonUnit : Unit
     [Header("LifeSteal")]
     //const string LIFE_STEAL = "LifeSteal";
     public float lifeStealPercentage = 40f;
+    [Range(0, 100)]
+    public float damageReduction;
     int currentStateIndex = -1;
     float nextCycleTime;
 
@@ -32,6 +34,7 @@ public class ChameleonUnit : Unit
 
     public override void Attack()
     {
+
         base.Attack();
         if (unitLevel < 4)
         {
@@ -99,13 +102,16 @@ public class ChameleonUnit : Unit
 
         if (unitLevel < 4)
         {
+            // Attack speed reduction.
             if (currentStateIndex == 0)
             {
+                damageTakenIncreasePercentage = 0;
                 DisableRageEffect();
                 GetUnitSpriteRenderer().color = Color.white;
                 DisableAllSprite();
                 attackSpeedReductionSprite.SetActive(true);
             }
+            // Attack speed bonus.
             if (currentStateIndex == 1 && unitLevel >= 2)
             {
                 GetUnitSpriteRenderer().color = Color.red;
@@ -113,8 +119,10 @@ public class ChameleonUnit : Unit
                 rageEffectSprite.SetActive(true);
                 EnableRageEffect();
             }
+            // Life steal.
             if (currentStateIndex == 2 && unitLevel >= 3)
             {
+                damageTakenIncreasePercentage = -damageReduction;
                 GetUnitSpriteRenderer().color = Color.yellow;
                 DisableAllSprite();
                 lifeStealSprite.SetActive(true);
@@ -123,22 +131,29 @@ public class ChameleonUnit : Unit
         }
         else
         {
-            if (currentStateIndex == 0)//
+            // Keep previous effect.
+
+            // Attack speed reduction.
+            if (currentStateIndex == 0)
             {
+                damageTakenIncreasePercentage = 0;
                 DisableRageEffect();
                 GetUnitSpriteRenderer().color = Color.white;
                 DisableAllSprite();
                 attackSpeedReductionSprite.SetActive(true);
             }
-            if (currentStateIndex == 1)//
+            // Attack speed bonus.
+            if (currentStateIndex == 1)
             {
                 GetUnitSpriteRenderer().color = Color.red;
                 DisableAllSprite();
                 rageEffectSprite.SetActive(true);
                 EnableRageEffect();
             }
+            // Life steal.
             if (currentStateIndex == 2)
             {
+                damageTakenIncreasePercentage = -damageReduction;
                 GetUnitSpriteRenderer().color = Color.yellow;
                 DisableAllSprite();
                 lifeStealSprite.SetActive(true);

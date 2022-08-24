@@ -137,7 +137,9 @@ MonoBehaviour:
   target: {fileID: 0}
   effect: {fileID: 4352566265116347071, guid: d087d9ac0b07dff43a2a44cb76a56c38, type: 3}
   spriteRenderer: {fileID: 0}
+  moveTowardTarget: 0
   explosionRange: 0.3
+  maxTargetDistance: 2
 --- !u!1 &2116847985150317397
 GameObject:
   m_ObjectHideFlags: 0

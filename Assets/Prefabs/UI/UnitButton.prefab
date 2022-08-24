@@ -28,6 +28,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.63343, y: 0.63343, z: 0.63343}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2641916048609594893}
   m_RootOrder: 0
@@ -103,6 +104,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6420360238483301836}
   m_Father: {fileID: 2641916049905728144}
@@ -180,6 +182,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8498261, y: 0.8498261, z: 0.8498261}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2641916048509110612}
   - {fileID: 7579276168443872643}
@@ -254,7 +257,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 0.35686275}
-    m_HighlightedColor: {r: 0, g: 0, b: 0, a: 0.19215687}
+    m_HighlightedColor: {r: 0.50980395, g: 0.33333334, b: 0, a: 0.3764706}
     m_PressedColor: {r: 0, g: 0, b: 0, a: 0.16862746}
     m_SelectedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0.16862746}
@@ -304,6 +307,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7988996, y: 0.7988996, z: 0.7988996}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2641916048609594893}
   m_RootOrder: 4
@@ -439,6 +443,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2641916048609594893}
   m_RootOrder: 2
@@ -513,6 +518,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8855057, y: 0.8855057, z: 0.8855057}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2641916048570194010}
   m_Father: {fileID: 2641916048609594893}
@@ -559,6 +565,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2641916048570194010}
   m_RootOrder: 0

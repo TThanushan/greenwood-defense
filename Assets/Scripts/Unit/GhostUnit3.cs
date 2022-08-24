@@ -4,8 +4,10 @@ public class GhostUnit3 : GhostUnit2
 {
     [Header("ConvertEnemyTag")]
     public float timeBetweenEffect = 5f;
+    public int convertCount;
     public GameObject triggerEffect;
     float nextEffectTime;
+    int currentConvertCount;
     bool nextAttackConvertEnemyTag;
 
     protected override void Update()
@@ -31,8 +33,13 @@ public class GhostUnit3 : GhostUnit2
         target.GetComponent<Unit>().RotateSprite();
         target.tag = tag;
 
-        nextAttackConvertEnemyTag = false;
-        nextEffectTime = Time.time + timeBetweenEffect;
+        currentConvertCount++;
+        if (currentConvertCount == convertCount)
+        {
+            nextAttackConvertEnemyTag = false;
+            nextEffectTime = Time.time + timeBetweenEffect;
+            currentConvertCount = 0;
+        }
     }
     //protected virtual void CreateEffect(GameObject effect)
     //{

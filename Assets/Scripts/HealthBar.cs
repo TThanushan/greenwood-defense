@@ -163,8 +163,17 @@ public class HealthBar : MonoBehaviour
         if (HitSoundName == "Classic")
             poolObject.audioManager.PlayHitSound();
 
+        GameObject obj = poolObject.DisplayDamageText(damage);
+        if (obj)
+            obj.transform.position = GetRandomPosition(transform.position, -0.04f, 0.04f, -0.04f, 0.04f);
     }
 
+    Vector2 GetRandomPosition(Vector2 pos, float xRangeA, float xRangeB, float yRangeA, float yRangeB)
+    {
+        pos.x += Random.Range(xRangeA, xRangeB);
+        pos.y += Random.Range(yRangeA, yRangeB);
+        return pos;
+    }
     void ResetDamageTakenIncreasePercentage()
     {
         damageTakenIncreasePercentage = initialDamageTakenIncreasePercentage;

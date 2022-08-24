@@ -434,6 +434,7 @@ MonoBehaviour:
   invulnerabilityBonusDuration: 7
   invulnerabilityBonusRespawnTime: 10
   timeBetweenEffect: 15
+  convertCount: 2
   triggerEffect: {fileID: 4352566265116347071, guid: 22bc6555adf93b449805c08f5bffd2cf,
     type: 3}
   timeBetweenEffect4: 20

@@ -280,7 +280,15 @@ public class Unit : HealthBar
     }
     public virtual void Disable()
     {
-        StartCoroutine(DisableIE());
+        if (GetComponent<Animator>())
+            StartCoroutine(DisableIE());
+        else
+        {
+            disabled = true;
+            PlayDeathSfx();
+            ResetSpriteColor();
+            gameObject.SetActive(false);
+        }
     }
 
     public void ChangeSpriteColor(Color color)

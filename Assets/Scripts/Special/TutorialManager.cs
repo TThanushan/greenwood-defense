@@ -21,6 +21,7 @@ public class TutorialManager : MonoBehaviour
             return;
         }
 
+        transform.Find("SkipTutorialButton").gameObject.SetActive(true);
         PoolObject.instance.enemyCaptain.currentHealth = 25;
         PoolObject.instance.enemyCaptain.maxHealth = 25;
 

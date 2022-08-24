@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,19 +12,22 @@ public class SpawnBar : MonoBehaviour
     public UnitButton[] unitButtons;
     public GameObject buttonPrefab;
 
+    Transform buttonParentTransform;
     private void Awake()
     {
         if (!instance)
             instance = this;
         else
             Destroy(gameObject);
+
+        buttonParentTransform = transform.Find("Scroll View/Viewport/Content").transform;
     }
 
     private void Start()
     {
         InitUnitButtons();
-        GenerateButtons();
         OrderChildButtonsByCost();
+        GenerateButtons();
     }
 
     private void Update()
@@ -97,7 +101,7 @@ public class SpawnBar : MonoBehaviour
 
     private Transform GetCorrespondingChild(string name)
     {
-        foreach (Transform child in transform)
+        foreach (Transform child in buttonParentTransform)
         {
             if (child.name.Contains(name))
                 return child;
@@ -156,23 +160,16 @@ public class SpawnBar : MonoBehaviour
 
     public void OrderChildButtonsByCost()
     {
-        float lowest = Mathf.Infinity;
-        foreach (UnitButton unitButton in unitButtons)
-        {
-            if (unitButton.cost <= lowest)
-            {
-                lowest = unitButton.cost;
-                GetCorrespondingChild(unitButton.name).SetAsFirstSibling();
-            }
-        }
+        unitButtons = unitButtons.OrderBy(o => o.cost).ToArray();
     }
+
 
     void GenerateButtons()
     {
 
         foreach (UnitButton unitButton in unitButtons)
         {
-            GameObject button = Instantiate(buttonPrefab, transform);
+            GameObject button = Instantiate(buttonPrefab, buttonParentTransform);
             SetButtonName(button, unitButton);
             SetButtonSprite(button, unitButton.name);
             SetButtonPrefab(unitButton);

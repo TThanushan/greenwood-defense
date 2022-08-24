@@ -165,13 +165,14 @@ public class HeroAbilitiesManager : MonoBehaviour
     {
         print("DamageBuff");
         PoolObject poolObject = PoolObject.instance;
+        float damageCoef = 2.5f;
+        float damageBonus = GetUpgradeNameNumbersOnly(GetAbility("DamageBuff").name) * damageCoef;
 
         foreach (GameObject ally in PoolObject.instance.Allies)
         {
             Unit unit = ally.GetComponent<Unit>();
             if (!unit || unit.Disabled)
                 continue;
-            float damageBonus = GetUpgradeNameNumbersOnly(GetAbility("DamageBuff").name);
             float duration = 5f;
             unit.BuffAttackDamage(damageBonus, duration);
             GameObject effect = poolObject.GetPoolObject(damageBuffEffect);
@@ -189,6 +190,8 @@ public class HeroAbilitiesManager : MonoBehaviour
     {
         print("Paralysis");
         PoolObject poolObject = PoolObject.instance;
+        float duration = 1.5f;
+        float paralyseDuration = GetUpgradeNameNumbersOnly(GetAbility("Paralysis").name) * duration;
 
         foreach (GameObject enemy in PoolObject.instance.Enemies)
         {
@@ -197,7 +200,6 @@ public class HeroAbilitiesManager : MonoBehaviour
                 continue;
 
             unit.ParalyseEffect(true);
-            float paralyseDuration = 3f;
             StartCoroutine(Paralyse(unit, paralyseDuration));
 
             GameObject effect = poolObject.GetPoolObject(stunEffect);
@@ -222,7 +224,8 @@ public class HeroAbilitiesManager : MonoBehaviour
     {
         PoolObject poolObject = PoolObject.instance;
         print("Lightning");
-        float damage = GetUpgradeNameNumbersOnly(GetAbility("Lightning").name) * 20f;
+        float lightningDamage = 10f;
+        float damage = GetUpgradeNameNumbersOnly(GetAbility("Lightning").name) * lightningDamage;
         foreach (GameObject enemy in PoolObject.instance.Enemies)
         {
             Unit unit = enemy.GetComponent<Unit>();

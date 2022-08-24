@@ -2,10 +2,20 @@ using UnityEngine;
 
 public class NinjaFrogUnit : Unit
 {
+    [Header("Teleport")]
     public float timeBetweenEffect = 5f;
     public GameObject dummyLog;
     public float teleportDistance = 1f;
     public GameObject triggerEffect;
+
+    [Header("CloneWhenLowLife")]
+    public GameObject clonePrefab;
+    [Range(0, 1)]
+    public float cloneTriggerThreshold;
+    public int cloneCount;
+
+    bool isCloneEffectTriggered;
+
     float nextEffectTime;
 
     protected override void Update()
@@ -13,8 +23,40 @@ public class NinjaFrogUnit : Unit
         base.Update();
         if (nextEffectTime <= Time.time && EnoughRangeToAttackTarget())
             DoEffect();
+
+        if (currentHealth / maxHealth <= cloneTriggerThreshold && !isCloneEffectTriggered)
+        {
+            InstantiateClones();
+            isCloneEffectTriggered = true;
+            DoEffect();
+        }
     }
 
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        isCloneEffectTriggered = false;
+    }
+
+    void InstantiateClones()
+    {
+        CreateEffect();
+
+        for (int i = 0; i < cloneCount; i++)
+        {
+            GameObject newClone = poolObject.GetPoolObject(clonePrefab);
+            newClone.transform.position = GetRandomPosition(transform.position, -0.16f, 0.16f, -0.16f, 0.16f);
+            Unit unit = newClone.GetComponent<Unit>();
+            unit.attackDamage = attackDamage;
+            unit.attackSpeed = attackSpeed;
+        }
+    }
+    Vector2 GetRandomPosition(Vector2 pos, float xRangeA, float xRangeB, float yRangeA, float yRangeB)
+    {
+        pos.x += Random.Range(xRangeA, xRangeB);
+        pos.y += Random.Range(yRangeA, yRangeB);
+        return pos;
+    }
     void DoEffect()
     {
         if (Target.name == "PlayerCaptain")

@@ -553,6 +553,7 @@ MonoBehaviour:
   attackSpeedBuff: 70
   attackDamageBuff: 70
   lifeStealPercentage: 250
+  damageReduction: 35
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0
