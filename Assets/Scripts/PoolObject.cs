@@ -49,6 +49,7 @@ public class PoolObject : MonoBehaviour
     {
         if (!damageText)
             return null;
+        damage = (int)(damage * 100.0f) / 100.0f;
 
         GameObject obj = GetPoolObject(damageText);
         obj.transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().text = damage.ToString();

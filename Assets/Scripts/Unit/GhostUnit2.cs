@@ -41,14 +41,19 @@ public class GhostUnit2 : GhostUnit1
     {
         isInvulnerabilityBonusEnabled = true;
         EnableInvulnerabilityBonusEffect(true);
-        StartCoroutine(DisableInvulnerabilityBonus());
+        StartCoroutine(DisableInvulnerabilityBonusIE());
     }
-    IEnumerator DisableInvulnerabilityBonus()
+    IEnumerator DisableInvulnerabilityBonusIE()
     {
         ResetInvulnerabilityCooldown();
         yield return new WaitForSeconds(invulnerabilityBonusDuration);
         if (Disabled)
             yield return null;
+        DisableInvulnerabilityBonus();
+    }
+
+    void DisableInvulnerabilityBonus()
+    {
         isInvulnerabilityBonusEnabled = false;
 
         EnableInvulnerabilityBonusEffect(false);
@@ -56,5 +61,10 @@ public class GhostUnit2 : GhostUnit1
     void EnableInvulnerabilityBonusEffect(bool val)
     {
         invulnerabilityBonusEffect.SetActive(val);
+    }
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        DisableInvulnerabilityBonus();
     }
 }

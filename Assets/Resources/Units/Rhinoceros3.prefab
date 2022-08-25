@@ -5141,7 +5141,7 @@ MonoBehaviour:
   timeBetweenCharge: 5
   moveSpeedBonus: 0.7
   knockBackPower: 0.25
-  count: 5
+  count: 15
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

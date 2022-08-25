@@ -27,9 +27,11 @@ public class Unit : HealthBar
     protected string targetTag = "Enemy";
     protected float nextAttackTime = 0f;
 
+
     GameObject target;
     bool disabled;
     Color originalColor;
+    string initialTag;
     protected float initialAttackDamage;
     protected float initialAttackSpeed;
     protected float initialMoveSpeed;
@@ -44,7 +46,7 @@ public class Unit : HealthBar
     {
         base.Awake();
         UpdateTag();
-
+        initialTag = tag;
     }
 
     void UpdateTag()
@@ -102,6 +104,7 @@ public class Unit : HealthBar
     {
         base.OnDisable();
         Unsubscribe();
+        tag = initialTag;
     }
 
     public float GetInitialAttackSpeed()

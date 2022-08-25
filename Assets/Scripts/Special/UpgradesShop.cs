@@ -10,14 +10,17 @@ public class UpgradesShop : MonoBehaviour
     private SaveManager saveManager;
     public string selectedCard;
     public GameObject selectCursor;
+    public GameObject upgradeButtonPrefab;
     public TMP_ColorGradient tooExpensivePriceColor;
     public TMP_ColorGradient priceOriginalColor;
     public GameObject upgradeEffect;
-
+    Transform buttonParentTransform;
     private void Start()
     {
         if (!saveManager)
             saveManager = SaveManager.instance;
+        buttonParentTransform = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH);
+        GenerateUpgradeButton();
         InitUpgradesCards();
         UpdateShopUI();
     }
@@ -31,7 +34,17 @@ public class UpgradesShop : MonoBehaviour
         SetSelectedCardButtonCursor();
     }
 
+    void GenerateUpgradeButton()
+    {
+        foreach (SaveManager.Unit unit in saveManager.units)
+        {
+            if (!unit.name.Contains('1'))
+                continue;
 
+            GameObject button = Instantiate(upgradeButtonPrefab, buttonParentTransform);
+            button.name = "UpgradeCard" + unit.name;
+        }
+    }
     void SetPlayerGoldText()
     {
         transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = saveManager.money.ToString() + '$';

@@ -11,7 +11,8 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         poolObject = PoolObject.instance;
-        stage = (Stage)Resources.Load("Stages/" + StageInfosManager.instance.GetCurrentStageName());
+        //stage = (Stage)Resources.Load("Stages/" + StageInfosManager.instance.GetCurrentStageName());
+        stage = (Stage)Resources.Load("Stages/GeneratedStage");
         InitEnemyTypes();
         stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
     }
@@ -41,10 +42,10 @@ public class EnemySpawner : MonoBehaviour
 
         if (enemyTypes.Length == 0)
             return;
-
+        float TIME_THRESHOLD_TO_SKIP_UNIT = 2f;
         foreach (EnemyType enemyType in enemyTypes)
         {
-            if (!enemyType.ReadyToSpawn())
+            if (!enemyType.ReadyToSpawn() || enemyType.TimeBetweenSpawn < TIME_THRESHOLD_TO_SKIP_UNIT)
                 continue;
             Spawn(enemyType);
         }

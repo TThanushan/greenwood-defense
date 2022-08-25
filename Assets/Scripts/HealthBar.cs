@@ -7,6 +7,7 @@ public class HealthBar : MonoBehaviour
 
     public float currentHealth;
     private GameObject healthBar;
+    private GameObject damageTakenBar;
 
     private GameObject shieldBar;
     private float shield;
@@ -27,6 +28,7 @@ public class HealthBar : MonoBehaviour
     {
         if (!healthBar)
             healthBar = transform.Find("HealthBar/Canvas/Bar").gameObject;
+        damageTakenBar = transform.Find("HealthBar/Canvas/DamageTaken").gameObject;
         if (!shieldBar)
             shieldBar = transform.Find("HealthBar/Canvas/ShieldBar").gameObject;
         if (transform.Find("SpriteBody/BigShield"))
@@ -51,6 +53,17 @@ public class HealthBar : MonoBehaviour
         UpdateShieldBarWidth();
         if (bigShield)
             UpdateBigShieldCurrent();
+        UpdateDamageTakenBar();
+    }
+
+    void UpdateDamageTakenBar()
+    {
+        float decreaseSpeed = 0.01f;
+        if (damageTakenBar.transform.localScale.x > healthBar.transform.localScale.x)
+            damageTakenBar.transform.localScale = new Vector3(damageTakenBar.transform.localScale.x - decreaseSpeed, damageTakenBar.transform.localScale.y, damageTakenBar.transform.localScale.z);
+
+        if (damageTakenBar.transform.localScale.x < healthBar.transform.localScale.x)
+            damageTakenBar.transform.localScale = healthBar.transform.localScale;
     }
     public void SetBigShieldCurrent(float val)
     {
@@ -162,7 +175,8 @@ public class HealthBar : MonoBehaviour
         }
         if (HitSoundName == "Classic")
             poolObject.audioManager.PlayHitSound();
-
+        if (damage == 0)
+            return;
         GameObject obj = poolObject.DisplayDamageText(damage);
         if (obj)
             obj.transform.position = GetRandomPosition(transform.position, -0.04f, 0.04f, -0.04f, 0.04f);

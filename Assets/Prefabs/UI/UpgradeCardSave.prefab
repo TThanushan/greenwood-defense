@@ -154,12 +154,12 @@ MonoBehaviour:
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
-  m_colorMode: 0
+  m_colorMode: 2
   m_fontColorGradient:
     topLeft: {r: 1, g: 0.97859895, b: 0.504717, a: 1}
     topRight: {r: 1, g: 0.97859895, b: 0.504717, a: 1}
-    bottomLeft: {r: 1, g: 0.97859895, b: 0.504717, a: 1}
-    bottomRight: {r: 1, g: 0.97859895, b: 0.504717, a: 1}
+    bottomLeft: {r: 1, g: 0.75143415, b: 0.5058824, a: 1}
+    bottomRight: {r: 1, g: 0.75143415, b: 0.5058824, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -404,12 +404,12 @@ MonoBehaviour:
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
-  m_colorMode: 0
+  m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.54520774, g: 1, b: 0.015686274, a: 1}
-    topRight: {r: 0.54520774, g: 1, b: 0.015686274, a: 1}
-    bottomLeft: {r: 0.54520774, g: 1, b: 0.015686274, a: 1}
-    bottomRight: {r: 0.54520774, g: 1, b: 0.015686274, a: 1}
+    topLeft: {r: 1, g: 0.96498877, b: 0.0141509175, a: 1}
+    topRight: {r: 1, g: 0.96498877, b: 0.0141509175, a: 1}
+    bottomLeft: {r: 0.2561028, g: 1, b: 0, a: 1}
+    bottomRight: {r: 0.2561028, g: 1, b: 0, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -540,12 +540,12 @@ MonoBehaviour:
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
-  m_colorMode: 0
+  m_colorMode: 2
   m_fontColorGradient:
-    topLeft: {r: 0.28627455, g: 0.6917423, b: 1, a: 1}
-    topRight: {r: 0.28627455, g: 0.6917423, b: 1, a: 1}
-    bottomLeft: {r: 0.28627455, g: 0.6917423, b: 1, a: 1}
-    bottomRight: {r: 0.28627455, g: 0.6917423, b: 1, a: 1}
+    topLeft: {r: 0.28773582, g: 0.98722976, b: 1, a: 1}
+    topRight: {r: 0.28773582, g: 0.98722976, b: 1, a: 1}
+    bottomLeft: {r: 0, g: 0.40291214, b: 1, a: 1}
+    bottomRight: {r: 0, g: 0.40291214, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 3404583486228166581}
   - component: {fileID: 681875139322675572}
   m_Layer: 5
-  m_Name: UpgradeCard
+  m_Name: UpgradeCardSave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

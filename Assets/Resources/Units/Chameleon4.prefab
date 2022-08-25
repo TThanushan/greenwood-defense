@@ -480,7 +480,7 @@ Transform:
   m_GameObject: {fileID: 5367232545533668792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.979, y: -0.104, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.73484, y: 0.73484, z: 0.73484}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5367232546079401137}
@@ -540,7 +540,7 @@ MonoBehaviour:
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 6
   attackSpeed: 1
-  attackRange: 0.22
+  attackRange: 0.25
   moveSpeed: 0.3
   moneyReward: 1
   manaReward: 1

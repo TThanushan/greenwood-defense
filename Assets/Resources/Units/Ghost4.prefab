@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1604ecfe670a01a48a9ba51ef9c778cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 35
+  maxHealth: 60
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
@@ -434,7 +434,7 @@ MonoBehaviour:
   invulnerabilityBonusDuration: 7
   invulnerabilityBonusRespawnTime: 10
   timeBetweenEffect: 15
-  convertCount: 2
+  convertCount: 3
   triggerEffect: {fileID: 4352566265116347071, guid: 22bc6555adf93b449805c08f5bffd2cf,
     type: 3}
   timeBetweenEffect4: 20
