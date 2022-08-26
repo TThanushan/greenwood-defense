@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2116847984675237308}
   - component: {fileID: -3772809968200008754}
+  - component: {fileID: 7417261888403648949}
   m_Layer: 0
   m_Name: TrunkShooterBullet4
   m_TagString: Bullet
@@ -53,6 +54,19 @@ MonoBehaviour:
   effect: {fileID: 0}
   spriteRenderer: {fileID: 0}
   moveTowardTarget: 0
+--- !u!114 &7417261888403648949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116847984675237283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ccc894ad7c5a44d84eeef5474acc0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableTime: 0.5
 --- !u!1 &2116847985150317397
 GameObject:
   m_ObjectHideFlags: 0

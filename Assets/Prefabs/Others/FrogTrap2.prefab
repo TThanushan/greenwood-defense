@@ -71,9 +71,11 @@ MonoBehaviour:
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  isNotAUnit: 1
   paralysed: 0
   effectRange: 0.1
   effectDamage: 0.2
+  damageSFXName: None
 --- !u!1 &1339922520311502491
 GameObject:
   m_ObjectHideFlags: 0

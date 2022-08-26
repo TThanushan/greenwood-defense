@@ -19,11 +19,11 @@ public class TweenPosition : MyTween
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    LeanTween.cancel(gameObject);
-        //    Tween();
-        //}
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            LeanTween.cancel(gameObject);
+            Tween();
+        }
     }
 
     void TweenPositionInit()

@@ -10,6 +10,8 @@ public class TrapFrogUnit : Unit
     float nextTrapSpawn = 0f;
     protected override void Update()
     {
+        if (Disabled)
+            return;
         base.Update();
         if (nextTrapSpawn <= Time.time && !EnoughRangeToAttackTarget())
             InstantiateTrap(Target);

@@ -255,11 +255,12 @@ MonoBehaviour:
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 1
-  attackRange: 1.25
+  attackRange: 2
   moveSpeed: 0.25
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
   timeBetweenSpawn: 2
   bunnies:

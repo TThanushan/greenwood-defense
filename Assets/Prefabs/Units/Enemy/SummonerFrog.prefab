@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7ac49cd117f62d74cb2a3b06bbb6c8af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8cc5352776f12fe4487fff64dc6e5dfa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -164,24 +164,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 924924e517ed7f74f8485c075f2e3747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 75
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 1
-  attackRange: 1.75
+  attackRange: 2.5
   moveSpeed: 0.15
-  moneyReward: 0
+  moneyReward: 50
   manaReward: 1
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
   timeBetweenSpawn: 5
   bunnies:
-  - {fileID: 7241784478119512346, guid: cc27ae804451fec4aa6d5c0a98178bfc, type: 3}
+  - {fileID: 7241784478119512346, guid: 22954130344ca5c41b9cf4bd018e7ba6, type: 3}
+  - {fileID: 7241784478119512346, guid: 8cc19dbca1324864284af2ab908b1045, type: 3}
+  - {fileID: 7241784478119512346, guid: d7ebebf5c255aa248b3dcf1b3f191e46, type: 3}
+  - {fileID: 7241784478119512346, guid: b6fad532db3423d4c94b3e7b2ef27e95, type: 3}
+  - {fileID: 7241784478119512346, guid: 8d3fde19f0bdca149a67fef7832b130b, type: 3}
   spawnEffect: {fileID: 1370331870408332415, guid: aac374459f257634cb95b4188e330ef5,
     type: 3}
-  spawnNumber: 1
+  spawnNumber: 2
+  spawnAll: 0
 --- !u!1 &2918563567972793646
 GameObject:
   m_ObjectHideFlags: 0

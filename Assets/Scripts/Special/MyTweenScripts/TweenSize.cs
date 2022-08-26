@@ -19,11 +19,11 @@ public class TweenSize : MyTween
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    LeanTween.cancel(gameObject);
-        //    Tween();
-        //}
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            LeanTween.cancel(gameObject);
+            Tween();
+        }
     }
     public override void Tween()
     {

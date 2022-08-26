@@ -5135,9 +5135,10 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 0.25
-  moneyReward: 20
+  moneyReward: 40
   manaReward: 10
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
   attackDamageBonus: 100
   zombieAttackSpeed: 0.125

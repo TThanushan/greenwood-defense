@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c526b7c028d614eb19f4092d5fdb53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 300
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
@@ -260,6 +260,7 @@ MonoBehaviour:
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
   spawnChance: 80
   reallySmallSlime: {fileID: 5367232545533668792, guid: 28c251dbfafea8c408c0d0ab5bd27e10,

@@ -165,6 +165,8 @@ GameObject:
   - component: {fileID: 2641916048609595376}
   - component: {fileID: 2641916048609594895}
   - component: {fileID: 2641916048609594894}
+  - component: {fileID: 7330270349876309891}
+  - component: {fileID: 8248358008770477680}
   m_Layer: 5
   m_Name: UnitButton
   m_TagString: Untagged
@@ -279,6 +281,40 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7330270349876309891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641916048609594892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d4702800b40934f8a40d7d1b9a319b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTimeSize: 0.75
+  maxSize: 1.25
+  useNewStartSize: 0
+  newStartSize: {x: 0, y: 0, z: 0}
+  leanTweenType: 34
+--- !u!114 &8248358008770477680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641916048609594892}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc00519bf4b8ed48a37c22ce61dc869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTimePosition: 1
+  newPosition: {x: 0.1, y: 0}
+  startFromNewPosition: 0
+  leanTweenType: 33
+  axisOnly: 1
 --- !u!1 &2641916049300494626
 GameObject:
   m_ObjectHideFlags: 0

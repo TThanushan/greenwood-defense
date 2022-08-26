@@ -4,6 +4,8 @@ using static Stage;
 public class EnemySpawner : MonoBehaviour
 {
     public Transform spawnPosition;
+    public Stage stage1;
+
     Stage stage;
     PoolObject poolObject;
 
@@ -12,9 +14,12 @@ public class EnemySpawner : MonoBehaviour
     {
         poolObject = PoolObject.instance;
         //stage = (Stage)Resources.Load("Stages/" + StageInfosManager.instance.GetCurrentStageName());
-        stage = (Stage)Resources.Load("Stages/GeneratedStage");
-        InitEnemyTypes();
         stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
+        if (stageNumber == 1)
+            stage = stage1;
+        else
+            stage = (Stage)Resources.Load("Stages/GeneratedStage");
+        InitEnemyTypes();
     }
 
     void Update()
@@ -42,10 +47,10 @@ public class EnemySpawner : MonoBehaviour
 
         if (enemyTypes.Length == 0)
             return;
-        float TIME_THRESHOLD_TO_SKIP_UNIT = 2f;
+        float TIME_THRESHOLD_TO_SKIP_UNIT = 3.5f;
         foreach (EnemyType enemyType in enemyTypes)
         {
-            if (!enemyType.ReadyToSpawn() || enemyType.TimeBetweenSpawn < TIME_THRESHOLD_TO_SKIP_UNIT)
+            if (!enemyType.ReadyToSpawn() || (enemyType.TimeBetweenSpawn < TIME_THRESHOLD_TO_SKIP_UNIT && enemyType.InfiniteSpawning))
                 continue;
             Spawn(enemyType);
         }

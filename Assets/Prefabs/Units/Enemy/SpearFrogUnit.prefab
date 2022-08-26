@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c79f3edfd2e4d0419f0c4cd8672d542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 25
+  maxHealth: 20
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
@@ -343,12 +343,14 @@ MonoBehaviour:
   attackSpeed: 2
   attackRange: 0.3
   moveSpeed: 0.25
-  moneyReward: 9
+  moneyReward: 7
   manaReward: 5
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
   effectRange: 0.15
   effectDamage: 5
+  damageSFXName: Classic
 --- !u!95 &3315706013935442866
 Animator:
   serializedVersion: 4

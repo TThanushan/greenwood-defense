@@ -459,9 +459,10 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 0.25
-  moneyReward: 1
+  moneyReward: 12
   manaReward: 1
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
   trap: {fileID: 1339922518811141910, guid: 3d44fedb1eb49ad44815b3cef7dacb40, type: 3}
   trapSpawnPosition: {fileID: 531437876}

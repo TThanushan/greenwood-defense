@@ -5,7 +5,7 @@ public class UnitAoeAttack : Unit
 
     public float effectRange;
     public float effectDamage;
-
+    public string damageSFXName = "Classic";
 
 
     public override void Attack()
@@ -22,7 +22,7 @@ public class UnitAoeAttack : Unit
             float distance = Vector2.Distance(Target.transform.position, enemy.transform.position);
             if (distance <= effectRange)
             {
-                enemy.GetComponent<Unit>().GetDamage(effectDamage, transform, "Classic");
+                enemy.GetComponent<Unit>().GetDamage(effectDamage, transform, damageSFXName);
             }
         }
     }

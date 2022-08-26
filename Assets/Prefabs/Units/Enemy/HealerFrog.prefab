@@ -158,8 +158,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 8cc5352776f12fe4487fff64dc6e5dfa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 7ac49cd117f62d74cb2a3b06bbb6c8af, type: 3}
+  m_Color: {r: 0.6430818, g: 1, b: 0.25, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -366,20 +366,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3463f21e9705deb4089e98ab52422bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 15
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 0
-  attackSpeed: 1
+  attackSpeed: 0.5
   attackRange: 1.25
   moveSpeed: 0.25
-  moneyReward: 1
+  moneyReward: 18
   manaReward: 1
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
-  healingAmount: 1
-  timeBetweenHeal: 1
+  healingAmount: 2
+  timeBetweenHeal: 0.5
   healRange: 1.25
 --- !u!1 &7241784478665342992
 GameObject:

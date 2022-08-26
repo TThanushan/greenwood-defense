@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f4ed2b57f87f34aba22b0afbccbbaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
+  maxHealth: 55
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
@@ -583,9 +583,10 @@ MonoBehaviour:
   attackSpeed: 0.25
   attackRange: 0.28
   moveSpeed: 0.4
-  moneyReward: 1
+  moneyReward: 31
   manaReward: 1
   deathSfxName: FrogDeath
+  isNotAUnit: 0
   paralysed: 0
   timeBetweenEffect: 10
   dummyLog: {fileID: 7241784478119512346, guid: cb867b028f9a20e40a82b3b6afce701b,

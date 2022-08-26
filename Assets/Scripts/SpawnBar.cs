@@ -198,10 +198,21 @@ public class SpawnBar : MonoBehaviour
         {
             eventID = EventTriggerType.PointerClick
         };
+        entry.callback.AddListener((eventData) => { TweenIfButtonReady(button); });
         entry.callback.AddListener((eventData) => { SpawnUnit(unitButton.name); });
         entry.callback.AddListener((eventData) => { AudioManager.instance.PlaySfx(Constants.BUTTON_CLICK_SFX_NAME); });
+        //entry.callback.AddListener((eventData) => { button.GetComponent<TweenSize>().Tween(); });
+
         eventTrigger.triggers.Add(entry);
     }
+
+    void TweenIfButtonReady(GameObject button)
+    {
+        UnitButton unitButton = GetUnitButton(button.name);
+        if (unitButton.HasEnoughMana() && unitButton.ReadyToSpawn())
+            button.GetComponent<TweenSize>().Tween();
+    }
+
     void SetButtonName(GameObject button, UnitButton unitButton)
     {
         button.name = buttonPrefab.name;

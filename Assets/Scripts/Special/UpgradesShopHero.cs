@@ -320,8 +320,8 @@ public class UpgradesShopHero : MonoBehaviour
             UpdateButtonName(oldCardName);
             UpdateShopUI();
             AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
+            CreateUpgradeEffect();
         }
-        CreateUpgradeEffect();
 
         if (IsUpgradeMax(GetUpgradeNameFromSelectCard()))
         {

@@ -13,11 +13,99 @@ MonoBehaviour:
   m_Name: GeneratedStage
   m_EditorClassIdentifier: 
   enemyTypes:
-  - Enemy: {fileID: 7241784478119512346, guid: cc27ae804451fec4aa6d5c0a98178bfc, type: 3}
-    TimeBetweenSpawn: 10
-    RandomTimeBetweenSpawn: 5
+  - Enemy: {fileID: 7241784478119512346, guid: 3bf43f1323578284db9a6b945bb36e6a, type: 3}
+    TimeBetweenSpawn: 1.7499996
+    RandomTimeBetweenSpawn: 4.5
     TimeBeforeFirstSpawn: 0
     InfiniteSpawning: 1
     EnemyCount: 0
     currentEnemyCount: 0
-    nextEnemySpawnTime: 46.940887
+    nextEnemySpawnTime: 0
+  - Enemy: {fileID: 7241784478119512346, guid: 0435ba058d14a3b43bb1c0cb5b47a4e4, type: 3}
+    TimeBetweenSpawn: 2.4999998
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 0.25
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 0.25
+  - Enemy: {fileID: 7241784478119512346, guid: c99706978e443b9449d9f0bf0db244de, type: 3}
+    TimeBetweenSpawn: 3.2499998
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 0.5
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 0.5
+  - Enemy: {fileID: 7241784478119512346, guid: aca6a5f7bb0da6146b12fb177b29142a, type: 3}
+    TimeBetweenSpawn: 3.9999998
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 0.75
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 121.30291
+  - Enemy: {fileID: 7241784478119512346, guid: 22954130344ca5c41b9cf4bd018e7ba6, type: 3}
+    TimeBetweenSpawn: 4.75
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 1
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 121.68148
+  - Enemy: {fileID: 7241784478119512346, guid: 580ce717a9a5b2a40a84df41fa11456e, type: 3}
+    TimeBetweenSpawn: 5.5
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 1.25
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 119.23497
+  - Enemy: {fileID: 7241784478119512346, guid: 8e7c246c0cb1dde4aa72a071d8a4cef9, type: 3}
+    TimeBetweenSpawn: 6.25
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 1.5
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 118.53252
+  - Enemy: {fileID: 7241784478119512346, guid: 8d3fde19f0bdca149a67fef7832b130b, type: 3}
+    TimeBetweenSpawn: 7
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 1.75
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 120.66644
+  - Enemy: {fileID: 7241784478119512346, guid: 1cb2441ed671f1f4391a6f1bd982df76, type: 3}
+    TimeBetweenSpawn: 7.75
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 2
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 117.20012
+  - Enemy: {fileID: 7241784478119512346, guid: 25bb1c6cf3f0a174a87292544de3774f, type: 3}
+    TimeBetweenSpawn: 8.5
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 2.25
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 121.260376
+  - Enemy: {fileID: 7241784478119512346, guid: 0932b06fcc798e94cad1c814f7afe462, type: 3}
+    TimeBetweenSpawn: 9.25
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 2.5
+    InfiniteSpawning: 0
+    EnemyCount: 3
+    currentEnemyCount: 2
+    nextEnemySpawnTime: 119.14678
+  - Enemy: {fileID: 7670015550058184774, guid: 6ed5f87803bf5ac469c702c2b1e8ee92, type: 3}
+    TimeBetweenSpawn: 1.7499996
+    RandomTimeBetweenSpawn: 4.5
+    TimeBeforeFirstSpawn: 0
+    InfiniteSpawning: 1
+    EnemyCount: 0
+    currentEnemyCount: 0
+    nextEnemySpawnTime: 0

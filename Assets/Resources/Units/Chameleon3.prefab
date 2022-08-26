@@ -552,7 +552,7 @@ MonoBehaviour:
   effectDuration: 4
   attackSpeedBuff: 55
   attackDamageBuff: 55
-  lifeStealPercentage: 200
+  lifeStealPercentage: 100
   damageReduction: 25
 --- !u!1 &5367232546079401138
 GameObject:

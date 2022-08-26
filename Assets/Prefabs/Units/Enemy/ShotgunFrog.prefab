@@ -483,17 +483,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008750dc2734fb54191233263e9f572b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 30
   currentHealth: 3
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 2
+  attackDamage: 1.5
   attackSpeed: 1
   attackRange: 1.5
   moveSpeed: 0.5
-  moneyReward: 1
+  moneyReward: 25
   manaReward: 1
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 6dcf22055f295834fb89166c22e6df56, type: 3}
   bullet2: {fileID: 0}

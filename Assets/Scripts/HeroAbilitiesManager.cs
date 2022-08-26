@@ -196,7 +196,7 @@ public class HeroAbilitiesManager : MonoBehaviour
         foreach (GameObject enemy in PoolObject.instance.Enemies)
         {
             Unit unit = enemy.GetComponent<Unit>();
-            if (!unit || unit.Disabled)
+            if (!unit || unit.Disabled || enemy.name.Contains("FrogTrap"))
                 continue;
 
             unit.ParalyseEffect(true);

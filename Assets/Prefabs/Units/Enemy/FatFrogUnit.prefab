@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 889b7b9b53794eb41878dfbd177f4e36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 70
+  maxHealth: 90
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
@@ -257,9 +257,10 @@ MonoBehaviour:
   attackSpeed: 3
   attackRange: 0.2
   moveSpeed: 0.15
-  moneyReward: 8
+  moneyReward: 10
   manaReward: 10
   deathSfxName: 
+  isNotAUnit: 0
   paralysed: 0
   spawnNumber: 10
   frogPrefab: {fileID: 7241784478119512346, guid: 23673e1af635cfa4abfbcd54fb0887d9,

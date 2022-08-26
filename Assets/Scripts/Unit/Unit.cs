@@ -21,7 +21,7 @@ public class Unit : HealthBar
 
     public event System.Action OnAttack;
     public string deathSfxName;
-
+    public bool isNotAUnit;
     protected int wayX = 1;
 
     protected string targetTag = "Enemy";
@@ -201,6 +201,8 @@ public class Unit : HealthBar
     public void SetTargetTag(string tag)
     {
         targetTag = tag;
+        if (isNotAUnit)
+            return;
         if (targetTag == "Enemy")
             transform.tag = "Ally";
         else

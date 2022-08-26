@@ -230,6 +230,7 @@ public class UpgradesShop : MonoBehaviour
         Transform selectedCardInfos = transform.Find("SelectedCardInfos");
         selectedCardInfos.Find("UnitName").GetComponent<TextMeshProUGUI>().text = "";
         selectedCardInfos.Find("Description").GetComponent<TextMeshProUGUI>().text = "";
+        selectedCardInfos.Find("ManaCost").GetComponent<TextMeshProUGUI>().text = "";
     }
 
 

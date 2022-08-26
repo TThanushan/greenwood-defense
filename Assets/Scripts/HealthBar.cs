@@ -175,7 +175,7 @@ public class HealthBar : MonoBehaviour
         }
         if (HitSoundName == "Classic")
             poolObject.audioManager.PlayHitSound();
-        if (damage == 0)
+        if (damage < 1)
             return;
         GameObject obj = poolObject.DisplayDamageText(damage);
         if (obj)
