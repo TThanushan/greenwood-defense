@@ -428,12 +428,13 @@ MonoBehaviour:
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
   isNotAUnit: 0
   paralysed: 0
   timeBetweenSpawn: 0.5
   bunnies:
-  - {fileID: 5394764171028466942, guid: eeba66788a0a9184fa3a466b3d608434, type: 3}
-  - {fileID: 5394764171028466942, guid: 98cf1b1807d28e54a8b775e5af7ee7b5, type: 3}
+  - {fileID: 64473780753522552, guid: e20c61587f54aff46808f4d6d700d126, type: 3}
+  - {fileID: 64473780753522552, guid: cac4523f187d67a4e946067ddd7805b0, type: 3}
   spawnEffect: {fileID: 1370331870408332415, guid: aac374459f257634cb95b4188e330ef5,
     type: 3}
   spawnNumber: 1

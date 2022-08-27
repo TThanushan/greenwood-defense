@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Stage;
 
-[ExecuteInEditMode]
 public class StageGenerator : MonoBehaviour
 {
     public GameObject[] prefabs;
@@ -70,11 +69,13 @@ public class StageGenerator : MonoBehaviour
             AddEnemyType(currentPrefabIndex, ref prefabs, ref enemyTypes);
         }
 
+        float stageDivided = stageNumber / 50f;
         // Add boss.
-        if (stageNumber / 50 >= 1)
+        if (stageDivided == 1 || stageDivided == 2)
         {
+            print("stageDi" + stageDivided);
             int index = 0;
-            if (stageNumber == 100)
+            if (stageDivided == 2)
                 index = 1;
             EnemyType enemyType = GetEnemyType(index, ref bossPrefabs);
             enemyType.InfiniteSpawning = false;
@@ -94,7 +95,7 @@ public class StageGenerator : MonoBehaviour
             RandomTimeBetweenSpawn = GetRandomTimeBetweenSpawn(index),
             EnemyCount = GetSpawnCount(index),
             InfiniteSpawning = IsSpawningInfinitly(index),
-            TimeBeforeFirstSpawn = index / 4f
+            TimeBeforeFirstSpawn = index / 2f
 
         };
         return enemyType;
@@ -102,19 +103,6 @@ public class StageGenerator : MonoBehaviour
 
     void AddEnemyType(int index, ref GameObject[] prefabs, ref List<EnemyType> enemyTypes)
     {
-        print(prefabs[index].name);
-        //EnemyType enemyType = new()
-        //{
-        //    Enemy = prefabs[index],
-        //    TimeBetweenSpawn = GetTimeBetweenSpawn(index),
-        //    RandomTimeBetweenSpawn = GetRandomTimeBetweenSpawn(index),
-        //    EnemyCount = GetSpawnCount(index),
-        //    InfiniteSpawning = IsSpawningInfinitly(index),
-        //    TimeBeforeFirstSpawn = index / 4f
-
-        //};
-
-        //enemyTypes.Add(enemyType);
         enemyTypes.Add(GetEnemyType(index, ref prefabs));
     }
 
@@ -129,7 +117,6 @@ public class StageGenerator : MonoBehaviour
         int count = 0;
         //print(Mathf.RoundToInt(stageNumber / 5) + " == " + currentPrefabIndex);
         float fiveDiv = stageNumber / 5f;
-        print(stageNumber / 5f);
         //print("stage " + stageNumber + " " + fiveDiv + "===" + Mathf.RoundToInt(fiveDiv));
         if (fiveDiv == Mathf.RoundToInt(fiveDiv) && Mathf.RoundToInt(fiveDiv) == currentPrefabIndex)
             count = 3;
@@ -149,14 +136,13 @@ public class StageGenerator : MonoBehaviour
         int coef2 = maxPrefabIndex - currentPrefabIndex;
         float fullCoef = coef * coef2;
         newTime = minTime - (0.075f * fullCoef);
-        print($"coef : {coef}, coef2 : {coef2}, fullCoef: {fullCoef}, newTime : {newTime}");
+        //print($"coef : {coef}, coef2 : {coef2}, fullCoef: {fullCoef}, newTime : {newTime}");
         return newTime;
     }
 
     float GetRandomTimeBetweenSpawn(int currentPrefabIndex)
     {
         float[] randomTimeRange = { 3.5f, 4f, 4.5f, 5f };
-        //int count = stageNumber + currentPrefabIndex;
         int count = stageNumber;
         // index can also start at 0, 2 allow to match the old stages values.
         int index = randomTimeRange.Length;
@@ -168,12 +154,4 @@ public class StageGenerator : MonoBehaviour
         }
         return randomTimeRange[index];
     }
-    //float GetRandomTimeBetweenSpawn(int currentPrefabIndex)
-    //{
-    //    float randomTime = GetTimeBetweenSpawn(currentPrefabIndex);
-
-    //    return randomTime / 2;
-    //}
-
-
 }

@@ -13,28 +13,35 @@ public class Unit : HealthBar
     [Header("Others")]
 
     public float moveSpeed = 0.15f;
-    //public float reward = 5f;
+
+    [Header("Death Reward")]
     [Tooltip("Only Enemy give money.")]
     public float moneyReward = 1f;
     [Tooltip("Only Enemy give mana.")]
     public float manaReward = 1f;
 
-    public event System.Action OnAttack;
+
+    [Header("SFXs")]
     public string deathSfxName;
+    public string[] hitSFX;
+
+
+    public event System.Action OnAttack;
     public bool isNotAUnit;
     protected int wayX = 1;
 
     protected string targetTag = "Enemy";
     protected float nextAttackTime = 0f;
 
+    protected float initialAttackDamage;
+    protected float initialAttackSpeed;
+    protected float initialMoveSpeed;
 
+    protected AudioManager audioManager;
     GameObject target;
     bool disabled;
     Color originalColor;
     string initialTag;
-    protected float initialAttackDamage;
-    protected float initialAttackSpeed;
-    protected float initialMoveSpeed;
 
     [HideInInspector]
     public bool paralysed;
@@ -44,13 +51,16 @@ public class Unit : HealthBar
     List<IEnumerator> coroutines;
     protected override void Awake()
     {
+
         base.Awake();
-        UpdateTag();
+        InvokeRepeating("UpdateTag", 0f, 2f);
         initialTag = tag;
     }
 
     void UpdateTag()
     {
+        if (isNotAUnit)
+            return;
         if (transform.CompareTag("Enemy"))
         {
             targetTag = "Ally";
@@ -85,6 +95,7 @@ public class Unit : HealthBar
     protected virtual void Start()
     {
         poolObject = PoolObject.instance;
+        audioManager = AudioManager.instance;
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
         FlipUnitSpriteOnWayX();
@@ -322,7 +333,15 @@ public class Unit : HealthBar
     {
         if (!Target)
             return;
-        Target.GetComponent<Unit>().GetDamage(attackDamage, transform, "Classic");
+        PlayHitSfx();
+        Target.GetComponent<Unit>().GetDamage(attackDamage, transform);
+    }
+
+    protected void PlayHitSfx()
+    {
+        if (hitSFX.Length > 0)
+            audioManager.Play(hitSFX[Random.Range(0, hitSFX.Length)], true);
+
     }
 
     protected virtual void AttackTarget()

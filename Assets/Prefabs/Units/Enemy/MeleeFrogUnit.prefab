@@ -260,6 +260,8 @@ MonoBehaviour:
   moneyReward: 2
   manaReward: 1
   deathSfxName: FrogDeath
+  hitSFX: Hit1
+  isNotAUnit: 0
   paralysed: 0
 --- !u!95 &3315706013935442866
 Animator:

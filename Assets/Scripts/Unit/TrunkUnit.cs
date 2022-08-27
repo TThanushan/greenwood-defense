@@ -40,6 +40,8 @@ public class TrunkUnit : UnitShooter
             if (!InRangeWithTarget())
                 break;
             InstantiateBullet(target);
+            PlayHitSfx();
+
             yield return new WaitForSeconds(timeBetweenShoot);
             nextAttackTime = attackSpeed + Time.time;
         }
@@ -54,8 +56,10 @@ public class TrunkUnit : UnitShooter
 
     private float GetAmmoBarNewBarLength()
     {
-        float barLenght = currentAmmo / bulletShotEachTime;
-        return barLenght;
+        float barLength = currentAmmo / bulletShotEachTime;
+        if (barLength > 1f)
+            barLength = 1f;
+        return barLength;
     }
 
     private void UpdateReloadAmmoBarLength()
@@ -63,6 +67,8 @@ public class TrunkUnit : UnitShooter
         float barLength = 0f;
         if (currentAmmo <= 0)
             barLength = GetReloadAmmoBarNewBarLength();
+        if (barLength > 1f)
+            barLength = 1f;
         reloadAmmoBar.localScale = new Vector3(barLength, reloadAmmoBar.localScale.y, reloadAmmoBar.localScale.z);
     }
 

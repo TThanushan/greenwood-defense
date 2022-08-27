@@ -217,6 +217,7 @@ public class StageManager : MonoBehaviour
         SaveScoreIfHigher();
         saveManager.SavePrefIfAutoSave();
         AudioManager.instance.PlaySfx(Constants.VICTORY_SFX_NAME);
+        //AudioManager.instance.PlaySfx("Victory2");
         levelCompletePanel.GetComponent<LevelComplete>().enabled = true;
         GameObject.FindGameObjectWithTag("Spawner").SetActive(false);
 

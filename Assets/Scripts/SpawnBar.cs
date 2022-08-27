@@ -12,6 +12,7 @@ public class SpawnBar : MonoBehaviour
     public UnitButton[] unitButtons;
     public GameObject buttonPrefab;
 
+    AudioManager audioManager;
     Transform buttonParentTransform;
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class SpawnBar : MonoBehaviour
         InitUnitButtons();
         OrderChildButtonsByCost();
         GenerateButtons();
+        audioManager = AudioManager.instance;
     }
 
     private void Update()
@@ -148,6 +150,8 @@ public class SpawnBar : MonoBehaviour
         GameObject newUnit = PoolObject.instance.GetPoolObject(prefab);
         float randomYPos = spawnPosition.y + UnityEngine.Random.Range(-0.1f, 0.3f);
         newUnit.transform.position = new Vector2(spawnPosition.x, randomYPos);
+        audioManager.PlaySfx("SpawnUnit");
+
     }
 
     private void UpdateUnitButtons()

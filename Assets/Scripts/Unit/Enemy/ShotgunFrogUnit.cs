@@ -27,6 +27,7 @@ public class ShotgunFrogUnit : UnitShooter
     protected override void Shoot(GameObject target)
     {
         //base.Shoot(target);
+        PlayHitSfx();
         ShootInSpread();
     }
 }

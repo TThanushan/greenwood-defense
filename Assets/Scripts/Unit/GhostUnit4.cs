@@ -10,6 +10,7 @@ public class GhostUnit4 : GhostUnit3
     public float lifeStealPercentage;
     public float explosionRange = 1f;
     public GameObject triggerEffect4;
+    public string effectSFX = "Classic";
     float nextEffectTime;
 
     protected override void Update()
@@ -23,6 +24,7 @@ public class GhostUnit4 : GhostUnit3
     {
         GameObject[] enemies = GetEnemies();
         float totalDamage = 0f;
+        poolObject.audioManager.Play(effectSFX);
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
@@ -32,7 +34,7 @@ public class GhostUnit4 : GhostUnit3
                 // Take damage based on max health percentage.
                 float damageTaken = enemy.GetComponent<Unit>().maxHealth * (effectDamagePercentage / 100f);
                 totalDamage += damageTaken;
-                enemy.GetComponent<Unit>().GetDamage(damageTaken, transform, "Classic");
+                enemy.GetComponent<Unit>().GetDamage(damageTaken, transform);
             }
         }
         CreateEffect(triggerEffect4);

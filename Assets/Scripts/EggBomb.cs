@@ -6,6 +6,7 @@ public class EggBomb : MonoBehaviour
     public float explosionRange;
     public float explosionDamage;
     public GameObject explosionEffect;
+    public string explosionSFX;
 
     float currentTimeBeforeExplosion;
     string targetTag = "Enemy";
@@ -37,7 +38,7 @@ public class EggBomb : MonoBehaviour
 
     protected void DamageTarget(GameObject target)
     {
-        target.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, "Classic");
+        target.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, explosionSFX);
     }
 
 

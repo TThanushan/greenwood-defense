@@ -1222,7 +1222,7 @@ MonoBehaviour:
   stageWhereToSave: {fileID: 11400000, guid: c13cbbcd82fd3df4facfe0e3c8b9e4ec, type: 2}
   meleeFrog: {fileID: 7241784478119512346, guid: cc27ae804451fec4aa6d5c0a98178bfc,
     type: 3}
-  tmpStageNumber: 50
+  tmpStageNumber: 0
   generate: 1
 --- !u!1 &310462787
 GameObject:
@@ -10512,6 +10512,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3939612983096211578, guid: e5331c5568324f1408b083c59e0ab161,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3939612983096211844, guid: e5331c5568324f1408b083c59e0ab161,
         type: 3}
       propertyPath: m_RootOrder
@@ -10903,23 +10908,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1476518410, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6925755
+      value: 0.9741767
       objectReference: {fileID: 0}
     - target: {fileID: 1476518410, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6925755
+      value: 0.9741767
       objectReference: {fileID: 0}
     - target: {fileID: 1476518410, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6925755
+      value: 0.9741767
       objectReference: {fileID: 0}
     - target: {fileID: 1476518410, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -46.7
+      value: -55.2
       objectReference: {fileID: 0}
     - target: {fileID: 1476518410, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 270.1
+      value: 269.04
       objectReference: {fileID: 0}
     - target: {fileID: 1606674370, guid: b93e3da3376e0b24d8ded505dd74e505, type: 3}
       propertyPath: m_SizeDelta.y

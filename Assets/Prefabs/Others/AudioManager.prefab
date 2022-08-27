@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.19990298, y: 0.6808042, z: 2024.8796}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -76,13 +77,13 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: FrogDeath
     clip: {fileID: 8300000, guid: eab98736d5289f84ea1e761d7cc61e5d, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: DuckDeath
     clip: {fileID: 8300000, guid: 6339e902579518c46ad5eabf56adf39b, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -110,5 +111,34 @@ MonoBehaviour:
     pitch: 0.8
     loop: 0
     source: {fileID: 0}
-  musicMuted: 0
+  - name: Sword1
+    clip: {fileID: 8300000, guid: 971b365ac696c40498e2f4a9f4267976, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Sword2
+    clip: {fileID: 8300000, guid: e51f187d024c0d2409a64c831d68ee4a, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Pistol1
+    clip: {fileID: 8300000, guid: 1baee5d58e392814e80100bd4f069ce4, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Victory2
+    clip: {fileID: 8300000, guid: 466c37f8f1e9dcb408d0c3a0cd1cfd82, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SpawnUnit
+    clip: {fileID: 8300000, guid: 0e7b7ab730df8364cbdc88179b0737e8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   SFXMuted: 0

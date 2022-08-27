@@ -5,7 +5,7 @@ public class ExplodeOnDeath : MonoBehaviour
     public float explosionRange;
     public float explosionDamage;
     public GameObject explosionEffect;
-
+    public string hitSFX;
     string targetTag = "Enemy";
     bool once;
     HealthBar healthBar;
@@ -42,7 +42,7 @@ public class ExplodeOnDeath : MonoBehaviour
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance <= explosionRange)
             {
-                enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, "Classic");
+                enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, hitSFX);
             }
         }
         CreateEffect();

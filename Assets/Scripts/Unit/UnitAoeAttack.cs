@@ -17,6 +17,7 @@ public class UnitAoeAttack : Unit
     protected virtual void DamageEnemiesAroundTarget()
     {
         GameObject[] enemies = GetEnemies();
+        poolObject.audioManager.Play(damageSFXName);
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector2.Distance(Target.transform.position, enemy.transform.position);

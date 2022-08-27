@@ -14,6 +14,7 @@ public class UnitShooter : Unit
 
     protected virtual void Shoot(GameObject target)
     {
+        PlayHitSfx();
         InstantiateBullet(target, bullet);
         InstantiateBullet(target, bullet2);
     }

@@ -494,6 +494,8 @@ MonoBehaviour:
   moneyReward: 25
   manaReward: 1
   deathSfxName: 
+  hitSFX:
+  - Pistol1
   isNotAUnit: 0
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 6dcf22055f295834fb89166c22e6df56, type: 3}

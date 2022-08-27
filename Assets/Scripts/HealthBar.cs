@@ -173,8 +173,7 @@ public class HealthBar : MonoBehaviour
             OnDeath?.Invoke();
             currentHealth = 0f;
         }
-        if (HitSoundName == "Classic")
-            poolObject.audioManager.PlayHitSound();
+        poolObject.audioManager.PlayHitSound();
         if (damage < 1)
             return;
         GameObject obj = poolObject.DisplayDamageText(damage);

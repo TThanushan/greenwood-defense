@@ -36,7 +36,7 @@ public class FireskullUnit4 : FireskullUnit3
             if (distance <= explosionRange)
             {
                 print(enemy.name);
-                enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, "Classic");
+                enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform);
                 InstantiateTrap(enemy);
             }
         }

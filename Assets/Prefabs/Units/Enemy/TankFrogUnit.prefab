@@ -494,6 +494,10 @@ MonoBehaviour:
   moneyReward: 5
   manaReward: 3
   deathSfxName: 
+  hitSFX:
+  - Sword1
+  - Sword2
+  isNotAUnit: 0
   paralysed: 0
 --- !u!95 &3315706013935442866
 Animator:
