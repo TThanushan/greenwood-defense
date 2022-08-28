@@ -343,9 +343,10 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 1.5
-  moneyReward: 35
+  moneyReward: 19
   manaReward: 1
   deathSfxName: FrogDeath
+  hitSFX: []
   isNotAUnit: 0
   paralysed: 0
 --- !u!95 &3315706013935442866
@@ -396,6 +397,7 @@ MonoBehaviour:
   explosionDamage: 50
   explosionEffect: {fileID: 3572809059910136023, guid: 7c5979eca9433d44e8a8a6b089a6ce18,
     type: 3}
+  hitSFX: Classic
 --- !u!1 &7241784478665342992
 GameObject:
   m_ObjectHideFlags: 0

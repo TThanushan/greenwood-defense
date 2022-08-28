@@ -427,7 +427,7 @@ MonoBehaviour:
   attackSpeed: 0.25
   attackRange: 0.24
   moveSpeed: 0.5
-  moneyReward: 22
+  moneyReward: 12
   manaReward: 7
   deathSfxName: 
   hitSFX:

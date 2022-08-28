@@ -172,9 +172,10 @@ MonoBehaviour:
   attackSpeed: 2
   attackRange: 2
   moveSpeed: 0.25
-  moneyReward: 35
+  moneyReward: 18
   manaReward: 8
   deathSfxName: 
+  hitSFX: []
   isNotAUnit: 0
   paralysed: 0
   bullet: {fileID: 2116847984675237283, guid: 5af5e5af9fa54ef4b9367a451062c1f7, type: 3}

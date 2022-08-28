@@ -172,9 +172,10 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 2.5
   moveSpeed: 0.15
-  moneyReward: 50
+  moneyReward: 22
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
   isNotAUnit: 0
   paralysed: 0
   timeBetweenSpawn: 5
