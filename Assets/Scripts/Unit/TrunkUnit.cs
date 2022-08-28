@@ -45,8 +45,11 @@ public class TrunkUnit : UnitShooter
             yield return new WaitForSeconds(timeBetweenShoot);
             nextAttackTime = attackSpeed + Time.time;
         }
+        //TODO:Reduce reload time base on remaining ammo.
         currentAmmo = 0f;
+
     }
+
 
 
     private void UpdateAmmoBarLength()

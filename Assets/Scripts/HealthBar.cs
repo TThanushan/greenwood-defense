@@ -82,8 +82,7 @@ public class HealthBar : MonoBehaviour
 
     public void HealMaxHealthPercentage(float amount)
     {
-        currentHealth *= 1 + amount / 100;
-
+        currentHealth += maxHealth * (amount / 100f);
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
     }

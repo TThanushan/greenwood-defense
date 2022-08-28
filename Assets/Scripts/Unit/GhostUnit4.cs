@@ -16,7 +16,7 @@ public class GhostUnit4 : GhostUnit3
     protected override void Update()
     {
         base.Update();
-        if (nextEffectTime <= Time.time && EnoughRangeToAttackTarget())
+        if (nextEffectTime <= Time.time && EnoughRangeToAttackTarget() && !nextAttackConvertEnemyTag)
             DoEffect();
     }
 

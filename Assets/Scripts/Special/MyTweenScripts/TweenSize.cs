@@ -9,27 +9,29 @@ public class TweenSize : MyTween
     public LeanTweenType leanTweenType;
     Vector3 startScale;
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (useNewStartSize)
             startScale = newStartSize;
         else
-            startScale = transform.localScale;
+            startScale = tweenedObject.transform.localScale;
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            LeanTween.cancel(gameObject);
+            LeanTween.cancel(tweenedObject);
             Tween();
         }
     }
     public override void Tween()
     {
-        transform.localScale = startScale;
-        LeanTween.scale(gameObject, startScale * maxSize, tweenTimeSize)
+        tweenedObject.transform.localScale = startScale;
+        LeanTween.scale(tweenedObject, startScale * maxSize, tweenTimeSize)
         .setEase(leanTweenType);
+        print("tween");
 
     }
 }

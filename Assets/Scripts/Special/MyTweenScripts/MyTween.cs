@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class MyTween : MonoBehaviour
 {
-    void Start()
+    public GameObject tweenedObject;
+
+    protected virtual void Awake()
     {
-
-    }
-
-    void Update()
-    {
-
+        if (!tweenedObject)
+            tweenedObject = gameObject;
     }
 
     public virtual void Tween()

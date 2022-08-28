@@ -8,7 +8,9 @@ public class GhostUnit3 : GhostUnit2
     public GameObject triggerEffect;
     float nextEffectTime;
     int currentConvertCount;
-    bool nextAttackConvertEnemyTag;
+    protected bool nextAttackConvertEnemyTag;
+
+
 
     protected override void Update()
     {
@@ -19,16 +21,18 @@ public class GhostUnit3 : GhostUnit2
 
     public override void Attack()
     {
-        base.Attack();
         if (nextAttackConvertEnemyTag)
             ConvertEnemyCamp(Target);
+        else
+            base.Attack();
     }
 
     void ConvertEnemyCamp(GameObject target)
     {
-        if (target.name == "EnemyCaptain")
+        if (target.name == "EnemyCaptain" || target.name.Contains("Ultimate"))
             return;
-        CreateEffect(triggerEffect);
+        target.transform.position = transform.position;
+        CreateConvertEffect(triggerEffect, target.transform);
         target.GetComponent<Unit>().SetTargetTag(targetTag);
         target.GetComponent<Unit>().RotateSprite();
         target.tag = tag;
@@ -40,6 +44,14 @@ public class GhostUnit3 : GhostUnit2
             nextEffectTime = Time.time + timeBetweenEffect;
             currentConvertCount = 0;
         }
+    }
+
+    void CreateConvertEffect(GameObject effect, Transform targetConverted)
+    {
+        if (!effect)
+            return;
+        GameObject newEffect = PoolObject.instance.GetPoolObject(effect);
+        newEffect.transform.position = targetConverted.position;
     }
     //protected virtual void CreateEffect(GameObject effect)
     //{

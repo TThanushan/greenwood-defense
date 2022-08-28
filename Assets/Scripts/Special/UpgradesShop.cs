@@ -14,6 +14,7 @@ public class UpgradesShop : MonoBehaviour
     public TMP_ColorGradient tooExpensivePriceColor;
     public TMP_ColorGradient priceOriginalColor;
     public GameObject upgradeEffect;
+    public Color32 starsMaxColor;
     Transform buttonParentTransform;
     private void Start()
     {
@@ -47,7 +48,7 @@ public class UpgradesShop : MonoBehaviour
     }
     void SetPlayerGoldText()
     {
-        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = saveManager.money.ToString() + '$';
+        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = ((int)saveManager.money).ToString() + '$';
     }
 
     void UpdateUpgradesCards()
@@ -255,6 +256,8 @@ public class UpgradesShop : MonoBehaviour
         return unit;
     }
 
+
+
     bool IsUnitLevelMax(string unitName)
     {
         return GetUpgradeUnit(unitName) is null;
@@ -396,9 +399,12 @@ public class UpgradesShop : MonoBehaviour
         else if (IsUnitLevelMax(unitName))
         {
             upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = "Max";
+            UpdateCardStars(upgradeCardButton, int.Parse(lvl));
             DisableUpgradeCard(upgradeCardButton.Find("Button").GetComponent<Button>());
         }
-        upgradeCardButton.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/4";
+        //upgradeCardButton.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/4";
+        UpdateCardStars(upgradeCardButton, int.Parse(lvl));
+
         TMPro.TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>();
         if (!IsUnitLevelMax(unitName))
         {
@@ -407,7 +413,20 @@ public class UpgradesShop : MonoBehaviour
         }
 
     }
-
+    void UpdateCardStars(Transform upgradeCardButton, int level)
+    {
+        Transform stars = upgradeCardButton.Find("Stars");
+        int levelMax = 4;
+        for (int i = 1; i < level + 1; i++)
+        {
+            string starName = "Star" + i.ToString();
+            print(starName);
+            GameObject starUnlocked = stars.Find(starName + "/StarUnlocked").gameObject;
+            starUnlocked.SetActive(true);
+            if (level == levelMax)
+                starUnlocked.GetComponent<Image>().color = starsMaxColor;
+        }
+    }
 
     void UpdatePriceTextColor(TMPro.TextMeshProUGUI text, string unitName)
     {

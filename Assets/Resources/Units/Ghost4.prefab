@@ -430,19 +430,22 @@ MonoBehaviour:
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
+  isNotAUnit: 0
   paralysed: 0
   invulnerabilityBonusDuration: 7
   invulnerabilityBonusRespawnTime: 10
   timeBetweenEffect: 15
-  convertCount: 3
-  triggerEffect: {fileID: 4352566265116347071, guid: 22bc6555adf93b449805c08f5bffd2cf,
+  convertCount: 4
+  triggerEffect: {fileID: 9051327033695357758, guid: 16f3c64656bc2e74288557dafd1a9968,
     type: 3}
-  timeBetweenEffect4: 20
-  effectDamagePercentage: 20
-  lifeStealPercentage: 10
+  timeBetweenEffect4: 2
+  effectDamagePercentage: 25
+  lifeStealPercentage: 30
   explosionRange: 1.77
-  triggerEffect4: {fileID: 397278707717103455, guid: 78b3dd0ca5ff2d346ace4a598a6bc50e,
+  triggerEffect4: {fileID: 7705239179079964477, guid: 788136ed8c65e5448a664ce5095726a0,
     type: 3}
+  effectSFX: Classic
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

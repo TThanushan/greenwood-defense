@@ -60,7 +60,7 @@ public class UpgradesShopHero : MonoBehaviour
         lvl = (int.Parse(lvl) - 1).ToString();
         string maxlvl = GetMaxLevel(upgradeName).ToString();
         maxlvl = (int.Parse(maxlvl) - 1).ToString();
-        button.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/" + maxlvl;
+        button.Find("LevelText").GetComponent<TextMeshProUGUI>().text = lvl + "/" + maxlvl;
     }
 
     void UpdatePriceTextColor(TextMeshProUGUI text, string upgradeName)

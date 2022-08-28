@@ -125,7 +125,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Pistol1
     clip: {fileID: 8300000, guid: 1baee5d58e392814e80100bd4f069ce4, type: 3}
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     loop: 0
     source: {fileID: 0}

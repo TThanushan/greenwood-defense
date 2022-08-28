@@ -8,9 +8,10 @@ public static class Constants
     public const string BUY_SFX_NAME = "Buy";
     public const string UNITS_BUTTON_PANEL_PATH = "Buttons/UnitsButtonPanel/Viewport/Content";
     public const string HERO_BUTTON_PANEL_PATH = "Buttons/HeroButtonPanel/Viewport/Content";
+    public const string LEVEL_SELECT_GOLD_TEXT_PATH = "LeftGroup/MoneyText";
     public const int LEVEL_COMPLETE_REWARD = 125;
     public const int FIRST_STAGE_REWARD_BONUS = 200;
-    public const int REWARD_BONUS_EVERY_X_STAGE = 75;
+    public const int REWARD_BONUS_EVERY_X_STAGE = 25;
     public const int MAX_SCORE = 100;
     public const int MAX_STAGE_NUMBER = 100;
     public const string GAME_VERSION = "1.11";
