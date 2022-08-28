@@ -49,9 +49,11 @@ public class Unit : HealthBar
     public GameObject Target { get => target; set => target = value; }
 
     List<IEnumerator> coroutines;
+    Quaternion originalSpriteRotation;
+
     protected override void Awake()
     {
-
+        originalSpriteRotation = GetSpriteTransform().localRotation;
         base.Awake();
         InvokeRepeating("UpdateTag", 0f, 2f);
         initialTag = tag;
@@ -106,6 +108,7 @@ public class Unit : HealthBar
         initialMoveSpeed = moveSpeed;
     }
 
+
     public virtual bool ProjectileAffectMe()
     {
         return true;
@@ -113,6 +116,7 @@ public class Unit : HealthBar
 
     protected override void OnDisable()
     {
+        ResetSpriteRotation();
         base.OnDisable();
         Unsubscribe();
         tag = initialTag;
@@ -128,9 +132,15 @@ public class Unit : HealthBar
     //    targetTag = _tag;
 
     //}
+
+
+    Transform GetSpriteTransform()
+    {
+        return transform.Find("SpriteBody/Sprite").transform;
+    }
     public void RotateSprite()
     {
-        Transform spriteTransform = transform.Find("SpriteBody/Sprite").transform;
+        Transform spriteTransform = GetSpriteTransform();
         if (spriteTransform.rotation.y != 180f)
             spriteTransform.rotation = Quaternion.Euler(spriteTransform.rotation.x, 180f, spriteTransform.rotation.z);
         else
@@ -245,6 +255,13 @@ public class Unit : HealthBar
         if (deathSfxName != "")
             poolObject.audioManager.Play(deathSfxName, true);
     }
+
+    void ResetSpriteRotation()
+    {
+        Transform spriteTransform = GetSpriteTransform();
+        if (spriteTransform)
+            spriteTransform.transform.localRotation = originalSpriteRotation;
+    }
     void FlipUnitSpriteOnWayX()
     {
         SpriteRenderer spriteRenderer = GetUnitSpriteRenderer();
@@ -278,10 +295,13 @@ public class Unit : HealthBar
     protected override void OnEnable()
     {
         base.OnEnable();
+        ResetSpriteRotation();
+
         RandomizeAttackRange();
         Disabled = false;
         Subscribe();
     }
+
 
 
     IEnumerator DisableIE()
