@@ -164,8 +164,8 @@ public class HealthBar : MonoBehaviour
             else
                 damage = 0f;
         }
-
-        currentHealth -= damage * GetDamageTakenIncreasePercentage();
+        damage *= GetDamageTakenIncreasePercentage();
+        currentHealth -= damage;
         OnHit?.Invoke();
         if (currentHealth <= 0f)
         {

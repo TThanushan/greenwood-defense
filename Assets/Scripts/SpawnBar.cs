@@ -41,15 +41,52 @@ public class SpawnBar : MonoBehaviour
     {
         SaveManager saveManager = SaveManager.instance;
         unitButtons = new UnitButton[saveManager.unlockedUnits.Count];
-        float cooldownReduction = 1 - GetCooldownReductionShop() / 100;
+        float cooldownReduction = 1 - GetCooldownReductionFromShop() / 100;
         int i = 0;
         foreach (string unitName in saveManager.unlockedUnits)
         {
             SaveManager.Unit unitS = saveManager.GetUnit(unitName);
             UnitButton unitButton = new UnitButton(unitS.name, unitS.cost, unitS.reloadTime * cooldownReduction);
+            //unitButton.prefabClone = Instantiate(unitButton.prefab);
+            //unitButton.prefabClone.SetActive(false);
+            //Unit unit = unitButton.prefabClone.GetComponent<Unit>();
+            ////Add health bonus from shop.
+            //unit.maxHealth *= 1 + GetMaxHealthPercentageBonusFromShop() / 100f;
+            //unit.currentHealth = unit.maxHealth;
+
             unitButtons[i] = unitButton;
             i++;
         }
+    }
+    float GetShopUpgrade(string upgradeName)
+    {
+        foreach (string name in SaveManager.instance.unlockedHeroUpgrades)
+        {
+            if (GetUpgradeNameWithoutNumbers(name) == upgradeName)
+                return GetUpgradeNameNumbersOnly(name);
+        }
+        return 0f;
+    }
+    //"UnitDamageReduction0",
+    //"UnitDamageBonus0",
+    //"UnitMaxHealthBonus0",
+    float GetMaxHealthPercentageBonusFromShop()
+    {
+        return GetShopUpgrade("UnitMaxHealthBonus");
+    }
+
+    float GetCooldownReductionFromShop()
+    {
+        return GetShopUpgrade("UnitCooldownReduction");
+    }
+    float GetDamageReductionFromShop()
+    {
+        return GetShopUpgrade("UnitDamageReduction");
+    }
+
+    float GetDamageBonusFromShop()
+    {
+        return GetShopUpgrade("UnitDamageBonus");
     }
 
     public void ReduceMaxCooldown(float percentageReduction)
@@ -75,17 +112,6 @@ public class SpawnBar : MonoBehaviour
         }
     }
 
-    float GetCooldownReductionShop()
-    {
-
-        foreach (string name in SaveManager.instance.unlockedHeroUpgrades)
-        {
-            if (GetUpgradeNameWithoutNumbers(name) == "UnitCooldownReduction")
-                return GetUpgradeNameNumbersOnly(name);
-        }
-        return 0f;
-
-    }
 
     string GetUpgradeNameWithoutNumbers(string upgradeName)
     {
@@ -101,16 +127,6 @@ public class SpawnBar : MonoBehaviour
         return float.Parse(withoutNumbers, CultureInfo.InvariantCulture.NumberFormat);
     }
 
-    private Transform GetCorrespondingChild(string name)
-    {
-        foreach (Transform child in buttonParentTransform)
-        {
-            if (child.name.Contains(name))
-                return child;
-        }
-        return null;
-    }
-
     string GetSimplifiedName(string name)
     {
         return GetUpgradeNameWithoutNumbers(name).Replace("UnitButton", "");
@@ -123,7 +139,7 @@ public class SpawnBar : MonoBehaviour
         {
             if (GetSimplifiedName(unitButton.name) == name && unitButton.ReadyToSpawn() && unitButton.HasEnoughMana())
             {
-                SpawnUnit(unitButton.prefab);
+                SpawnUnit(unitButton.prefabClone);
                 unitButton.ResetCurrentReloadTime();
                 ManaBar.instance.UseMana(unitButton.cost);
             }
@@ -143,11 +159,12 @@ public class SpawnBar : MonoBehaviour
 
     public void SpawnUnitForFree(string name)
     {
-        SpawnUnit(GetUnitButton(name).prefab);
+        SpawnUnit(GetUnitButton(name).prefabClone);
     }
     private void SpawnUnit(GameObject prefab)
     {
         GameObject newUnit = PoolObject.instance.GetPoolObject(prefab);
+        newUnit.SetActive(true);
         float randomYPos = spawnPosition.y + UnityEngine.Random.Range(-0.1f, 0.3f);
         newUnit.transform.position = new Vector2(spawnPosition.x, randomYPos);
         audioManager.PlaySfx("SpawnUnit");
@@ -177,12 +194,15 @@ public class SpawnBar : MonoBehaviour
             SetButtonName(button, unitButton);
             SetButtonSprite(button, unitButton.name);
             SetButtonPrefab(unitButton);
+            SetButtonPrefabClone(unitButton);
             SetButtonPrice(button, unitButton.cost);
             SetButtonReloadBarAndEnougManaShade(button, unitButton);
             AddEventTriggerOnButton(button, unitButton);
             EnableButtonStars(button, unitButton);
         }
     }
+
+
     void SetButtonReloadBarAndEnougManaShade(GameObject button, UnitButton unitButton)
     {
         unitButton.reloadBar = button.transform.Find("ReloadBar/Bar");
@@ -233,6 +253,26 @@ public class SpawnBar : MonoBehaviour
     {
         button.transform.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + spriteName);
     }
+
+    void SetButtonPrefabClone(UnitButton unitButton)
+    {
+        unitButton.prefabClone = Instantiate(unitButton.prefab);
+        unitButton.prefabClone.name = unitButton.prefabClone.name.Replace("(Clone)", "");
+        unitButton.prefabClone.SetActive(false);
+        Unit unit = unitButton.prefabClone.GetComponent<Unit>();
+        //Add health bonus from shop.
+        unit.maxHealth *= 1 + GetMaxHealthPercentageBonusFromShop() / 100f;
+        unit.currentHealth = unit.maxHealth;
+
+        //Add damage reduction.
+        unit.initialDamageTakenIncreasePercentage = -GetDamageReductionFromShop();
+        unit.damageTakenIncreasePercentage = unit.initialDamageTakenIncreasePercentage;
+
+        //Add damage bonus.
+        unit.attackDamage *= 1 + GetDamageBonusFromShop() / 100;
+        unit.SetInitialAttackDamage(unit.attackDamage);
+    }
+
     void EnableButtonStars(GameObject button, UnitButton unitButton)
     {
         Transform panel = button.transform.Find("StarsCanvas/Panel");
@@ -262,7 +302,10 @@ public class SpawnBar : MonoBehaviour
         public float reloadTimeInitial;
 
         [HideInInspector]
+        //Only used one time.
         public GameObject prefab;
+        [HideInInspector]
+        public GameObject prefabClone;
         [HideInInspector]
         public Transform reloadBar;
         [HideInInspector]

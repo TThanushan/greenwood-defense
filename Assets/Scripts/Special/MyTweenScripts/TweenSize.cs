@@ -31,7 +31,6 @@ public class TweenSize : MyTween
         tweenedObject.transform.localScale = startScale;
         LeanTween.scale(tweenedObject, startScale * maxSize, tweenTimeSize)
         .setEase(leanTweenType);
-        print("tween");
 
     }
 }

@@ -701,7 +701,10 @@ MonoBehaviour:
   moneyReward: 0
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
+  isNotAUnit: 0
   paralysed: 0
+  phoenixEffect: {fileID: 0}
 --- !u!1 &7674415424124316409
 GameObject:
   m_ObjectHideFlags: 0

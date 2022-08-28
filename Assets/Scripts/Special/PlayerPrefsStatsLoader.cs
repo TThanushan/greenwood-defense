@@ -18,7 +18,7 @@ public class PlayerPrefsStatsLoader : MonoBehaviour
             const string MAX_HEALTH = "MaxHealth";
             const string DAMAGE_REDUCTION = "DamageReduction";
             const string SHIELD = "Shield";
-            if (name.Contains(MAX_HEALTH))
+            if (name.Contains(MAX_HEALTH) && !name.Contains("Unit"))
             {
                 float maxHealth = GetUpgradeNameNumbersOnly(name);
                 playerUnit.maxHealth = maxHealth;

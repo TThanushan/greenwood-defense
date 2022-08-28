@@ -53,7 +53,8 @@ public class Unit : HealthBar
 
     protected override void Awake()
     {
-        originalSpriteRotation = GetSpriteTransform().localRotation;
+        if (GetSpriteTransform())
+            originalSpriteRotation = GetSpriteTransform().localRotation;
         base.Awake();
         InvokeRepeating("UpdateTag", 0f, 2f);
         initialTag = tag;
@@ -76,6 +77,10 @@ public class Unit : HealthBar
         }
     }
 
+    public void SetInitialAttackDamage(float value)
+    {
+        initialAttackDamage = value;
+    }
     protected override void Update()
     {
         if (disabled) return;
