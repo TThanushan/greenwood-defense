@@ -5475,6 +5475,7 @@ MonoBehaviour:
   moneyReward: 1000
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
   isNotAUnit: 0
   paralysed: 0
   bullet: {fileID: 6471964120560958441, guid: 9b057d5f620c55b44a98560539a940be, type: 3}
@@ -5486,10 +5487,10 @@ MonoBehaviour:
   fireBreathDuration: 3
   timeBetweenFireBreath: 5
   timeBetweenEffect3: 10
-  meteor: {fileID: 2116847984675237283, guid: 92abf3637711cd140b93a11ba574d707, type: 3}
+  meteor: {fileID: 2116847984675237283, guid: 41a573c298c459b4f867e8b1e54910a8, type: 3}
   triggerEffect3: {fileID: 0}
   meteorDamage: 200
-  magmaDamage: 0.05
+  magmaDamage: 0.1
   meteorSpawnPos: {fileID: 249981793}
 --- !u!1001 &6052848757072095399
 PrefabInstance:

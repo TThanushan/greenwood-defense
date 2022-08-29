@@ -173,7 +173,7 @@ public class HeroAbilitiesManager : MonoBehaviour
             Unit unit = ally.GetComponent<Unit>();
             if (!unit || unit.Disabled)
                 continue;
-            float duration = 5f;
+            float duration = 10f;
             unit.BuffAttackDamage(damageBonus, duration);
             GameObject effect = poolObject.GetPoolObject(damageBuffEffect);
             effect.GetComponent<MoveTowardTarget>().target = unit.gameObject;
@@ -228,6 +228,7 @@ public class HeroAbilitiesManager : MonoBehaviour
         float damage = GetUpgradeNameNumbersOnly(GetAbility("Lightning").name) * lightningDamage;
         foreach (GameObject enemy in PoolObject.instance.Enemies)
         {
+            print(enemy.name);
             Unit unit = enemy.GetComponent<Unit>();
             if (!unit || unit.Disabled || enemy.name == "EnemyCaptain")
                 continue;

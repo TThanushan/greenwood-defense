@@ -141,4 +141,10 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: ShieldHit
+    clip: {fileID: 8300000, guid: 0ef1c955c18cd4b4f8c88d591921b67e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   SFXMuted: 0

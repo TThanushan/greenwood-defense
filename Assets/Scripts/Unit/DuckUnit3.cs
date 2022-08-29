@@ -54,6 +54,7 @@ public class DuckUnit3 : HitBasedUnit
         if (bigShieldcurrent > 0)
         {
             bigShieldcurrent--;
+            audioManager.Play(Constants.SHIELD_HIT_SFX);
             if (bigShieldcurrent <= 0)
             {
                 bigShieldcurrent = 0;

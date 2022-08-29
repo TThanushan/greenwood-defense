@@ -105,7 +105,7 @@ public class Unit : HealthBar
         audioManager = AudioManager.instance;
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
-        FlipUnitSpriteOnWayX();
+        //FlipUnitSpriteOnWayX();
         if (GetUnitSpriteRenderer())
             originalColor = GetUnitSpriteRenderer().color;
         initialAttackDamage = attackDamage;
@@ -267,13 +267,13 @@ public class Unit : HealthBar
         if (spriteTransform)
             spriteTransform.transform.localRotation = originalSpriteRotation;
     }
-    void FlipUnitSpriteOnWayX()
+    public void FlipUnitSpriteOnWayX()
     {
         SpriteRenderer spriteRenderer = GetUnitSpriteRenderer();
         if (spriteRenderer)
         {
             // TODO
-            if (targetTag == "Enemy")
+            if (targetTag == "Enemy" && CompareTag("Enemy"))
                 spriteRenderer.flipX = (wayX == 1);
             else
                 spriteRenderer.flipX = (wayX == -1);
@@ -358,7 +358,7 @@ public class Unit : HealthBar
     {
         if (!Target)
             return;
-        PlayHitSfx();
+        //PlayHitSfx();
         Target.GetComponent<Unit>().GetDamage(attackDamage, transform);
     }
 
@@ -428,7 +428,7 @@ public class Unit : HealthBar
         foreach (GameObject enemy in enemies)
         {
             //if (!IsInRange(enemy) || enemy.GetComponent<Unit>().Disabled)
-            if (enemy.GetComponent<Unit>().Disabled)
+            if (enemy.GetComponent<Unit>().Disabled || !IsEnemyBehindMeOnXAxis(enemy.transform))
                 continue;
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance < lowestDistance)
@@ -440,6 +440,12 @@ public class Unit : HealthBar
         return closestEnemy;
     }
 
+    bool IsEnemyBehindMeOnXAxis(Transform target)
+    {
+        if (wayX == -1)
+            return transform.position.x > target.transform.position.x;
+        return transform.position.x < target.transform.position.x;
+    }
 
 
     protected GameObject[] GetEnemies()

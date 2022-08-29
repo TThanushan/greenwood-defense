@@ -1,5 +1,5 @@
 using UnityEngine;
-
+[DisallowMultipleComponent]
 public class DisableIfUnitDisabled : MonoBehaviour
 {
     Unit unit;
@@ -11,13 +11,25 @@ public class DisableIfUnitDisabled : MonoBehaviour
 
     private void Update()
     {
-        if (unit.Disabled)
-            gameObject.SetActive(false);
-        else
-            gameObject.SetActive(true);
+        DisableLoop();
     }
-    private void OnDisable()
+
+    void DisableLoop()
     {
-        gameObject.SetActive(true);
+        if (unit.Disabled)
+            EnableChild(false);
+        else
+            EnableChild(true);
     }
+
+    void EnableChild(bool value)
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            var child = transform.GetChild(i).gameObject;
+            if (child != null)
+                child.SetActive(value);
+        }
+    }
+
 }

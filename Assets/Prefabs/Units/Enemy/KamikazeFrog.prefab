@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRange: 0.7
-  explosionDamage: 50
+  explosionDamage: 90
   explosionEffect: {fileID: 3572809059910136023, guid: 7c5979eca9433d44e8a8a6b089a6ce18,
     type: 3}
   hitSFX: Classic

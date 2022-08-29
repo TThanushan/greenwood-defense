@@ -19,6 +19,13 @@ public class GhostUnit3 : GhostUnit2
             nextAttackConvertEnemyTag = true;
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        nextEffectTime = 0f;
+        currentConvertCount = convertCount;
+    }
+
     public override void Attack()
     {
         if (nextAttackConvertEnemyTag)
@@ -29,13 +36,16 @@ public class GhostUnit3 : GhostUnit2
 
     void ConvertEnemyCamp(GameObject target)
     {
-        if (target.name == "EnemyCaptain" || target.name.Contains("Ultimate"))
+        if (target.name == "EnemyCaptain" || target.name.Contains("Ultimate") || target.name.Contains("DummyLog"))
             return;
         target.transform.position = transform.position;
         CreateConvertEffect(triggerEffect, target.transform);
         target.GetComponent<Unit>().SetTargetTag(targetTag);
         target.GetComponent<Unit>().RotateSprite();
         target.tag = tag;
+        if (target.GetComponent<ExplodeOnDeath>())
+            target.GetComponent<ExplodeOnDeath>().SetTargetTag(targetTag);
+
 
         currentConvertCount++;
         if (currentConvertCount == convertCount)

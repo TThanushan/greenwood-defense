@@ -15,7 +15,8 @@ public class TeleportFrogUnit : Unit
 
     void DoEffect()
     {
-        if (Target.name == "PlayerCaptain")
+
+        if (Target.name == "PlayerCaptain" || Target.name == "EnemyCaptain")
             return;
         CreateEffect();
 
@@ -32,6 +33,8 @@ public class TeleportFrogUnit : Unit
 
         if (transform.position.x < poolObject.playerCaptain.transform.position.x)
             transform.position = new Vector2(poolObject.playerCaptain.transform.position.x + 0.15f, transform.position.y);
+        if (transform.position.x > poolObject.enemyCaptain.transform.position.x)
+            transform.position = new Vector2(poolObject.enemyCaptain.transform.position.x - 0.15f, transform.position.y);
     }
 
 

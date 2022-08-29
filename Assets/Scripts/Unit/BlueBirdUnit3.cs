@@ -21,6 +21,12 @@ public class BlueBirdUnit3 : BlueBirdUnit2
 
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        birdSpawnCooldown = 0f;
+    }
+
     void ResetTravelDistCoef()
     {
         travelDistCoef = 1f;

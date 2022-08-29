@@ -143,14 +143,15 @@ public class HealthBar : MonoBehaviour
     }
 
     //Caller can be null because the unit is calling getdamage on himself.
-    public virtual void GetDamage(float damage, Transform caller, string HitSoundName = "")
+    public virtual void GetDamage(float damage, Transform caller, string hitSoundName = "")
     {
         if (currentHealth <= 0)
             return;
         if (bigShieldCurrent > 0)
         {
             bigShieldCurrent--;
-            damage = 0;
+            poolObject.audioManager.Play(Constants.SHIELD_HIT_SFX);
+            return;
         }
         if (shield > 0)
         {
@@ -172,13 +173,16 @@ public class HealthBar : MonoBehaviour
             OnDeath?.Invoke();
             currentHealth = 0f;
         }
-        poolObject.audioManager.PlayHitSound();
+        if (hitSoundName != "None" && (!caller || (caller && !caller.GetComponent<UnitAoeAttack>() && !caller.GetComponent<Trap>())))
+            poolObject.audioManager.PlayHitSound();
         if (damage < 1)
             return;
         GameObject obj = poolObject.DisplayDamageText(damage);
         if (obj)
             obj.transform.position = GetRandomPosition(transform.position, -0.04f, 0.04f, -0.04f, 0.04f);
     }
+
+
 
     Vector2 GetRandomPosition(Vector2 pos, float xRangeA, float xRangeB, float yRangeA, float yRangeB)
     {

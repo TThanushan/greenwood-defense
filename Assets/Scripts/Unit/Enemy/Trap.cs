@@ -62,6 +62,12 @@ public class Trap : MonoBehaviour
         }
 
     }
+
+    public void GetDamage(float damage, Transform caller, string hitSoundName = "")
+    {
+
+    }
+
     private void RotateObjAwayFrom(GameObject obj, GameObject _target)
     {
         Vector3 dir = _target.transform.position - transform.position;
@@ -70,12 +76,12 @@ public class Trap : MonoBehaviour
     }
     protected void DamageTarget()
     {
-        target.GetComponent<HealthBar>().GetDamage(damage, transform, "Classic");
+        target.GetComponent<HealthBar>().GetDamage(damage, transform, "");
     }
 
     protected void DamageTarget(GameObject target, float damage)
     {
-        target.GetComponent<HealthBar>().GetDamage(damage, transform, "Classic");
+        target.GetComponent<HealthBar>().GetDamage(damage, transform, "");
     }
     protected bool IsTargetInRange()
     {

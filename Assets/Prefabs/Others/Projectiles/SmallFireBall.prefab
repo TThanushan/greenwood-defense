@@ -139,7 +139,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   moveTowardTarget: 1
   explosionRange: 0.3
-  maxTargetDistance: 1.5
+  maxTargetDistance: 2
 --- !u!1 &2116847985150317397
 GameObject:
   m_ObjectHideFlags: 0

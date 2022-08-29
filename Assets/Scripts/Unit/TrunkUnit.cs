@@ -9,8 +9,12 @@ public class TrunkUnit : UnitShooter
     Transform ammoBar;
     Transform reloadAmmoBar;
     public int AMMO_RELOAD_AMOUNT = 3;
-
+    public int ammoMinimumToShoot = 5;
+    public float ammoReloadTime = 0.2f;
     bool shooting;
+
+    float ammoSave;
+
     protected override void Awake()
     {
         base.Awake();
@@ -18,24 +22,38 @@ public class TrunkUnit : UnitShooter
         reloadAmmoBar = transform.Find("AmmoBar/Canvas/ReloadBar");
 
         currentAmmo = bulletShotEachTime;
-        InvokeRepeating("ReloadCurrentAmmo", 0f, 0.2f);
+        InvokeRepeating(nameof(ReloadCurrentAmmo), 0f, ammoReloadTime);
+        InvokeRepeating(nameof(Unblocker), 0f, 1f);
+    }
+
+    void Unblocker()
+    {
+        if (currentAmmo == bulletShotEachTime)
+            return;
+        if (currentAmmo == ammoSave)
+            shooting = false;
+        else if (shooting)
+            ammoSave = currentAmmo;
     }
     protected override void Update()
     {
         base.Update();
+        if (Disabled)
+            return;
         UpdateAmmoBarLength();
         UpdateReloadAmmoBarLength();
 
-        if (InRangeWithTarget() && currentAmmo >= 5 && !shooting)
+        if (InRangeWithTarget() && currentAmmo >= ammoMinimumToShoot && !shooting)
             StartCoroutine(ShootInRow(Target));
         else if (!InRangeWithTarget())
             shooting = false;
+        //Unblocker();
     }
 
     void ReloadCurrentAmmo()
     {
         // Reload if not target or if in range but ammo under 5
-        if (!InRangeWithTarget() || (InRangeWithTarget() && currentAmmo < 5))
+        if (!InRangeWithTarget() || (InRangeWithTarget() && currentAmmo < ammoMinimumToShoot))
         {
             currentAmmo += AMMO_RELOAD_AMOUNT;
             if (currentAmmo > bulletShotEachTime)
@@ -45,6 +63,13 @@ public class TrunkUnit : UnitShooter
 
     protected override void Shoot(GameObject target)
     {
+    }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+        shooting = false;
+        currentAmmo = bulletShotEachTime;
     }
 
     IEnumerator ShootInRow(GameObject target)

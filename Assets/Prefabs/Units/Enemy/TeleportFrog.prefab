@@ -370,8 +370,8 @@ MonoBehaviour:
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 4
-  attackSpeed: 1
+  attackDamage: 10
+  attackSpeed: 0.5
   attackRange: 0.24
   moveSpeed: 0.5
   moneyReward: 14

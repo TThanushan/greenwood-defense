@@ -178,7 +178,7 @@ MonoBehaviour:
   hitSFX: []
   isNotAUnit: 0
   paralysed: 0
-  bullet: {fileID: 2116847984675237283, guid: 5af5e5af9fa54ef4b9367a451062c1f7, type: 3}
+  bullet: {fileID: 2116847984675237283, guid: df91fb73b11abb24ab8de7a80487cc4f, type: 3}
   bullet2: {fileID: 0}
   bulletPosition: {fileID: 2918563567972793647}
   bigShieldAmount: 5

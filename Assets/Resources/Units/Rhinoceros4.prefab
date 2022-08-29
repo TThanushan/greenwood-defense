@@ -5136,6 +5136,8 @@ MonoBehaviour:
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
+  isNotAUnit: 0
   paralysed: 0
   damageBonus: 4
   timeBetweenCharge: 5
@@ -5262,7 +5264,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: EffectBar
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4507035904194247476, guid: b54f273202a5c07479149c89b013a2d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b54f273202a5c07479149c89b013a2d8, type: 3}
 --- !u!4 &3798518949713373145 stripped
 Transform:

@@ -34,6 +34,8 @@ public class MenuScript : MonoBehaviour
     void Init()
     {
         fadeAnimator = transform.Find("MiddleGroup/FadeSceneBody").transform.GetComponent<Animator>();
+        if (!fadeAnimator.gameObject.activeSelf)
+            fadeAnimator.gameObject.SetActive(true);
         blackSquareFade = transform.Find("MiddleGroup/FadeSceneBody/Canvas/blackSquareFade").GetComponent<Image>();
     }
 
@@ -69,17 +71,25 @@ public class MenuScript : MonoBehaviour
     public void LoadScene(string sceneName)
     {
         int index = SceneUtility.GetBuildIndexByScenePath(sceneName);
+        if (SceneManager.GetActiveScene().name == "Stage" && sceneName != "Stage")
+            TrackPlayer.instance.PlayMenuTheme();
+
         LoadScene(index);
+
     }
 
     public void LoadStageScene()
     {
         LoadScene(STAGE_SCENE_NAME);
+        //TrackPlayer.instance.PlayMainTheme();
+
     }
 
     public void LoadLevelSelectionScene()
     {
         LoadScene(levelSelectionSceneIndex);
+        //TrackPlayer.instance.PlayMenuTheme();
+
     }
 
     public void LoadCurrentScene()

@@ -31,6 +31,8 @@ public class FatFrogUnit : Unit
         GameObject newFrog = PoolObject.instance.GetPoolObject(frogPrefab);
         newFrog.transform.position = GetRandomSpawnPosition(transform.position);
         newFrog.GetComponent<Unit>().SetTargetTag(targetTag);
+        if (targetTag == "Enemy")
+            newFrog.GetComponent<Unit>().RotateSprite();
     }
 
     Vector2 GetRandomSpawnPosition(Vector2 spawnPosition)

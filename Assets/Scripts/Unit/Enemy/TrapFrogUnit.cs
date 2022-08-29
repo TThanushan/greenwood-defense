@@ -24,7 +24,7 @@ public class TrapFrogUnit : Unit
         GameObject newTrap = poolObject.GetPoolObject(trap);
         newTrap.transform.position = trapSpawnPosition.transform.position;
         //newTrap.GetComponent<Trap>().SetTargetTag(targetTag);
-        newTrap.GetComponent<Unit>().SetTargetTag(targetTag);
+        newTrap.GetComponent<Trap>().SetTargetTag(targetTag);
 
         nextTrapSpawn = Time.time + timeBetweenTrap;
         return newTrap;

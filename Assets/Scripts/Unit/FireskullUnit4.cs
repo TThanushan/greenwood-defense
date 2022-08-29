@@ -21,14 +21,24 @@ public class FireskullUnit4 : FireskullUnit3
     }
     void DoEffect()
     {
-        CreateEffect();
-        Invoke("DamageEnemiesAround", 0.1f);
+        Invoke(nameof(DamageEnemiesAround), 2f);
 
-        nextEffectTime4 = Time.time + timeBetweenEffect3;
     }
-
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        nextEffectTime4 = 0f;
+    }
     private void DamageEnemiesAround()
     {
+        if (!IsTargetEnabled(Target) || !EnoughRangeToAttackTarget() || nextEffectTime4 > Time.time)
+        {
+            //nextEffectTime4 = Time.time + 2f;
+            return;
+        }
+
+        CreateEffect();
+
         GameObject[] enemies = GetEnemies();
         foreach (GameObject enemy in enemies)
         {
@@ -40,6 +50,7 @@ public class FireskullUnit4 : FireskullUnit3
                 InstantiateTrap(enemy);
             }
         }
+        nextEffectTime4 = Time.time + timeBetweenEffect4;
 
     }
     protected GameObject InstantiateTrap(GameObject target)

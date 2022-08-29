@@ -49,6 +49,12 @@ public class NinjaFrogUnit : Unit
             Unit unit = newClone.GetComponent<Unit>();
             unit.attackDamage = attackDamage;
             unit.attackSpeed = attackSpeed;
+            unit.SetTargetTag(targetTag);
+            //unit.FlipUnitSpriteOnWayX();
+            if (targetTag == "Enemy")
+                unit.RotateSprite();
+
+
         }
     }
     Vector2 GetRandomPosition(Vector2 pos, float xRangeA, float xRangeB, float yRangeA, float yRangeB)
@@ -62,8 +68,8 @@ public class NinjaFrogUnit : Unit
         if (Target.name == "PlayerCaptain")
             return;
         CreateEffect();
-        // Spawn log.
-        SpawnDummyLog();
+        //// Spawn log.
+        //SpawnDummyLog();
 
         // Teleport behind.
         TeleportBehind();

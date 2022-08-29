@@ -42,6 +42,7 @@ public class MeteorMagma : Rocket
         newTrap.transform.position = target.transform.position;
         newTrap.GetComponent<Trap>().SetTargetTag(targetTag);
         newTrap.GetComponent<Trap>().damage = magmaDamage;
+        Debug.Log("magdama:" + magmaDamage, gameObject);
 
 
         return newTrap;

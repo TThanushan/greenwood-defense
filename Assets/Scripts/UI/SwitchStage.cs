@@ -28,6 +28,7 @@ public class SwitchStage : MonoBehaviour
         imageNext = transform.Find("TopGroup/NextLevel/Image").GetComponent<Image>();
         imagePrevious = transform.Find("TopGroup/PreviousLevel/Image").GetComponent<Image>();
 
+        SelectPreviousStage();
         UpdateButtonColor();
     }
 
@@ -73,7 +74,7 @@ public class SwitchStage : MonoBehaviour
         string[] splitted = currentStage.Split(' ');
         string newStage = splitted[0] + ' ' + (int.Parse(splitted[1]) + i);
 
-        if (!IsStageUnlocked(newStage) || !DoesStageExist(newStage))
+        if (!IsStageUnlocked(newStage))
             return null;
         return newStage;
     }
@@ -92,10 +93,6 @@ public class SwitchStage : MonoBehaviour
             imagePrevious.color = enableButtonColor;
     }
 
-    bool DoesStageExist(string stage)
-    {
-        return Resources.Load("Stages/" + stage) != null;
-    }
     void UpdateStars()
     {
         float score = saveManager.GetLevelScore();
@@ -123,11 +120,11 @@ public class SwitchStage : MonoBehaviour
         }
     }
 
-    void GetStageStarsNumber()
-    {
-        saveManager.GetLevelScore();
+    //void GetStageStarsNumber()
+    //{
+    //    saveManager.GetLevelScore();
 
-    }
+    //}
 
     void SetNewStage(string newStage)
     {
@@ -136,12 +133,12 @@ public class SwitchStage : MonoBehaviour
         StageInfosManager.instance.SetCurrentStageName(newStage);
     }
 
-    bool IsStageCompleted(string stage)
-    {
-        string[] splitted = stage.Split(' ');
-        int nb = int.Parse(splitted[1]);
-        return nb < saveManager.maxLevelUnlocked;
-    }
+    //bool IsStageCompleted(string stage)
+    //{
+    //    string[] splitted = stage.Split(' ');
+    //    int nb = int.Parse(splitted[1]);
+    //    return nb < saveManager.maxLevelUnlocked;
+    //}
 
     bool IsStageUnlocked(string stage)
     {

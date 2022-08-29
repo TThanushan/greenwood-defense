@@ -19,35 +19,13 @@ public class StageGenerator : MonoBehaviour
     private void Awake()
     {
         stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
-        //stageNumber = tmpStageNumber;
         maxPrefabIndex = GetMaxPrefabIndex();
         GenerateStages();
 
     }
-
-
-    private void Update()
-    {
-        //Test();
-    }
-    void Test()
-    {
-        if (!generate)
-            return;
-        //if (Input.GetKeyDown(KeyCode.RightArrow))
-        //{
-        //stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
-        stageNumber = tmpStageNumber;
-        GenerateStages();
-        print("generate stage " + stageNumber);
-        //}
-    }
-
     void GenerateStages()
     {
-
         List<EnemyType> enemyTypes = new List<EnemyType>(maxPrefabIndex + 1);
-
         // Add melee frog for early game.
         if (stageNumber < 10)
         {
@@ -69,13 +47,11 @@ public class StageGenerator : MonoBehaviour
             AddEnemyType(currentPrefabIndex, ref prefabs, ref enemyTypes);
         }
 
-        float stageDivided = stageNumber / 50f;
         // Add boss.
-        if (stageDivided == 1 || stageDivided == 2)
+        if (stageNumber == 50 || stageNumber == 100)
         {
-            print("stageDi" + stageDivided);
             int index = 0;
-            if (stageDivided == 2)
+            if (stageNumber == 100)
                 index = 1;
             EnemyType enemyType = GetEnemyType(index, ref bossPrefabs);
             enemyType.InfiniteSpawning = false;
@@ -88,6 +64,11 @@ public class StageGenerator : MonoBehaviour
 
     EnemyType GetEnemyType(int index, ref GameObject[] prefabs)
     {
+        //if (index >= prefabs.Length)
+        //{
+        //    Debug.LogError("index > prefabs.legth" + prefabs.Length);
+        //    return null;
+        //}
         EnemyType enemyType = new()
         {
             Enemy = prefabs[index],
@@ -103,7 +84,10 @@ public class StageGenerator : MonoBehaviour
 
     void AddEnemyType(int index, ref GameObject[] prefabs, ref List<EnemyType> enemyTypes)
     {
-        enemyTypes.Add(GetEnemyType(index, ref prefabs));
+        EnemyType enemyType = GetEnemyType(index, ref prefabs);
+        float timeBetweenSpawnThresholdSkip = 3f;
+        if (enemyType.TimeBetweenSpawn > timeBetweenSpawnThresholdSkip)
+            enemyTypes.Add(enemyType);
     }
 
 
@@ -115,9 +99,7 @@ public class StageGenerator : MonoBehaviour
     int GetSpawnCount(int currentPrefabIndex)
     {
         int count = 0;
-        //print(Mathf.RoundToInt(stageNumber / 5) + " == " + currentPrefabIndex);
         float fiveDiv = stageNumber / 5f;
-        //print("stage " + stageNumber + " " + fiveDiv + "===" + Mathf.RoundToInt(fiveDiv));
         if (fiveDiv == Mathf.RoundToInt(fiveDiv) && Mathf.RoundToInt(fiveDiv) == currentPrefabIndex)
             count = 3;
         return count;
@@ -125,15 +107,18 @@ public class StageGenerator : MonoBehaviour
 
     int GetMaxPrefabIndex()
     {
-        return stageNumber / 5 + 1;
+        int prefabNb = stageNumber / 5;
+        if (prefabs.Length != prefabNb)
+            prefabNb++;
+        return prefabNb;
     }
 
     float GetTimeBetweenSpawn(int currentPrefabIndex)
     {
         float minTime = 10f;
         float newTime;
-        int coef = stageNumber / 5;
-        int coef2 = maxPrefabIndex - currentPrefabIndex;
+        float coef = 10f;
+        float coef2 = maxPrefabIndex - currentPrefabIndex;
         float fullCoef = coef * coef2;
         newTime = minTime - (0.075f * fullCoef);
         //print($"coef : {coef}, coef2 : {coef2}, fullCoef: {fullCoef}, newTime : {newTime}");

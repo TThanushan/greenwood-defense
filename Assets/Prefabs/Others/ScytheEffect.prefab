@@ -137,6 +137,7 @@ MonoBehaviour:
   target: {fileID: 0}
   effect: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  moveTowardTarget: 0
   piercingCount: 1000
 --- !u!114 &2405191153317654363
 MonoBehaviour:
@@ -150,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ccc894ad7c5a44d84eeef5474acc0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableTime: 0.25
+  disableTime: 0.5
 --- !u!1 &5101950799238971004
 GameObject:
   m_ObjectHideFlags: 0

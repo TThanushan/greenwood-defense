@@ -58,7 +58,8 @@ public class RockUnit3 : RockUnit2
                 bulletScript.wayX *= -1;
                 //bulletScript.moveSpeed *= 1.25f;
                 bulletScript.SetTargetTag(targetTag);
-                bulletScript.GetSpriteRenderer().color = Color.white;
+                if (bulletScript.GetSpriteRenderer())
+                    bulletScript.GetSpriteRenderer().color = Color.white;
             }
         }
     }

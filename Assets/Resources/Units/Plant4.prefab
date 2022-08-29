@@ -255,7 +255,7 @@ MonoBehaviour:
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 15
   attackSpeed: 3
-  attackRange: 3
+  attackRange: 1.5
   moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1

@@ -20,28 +20,42 @@ public class RhinocerosUnit3 : RhinocerosUnit2
     {
         base.Update();
         UpdateEffectBarLength();
+        if (currentCount > 0)
+            ChangeMoveSpeedIfUnchanged(moveSpeedBonus);
+
 
     }
     protected override void OnEnable()
     {
         base.OnEnable();
-        OnDeath += DisableHitEffectBar;
-        HitEffectBar.transform.parent.transform.parent.gameObject.SetActive(true);
+        //OnDeath += DisableHitEffectBar;
+        //HitEffectBar.transform.parent.transform.parent.gameObject.SetActive(true);
+        //UpdateEffectBarLength();
+        HitEffectBar.transform.localScale = new Vector3(1f, HitEffectBar.transform.localScale.y, HitEffectBar.transform.localScale.z);
+    }
 
-    }
-    void DisableHitEffectBar()
+    protected override void OnDisable()
     {
-        OnDeath -= DisableHitEffectBar;
-        HitEffectBar.transform.parent.transform.parent.gameObject.SetActive(false);
+        base.OnDisable();
+        currentCount = count;
     }
+
 
     private void UpdateEffectBarLength()
     {
-        HitEffectBar.transform.localScale = new Vector3(1 - (float)currentCount / count, HitEffectBar.transform.localScale.y, HitEffectBar.transform.localScale.z);
+        float x = 1f - (float)currentCount / count;
+        if (currentCount == count && ChargeReady())
+            x = 1;
+        HitEffectBar.transform.localScale = new Vector3(x, HitEffectBar.transform.localScale.y, HitEffectBar.transform.localScale.z);
     }
 
     public override void Attack()
     {
+        if (Target.name == "EnemyCaptain")
+        {
+            base.Attack();
+            return;
+        }
         if (ChargeReady() && currentCount == count)
         {
             currentCount = 0;
@@ -55,7 +69,6 @@ public class RhinocerosUnit3 : RhinocerosUnit2
             if (currentCount == count)
                 OnChargeEnd?.Invoke();
         }
-
         base.Attack();
 
 

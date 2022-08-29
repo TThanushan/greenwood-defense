@@ -1729,30 +1729,6 @@ MonoBehaviour:
             m_StringArgument: ButtonClick
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 3715788401226662629}
-          m_TargetAssemblyTypeName: SwitchStage, Assembly-CSharp
-          m_MethodName: UpdateNextStageButtonColor
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1698624811}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3715788401226662629}
-          m_TargetAssemblyTypeName: SwitchStage, Assembly-CSharp
-          m_MethodName: UpdatePreviousStageButtonColor
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 652721098}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!1 &823153756
 GameObject:
   m_ObjectHideFlags: 0
@@ -3740,30 +3716,6 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: ButtonClick
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3715788401226662629}
-          m_TargetAssemblyTypeName: SwitchStage, Assembly-CSharp
-          m_MethodName: UpdatePreviousStageButtonColor
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 652721098}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 3715788401226662629}
-          m_TargetAssemblyTypeName: SwitchStage, Assembly-CSharp
-          m_MethodName: UpdateNextStageButtonColor
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1698624811}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
 --- !u!1 &1515131924

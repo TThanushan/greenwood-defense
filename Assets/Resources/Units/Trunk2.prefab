@@ -268,7 +268,9 @@ MonoBehaviour:
   bulletPosition: {fileID: 1142343704}
   bulletShotEachTime: 3
   timeBetweenShoot: 0.125
-  AMMO_RELOAD_AMOUNT: 3
+  AMMO_RELOAD_AMOUNT: 1
+  ammoMinimumToShoot: 2
+  ammoReloadTime: 0.1
 --- !u!95 &1829568272
 Animator:
   serializedVersion: 4
@@ -648,7 +650,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmmoBar
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 3798518949355348248, guid: b54f273202a5c07479149c89b013a2d8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4507035904194247476, guid: b54f273202a5c07479149c89b013a2d8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b54f273202a5c07479149c89b013a2d8, type: 3}
 --- !u!4 &7296189453823010250 stripped
 Transform:

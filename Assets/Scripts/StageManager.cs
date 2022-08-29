@@ -32,6 +32,14 @@ public class StageManager : MonoBehaviour
             return;
         }
     }
+
+
+    void SetEnemyCaptainHealthUsingStageNumber()
+    {
+        enemyCaptain.maxHealth = Constants.ENEMY_CAPTAIN_MAX_HEALTH + StageInfosManager.instance.GetCurrentStageNumber() * Constants.ENEMY_CAPTAIN_MAX_HEALTH_BONUS;
+        enemyCaptain.currentHealth = enemyCaptain.maxHealth;
+    }
+
     private void Start()
     {
         InitVal();
@@ -109,6 +117,8 @@ public class StageManager : MonoBehaviour
         gameOverPanel = transform.Find("MiddleGroup/GameOverPanel").gameObject;
         levelCompletePanel = transform.Find("MiddleGroup/LevelCompletePanel").gameObject;
         saveManager = SaveManager.instance;
+        SetEnemyCaptainHealthUsingStageNumber();
+
         InitLevelCompleteMoneyReward();
     }
 

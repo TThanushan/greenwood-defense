@@ -5127,14 +5127,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3c54c22428abf4db1431bf551d0b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 150
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 10
+  attackDamage: 25
   attackSpeed: 1
   attackRange: 0.24
-  moveSpeed: 0.25
+  moveSpeed: 0.5
   moneyReward: 20
   manaReward: 10
   deathSfxName: 
@@ -5142,8 +5142,8 @@ MonoBehaviour:
   isNotAUnit: 0
   paralysed: 0
   attackDamageBonus: 100
-  zombieAttackSpeed: 0.125
-  zombieMoveSpeed: 0.75
+  zombieAttackSpeed: 0.1
+  zombieMoveSpeed: 0.9
   zombieActivationEffect: {fileID: 459091600923905559, guid: 3322ce432b78adf428595b6060168555,
     type: 3}
 --- !u!95 &3315706013935442866
