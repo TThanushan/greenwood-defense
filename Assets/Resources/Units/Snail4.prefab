@@ -225,7 +225,7 @@ MonoBehaviour:
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 0
   attackSpeed: 2
-  attackRange: 1.25
+  attackRange: 1
   moveSpeed: 0.15
   moneyReward: 1
   manaReward: 1
@@ -236,7 +236,7 @@ MonoBehaviour:
   healthShieldBonusRespawnTime: 5
   healthShieldBonusHealthAmount: 2
   healthShieldBonusPercentage: 20
-  bonusRange: 1.25
+  bonusRange: 1.5
   healingPercentage: 10
   constantHealingPercentage: 3.5
   timeBetweenConstantHealing: 0.25

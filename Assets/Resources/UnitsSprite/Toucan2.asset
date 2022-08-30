@@ -6,7 +6,7 @@ Sprite:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BlueBird4
+  m_Name: Toucan2
   m_Rect:
     serializedVersion: 2
     x: 0
@@ -22,12 +22,12 @@ Sprite:
   m_AtlasName: 
   m_PackingTag: 
   m_RenderDataKey:
-    179574513e3f91f488f3cf22cf1de74a: 4726298187165579731
+    3de50fc2eee0cb24182e044a5f84abac: 2227309599351404590
   m_AtlasTags: []
   m_SpriteAtlas: {fileID: 0}
   m_RD:
     serializedVersion: 3
-    texture: {fileID: 2800000, guid: 179574513e3f91f488f3cf22cf1de74a, type: 3}
+    texture: {fileID: 2800000, guid: 3de50fc2eee0cb24182e044a5f84abac, type: 3}
     alphaTexture: {fileID: 0}
     secondaryTextures: []
     m_SubMeshes:
@@ -118,7 +118,7 @@ Sprite:
     downscaleMultiplier: 1
   m_AtlasRD:
     serializedVersion: 3
-    texture: {fileID: 2800000, guid: 179574513e3f91f488f3cf22cf1de74a, type: 3}
+    texture: {fileID: 2800000, guid: 3de50fc2eee0cb24182e044a5f84abac, type: 3}
     alphaTexture: {fileID: 0}
     secondaryTextures: []
     m_SubMeshes:
@@ -217,4 +217,4 @@ Sprite:
     - {x: 0.16, y: 0.08}
     - {x: 0.14, y: 0.13}
   m_Bones: []
-  m_SpriteID: 3d9b394092f279140800000000000000
+  m_SpriteID: e287822a74ef8ee10800000000000000

@@ -287,7 +287,7 @@ MonoBehaviour:
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 1.5
   attackSpeed: 6
-  attackRange: 2
+  attackRange: 1.5
   moveSpeed: 0.2
   moneyReward: 1
   manaReward: 1
@@ -302,6 +302,8 @@ MonoBehaviour:
   bulletShotEachTime: 100
   timeBetweenShoot: 0.05
   AMMO_RELOAD_AMOUNT: 3
+  ammoMinimumToShoot: 5
+  ammoReloadTime: 0.2
 --- !u!1 &5367232546079401138
 GameObject:
   m_ObjectHideFlags: 0

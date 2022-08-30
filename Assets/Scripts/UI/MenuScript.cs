@@ -64,6 +64,8 @@ public class MenuScript : MonoBehaviour
 
     public void LoadScene(int sceneIndex)
     {
+        if (SceneManager.GetActiveScene().name == "Stage" && SceneManager.GetSceneByBuildIndex(sceneIndex).name != "Stage")
+            TrackPlayer.instance.PlayMenuTheme();
         ResetTimeScale();
         StartCoroutine(FadeInScene(sceneIndex));
     }

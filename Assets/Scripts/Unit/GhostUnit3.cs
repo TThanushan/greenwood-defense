@@ -6,7 +6,7 @@ public class GhostUnit3 : GhostUnit2
     public float timeBetweenEffect = 5f;
     public int convertCount;
     public GameObject triggerEffect;
-    float nextEffectTime;
+    float nextEffectTime3;
     int currentConvertCount;
     protected bool nextAttackConvertEnemyTag;
 
@@ -15,14 +15,14 @@ public class GhostUnit3 : GhostUnit2
     protected override void Update()
     {
         base.Update();
-        if (nextEffectTime <= Time.time)
+        if (nextEffectTime3 <= Time.time)
             nextAttackConvertEnemyTag = true;
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
-        nextEffectTime = 0f;
+        nextEffectTime3 = 0f;
         currentConvertCount = convertCount;
     }
 
@@ -47,12 +47,12 @@ public class GhostUnit3 : GhostUnit2
             target.GetComponent<ExplodeOnDeath>().SetTargetTag(targetTag);
 
 
-        currentConvertCount++;
-        if (currentConvertCount == convertCount)
+        currentConvertCount--;
+        if (currentConvertCount <= 0)
         {
             nextAttackConvertEnemyTag = false;
-            nextEffectTime = Time.time + timeBetweenEffect;
-            currentConvertCount = 0;
+            nextEffectTime3 = Time.time + timeBetweenEffect;
+            currentConvertCount = convertCount;
         }
     }
 

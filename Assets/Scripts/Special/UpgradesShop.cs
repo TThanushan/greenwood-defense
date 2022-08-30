@@ -420,7 +420,6 @@ public class UpgradesShop : MonoBehaviour
         for (int i = 1; i < level + 1; i++)
         {
             string starName = "Star" + i.ToString();
-            print(starName);
             GameObject starUnlocked = stars.Find(starName + "/StarUnlocked").gameObject;
             starUnlocked.SetActive(true);
             if (level == levelMax)

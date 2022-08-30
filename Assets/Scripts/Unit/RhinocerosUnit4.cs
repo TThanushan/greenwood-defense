@@ -16,9 +16,12 @@ public class RhinocerosUnit4 : RhinocerosUnit3
     protected override void Awake()
     {
         base.Awake();
+        OnChargeStart += ResetDefenseBonus;
         OnChargeEnd += ResetDefenseBonus;
         defenseBonusEffect = transform.Find("SpriteBody/Sprite").gameObject;
+
     }
+
 
 
     void ResetDefenseBonus()

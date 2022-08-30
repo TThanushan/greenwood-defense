@@ -5,6 +5,7 @@ public class RhinocerosUnit3 : RhinocerosUnit2
     [Header("AoeCharge")]
     public int count;
     protected event System.Action OnChargeEnd;
+    protected event System.Action OnChargeStart;
 
     int currentCount;
     GameObject HitEffectBar;
@@ -66,6 +67,9 @@ public class RhinocerosUnit3 : RhinocerosUnit2
             nextChargeTime = 0f;
             nextAttackTime = 0f;
             currentCount++;
+            if (currentCount == 1)
+                OnChargeStart?.Invoke();
+
             if (currentCount == count)
                 OnChargeEnd?.Invoke();
         }

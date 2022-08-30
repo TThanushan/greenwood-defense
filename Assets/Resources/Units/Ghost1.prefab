@@ -253,13 +253,15 @@ MonoBehaviour:
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 2
+  attackDamage: 3
   attackSpeed: 0.5
   attackRange: 0.24
   moveSpeed: 0.4
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
+  isNotAUnit: 0
   paralysed: 0
 --- !u!1 &5367232546079401138
 GameObject:

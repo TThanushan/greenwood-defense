@@ -155,7 +155,7 @@ public class HitBasedUnit : Unit
             isNextAttackBlocked = false;
             return;
         }
-        if (effect == Effect.BlockNextAttack && (!IsCallerPoisoning(caller)))
+        if (effect == Effect.BlockNextAttack && (!IsCallerPoisoning(caller) && caller && !caller.GetComponent<Trap>()))
             IncreaseHitCount();
         base.GetDamage(damage, caller, HitSoundName);
     }

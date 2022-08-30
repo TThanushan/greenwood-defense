@@ -11,12 +11,12 @@ public class GhostUnit4 : GhostUnit3
     public float explosionRange = 1f;
     public GameObject triggerEffect4;
     public string effectSFX = "Classic";
-    float nextEffectTime;
+    float nextEffectTime4;
 
     protected override void Update()
     {
         base.Update();
-        if (nextEffectTime <= Time.time && EnoughRangeToAttackTarget() && !nextAttackConvertEnemyTag)
+        if (nextEffectTime4 <= Time.time && EnoughRangeToAttackTarget() && (!nextAttackConvertEnemyTag && Target && !Target.name.Contains("Captain")))
             DoEffect();
     }
 
@@ -42,7 +42,7 @@ public class GhostUnit4 : GhostUnit3
         currentHealth += totalDamage * (lifeStealPercentage / 100);
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
-        nextEffectTime = Time.time + timeBetweenEffect4;
+        nextEffectTime4 = Time.time + timeBetweenEffect4;
     }
 
     void OnDrawGizmosSelected()

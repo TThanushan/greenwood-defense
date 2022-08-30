@@ -419,23 +419,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 055ba260e106ff94ebed073475f07e0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 35
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 5
-  attackSpeed: 0.5
+  attackDamage: 7.5
+  attackSpeed: 0.4
   attackRange: 0.24
   moveSpeed: 0.5
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
+  isNotAUnit: 0
   paralysed: 0
   invulnerabilityBonusDuration: 6
   invulnerabilityBonusRespawnTime: 10
   timeBetweenEffect: 15
   convertCount: 2
-  triggerEffect: {fileID: 4352566265116347071, guid: 22bc6555adf93b449805c08f5bffd2cf,
+  triggerEffect: {fileID: 9051327033695357758, guid: 16f3c64656bc2e74288557dafd1a9968,
     type: 3}
 --- !u!1 &5367232546079401138
 GameObject:

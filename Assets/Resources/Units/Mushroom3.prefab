@@ -261,9 +261,12 @@ MonoBehaviour:
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
+  isNotAUnit: 0
   paralysed: 0
   effectRange: 1.35
-  effectDamage: 0.15
+  effectDamage: 0.225
+  damageSFXName: Classic
   dotCount: 80
   timeBetweenDotDamage: 0.05
   poisonParticlesEffect: {fileID: 4352566265116347071, guid: 065583c2f333d244fb609dabd1337892,

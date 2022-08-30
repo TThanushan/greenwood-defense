@@ -28,7 +28,6 @@ public class SwitchStage : MonoBehaviour
         imageNext = transform.Find("TopGroup/NextLevel/Image").GetComponent<Image>();
         imagePrevious = transform.Find("TopGroup/PreviousLevel/Image").GetComponent<Image>();
 
-        SelectPreviousStage();
         UpdateButtonColor();
     }
 

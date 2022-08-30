@@ -538,20 +538,22 @@ MonoBehaviour:
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 3
-  attackSpeed: 1
+  attackDamage: 5
+  attackSpeed: 0.85
   attackRange: 0.25
   moveSpeed: 0.3
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
+  hitSFX: []
+  isNotAUnit: 0
   paralysed: 0
   unitLevel: 2
   cycleDuration: 5
-  attackSpeedReduction: 60
+  attackSpeedReduction: 65
   effectDuration: 4
-  attackSpeedBuff: 40
-  attackDamageBuff: 40
+  attackSpeedBuff: 50
+  attackDamageBuff: 50
   lifeStealPercentage: 200
   damageReduction: 0
 --- !u!1 &5367232546079401138

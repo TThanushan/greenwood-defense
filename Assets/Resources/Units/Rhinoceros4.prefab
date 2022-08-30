@@ -5125,7 +5125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c45579c5aeb6eb4891eff6fef8da022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 150
+  maxHealth: 200
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
@@ -5145,7 +5145,7 @@ MonoBehaviour:
   knockBackPower: 0.25
   count: 30
   damageReductionPercentage: 80
-  defenseBonusDuration: 2
+  defenseBonusDuration: 5
   defenseColor: {r: 0.3254902, g: 0.6784314, b: 1, a: 1}
 --- !u!1 &5367232546079401138
 GameObject:

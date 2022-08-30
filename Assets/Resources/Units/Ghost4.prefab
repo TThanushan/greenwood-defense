@@ -419,12 +419,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1604ecfe670a01a48a9ba51ef9c778cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
+  maxHealth: 75
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 8
-  attackSpeed: 0.5
+  attackDamage: 11
+  attackSpeed: 0.35
   attackRange: 0.24
   moveSpeed: 0.55
   moneyReward: 1
@@ -433,15 +433,15 @@ MonoBehaviour:
   hitSFX: []
   isNotAUnit: 0
   paralysed: 0
-  invulnerabilityBonusDuration: 7
+  invulnerabilityBonusDuration: 8
   invulnerabilityBonusRespawnTime: 10
   timeBetweenEffect: 15
-  convertCount: 4
+  convertCount: 5
   triggerEffect: {fileID: 9051327033695357758, guid: 16f3c64656bc2e74288557dafd1a9968,
     type: 3}
   timeBetweenEffect4: 2
-  effectDamagePercentage: 25
-  lifeStealPercentage: 30
+  effectDamagePercentage: 20
+  lifeStealPercentage: 60
   explosionRange: 1.77
   triggerEffect4: {fileID: 7705239179079964477, guid: 788136ed8c65e5448a664ce5095726a0,
     type: 3}
