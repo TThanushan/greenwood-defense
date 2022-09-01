@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static ShowNewEnemyDescriptionCard;
 
 public class SaveManager : MonoBehaviour
 {
@@ -20,7 +21,10 @@ public class SaveManager : MonoBehaviour
     const string UNLOCKED_HERO_UPGRADES_KEY = "UnlockedHeroUpgrades";
     const string IS_TUTORIAL_DONE_KEY = "IsTutorialDone";
     const string AUTO_SAVE_KEY = "IsAutoSave";
+    const string NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY = "IsAutoSave";
+    public List<UnitDescription> unitDescriptions;
 
+    public int newEnemyCardDescriptionShownedIndex;
     public float money;
     private void Awake()
     {
@@ -76,6 +80,9 @@ public class SaveManager : MonoBehaviour
         SaveIsAutoSave();
         money = 0f;
         PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, 0);
+        PlayerPrefs.SetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY, 0);
+        newEnemyCardDescriptionShownedIndex = 0;
+        InitFrogDescription();
     }
 
     void OnApplicationQuit()
@@ -89,7 +96,32 @@ public class SaveManager : MonoBehaviour
             SavePrefs();
     }
 
-
+    void InitFrogDescription()
+    {
+        unitDescriptions = new List<UnitDescription>
+        {
+            new UnitDescription("SwordFrog", "Basic frog, spawn frequently."),
+            new UnitDescription("ShooterFrog", "Range frog, low health."),
+            new UnitDescription("TankFrog", "High health but low damage."),
+            new UnitDescription("SpearFrog", "Damage all enemies in front of him."),
+            new UnitDescription("FatFrog", "Really high health, explode on death and spawn several small frogs."),
+            new UnitDescription("TrapFrog", "Drop traps when walking, damage units that walk on them."),
+            new UnitDescription("PoisonFrog", "Poison his target."),
+            new UnitDescription("HealerFrog", "Heal his allies."),
+            new UnitDescription("AxeFrog", "Low attack speed, high damage on all enemies in front of him."),
+            new UnitDescription("DoubleSwordFrog", "High move speed and attack speed."),
+            new UnitDescription("ShotgunFrog", "High range damage."),
+            new UnitDescription("TeleportFrog", "Every certain time, teleport behind his enemy."),
+            new UnitDescription("RocketLauncherFrog", "Fire a rocket that does splash damage."),
+            new UnitDescription("NinjaFrog", "\"KAGE BUNSHIN NO JUTSU!\""),
+            new UnitDescription("SpeedFrog", "Move and atack super fast."),
+            new UnitDescription("MageFrog", "Shoot fire ball with splash damage."),
+            new UnitDescription("KamikazeFrog", "Explode when being hit."),
+            new UnitDescription("ZombieFrog", "Instead of dying, come back to life with increased damage and movement speed."),
+            new UnitDescription("ScytheFrog", "Each of his attacks send a shock wave in front of him."),
+            new UnitDescription("SummonerFrog", "Summon other frogs."),
+        };
+    }
 
     public void ResetPlayerPrefs()
     {
@@ -174,6 +206,8 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetInt(MAX_LEVEL_UNLOCKED_KEY, maxLevelUnlocked);
         PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, money);
         PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, isTutorialDone);
+        PlayerPrefs.SetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY, newEnemyCardDescriptionShownedIndex);
+
         PlayerPrefs.Save();
     }
 
@@ -231,6 +265,8 @@ public class SaveManager : MonoBehaviour
         }
         isTutorialDone = PlayerPrefs.GetInt(IS_TUTORIAL_DONE_KEY);
         isAutoSave = (PlayerPrefs.GetInt(AUTO_SAVE_KEY) == 1) ? true : false;
+        newEnemyCardDescriptionShownedIndex = PlayerPrefs.GetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY);
+
         LoadUnlockedUnits();
         LoadUnlockedHeroUpgrades();
     }
@@ -414,17 +450,17 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("MaxHealth500", "Increase your captain max health to 500", 3200),
 
 
-            new HeroUpgrade("DamageReduction0%"),
-            new HeroUpgrade("DamageReduction5%", "Reduce the damage taken by your captain by 5%", 200),
-            new HeroUpgrade("DamageReduction10%", "Reduce the damage taken by your captain by 10%", 400),
-            new HeroUpgrade("DamageReduction15%", "Reduce the damage taken by your captain by 15%", 600),
-            new HeroUpgrade("DamageReduction20%", "Reduce the damage taken by your captain by 20%", 800),
-            new HeroUpgrade("DamageReduction25%", "Reduce the damage taken by your captain by 25%", 1000),
-            new HeroUpgrade("DamageReduction30%", "Reduce the damage taken by your captain by 30%", 1200),
-            new HeroUpgrade("DamageReduction35%", "Reduce the damage taken by your captain by 35%", 1400),
-            new HeroUpgrade("DamageReduction40%", "Reduce the damage taken by your captain by 40%", 1600),
-            new HeroUpgrade("DamageReduction45%", "Reduce the damage taken by your captain by 45%", 1800),
-            new HeroUpgrade("DamageReduction50%", "Reduce the damage taken by your captain by 50%", 2000),
+            new HeroUpgrade("DamageReduction0"),
+            new HeroUpgrade("DamageReduction5", "Reduce the damage taken by your captain by 5%", 200),
+            new HeroUpgrade("DamageReduction10", "Reduce the damage taken by your captain by 10%", 400),
+            new HeroUpgrade("DamageReduction15", "Reduce the damage taken by your captain by 15%", 600),
+            new HeroUpgrade("DamageReduction20", "Reduce the damage taken by your captain by 20%", 800),
+            new HeroUpgrade("DamageReduction25", "Reduce the damage taken by your captain by 25%", 1000),
+            new HeroUpgrade("DamageReduction30", "Reduce the damage taken by your captain by 30%", 1200),
+            new HeroUpgrade("DamageReduction35", "Reduce the damage taken by your captain by 35%", 1400),
+            new HeroUpgrade("DamageReduction40", "Reduce the damage taken by your captain by 40%", 1600),
+            new HeroUpgrade("DamageReduction45", "Reduce the damage taken by your captain by 45%", 1800),
+            new HeroUpgrade("DamageReduction50", "Reduce the damage taken by your captain by 50%", 2000),
 
             new HeroUpgrade("MoneyIncomeIncrease0"),
             new HeroUpgrade("MoneyIncomeIncrease5", "Increase the gold dropped by units by 5%", 300),

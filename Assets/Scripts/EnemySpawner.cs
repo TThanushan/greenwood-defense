@@ -5,11 +5,21 @@ public class EnemySpawner : MonoBehaviour
 {
     public Transform spawnPosition;
     public Stage stage1;
+    public static EnemySpawner instance;
 
     Stage stage;
     PoolObject poolObject;
 
     int stageNumber;
+    ShowNewEnemyDescriptionCard showNewEnemyDescriptionCard;
+
+    private void Awake()
+    {
+        if (!instance)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
     void Start()
     {
         poolObject = PoolObject.instance;
@@ -20,13 +30,19 @@ public class EnemySpawner : MonoBehaviour
         else
             stage = (Stage)Resources.Load("Stages/GeneratedStage");
         InitEnemyTypes();
+        showNewEnemyDescriptionCard = ShowNewEnemyDescriptionCard.instance;
     }
+
 
     void Update()
     {
         TrySpawn();
     }
 
+    public Stage GetStage()
+    {
+        return stage;
+    }
 
     float GetIncreasedHealthUsingStageNumber(float health)
     {
@@ -38,13 +54,17 @@ public class EnemySpawner : MonoBehaviour
         foreach (EnemyType enemyType in stage.enemyTypes)
         {
             enemyType.Init();
+
         }
     }
 
     void TrySpawn()
     {
-        EnemyType[] enemyTypes = stage.enemyTypes;
+        if (Time.timeSinceLevelLoad < Constants.TIME_BEFORE_FIRST_ENEMY_SPAWN || showNewEnemyDescriptionCard.IsDescriptionCardEnabled())
+            return;
 
+
+        EnemyType[] enemyTypes = stage.enemyTypes;
         if (enemyTypes.Length == 0)
             return;
         float TIME_THRESHOLD_TO_SKIP_UNIT = 3.5f;
@@ -63,6 +83,9 @@ public class EnemySpawner : MonoBehaviour
         UpdateUnitStatsUsingStageNumber(newEnemy);
         enemyType.DecreaseCount();
         enemyType.SetRandomNextEnemySpawnTime();
+
+        if (enemyType.Enemy.name.Contains("Ultimate"))
+            UltimateHealthBar.instance.SetUltimateReference(newEnemy.GetComponent<Unit>());
     }
 
     void UpdateUnitStatsUsingStageNumber(GameObject enemy)

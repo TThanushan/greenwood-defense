@@ -139,7 +139,7 @@ public class Unit : HealthBar
     //}
 
 
-    Transform GetSpriteTransform()
+    public Transform GetSpriteTransform()
     {
         return transform.Find("SpriteBody/Sprite").transform;
     }
@@ -240,7 +240,7 @@ public class Unit : HealthBar
         return !target || !target.GetComponent<Unit>().Disabled;
     }
 
-    protected SpriteRenderer GetUnitSpriteRenderer()
+    public SpriteRenderer GetUnitSpriteRenderer()
     {
         string[] spritePaths = { "SpriteBody/Sprite/UnitSprite", "SpriteBody/Sprite/Sprite", "SpriteBody/Sprite" };
         foreach (string path in spritePaths)

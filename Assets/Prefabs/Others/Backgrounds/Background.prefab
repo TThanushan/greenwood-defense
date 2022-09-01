@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28224999}
   m_LocalRotation: {x: -0.46225765, y: 0.5350868, z: -0.5350868, w: 0.46225765}
-  m_LocalPosition: {x: -2.6509085, y: 0.15340388, z: -50.776894}
+  m_LocalPosition: {x: -6.712, y: 0.15340388, z: -50.776894}
   m_LocalScale: {x: 0.1910963, y: 0.19109632, z: 0.1910963}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4780,8 +4780,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 252151829
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4836,7 +4836,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328976708}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -1.1928566, y: 0.79094756, z: 186.18332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4845,7 +4845,7 @@ Transform:
   - {fileID: 1447048723}
   m_Father: {fileID: 6438602153600064175}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1447048720
 GameObject:
   m_ObjectHideFlags: 0
@@ -4872,7 +4872,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447048720}
   m_LocalRotation: {x: -0.46225765, y: 0.5350868, z: -0.5350868, w: 0.46225765}
-  m_LocalPosition: {x: -2.4399085, y: 0.18240386, z: -50.776894}
+  m_LocalPosition: {x: -6.501, y: 0.652, z: -50.776894}
   m_LocalScale: {x: 0.1910963, y: 0.19109632, z: 0.1910963}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4962,7 +4962,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 30
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -9683,8 +9683,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1349586257
-  m_SortingLayer: -3
+  m_SortingLayerID: 252151829
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0

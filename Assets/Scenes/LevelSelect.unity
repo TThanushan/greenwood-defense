@@ -693,22 +693,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 28225000, guid: 24e17585f33d2ea49b0382e83ec9e8ea, type: 3}
-      propertyPath: m_SortingLayer
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 28225000, guid: 24e17585f33d2ea49b0382e83ec9e8ea, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 252151829
-      objectReference: {fileID: 0}
-    - target: {fileID: 1447048721, guid: 24e17585f33d2ea49b0382e83ec9e8ea, type: 3}
-      propertyPath: m_SortingLayer
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1447048721, guid: 24e17585f33d2ea49b0382e83ec9e8ea, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 252151829
-      objectReference: {fileID: 0}
     - target: {fileID: 6438602153600064174, guid: 24e17585f33d2ea49b0382e83ec9e8ea,
         type: 3}
       propertyPath: m_Name
@@ -1234,6 +1218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShareBetweenScenes
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985511611478847749, guid: 0c0afb9b44dc8ae41905f4c936156656,
+        type: 3}
+      propertyPath: newEnemyCardDescriptionShownedIndex
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2985511611478847750, guid: 0c0afb9b44dc8ae41905f4c936156656,
         type: 3}

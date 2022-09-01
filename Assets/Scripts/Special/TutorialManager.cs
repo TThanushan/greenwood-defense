@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,7 @@ public class TutorialManager : MonoBehaviour
     bool enemySpawned;
     GameObject levelCompleteMenuButton;
     GameObject duckUnitRef;
+    List<GameObject> objectsToDisable;
     private void Start()
     {
         if (SaveManager.instance.IsTutorialDone())
@@ -25,13 +27,27 @@ public class TutorialManager : MonoBehaviour
         PoolObject.instance.enemyCaptain.currentHealth = 25;
         PoolObject.instance.enemyCaptain.maxHealth = 25;
 
-        mainCanvas = GameObject.Find("InGameMainCanvas");
-        transform.parent = mainCanvas.transform;
-        transform.Find("SkipTutorialButton").position = Vector3.zero;
+        //mainCanvas = GameObject.Find("InGameMainCanvas");
+        //transform.parent = mainCanvas.transform;
+        //transform.Find("SkipTutorialButton").position = Vector3.zero;
 
-        ResetTutoPartCanvasScale();
-        levelCompleteMenuButton = mainCanvas.transform.Find("MiddleGroup/LevelCompletePanel/NextLevelButton").gameObject;
-        levelCompleteMenuButton.transform.parent.Find("NextLevelButton").localScale = Vector3.zero;
+        //ResetTutoPartCanvasScale();
+        //levelCompleteMenuButton = mainCanvas.transform.Find("MiddleGroup/LevelCompletePanel/NextLevelButton").gameObject;
+        //levelCompleteMenuButton.transform.parent.Find("NextLevelButton").localScale = Vector3.zero;
+        objectsToDisable = new List<GameObject>();
+
+        objectsToDisable.Add(GameObject.Find("CameraMoveRight"));
+        objectsToDisable.Add(GameObject.Find("CameraMoveLeft"));
+        objectsToDisable.Add(GameObject.Find("SpawnBar"));
+        objectsToDisable.Add(GameObject.Find("MiniMap"));
+        foreach (GameObject obj in objectsToDisable)
+        {
+            if (obj.name == "MiniMap")
+                obj.GetComponent<Camera>().enabled = false;
+            else
+                obj.SetActive(false);
+        }
+
         mainCamera = Camera.main;
         enemySpawner = GameObject.Find("Spawner").GetComponent<EnemySpawner>();
         enemySpawner.gameObject.SetActive(false);
@@ -75,6 +91,14 @@ public class TutorialManager : MonoBehaviour
     {
         SaveManager.instance.SetTutorialDone();
         enemySpawner.gameObject.SetActive(true);
+        foreach (GameObject obj in objectsToDisable)
+        {
+            if (obj.name == "MiniMap")
+                obj.GetComponent<Camera>().enabled = true;
+            else
+                obj.SetActive(true);
+        }
+
         Destroy(gameObject);
     }
 
@@ -137,14 +161,14 @@ public class TutorialManager : MonoBehaviour
         //  > hide next level button
 
         if (
-           (tutorialIndex == 0 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
-        || (tutorialIndex == 1 && mainCamera.transform.position.x >= 3.06)
-        || (tutorialIndex == 2 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
-        || (tutorialIndex == 3 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
-        || (tutorialIndex == 4 && mainCamera.transform.position.x <= 0)
-        || (tutorialIndex == 5 && poolObject.Allies.Length > 1)
-        || (tutorialIndex == 6 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
-        || (tutorialIndex == 7 && Input.GetKeyUp(KeyCode.Mouse0) || Input.touchCount == 1)
+           (tutorialIndex == 0 && Input.GetKeyUp(KeyCode.Mouse0))
+        || (tutorialIndex == 1 && Input.GetKeyUp(KeyCode.Mouse0))
+        || (tutorialIndex == 2 && Input.GetKeyUp(KeyCode.Mouse0))
+        || (tutorialIndex == 3 && Input.GetKeyUp(KeyCode.Mouse0))
+        || (tutorialIndex == 4 && Input.GetKeyUp(KeyCode.Mouse0))
+        || (tutorialIndex == 5 && Input.GetKeyUp(KeyCode.Mouse0))
+        || (tutorialIndex == 6 && Input.GetKeyUp(KeyCode.Mouse0))
+        || (tutorialIndex == 7 && Input.GetKeyUp(KeyCode.Mouse0))
         )
         {
             if (tutorialIndex == 6)
@@ -154,7 +178,7 @@ public class TutorialManager : MonoBehaviour
             ShowTutoPart();
             return true;
         }
-        else if (tutorialIndex == 8)
+        else if (tutorialIndex == 7)
             EndTutorial();
 
         //else if (tutorialIndex == 8 && levelCompleteMenuButton.activeSelf)

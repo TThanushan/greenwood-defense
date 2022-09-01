@@ -17,6 +17,6 @@ public static class Constants
     public const string GAME_VERSION = "1.11";
     public const int ENEMY_CAPTAIN_MAX_HEALTH = 100;
     public const int ENEMY_CAPTAIN_MAX_HEALTH_BONUS = 5;
-
+    public const float TIME_BEFORE_FIRST_ENEMY_SPAWN = 1;
     public const string SHIELD_HIT_SFX = "ShieldHit";
 }
