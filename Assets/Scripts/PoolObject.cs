@@ -49,9 +49,13 @@ public class PoolObject : MonoBehaviour
     {
         if (!damageText)
             return null;
-        damage = (int)(damage * 100.0f) / 100.0f;
-
+        damage = (damage * 100.0f) / 100.0f;
+        damage = (int)damage;
         GameObject obj = GetPoolObject(damageText);
+        float scale = damage / 30f;
+        scale = Mathf.Min(1.5f, scale);
+        scale = Mathf.Max(0.7f, scale);
+        obj.transform.localScale = new Vector2(damageText.transform.localScale.x * scale, damageText.transform.localScale.y * scale);
         obj.transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().text = damage.ToString();
         return obj;
     }

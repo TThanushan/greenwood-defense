@@ -11,7 +11,7 @@ public class SlimeUnit1 : Unit
     public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         base.GetDamage(damage, caller, HitSoundName);
-        if (IsSpawn())
+        if (!caller.GetComponent<Trap>() && !IsCallerPoisoning(caller) && IsSpawn())
         {
             SpawnSlime(reallySmallSlime);
             CreateEffect(spawnEffect);

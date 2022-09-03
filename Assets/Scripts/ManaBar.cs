@@ -91,9 +91,22 @@ public class ManaBar : MonoBehaviour
     private void RegenerateMana()
     {
         if (currentMana < maxMana)
-            currentMana += regenerationSpeed * Time.deltaTime;
+        {
+            if (currentMana + regenerationSpeed * Time.deltaTime > maxMana)
+                currentMana = maxMana;
+            else
+                currentMana += regenerationSpeed * Time.deltaTime;
+        }
         else if (currentMana > maxMana)
             currentMana = maxMana;
+    }
+
+    public void GiveMana(float mana)
+    {
+        if (currentMana + mana > maxMana)
+            currentMana = maxMana;
+        else
+            currentMana += mana;
     }
 
     public void UseMana(float amount)

@@ -367,16 +367,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3aff3500001b74d822255148fb0ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  maxHealth: 75
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 10
+  attackDamage: 15
   attackSpeed: 0.125
   attackRange: 0.24
   moveSpeed: 0.75
   moneyReward: 17
-  manaReward: 9
+  manaReward: 4.5
   deathSfxName: 
   hitSFX:
   - Sword1

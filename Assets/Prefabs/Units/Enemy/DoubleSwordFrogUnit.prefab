@@ -428,7 +428,7 @@ MonoBehaviour:
   attackRange: 0.24
   moveSpeed: 0.5
   moneyReward: 12
-  manaReward: 7
+  manaReward: 3.25
   deathSfxName: 
   hitSFX:
   - Sword1

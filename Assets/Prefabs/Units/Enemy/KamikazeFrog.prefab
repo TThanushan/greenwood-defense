@@ -335,16 +335,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c3aff3500001b74d822255148fb0ffe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 50
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
-  attackDamage: 0
+  attackDamage: 1
   attackSpeed: 1
   attackRange: 0.24
   moveSpeed: 1.5
   moneyReward: 19
-  manaReward: 1
+  manaReward: 5
   deathSfxName: FrogDeath
   hitSFX: []
   isNotAUnit: 0

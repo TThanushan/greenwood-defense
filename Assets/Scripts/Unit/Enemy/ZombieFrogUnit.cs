@@ -34,6 +34,14 @@ public class ZombieFrogUnit : Unit
         nextAttackTime = 0f;
     }
 
+    public override void Attack()
+    {
+        if (!Target)
+            return;
+        base.Attack();
+        Heal(attackDamage * 0.25f);
+    }
+
     public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         if (damage >= currentHealth && !zombieEffect.activeSelf && !Disabled)

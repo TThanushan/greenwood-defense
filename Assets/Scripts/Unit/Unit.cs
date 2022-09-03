@@ -56,7 +56,7 @@ public class Unit : HealthBar
         if (GetSpriteTransform())
             originalSpriteRotation = GetSpriteTransform().localRotation;
         base.Awake();
-        InvokeRepeating("UpdateTag", 0f, 2f);
+        InvokeRepeating("UpdateTag", 0f, 0.1f);
         initialTag = tag;
     }
 
@@ -219,7 +219,7 @@ public class Unit : HealthBar
     void GiveManaReward()
     {
         if (gameObject.CompareTag("Enemy"))
-            poolObject.manaBar.currentMana += manaReward;
+            poolObject.manaBar.GiveMana(manaReward);
     }
 
 
@@ -314,6 +314,8 @@ public class Unit : HealthBar
         disabled = true;
         PlayDeathSfx();
         ResetSpriteColor();
+        if (GetComponent<Animator>())
+            GetComponent<Animator>().enabled = true;
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
 

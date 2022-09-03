@@ -324,7 +324,7 @@ MonoBehaviour:
   attackRange: 0.28
   moveSpeed: 0.4
   moneyReward: 16
-  manaReward: 1
+  manaReward: 4.25
   deathSfxName: FrogDeath
   hitSFX: []
   isNotAUnit: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
   clonePrefab: {fileID: 241010044734991814, guid: adce59b01ee9da147b49fd27fc1e0ded,
     type: 3}
   cloneTriggerThreshold: 0.25
-  cloneCount: 4
+  cloneCount: 8
 --- !u!1 &241010045121935959
 GameObject:
   m_ObjectHideFlags: 0

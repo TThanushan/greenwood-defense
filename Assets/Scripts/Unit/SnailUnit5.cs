@@ -12,7 +12,7 @@ public class SnailUnit5 : SnailUnit4
 
     protected override void Update()
     {
-        if (IsAnyAllyLowLife() && lowLifeGlobalHealCooldown <= Time.time)
+        if (IsInRangeWithAlly() && IsAnyAllyLowLife() && lowLifeGlobalHealCooldown <= Time.time)
             StartLowLifeGlobalHeal();
         base.Update();
 
@@ -25,6 +25,8 @@ public class SnailUnit5 : SnailUnit4
             return false;
         foreach (GameObject ally in allies)
         {
+            if (ally.GetComponent<Unit>().Disabled || ally.name.Contains("ReallySmallSlime") || ally.name.Contains("WeakLittleBunny"))
+                continue;
             Unit unit = ally.GetComponent<Unit>();
             float percentage = unit.currentHealth / unit.maxHealth * 100;
             if (percentage <= healthTriggerPercentage)
@@ -49,6 +51,22 @@ public class SnailUnit5 : SnailUnit4
         }
         CreateEffect();
         lowLifeGlobalHealCooldown = Time.time + timeBetweenlowLifeGlobalHeal;
+    }
+
+    bool IsInRangeWithAlly()
+    {
+        GameObject[] allies = poolObject.Allies;
+        if (allies == null || allies.Length == 0)
+            return false;
+        foreach (GameObject ally in allies)
+        {
+            float distance = Vector2.Distance(transform.position, ally.transform.position);
+            if (distance <= bonusRange)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void CreateEffect()

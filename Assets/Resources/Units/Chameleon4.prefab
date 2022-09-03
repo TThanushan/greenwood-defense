@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a7c17ecd104144896a52e8d6fbcba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 90
+  maxHealth: 120
   currentHealth: 0
   damageTakenIncreasePercentage: 0
   initialDamageTakenIncreasePercentage: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
   isNotAUnit: 0
   paralysed: 0
   unitLevel: 4
-  cycleDuration: 5
+  cycleDuration: 2
   attackSpeedReduction: 95
   effectDuration: 4
   attackSpeedBuff: 80

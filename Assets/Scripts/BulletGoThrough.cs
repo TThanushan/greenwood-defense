@@ -4,7 +4,6 @@ public class BulletGoThrough : BulletScript
 {
     public int piercingCount = 3;
 
-
     int currentPiercing;
     List<int> enemyAlreadyDamaged;
 

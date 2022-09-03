@@ -67,10 +67,9 @@ public class EnemySpawner : MonoBehaviour
         EnemyType[] enemyTypes = stage.enemyTypes;
         if (enemyTypes.Length == 0)
             return;
-        float TIME_THRESHOLD_TO_SKIP_UNIT = 3.5f;
         foreach (EnemyType enemyType in enemyTypes)
         {
-            if (!enemyType.ReadyToSpawn() || (enemyType.TimeBetweenSpawn < TIME_THRESHOLD_TO_SKIP_UNIT && enemyType.InfiniteSpawning))
+            if (!enemyType.ReadyToSpawn() || (enemyType.TimeBetweenSpawn < Constants.TIME_THRESHOLD_TO_SKIP_UNIT && enemyType.InfiniteSpawning))
                 continue;
             Spawn(enemyType);
         }
@@ -83,8 +82,7 @@ public class EnemySpawner : MonoBehaviour
         UpdateUnitStatsUsingStageNumber(newEnemy);
         enemyType.DecreaseCount();
         enemyType.SetRandomNextEnemySpawnTime();
-
-        if (enemyType.Enemy.name.Contains("Ultimate"))
+        if (newEnemy.name.Contains("Ultimate"))
             UltimateHealthBar.instance.SetUltimateReference(newEnemy.GetComponent<Unit>());
     }
 

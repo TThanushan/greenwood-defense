@@ -35,16 +35,13 @@ public class PigUnit4 : PigUnit3
             manaBar.currentMana = manaBar.maxMana;
         isManaIncreased = false;
         manaBar.UpdateManaMaxText();
-        print("bip2");
     }
 
     void IncreaseManaMax()
     {
-        print("bip1:" + manaBar.maxMana);
 
         manaBar.maxMana += manaMaxIncrease;
         isManaIncreased = true;
         manaBar.UpdateManaMaxText();
-        print("bip1b:" + manaBar.maxMana);
     }
 }

@@ -256,7 +256,7 @@ MonoBehaviour:
   initialDamageTakenIncreasePercentage: 0
   attackDamage: 1
   attackSpeed: 5
-  attackRange: 1.35
+  attackRange: 1.5
   moveSpeed: 0.15
   moneyReward: 1
   manaReward: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
   hitSFX: []
   isNotAUnit: 0
   paralysed: 0
-  effectRange: 1.35
+  effectRange: 1.5
   effectDamage: 0.225
   damageSFXName: Classic
   dotCount: 80

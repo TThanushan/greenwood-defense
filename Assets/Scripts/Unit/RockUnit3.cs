@@ -49,8 +49,10 @@ public class RockUnit3 : RockUnit2
         float triggerRange = 0.25f;
         foreach (GameObject bullet in bullets)
         {
-            if (!bullet.activeSelf || !isDefenseBonusEnabled)
-                return;
+            if (!isDefenseBonusEnabled)
+                break;
+            if (!bullet.activeSelf || !bullet.GetComponent<BulletScript>().canBeReflected)
+                continue;
             float distance = Vector2.Distance(transform.position, bullet.transform.position);
             if (distance <= triggerRange && bullet && IsBulletAimingAtMe(bullet))
             {

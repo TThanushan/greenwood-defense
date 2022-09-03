@@ -460,7 +460,7 @@ MonoBehaviour:
   attackRange: 0.24
   moveSpeed: 0.25
   moneyReward: 8
-  manaReward: 1
+  manaReward: 2.25
   deathSfxName: 
   hitSFX: []
   isNotAUnit: 0

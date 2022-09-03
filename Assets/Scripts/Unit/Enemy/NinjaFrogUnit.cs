@@ -65,7 +65,7 @@ public class NinjaFrogUnit : Unit
     }
     void DoEffect()
     {
-        if (Target.name == "PlayerCaptain")
+        if (!Target || Target.name == "PlayerCaptain")
             return;
         CreateEffect();
         //// Spawn log.

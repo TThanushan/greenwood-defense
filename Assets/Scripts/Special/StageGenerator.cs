@@ -85,8 +85,7 @@ public class StageGenerator : MonoBehaviour
     void AddEnemyType(int index, ref GameObject[] prefabs, ref List<EnemyType> enemyTypes)
     {
         EnemyType enemyType = GetEnemyType(index, ref prefabs);
-        float timeBetweenSpawnThresholdSkip = 3f;
-        if (enemyType.TimeBetweenSpawn > timeBetweenSpawnThresholdSkip)
+        if (enemyType.TimeBetweenSpawn > Constants.TIME_THRESHOLD_TO_SKIP_UNIT)
             enemyTypes.Add(enemyType);
     }
 

@@ -236,7 +236,7 @@ MonoBehaviour:
   healthShieldBonusRespawnTime: 5
   healthShieldBonusHealthAmount: 2
   healthShieldBonusPercentage: 20
-  bonusRange: 1.5
+  bonusRange: 2.5
   healingPercentage: 10
   constantHealingPercentage: 3.5
   timeBetweenConstantHealing: 0.25

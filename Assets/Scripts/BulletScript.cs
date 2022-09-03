@@ -15,6 +15,7 @@ public class BulletScript : MonoBehaviour
 
     public GameObject effect;
     public SpriteRenderer spriteRenderer;
+    public bool canBeReflected = true;
 
     public bool moveTowardTarget;
     protected string targetTag = "Ally";

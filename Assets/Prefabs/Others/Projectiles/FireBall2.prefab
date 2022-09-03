@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2116847984675237308}
   - component: {fileID: 8264725016369439490}
+  - component: {fileID: -1351464479661709773}
   m_Layer: 0
   m_Name: FireBall2
   m_TagString: Untagged
@@ -140,6 +141,19 @@ MonoBehaviour:
   moveTowardTarget: 0
   explosionRange: 0.45
   maxTargetDistance: 2.15
+--- !u!114 &-1351464479661709773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2116847984675237283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8ccc894ad7c5a44d84eeef5474acc0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableTime: 1
 --- !u!1 &2116847985150317397
 GameObject:
   m_ObjectHideFlags: 0

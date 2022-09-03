@@ -577,7 +577,7 @@ MonoBehaviour:
   attackRange: 1.5
   moveSpeed: 0.25
   moneyReward: 5
-  manaReward: 2
+  manaReward: 1.25
   deathSfxName: 
   hitSFX:
   - Pistol1

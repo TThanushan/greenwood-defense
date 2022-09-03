@@ -15,8 +15,10 @@ public class GhostUnit4 : GhostUnit3
 
     protected override void Update()
     {
+        if (Disabled)
+            return;
         base.Update();
-        if (nextEffectTime4 <= Time.time && EnoughRangeToAttackTarget() && (!nextAttackConvertEnemyTag && Target && !Target.name.Contains("Captain")))
+        if (nextEffectTime4 <= Time.time && EnoughRangeToAttackTarget() && (!nextAttackConvertEnemyTag && Target && (!Target.name.Contains("Captain") && !Target.name.Contains("Ultimate"))))
             DoEffect();
     }
 
@@ -27,6 +29,8 @@ public class GhostUnit4 : GhostUnit3
         poolObject.audioManager.Play(effectSFX);
         foreach (GameObject enemy in enemies)
         {
+            if (enemy.name.Contains("Captain") || enemy.name.Contains("Ultimate"))
+                continue;
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance <= explosionRange)
             {

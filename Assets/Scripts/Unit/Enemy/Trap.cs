@@ -6,8 +6,6 @@ public class Trap : MonoBehaviour
     string targetTag = "Ally";
     GameObject target;
 
-    public float explosionDamage;
-    public float explosionRange;
     public GameObject triggerEffect;
     public float triggerRange;
     public bool destroyOnTrigger;
@@ -24,13 +22,9 @@ public class Trap : MonoBehaviour
             return;
         if (IsTargetInRange())
         {
-            DamageTarget();
+            //DamageTarget();
             DestroyEffect();
-            if (explosionDamage > 0)
-            {
-                DamageEnemiesAround();
-
-            }
+            DamageEnemiesAround();
             if (destroyOnTrigger)
             {
                 target = null;
@@ -55,9 +49,9 @@ public class Trap : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
-            if (distance <= explosionRange)
+            if (distance <= triggerRange)
             {
-                DamageTarget(enemy, explosionDamage);
+                DamageTarget(enemy, damage);
             }
         }
 

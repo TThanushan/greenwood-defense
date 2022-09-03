@@ -14,6 +14,7 @@ public class SaveManager : MonoBehaviour
     public List<HeroUpgrade> heroUpgrades;
     public List<string> unlockedHeroUpgrades;
     public List<string> unlockedUnits;
+    public List<UnitDescription> unitDescriptions;
     int isTutorialDone;
     const string MAX_LEVEL_UNLOCKED_KEY = "MaxLevelUnlockedKey";
     const string PLAYER_MONEY_KEY = "Money";
@@ -21,8 +22,7 @@ public class SaveManager : MonoBehaviour
     const string UNLOCKED_HERO_UPGRADES_KEY = "UnlockedHeroUpgrades";
     const string IS_TUTORIAL_DONE_KEY = "IsTutorialDone";
     const string AUTO_SAVE_KEY = "IsAutoSave";
-    const string NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY = "IsAutoSave";
-    public List<UnitDescription> unitDescriptions;
+    const string NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY = "newEnemyCardShownedIndex";
 
     public int newEnemyCardDescriptionShownedIndex;
     public float money;
@@ -39,6 +39,7 @@ public class SaveManager : MonoBehaviour
         else
             LoadPrefs();
 
+        InitFrogDescription();
         InitUnits();
         InitsHeroUpgrades();
     }
@@ -66,6 +67,7 @@ public class SaveManager : MonoBehaviour
         {
             levels.Add(new Level());
         }
+        newEnemyCardDescriptionShownedIndex = 0;
         levels[0].unlocked = 1;
         // Player money.
         maxLevelUnlocked = 1;
@@ -81,8 +83,6 @@ public class SaveManager : MonoBehaviour
         money = 0f;
         PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, 0);
         PlayerPrefs.SetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY, 0);
-        newEnemyCardDescriptionShownedIndex = 0;
-        InitFrogDescription();
     }
 
     void OnApplicationQuit()
@@ -160,7 +160,10 @@ public class SaveManager : MonoBehaviour
     public void UnlockLevel(int index)
     {
         if (index >= levels.Count)
+        {
+            levels[levels.Count - 1].unlocked = 1;
             return;
+        }
         levels[index].unlocked = 1;
         if (index >= maxLevelUnlocked)
             maxLevelUnlocked = index + 1;
@@ -185,7 +188,7 @@ public class SaveManager : MonoBehaviour
     void SaveLevels()
     {
         string key;
-        for (int i = 0; i < levels.Count - 1; i++)
+        for (int i = 0; i < levels.Count; i++)
         {
             key = "Level" + i.ToString();
             // Is level unlocked.
@@ -264,7 +267,7 @@ public class SaveManager : MonoBehaviour
             levels.Add(newLevel);
         }
         isTutorialDone = PlayerPrefs.GetInt(IS_TUTORIAL_DONE_KEY);
-        isAutoSave = (PlayerPrefs.GetInt(AUTO_SAVE_KEY) == 1) ? true : false;
+        isAutoSave = PlayerPrefs.GetInt(AUTO_SAVE_KEY) == 1;
         newEnemyCardDescriptionShownedIndex = PlayerPrefs.GetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY);
 
         LoadUnlockedUnits();
@@ -364,10 +367,11 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("ManaMax350", "Increase maximum mana from 340 to 350",580),
 
             new HeroUpgrade("StartMana0"),
-            new HeroUpgrade("StartMana25", "Start stage with 25% of maximum mana.",250),
-            new HeroUpgrade("StartMana50", "Start stage with 50% of maximum mana.",500),
-            new HeroUpgrade("StartMana75", "Start stage with 75% of maximum mana.",750),
-            new HeroUpgrade("StartMana100", "Start stage with 100% of maximum mana.",1000),
+            new HeroUpgrade("StartMana25", "Start stage with 25% of maximum mana.",500),
+            new HeroUpgrade("StartMana50", "Start stage with 50% of maximum mana.",1000),
+            new HeroUpgrade("StartMana75", "Start stage with 75% of maximum mana.",1500),
+            new HeroUpgrade("StartMana100", "Start stage with 100% of maximum mana.",2000),
+
 
             new HeroUpgrade("ManaRegen0.0"),
             new HeroUpgrade("ManaRegen0.5", "Increase mana regeneration by 0.5 per second)",100),
@@ -392,52 +396,52 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("ManaRegen10.0", "Increase mana regeneration (9.5 => 10.0 per second)",1050),
 
             new HeroUpgrade("UnitMaxHealthBonus0"),
-            new HeroUpgrade("UnitMaxHealthBonus10", "Increase units max health by 10%", 500),
-            new HeroUpgrade("UnitMaxHealthBonus20", "Increase units max health (10% => 20%)", 1000),
-            new HeroUpgrade("UnitMaxHealthBonus30", "Increase units max health (20% => 30%)", 1500),
-            new HeroUpgrade("UnitMaxHealthBonus40", "Increase units max health (30% => 40%)", 2000),
-            new HeroUpgrade("UnitMaxHealthBonus50", "Increase units max health (40% => 50%)", 2500),
-            new HeroUpgrade("UnitMaxHealthBonus60", "Increase units max health (50% => 60%)", 3000),
-            new HeroUpgrade("UnitMaxHealthBonus70", "Increase units max health (60% => 70%)", 3500),
-            new HeroUpgrade("UnitMaxHealthBonus80", "Increase units max health (70% => 80%)", 4000),
-            new HeroUpgrade("UnitMaxHealthBonus90", "Increase units max health (80% => 90%)", 4500),
-            new HeroUpgrade("UnitMaxHealthBonus100", "Increase units max health (90% => 100%)", 5000),
+            new HeroUpgrade("UnitMaxHealthBonus15", "Increase units max health by 15%", 750),
+            new HeroUpgrade("UnitMaxHealthBonus30", "Increase units max health (15% => 30%)", 1500),
+            new HeroUpgrade("UnitMaxHealthBonus45", "Increase units max health (30% => 45%)", 2250),
+            new HeroUpgrade("UnitMaxHealthBonus60", "Increase units max health (45% => 60%)", 3000),
+            new HeroUpgrade("UnitMaxHealthBonus75", "Increase units max health (60% => 75%)", 3750),
+            new HeroUpgrade("UnitMaxHealthBonus90", "Increase units max health (75% => 90%)", 4500),
+            new HeroUpgrade("UnitMaxHealthBonus105", "Increase units max health (90% => 105%)", 5250),
+            new HeroUpgrade("UnitMaxHealthBonus120", "Increase units max health (105% => 120%)", 6000),
+            new HeroUpgrade("UnitMaxHealthBonus135", "Increase units max health (120% => 135%)", 6750),
+            new HeroUpgrade("UnitMaxHealthBonus150", "Increase units max health (135% => 150%)", 7500),
 
             new HeroUpgrade("UnitDamageBonus0"),
-            new HeroUpgrade("UnitDamageBonus5", "Increase units attack damage by 5%", 500),
-            new HeroUpgrade("UnitDamageBonus10", "Increase units attack damage (5% => 10%)", 1000),
-            new HeroUpgrade("UnitDamageBonus15", "Increase units attack damage (10 => 15%)", 1500),
-            new HeroUpgrade("UnitDamageBonus20", "Increase units attack damage (15 => 20%)", 2000),
-            new HeroUpgrade("UnitDamageBonus25", "Increase units attack damage (20 => 25%)", 2500),
-            new HeroUpgrade("UnitDamageBonus30", "Increase units attack damage (25 => 30%)", 3000),
-            new HeroUpgrade("UnitDamageBonus35", "Increase units attack damage (30 => 35%)", 3500),
-            new HeroUpgrade("UnitDamageBonus40", "Increase units attack damage (35 => 40%)", 4000),
-            new HeroUpgrade("UnitDamageBonus45", "Increase units attack damage (40 => 45%)", 4500),
-            new HeroUpgrade("UnitDamageBonus50", "Increase units attack damage (45 => 50%)", 5000),
+            new HeroUpgrade("UnitDamageBonus7.5", "Increase units attack damage by 7.5%", 750),
+            new HeroUpgrade("UnitDamageBonus15", "Increase units attack damage (7.5 => 15%)", 1500),
+            new HeroUpgrade("UnitDamageBonus22.5", "Increase units attack damage (15 => 22.5%)", 2250),
+            new HeroUpgrade("UnitDamageBonus30", "Increase units attack damage (22.5 => 30%)", 3000),
+            new HeroUpgrade("UnitDamageBonus37.5", "Increase units attack damage (30 => 37.5%)", 3750),
+            new HeroUpgrade("UnitDamageBonus45", "Increase units attack damage (37.5 => 45%)", 4500),
+            new HeroUpgrade("UnitDamageBonus52.5", "Increase units attack damage (45 => 52.5%)", 5250),
+            new HeroUpgrade("UnitDamageBonus60", "Increase units attack damage (52.5 => 60%)", 6000),
+            new HeroUpgrade("UnitDamageBonus67.5", "Increase units attack damage (60 => 67.5%)", 6750),
+            new HeroUpgrade("UnitDamageBonus75", "Increase units attack damage (67.5 => 75%)", 7500),
 
             new HeroUpgrade("UnitDamageReduction0"),
-            new HeroUpgrade("UnitDamageReduction5", "Units damage received reduced by 5%", 500),
-            new HeroUpgrade("UnitDamageReduction10", "Units damage received reduced (5% => 10%)", 1000),
-            new HeroUpgrade("UnitDamageReduction15", "Units damage received reduced (10 => 15%)", 1500),
-            new HeroUpgrade("UnitDamageReduction20", "Units damage received reduced (15 => 20%)", 2000),
-            new HeroUpgrade("UnitDamageReduction25", "Units damage received reduced (20 => 25%)", 2500),
-            new HeroUpgrade("UnitDamageReduction30", "Units damage received reduced (25 => 30%)", 3000),
-            new HeroUpgrade("UnitDamageReduction35", "Units damage received reduced (30 => 35%)", 3500),
-            new HeroUpgrade("UnitDamageReduction40", "Units damage received reduced (35 => 40%)", 4000),
-            new HeroUpgrade("UnitDamageReduction45", "Units damage received reduced (40 => 45%)", 4500),
-            new HeroUpgrade("UnitDamageReduction50", "Units damage received reduced (45 => 50%)", 5000),
+            new HeroUpgrade("UnitDamageReduction7.5", "Units damage received reduced by 5%", 750),
+            new HeroUpgrade("UnitDamageReduction15", "Units damage received reduced (7.5 => 15%)", 1500),
+            new HeroUpgrade("UnitDamageReduction22.5", "Units damage received reduced (15 => 22.5%)", 2250),
+            new HeroUpgrade("UnitDamageReduction30", "Units damage received reduced (22.5 => 30%)", 3000),
+            new HeroUpgrade("UnitDamageReduction37.5", "Units damage received reduced (30 => 37.5%)", 3750),
+            new HeroUpgrade("UnitDamageReduction45", "Units damage received reduced (37.5 => 45%)", 4500),
+            new HeroUpgrade("UnitDamageReduction52.5", "Units damage received reduced (45 => 52.5%)", 5250),
+            new HeroUpgrade("UnitDamageReduction60", "Units damage received reduced (52.5 => 60%)", 6000),
+            new HeroUpgrade("UnitDamageReduction67.5", "Units damage received reduced (60 => 67.5%)", 6750),
+            new HeroUpgrade("UnitDamageReduction75", "Units damage received reduced (67.5 => 75%)", 7500),
 
             new HeroUpgrade("UnitCooldownReduction0"),
-            new HeroUpgrade("UnitCooldownReduction5", "Reduce unit spawn cooldown by 5%",200),
-            new HeroUpgrade("UnitCooldownReduction10", "Reduce unit spawn cooldown by 10%",400),
-            new HeroUpgrade("UnitCooldownReduction15", "Reduce unit spawn cooldown by 15%",600),
-            new HeroUpgrade("UnitCooldownReduction20", "Reduce unit spawn cooldown by 20%",800),
-            new HeroUpgrade("UnitCooldownReduction25", "Reduce unit spawn cooldown by 25%",800),
-            new HeroUpgrade("UnitCooldownReduction30", "Reduce unit spawn cooldown by 30%",1000),
-            new HeroUpgrade("UnitCooldownReduction35", "Reduce unit spawn cooldown by 35%",1200),
-            new HeroUpgrade("UnitCooldownReduction40", "Reduce unit spawn cooldown by 40%",1400),
-            new HeroUpgrade("UnitCooldownReduction45", "Reduce unit spawn cooldown by 45%",1600),
-            new HeroUpgrade("UnitCooldownReduction50", "Reduce unit spawn cooldown by 50%",1800),
+            new HeroUpgrade("UnitCooldownReduction7.5", "Reduce unit spawn cooldown by 5%",200),
+            new HeroUpgrade("UnitCooldownReduction15", "Reduce unit spawn cooldown (7.5 => 15%)",400),
+            new HeroUpgrade("UnitCooldownReduction22.5", "Reduce unit spawn cooldown (15 => 22.5%)",600),
+            new HeroUpgrade("UnitCooldownReduction30", "Reduce unit spawn cooldown (22.5 => 30%)",800),
+            new HeroUpgrade("UnitCooldownReduction37.5", "Reduce unit spawn cooldown (30 => 37.5%)",800),
+            new HeroUpgrade("UnitCooldownReduction45", "Reduce unit spawn cooldown (37.5 => 45%)",1000),
+            new HeroUpgrade("UnitCooldownReduction52.5", "Reduce unit spawn cooldown (45 => 52.5%)",1200),
+            new HeroUpgrade("UnitCooldownReduction60", "Reduce unit spawn cooldown (52.5 => 60%)",1400),
+            new HeroUpgrade("UnitCooldownReduction67.5", "Reduce unit spawn cooldown (60 => 67.5%)",1600),
+            new HeroUpgrade("UnitCooldownReduction75", "Reduce unit spawn cooldown (67.5 => 75%)",1800),
 
             new HeroUpgrade("MaxHealth100"),
             new HeroUpgrade("MaxHealth150", "Increase your captain max health to 150", 400),
@@ -463,16 +467,16 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("DamageReduction50", "Reduce the damage taken by your captain by 50%", 2000),
 
             new HeroUpgrade("MoneyIncomeIncrease0"),
-            new HeroUpgrade("MoneyIncomeIncrease5", "Increase the gold dropped by units by 5%", 300),
-            new HeroUpgrade("MoneyIncomeIncrease10", "Increase the gold dropped by units by 10%", 600),
-            new HeroUpgrade("MoneyIncomeIncrease15", "Increase the gold dropped by units by 15%", 900),
-            new HeroUpgrade("MoneyIncomeIncrease20", "Increase the gold dropped by units by 20%", 1200),
-            new HeroUpgrade("MoneyIncomeIncrease25", "Increase the gold dropped by units by 25%", 1500),
-            new HeroUpgrade("MoneyIncomeIncrease30", "Increase the gold dropped by units by 30%", 1800),
-            new HeroUpgrade("MoneyIncomeIncrease35", "Increase the gold dropped by units by 35%", 2100),
-            new HeroUpgrade("MoneyIncomeIncrease40", "Increase the gold dropped by units by 40%", 2400),
-            new HeroUpgrade("MoneyIncomeIncrease45", "Increase the gold dropped by units by 45%", 2700),
-            new HeroUpgrade("MoneyIncomeIncrease50", "Increase the gold dropped by units by 50%", 3000),
+            new HeroUpgrade("MoneyIncomeIncrease10", "Increase the gold dropped by units by 10%", 300),
+            new HeroUpgrade("MoneyIncomeIncrease20", "Increase the gold dropped by units by 20%", 600),
+            new HeroUpgrade("MoneyIncomeIncrease30", "Increase the gold dropped by units by 30%", 900),
+            new HeroUpgrade("MoneyIncomeIncrease40", "Increase the gold dropped by units by 40%", 1200),
+            new HeroUpgrade("MoneyIncomeIncrease50", "Increase the gold dropped by units by 50%", 1500),
+            new HeroUpgrade("MoneyIncomeIncrease60", "Increase the gold dropped by units by 60%", 1800),
+            new HeroUpgrade("MoneyIncomeIncrease70", "Increase the gold dropped by units by 70%", 2100),
+            new HeroUpgrade("MoneyIncomeIncrease80", "Increase the gold dropped by units by 80%", 2400),
+            new HeroUpgrade("MoneyIncomeIncrease90", "Increase the gold dropped by units by 90%", 2700),
+            new HeroUpgrade("MoneyIncomeIncrease100", "Increase the gold dropped by units by 100%", 3000),
 
 
             new HeroUpgrade("Shield0"),
@@ -489,24 +493,24 @@ public class SaveManager : MonoBehaviour
 
             new HeroUpgrade("AbilityRandomSpawn0", "Spawn for free 0 random unit"),
             new HeroUpgrade("AbilityRandomSpawn1", "Spawn for free 1 random unit (Cooldown: 25 seconds)", 400, 0, 25),
-            new HeroUpgrade("AbilityRandomSpawn2", "Spawn for free 2 random unit (Cooldown: 25 => 60 seconds)", 900, 0, 60),
-            new HeroUpgrade("AbilityRandomSpawn3", "Spawn for free 3 random unit (Cooldown: 60 => 100 seconds)", 1500, 0, 100),
-            new HeroUpgrade("AbilityRandomSpawn4", "Spawn for free 4 random unit (Cooldown: 100 => 150 seconds)", 2200, 0, 150),
+            new HeroUpgrade("AbilityRandomSpawn2", "Spawn for free 2 random unit (Cooldown: 25 => 35 seconds)", 900, 0, 35),
+            new HeroUpgrade("AbilityRandomSpawn3", "Spawn for free 3 random unit (Cooldown: 35 => 50 seconds)", 1500, 0, 50),
+            new HeroUpgrade("AbilityRandomSpawn4", "Spawn for free 4 random unit (Cooldown: 50 => 65 seconds)", 2200, 0, 65),
             new HeroUpgrade("AbilityDamageBuff0", "Increase units damage by x for 5 seconds"),
             new HeroUpgrade("AbilityDamageBuff1", "Increase units damage by 2.5 for 5 seconds (Cooldown: 30 seconds)", 500, 0, 30),
-            new HeroUpgrade("AbilityDamageBuff2", "Increase units damage by 5 for 5 seconds (Cooldown: 30 => 60 seconds)", 1000, 0, 60),
-            new HeroUpgrade("AbilityDamageBuff3", "Increase units damage by 7.5 for 5 seconds (Cooldown: 60 => 90 seconds)", 1500, 0, 90),
-            new HeroUpgrade("AbilityDamageBuff4", "Increase units damage by 9 for 5 seconds (Cooldown: 90 => 120 seconds)", 2000, 0, 120),
+            new HeroUpgrade("AbilityDamageBuff2", "Increase units damage by 5 for 5 seconds (Cooldown: 30 => 40 seconds)", 1000, 0, 40),
+            new HeroUpgrade("AbilityDamageBuff3", "Increase units damage by 7.5 for 5 seconds (Cooldown: 40 => 50 seconds)", 1500, 0, 50),
+            new HeroUpgrade("AbilityDamageBuff4", "Increase units damage by 9 for 5 seconds (Cooldown: 50 => 60 seconds)", 2000, 0, 60),
             new HeroUpgrade("AbilityParalysis0", "Paralyse enemies for x seconds"),
             new HeroUpgrade("AbilityParalysis1", "Paralyse enemies for 1.5 seconds (Cooldown: 70 seconds)", 600, 0, 70),
-            new HeroUpgrade("AbilityParalysis2", "Paralyse enemies for 3 seconds (Cooldown: 70 => 105 seconds)", 1200, 0, 105),
-            new HeroUpgrade("AbilityParalysis3", "Paralyse enemies for 4.5 seconds (Cooldown: 105 => 140 seconds)", 1800, 0, 140),
-            new HeroUpgrade("AbilityParalysis4", "Paralyse enemies for 6 seconds (Cooldown: 140 => 175 seconds)", 2000, 0, 175),
+            new HeroUpgrade("AbilityParalysis2", "Paralyse enemies for 3 seconds (Cooldown: 70 => 85 seconds)", 1200, 0, 85),
+            new HeroUpgrade("AbilityParalysis3", "Paralyse enemies for 4.5 seconds (Cooldown: 85 => 100 seconds)", 1800, 0, 100),
+            new HeroUpgrade("AbilityParalysis4", "Paralyse enemies for 6 seconds (Cooldown: 100 => 115 seconds)", 2000, 0, 115),
             new HeroUpgrade("AbilityLightning0", "Makes the lightning fall all enemies and makes them take x amount of damage"),
             new HeroUpgrade("AbilityLightning1", "Makes the lightning fall all enemies and makes them take 10 amount of damage (Cooldown: 30 seconds)", 500, 0, 30),
-            new HeroUpgrade("AbilityLightning2", "Makes the lightning fall all enemies and makes them take 20 amount of damage (Cooldown: 30 => 60 seconds)", 1000, 0, 60),
-            new HeroUpgrade("AbilityLightning3", "Makes the lightning fall all enemies and makes them take 30 amount of damage (Cooldown: 60 => 90 seconds)", 1500, 0, 90),
-            new HeroUpgrade("AbilityLightning4", "Makes the lightning fall all enemies and makes them take 40 amount of damage (Cooldown: 90 => 120 seconds)", 2000, 0, 120),
+            new HeroUpgrade("AbilityLightning2", "Makes the lightning fall all enemies and makes them take 20 amount of damage (Cooldown: 30 => 40 seconds)", 1000, 0, 40),
+            new HeroUpgrade("AbilityLightning3", "Makes the lightning fall all enemies and makes them take 30 amount of damage (Cooldown: 40 => 50 seconds)", 1500, 0, 50),
+            new HeroUpgrade("AbilityLightning4", "Makes the lightning fall all enemies and makes them take 40 amount of damage (Cooldown: 50 => 60 seconds)", 2000, 0, 60),
 
         };
     }
@@ -554,8 +558,8 @@ public class SaveManager : MonoBehaviour
 
             new Unit("Rock1", 25, 10, 150, "Tank unit, high health."),
             new Unit("Rock2", 40, 12, 400, "Become super resistant (damage received reduced by a percentage) for an amount of time."),
-            new Unit("Rock3", 90, 14, 1000, "When super resistant, sends back a percentage of damage received and projectiles are reflected."),
-            new Unit("Rock4", 150, 16, 3500, "Become invulnerable for an amount of time."),
+            new Unit("Rock3", 100, 14, 1300, "When super resistant, sends back a percentage of damage received and projectiles are reflected."),
+            new Unit("Rock4", 165, 16, 4500, "Become invulnerable for an amount of time."),
 
             new Unit("Bunny1", 20, 10, 130, "Summon weak rabbit."),
             new Unit("Bunny2", 35, 13, 350, "Instead of weak rabbit, randomly summon unique rabbit (dps or tank)."),

@@ -306,9 +306,9 @@ MonoBehaviour:
   timeBetweenEffect3: 15
   meteor: {fileID: 2116847984675237283, guid: f64435efd12bd4346bec577bb467ba6e, type: 3}
   triggerEffect3: {fileID: 0}
-  meteorDamage: 75
+  meteorDamage: 120
   meteorSpawnPos: {fileID: 732898105}
-  explosionDamage: 150
+  explosionDamage: 180
   explosionRange: 3
   timeBetweenEffect4: 30
   magma: {fileID: 1339922518811141910, guid: c9b8fedd221145a49ac2bb6903454bfb, type: 3}

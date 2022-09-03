@@ -306,7 +306,7 @@ MonoBehaviour:
   timeBetweenEffect3: 20
   meteor: {fileID: 2116847984675237283, guid: f64435efd12bd4346bec577bb467ba6e, type: 3}
   triggerEffect3: {fileID: 0}
-  meteorDamage: 50
+  meteorDamage: 100
   meteorSpawnPos: {fileID: 732898105}
 --- !u!1 &5367232546079401138
 GameObject:

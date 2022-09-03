@@ -426,7 +426,7 @@ MonoBehaviour:
   attackDamage: 11
   attackSpeed: 0.35
   attackRange: 0.24
-  moveSpeed: 0.55
+  moveSpeed: 0.45
   moneyReward: 1
   manaReward: 1
   deathSfxName: 
@@ -436,7 +436,7 @@ MonoBehaviour:
   invulnerabilityBonusDuration: 8
   invulnerabilityBonusRespawnTime: 10
   timeBetweenEffect: 15
-  convertCount: 5
+  convertCount: 4
   triggerEffect: {fileID: 9051327033695357758, guid: 16f3c64656bc2e74288557dafd1a9968,
     type: 3}
   timeBetweenEffect4: 2

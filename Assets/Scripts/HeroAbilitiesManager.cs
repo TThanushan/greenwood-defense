@@ -226,9 +226,9 @@ public class HeroAbilitiesManager : MonoBehaviour
         print("Lightning");
         float lightningDamage = 10f;
         float damage = GetUpgradeNameNumbersOnly(GetAbility("Lightning").name) * lightningDamage;
+        // Cooldown duration is in heroUpgrade class.
         foreach (GameObject enemy in PoolObject.instance.Enemies)
         {
-            print(enemy.name);
             Unit unit = enemy.GetComponent<Unit>();
             if (!unit || unit.Disabled || enemy.name == "EnemyCaptain")
                 continue;

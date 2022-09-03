@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShowNewEnemyDescriptionCard : MonoBehaviour
@@ -8,7 +7,6 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
 
     SaveManager saveManager;
 
-    List<UnitDescription> unitDescriptions;
 
     private void Awake()
     {
@@ -22,6 +20,8 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
     private void Start()
     {
         saveManager = SaveManager.instance;
+        //EnableObjects(false);
+        Invoke(nameof(Check), Constants.TIME_BEFORE_FIRST_ENEMY_SPAWN - 1);
         //SceneManager.sceneLoaded += CheckOnSceneLoad;
     }
 
@@ -39,8 +39,8 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeSinceLevelLoad > Constants.TIME_BEFORE_FIRST_ENEMY_SPAWN - 1 && Time.timeSinceLevelLoad < 10)
-            Check();
+        //if (Time.timeSinceLevelLoad > Constants.TIME_BEFORE_FIRST_ENEMY_SPAWN - 1 && Time.timeSinceLevelLoad < 10)
+        //    Check();
     }
     public void DisableDescriptionCard()
     {
@@ -50,42 +50,60 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
     public void CloseCard()
     {
         DisableDescriptionCard();
-
+        EnableObjects();
+        DisableAllUnits(false);
     }
-    void Check()
+
+    void EnableObjects(bool value = true)
+    {
+        GameObject.Find("ManaBody").GetComponent<ManaBar>().enabled = value;
+        GameObject.Find("SpawnBar").GetComponent<SpawnBar>().enabled = value;
+    }
+
+    void DisableAllUnits(bool value = true)
+    {
+        print("disableallunit:" + value);
+        GameObject[] allies = PoolObject.instance.Allies;
+        if (allies is null || allies.Length == 0)
+            return;
+        foreach (GameObject ally in PoolObject.instance.Allies)
+        {
+            print(ally.name);
+            if (ally.name == "PlayerCaptain")
+                continue;
+            ally.GetComponent<Unit>().Disabled = value;
+        }
+    }
+
+    bool DoesCardNeedToBeShowned()
     {
         int currentLevel = StageInfosManager.instance.GetCurrentStageNumber();
-        if (saveManager.maxLevelUnlocked != currentLevel)
-            return;
-        print("ShowCard");
-
-        print(currentLevel);
         int index = (currentLevel) / 5;
-        if (saveManager.newEnemyCardDescriptionShownedIndex == index)
-            if (currentLevel == 2 || (currentLevel % 5 == 0 && saveManager.GetLevelScore(currentLevel - 1) == 0))
-            {
-                GetEnemySprite(saveManager.newEnemyCardDescriptionShownedIndex);
-                descriptionCard.SetActive(true);
-                saveManager.newEnemyCardDescriptionShownedIndex++;
-            }
+        if (currentLevel == Constants.MAX_STAGE_NUMBER)
+            return false;
+        return saveManager.maxLevelUnlocked == currentLevel && (saveManager.newEnemyCardDescriptionShownedIndex == index) &&
+            (currentLevel == 2 || (currentLevel % 5 == 0 && saveManager.GetLevelScore(currentLevel - 1) == 0));
     }
 
-    void GetEnemySprite(int index)
+
+
+    void Check()
     {
-        GameObject enemy;
-        if (EnemySpawner.instance.GetStage().enemyTypes[0].Enemy.name == "MeleeFrogUnit")
-            enemy = EnemySpawner.instance.GetStage().enemyTypes[index + 1].Enemy;
-        else
-            enemy = EnemySpawner.instance.GetStage().enemyTypes[index].Enemy;
+        if (!DoesCardNeedToBeShowned())
+            return;
+        DisableAllUnits();
 
-        //if (enemy.name == "MeleeFrogUnit")
-        //{
-        //    enemy = EnemySpawner.instance.GetStage().enemyTypes[index + 1].Enemy;
-        //}
-
+        GameObject.Find("ManaBody").GetComponent<ManaBar>().enabled = false;
+        GameObject.Find("SpawnBar").GetComponent<SpawnBar>().enabled = false;
+        AudioManager.instance.PlaySfx(Constants.NEW_ENEMY_SFX);
+        GetEnemySprite(saveManager.newEnemyCardDescriptionShownedIndex);
+        descriptionCard.SetActive(true);
+        saveManager.newEnemyCardDescriptionShownedIndex++;
+    }
+    void SetSprite(GameObject enemy)
+    {
         Transform spriteBody = Instantiate(enemy.transform.Find("SpriteBody"), transform.Find("NewEnemyDescriptionCard"));
         spriteBody.name = spriteBody.name.Replace("(Clone)", "");
-
         Transform spriteBodyTransformModel = descriptionCard.transform.Find("SpriteBodyModel");
         spriteBody.transform.localPosition = spriteBodyTransformModel.localPosition;
         spriteBody.transform.localEulerAngles = spriteBodyTransformModel.localEulerAngles;
@@ -94,14 +112,59 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
         foreach (SpriteRenderer sp in sprites)
         {
             sp.sortingLayerName = "UI";
-            sp.sortingOrder = 1002;
+            sp.sortingOrder = 1002 + sp.sortingOrder;
         }
-        if (index > saveManager.unitDescriptions.Count)
-            index = saveManager.unitDescriptions.Count;
-        descriptionCard.transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.unitDescriptions[index].name;
-        descriptionCard.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.unitDescriptions[index].description;
+    }
+    void GetEnemySprite(int index)
+    {
+        int descriptionIndex = index;
+        //if (index >= EnemySpawner.instance.GetStage().enemyTypes.Length)
+        //    index--;
+        GameObject enemy;
+        Stage.EnemyType[] enemyTypes = EnemySpawner.instance.GetStage().enemyTypes;
+        enemy = enemyTypes[^1].Enemy;
+        if (enemy.name.Contains("Ultimate"))
+            enemy = enemyTypes[^2].Enemy;
+
+        //if (EnemySpawner.instance.GetStage().enemyTypes[0].Enemy.name == "MeleeFrogUnit")
+        //    enemy = EnemySpawner.instance.GetStage().enemyTypes[index + 1].Enemy;
+        //else
+        //    enemy = EnemySpawner.instance.GetStage().enemyTypes[index].Enemy;
+
+        SetSprite(enemy);
+        //Transform spriteBody = Instantiate(enemy.transform.Find("SpriteBody"), transform.Find("NewEnemyDescriptionCard"));
+        //spriteBody.name = spriteBody.name.Replace("(Clone)", "");
+        //Transform spriteBodyTransformModel = descriptionCard.transform.Find("SpriteBodyModel");
+        //spriteBody.transform.localPosition = spriteBodyTransformModel.localPosition;
+        //spriteBody.transform.localEulerAngles = spriteBodyTransformModel.localEulerAngles;
+        //spriteBody.transform.localScale = spriteBodyTransformModel.localScale;
+        //SpriteRenderer[] sprites = spriteBody.GetComponentsInChildren<SpriteRenderer>();
+        //foreach (SpriteRenderer sp in sprites)
+        //{
+        //    sp.sortingLayerName = "UI";
+        //    sp.sortingOrder = 1002 + sp.sortingOrder;
+        //}
+
+        Debug.Log(saveManager.unitDescriptions.Count);
+
+        if (descriptionIndex > saveManager.unitDescriptions.Count)
+            descriptionIndex = saveManager.unitDescriptions.Count - 1;
+        //if (EnemySpawner.instance.GetStage().enemyTypes[index].Enemy.name.Contains("Ultimate"))
+        //    descriptionIndex--;
+
+        string name = saveManager.unitDescriptions[descriptionIndex].name;
+        string description = saveManager.unitDescriptions[descriptionIndex].description;
+
+        SetDescriptionInfos(name, description);
+
+
     }
 
+    void SetDescriptionInfos(string name, string description)
+    {
+        descriptionCard.transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = name;
+        descriptionCard.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = description;
+    }
 
 
     public class UnitDescription

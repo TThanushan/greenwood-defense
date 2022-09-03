@@ -138,8 +138,9 @@ MonoBehaviour:
   target: {fileID: 0}
   effect: {fileID: 2385728457605148233, guid: 6d7d763375b0be54085c492f8d676de9, type: 3}
   spriteRenderer: {fileID: 0}
+  canBeReflected: 1
   moveTowardTarget: 1
-  explosionRange: 2
+  explosionRange: 1.5
   maxTargetDistance: 4
   magma: {fileID: 1339922518811141910, guid: 4d4c85ce24cd933488b9e3bd9c8ce8a9, type: 3}
   triggerEffect4: {fileID: 0}
