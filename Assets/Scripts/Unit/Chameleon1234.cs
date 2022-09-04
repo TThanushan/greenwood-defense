@@ -97,7 +97,6 @@ public class Chameleon1234 : Unit
 
     void LifeSteal(float damageDone)
     {
-        print("lifesteal");
         currentHealth += damageDone * lifeStealPercentage / 100;
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
@@ -105,7 +104,6 @@ public class Chameleon1234 : Unit
 
     void SlowTargetAttackSpeed()
     {
-        print("slow");
         Unit unit = Target.GetComponent<Unit>();
         if (unit.attackSpeed == unit.GetInitialAttackSpeed())
             unit.attackSpeed *= 1 + attackSpeedReduction / 100f;

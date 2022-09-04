@@ -39,7 +39,6 @@ public class UpdateUI : MonoBehaviour
         string minutes = Mathf.Floor(timer / 60).ToString("00");
         string seconds = (timer % 60).ToString("00");
 
-        //print(string.Format("{0}:{1}", minutes, seconds));
         return string.Format("{0}:{1}", minutes, seconds);
     }
 

@@ -20,21 +20,13 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
     private void Start()
     {
         saveManager = SaveManager.instance;
-        //EnableObjects(false);
         Invoke(nameof(Check), Constants.TIME_BEFORE_FIRST_ENEMY_SPAWN - 1);
-        //SceneManager.sceneLoaded += CheckOnSceneLoad;
     }
 
     public bool IsDescriptionCardEnabled()
     {
         return descriptionCard.activeSelf;
     }
-    //void CheckOnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)
-    //{
-    //    print("check1");
-    //    if (Time.timeSinceLevelLoad > 3)
-    //        Check();
-    //}
 
 
     private void Update()
@@ -62,13 +54,11 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
 
     void DisableAllUnits(bool value = true)
     {
-        print("disableallunit:" + value);
         GameObject[] allies = PoolObject.instance.Allies;
         if (allies is null || allies.Length == 0)
             return;
         foreach (GameObject ally in PoolObject.instance.Allies)
         {
-            print(ally.name);
             if (ally.name == "PlayerCaptain")
                 continue;
             ally.GetComponent<Unit>().Disabled = value;
@@ -118,39 +108,18 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
     void GetEnemySprite(int index)
     {
         int descriptionIndex = index;
-        //if (index >= EnemySpawner.instance.GetStage().enemyTypes.Length)
-        //    index--;
         GameObject enemy;
         Stage.EnemyType[] enemyTypes = EnemySpawner.instance.GetStage().enemyTypes;
         enemy = enemyTypes[^1].Enemy;
         if (enemy.name.Contains("Ultimate"))
             enemy = enemyTypes[^2].Enemy;
 
-        //if (EnemySpawner.instance.GetStage().enemyTypes[0].Enemy.name == "MeleeFrogUnit")
-        //    enemy = EnemySpawner.instance.GetStage().enemyTypes[index + 1].Enemy;
-        //else
-        //    enemy = EnemySpawner.instance.GetStage().enemyTypes[index].Enemy;
 
         SetSprite(enemy);
-        //Transform spriteBody = Instantiate(enemy.transform.Find("SpriteBody"), transform.Find("NewEnemyDescriptionCard"));
-        //spriteBody.name = spriteBody.name.Replace("(Clone)", "");
-        //Transform spriteBodyTransformModel = descriptionCard.transform.Find("SpriteBodyModel");
-        //spriteBody.transform.localPosition = spriteBodyTransformModel.localPosition;
-        //spriteBody.transform.localEulerAngles = spriteBodyTransformModel.localEulerAngles;
-        //spriteBody.transform.localScale = spriteBodyTransformModel.localScale;
-        //SpriteRenderer[] sprites = spriteBody.GetComponentsInChildren<SpriteRenderer>();
-        //foreach (SpriteRenderer sp in sprites)
-        //{
-        //    sp.sortingLayerName = "UI";
-        //    sp.sortingOrder = 1002 + sp.sortingOrder;
-        //}
 
-        Debug.Log(saveManager.unitDescriptions.Count);
 
         if (descriptionIndex > saveManager.unitDescriptions.Count)
             descriptionIndex = saveManager.unitDescriptions.Count - 1;
-        //if (EnemySpawner.instance.GetStage().enemyTypes[index].Enemy.name.Contains("Ultimate"))
-        //    descriptionIndex--;
 
         string name = saveManager.unitDescriptions[descriptionIndex].name;
         string description = saveManager.unitDescriptions[descriptionIndex].description;

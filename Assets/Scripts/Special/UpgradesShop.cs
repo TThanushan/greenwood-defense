@@ -346,7 +346,7 @@ public class UpgradesShop : MonoBehaviour
         SetActiveUpgradeCardButtonLock(GetSelectedCard(), false);
         AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
         //saveManager.SaveUnlockedUnits();
-        saveManager.SavePrefIfAutoSave();
+        //saveManager.SavePrefIfAutoSave();
 
     }
 

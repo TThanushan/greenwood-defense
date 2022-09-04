@@ -47,18 +47,6 @@ public class SaveManager : MonoBehaviour
     {
         return PlayerPrefs.HasKey(MAX_LEVEL_UNLOCKED_KEY) && PlayerPrefs.HasKey("Level1Unlocked");
     }
-    //private void Update()
-    //{
-    //    //if (Input.GetKeyDown(KeyCode.R))
-    //    //{
-    //    //    ResetPlayerPrefs();
-    //    //    print("Reset player pref");
-    //    //}
-    //    //if (Input.GetKeyDown(KeyCode.V))
-    //    //    print(saveManager.money);
-    //    //if (Input.GetKeyDown(KeyCode.S))
-    //    //    SavePrefs();
-    //}
 
     public void Init()
     {
@@ -191,6 +179,13 @@ public class SaveManager : MonoBehaviour
         for (int i = 0; i < levels.Count; i++)
         {
             key = "Level" + i.ToString();
+            if (i > maxLevelUnlocked)
+            {
+                PlayerPrefs.SetInt(key + "Unlocked", 0);
+                PlayerPrefs.SetInt(key + "Score", 0);
+                continue;
+            }
+
             // Is level unlocked.
             PlayerPrefs.SetInt(key + "Unlocked", levels[i].unlocked);
             // Level score.
@@ -541,7 +536,7 @@ public class SaveManager : MonoBehaviour
     {
         units = new List<Unit>
         {
-            new Unit("Chicken1", 15, 6, 100, "Fast dps unit."),
+            new Unit("Chicken1", 20, 6, 100, "Fast dps unit."),
             new Unit("Chicken2", 30, 8, 350, "Every 3 attacks, double hit"),
             new Unit("Chicken3", 70, 10, 950, "Every 3 attacks, triple hit and 50% chance to dodge an attack"),
             new Unit("Chicken4", 120, 12, 3200, "When under 25% health, attack speed is increase by 500%, each hit increase attack damage by 5% until 50%)"),

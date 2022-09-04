@@ -147,4 +147,10 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: SaveGame
+    clip: {fileID: 8300000, guid: 772afa3762699e5448188fff46bed738, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   SFXMuted: 0

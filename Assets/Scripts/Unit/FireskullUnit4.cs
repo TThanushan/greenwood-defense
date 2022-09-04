@@ -45,7 +45,6 @@ public class FireskullUnit4 : FireskullUnit3
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance <= explosionRange)
             {
-                print(enemy.name);
                 enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform);
                 InstantiateTrap(enemy);
             }

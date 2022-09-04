@@ -70,8 +70,6 @@ public class RockUnit3 : RockUnit2
     {
         if (!bullet.activeSelf)
             return false;
-        //print("1:" + bullet.GetComponent<BulletScript>().target.GetInstanceID());
-        //print("2" + gameObject.GetInstanceID());
         return bullet.GetComponent<BulletScript>().target.GetInstanceID() == gameObject.GetInstanceID();
     }
 

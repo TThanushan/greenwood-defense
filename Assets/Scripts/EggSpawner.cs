@@ -44,7 +44,6 @@ public class EggSpawner : MonoBehaviour
 
         if (!birdPrefab)
             return;
-        print("bip2");
         GameObject newBirdPrefab = PoolObject.instance.GetPoolObject(birdPrefab);
         newBirdPrefab.transform.position = GetRandomSpawnPosition(transform.position);
         newBirdPrefab.GetComponent<Unit>().SetTargetTag(targetTag);

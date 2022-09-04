@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -14,18 +16,113 @@ public class UpgradesShopHero : MonoBehaviour
     public TMP_ColorGradient priceOriginalColor;
     public GameObject upgradeEffect;
 
+    List<SaveManager.HeroUpgrade> nextHeroUpgrades;
 
+    StringBuilder _sb = new(50);
+    List<float> prices;
+    float oldPlayerMoney;
     private void Start()
     {
         if (!saveManager)
             saveManager = SaveManager.instance;
+        oldPlayerMoney = saveManager.money;
+
+        prices = new List<float>();
+        //UpdateNextHeroUpgrades();
+        InitNextHeroUpgrades();
         InitUpgradesCards();
     }
+
     public void UpdateShopUI()
     {
-        SetPlayerGoldText();
-        UpdateButton();
+        if (oldPlayerMoney != saveManager.money)
+        {
+            oldPlayerMoney = saveManager.money;
+            SetPlayerGoldText();
+            UpdateButton();
+        }
         SetSelectedCardInfos();
+
+    }
+
+    void InitUpgradesCards()
+    {
+        //Transform unitsButtonPanel = transform.Find("Buttons/HeroButtonPanel");
+        Transform unitsButtonPanel = transform.Find(Constants.HERO_BUTTON_PANEL_PATH);
+        string upgradeName;
+        string unlockedName;
+        foreach (Transform upgradeCardButton in unitsButtonPanel)
+        {
+            upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
+            unlockedName = GetUnlockedUpgradeName(upgradeName);
+            //string name = GetUnlockedUpgradeName(upgradeName);
+            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
+            upgradeCardButton.name = "UpgradeCard" + unlockedName;
+            TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>();
+
+            if (!IsUpgradeMax(unlockedName))
+            {
+                AddTriggers(upgradeCardButton);
+                SaveManager.HeroUpgrade nextHeroUpgrade = GetNextHeroUpgrade(unlockedName);
+                UpdatePriceTextColor(priceText, nextHeroUpgrade.name);
+                prices.Add(nextHeroUpgrade.shopPrice);
+                string price = nextHeroUpgrade.shopPrice.ToString() + "$";
+                priceText.text = price;
+
+            }
+            else
+                DisableUpgradeCard(upgradeCardButton.Find("Button").GetComponent<Button>());
+            UpdateUpgradeCardLevelText(upgradeCardButton, unlockedName);
+
+        }
+    }
+
+
+    public void UpdateCurrentButtonLevelText()
+    {
+        UpdateUpgradeCardLevelText(GetSelectedCard(), GetUpgradeNameFromSelectCard());
+    }
+    void UpdateButtonPriceTextColor()
+    {
+        Transform unitsButtonPanel = transform.Find(Constants.HERO_BUTTON_PANEL_PATH);
+        foreach (Transform upgradeCardButton in unitsButtonPanel)
+        {
+            //if (!upgradeCardButton.name.Equals(GetSelectedCard().name))
+            //    continue;
+            string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
+            SaveManager.HeroUpgrade nextUpgrade = GetNextHeroUpgrade(upgradeName);
+            if (nextUpgrade is null || nextUpgrade.shopPrice < saveManager.money)
+                continue;
+            //if (!IsUpgradeMax(upgradeName))
+            UpdatePriceTextColor(upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>(), GetNextHeroUpgrade(upgradeName).name);
+        }
+    }
+
+    void UpdateCurrentButton()
+    {
+        Transform unitsButtonPanel = transform.Find(Constants.HERO_BUTTON_PANEL_PATH);
+        foreach (Transform upgradeCardButton in unitsButtonPanel)
+        {
+            if (!upgradeCardButton.name.Equals(GetSelectedCard().name))
+                continue;
+            string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
+            string unlockedName = GetUnlockedUpgradeName(upgradeName);
+            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
+
+
+            upgradeCardButton.name = "UpgradeCard" + unlockedName;
+            string price = "Max";
+            TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>();
+            if (!IsUpgradeMax(unlockedName))
+            {
+                SaveManager.HeroUpgrade nextHeroUpgrade = GetNextHeroUpgrade(unlockedName);
+                price = nextHeroUpgrade.shopPrice.ToString() + "$";
+                UpdatePriceTextColor(priceText, nextHeroUpgrade.name);
+            }
+            UpdateUpgradeCardLevelText(upgradeCardButton, unlockedName);
+
+            priceText.text = price;
+        }
 
     }
 
@@ -37,6 +134,8 @@ public class UpgradesShopHero : MonoBehaviour
             string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
             string unlockedName = GetUnlockedUpgradeName(upgradeName);
             upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
+
+
             upgradeCardButton.name = "UpgradeCard" + unlockedName;
             string price = "Max";
             TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>();
@@ -46,21 +145,72 @@ public class UpgradesShopHero : MonoBehaviour
                 price = nextHeroUpgrade.shopPrice.ToString() + "$";
                 UpdatePriceTextColor(priceText, nextHeroUpgrade.name);
             }
-            //string lvl = GetUpgradeLevel(unlockedName).ToString();
-            //string maxlvl = GetMaxLevel(unlockedName).ToString();
-            //upgradeCardButton.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/" + maxlvl;
-            UpdateUpgradeCardLevelText(upgradeCardButton, unlockedName);
             priceText.text = price;
         }
     }
 
+    void InitNextHeroUpgrades()
+    {
+        nextHeroUpgrades = new List<SaveManager.HeroUpgrade>();
+        foreach (string unlockedHeroUpgrade in saveManager.unlockedHeroUpgrades)
+        {
+            SaveManager.HeroUpgrade heroUpgrade = saveManager.GetHeroUpgrade(unlockedHeroUpgrade);
+            SaveManager.HeroUpgrade a = GetNextHeroUpgradeSimple(heroUpgrade.name);
+            if (a != null)
+                nextHeroUpgrades.Add(a);
+        }
+    }
+    void UpdateNextHeroUpgrades(string oldUpgradeName)
+    {
+        int i = 0;
+        foreach (SaveManager.HeroUpgrade unlockedHeroUpgrade in nextHeroUpgrades)
+        {
+            if (unlockedHeroUpgrade.name == oldUpgradeName)
+            {
+                nextHeroUpgrades.RemoveAt(i);
+                break;
+            }
+            i++;
+        }
+        SaveManager.HeroUpgrade newUpgrade = GetNextHeroUpgradeSimple(oldUpgradeName);
+        if (newUpgrade != null)
+            nextHeroUpgrades.Add(newUpgrade);
+    }
+
+
+
     void UpdateUpgradeCardLevelText(Transform button, string upgradeName)
     {
-        string lvl = GetUpgradeLevel(upgradeName).ToString();
-        lvl = (int.Parse(lvl) - 1).ToString();
-        string maxlvl = GetMaxLevel(upgradeName).ToString();
-        maxlvl = (int.Parse(maxlvl) - 1).ToString();
-        button.Find("LevelText").GetComponent<TextMeshProUGUI>().text = lvl + "/" + maxlvl;
+
+        TextMeshProUGUI tmPro = button.Find("LevelText").GetComponent<TextMeshProUGUI>();
+
+        int lvl = GetUpgradeLevel(upgradeName) - 1;
+        string lvlText = lvl.ToString();
+
+        int maxlvl = GetMaxLevel(upgradeName) - 1;
+        tmPro.text = ConcatLevelText(lvlText, maxlvl.ToString());
+    }
+
+    string ConcatLevelText(string currentLevel, string maxLevel)
+    {
+        _sb.Clear();
+        _sb.Append(currentLevel);
+        _sb.Append('/');
+
+        _sb.Append(maxLevel);
+        return _sb.ToString();
+    }
+
+    string Concat(string[] stringArray)
+    {
+        _sb.Clear();
+
+        for (int i = 0; i < stringArray.Length; i++)
+        {
+            _sb.Append(stringArray[i]);
+        }
+
+        return _sb.ToString();
     }
 
     void UpdatePriceTextColor(TextMeshProUGUI text, string upgradeName)
@@ -77,34 +227,7 @@ public class UpgradesShopHero : MonoBehaviour
         transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = saveManager.money.ToString() + '$';
     }
 
-    void InitUpgradesCards()
-    {
-        //Transform unitsButtonPanel = transform.Find("Buttons/HeroButtonPanel");
-        Transform unitsButtonPanel = transform.Find(Constants.HERO_BUTTON_PANEL_PATH);
-        foreach (Transform upgradeCardButton in unitsButtonPanel)
-        {
-            string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
-            string unlockedName = GetUnlockedUpgradeName(upgradeName);
-            //string name = GetUnlockedUpgradeName(upgradeName);
-            upgradeCardButton.Find("Title").GetComponent<TMPro.TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
-            upgradeCardButton.name = "UpgradeCard" + unlockedName;
-            TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>();
 
-            if (!IsUpgradeMax(unlockedName))
-            {
-                AddTriggers(upgradeCardButton);
-                SaveManager.HeroUpgrade nextHeroUpgrade = GetNextHeroUpgrade(unlockedName);
-                UpdatePriceTextColor(priceText, nextHeroUpgrade.name);
-                string price = nextHeroUpgrade.shopPrice.ToString() + "$";
-                priceText.text = price;
-
-            }
-            else
-                DisableUpgradeCard(upgradeCardButton.Find("Button").GetComponent<Button>());
-            UpdateUpgradeCardLevelText(upgradeCardButton, unlockedName);
-
-        }
-    }
 
     string GetUnlockedUpgradeName(string upgradeName)
     {
@@ -171,21 +294,38 @@ public class UpgradesShopHero : MonoBehaviour
     {
         return GetUpgradeNameNumbersOnly(upgradeName) == GetMaxUpgradeLevel(upgradeName);
     }
+
+
+    //float GetMaxUpgradeLevel(string upgradeName)
+    //{
+    //    string name = GetUpgradeNameWithoutNumbers(upgradeName);
+    //    float levelMax = 0f;
+    //    string nameCurrent;
+    //    float levelCurrent;
+    //    foreach (SaveManager.HeroUpgrade heroUpgrade in saveManager.heroUpgrades)
+    //    {
+    //        nameCurrent = GetUpgradeNameWithoutNumbers(heroUpgrade.name);
+    //        if (name != nameCurrent)
+    //            continue;
+    //        levelCurrent = GetUpgradeNameNumbersOnly(heroUpgrade.name);
+    //        if (levelCurrent > levelMax)
+    //            levelMax = levelCurrent;
+    //    }
+    //    return levelMax;
+    //}
     float GetMaxUpgradeLevel(string upgradeName)
     {
         string name = GetUpgradeNameWithoutNumbers(upgradeName);
         float levelMax = 0f;
         string nameCurrent;
-        float levelCurrent;
-        foreach (SaveManager.HeroUpgrade heroUpgrade in saveManager.heroUpgrades)
+        for (int i = saveManager.heroUpgrades.Count - 1; i != 0; i--)
         {
+            SaveManager.HeroUpgrade heroUpgrade = saveManager.heroUpgrades[i];
             nameCurrent = GetUpgradeNameWithoutNumbers(heroUpgrade.name);
-            if (name != nameCurrent)
-                continue;
-            levelCurrent = GetUpgradeNameNumbersOnly(heroUpgrade.name);
-            if (levelCurrent > levelMax)
-                levelMax = levelCurrent;
+            if (name == nameCurrent)
+                return GetUpgradeNameNumbersOnly(heroUpgrade.name);
         }
+
         return levelMax;
     }
 
@@ -217,7 +357,8 @@ public class UpgradesShopHero : MonoBehaviour
         entry.callback.AddListener((eventData) => { function(); });
         eventTrigger.triggers.Add(entry);
     }
-    SaveManager.HeroUpgrade GetNextHeroUpgrade(string upgradeName)
+
+    SaveManager.HeroUpgrade GetNextHeroUpgradeSimple(string upgradeName)
     {
         string name = GetUpgradeNameWithoutNumbers(upgradeName);
         float level = GetUpgradeNameNumbersOnly(upgradeName);
@@ -229,12 +370,21 @@ public class UpgradesShopHero : MonoBehaviour
             nameCurrent = GetUpgradeNameWithoutNumbers(heroUpgrade.name);
             if (name != nameCurrent)
                 continue;
-
             levelCurrent = GetUpgradeNameNumbersOnly(heroUpgrade.name);
             if (levelCurrent > level)
             {
                 return heroUpgrade;
             }
+        }
+        return null;
+    }
+    SaveManager.HeroUpgrade GetNextHeroUpgrade(string upgradeName)
+    {
+        upgradeName = GetUpgradeNameWithoutNumbers(upgradeName);
+        foreach (SaveManager.HeroUpgrade nextHeroUpgrade in nextHeroUpgrades)
+        {
+            if (GetUpgradeNameWithoutNumbers(nextHeroUpgrade.name) == upgradeName)
+                return nextHeroUpgrade;
         }
         return null;
     }
@@ -298,8 +448,9 @@ public class UpgradesShopHero : MonoBehaviour
     {
         GameObject effect = Instantiate(upgradeEffect);
         effect.transform.position = selectCursor.transform.position;
-
     }
+
+
 
     public void UnlockUpgrade()
     {
@@ -313,14 +464,18 @@ public class UpgradesShopHero : MonoBehaviour
             saveManager.unlockedHeroUpgrades.Remove(currentHeroUpgradeName);
             saveManager.unlockedHeroUpgrades.Add(nextHeroUpgrade.name);
             saveManager.money -= nextHeroUpgrade.shopPrice;
-            //saveManager.SaveUnlockedHeroUpgrades();
-            saveManager.SavePrefIfAutoSave();
             string oldCardName = selectedCard;
             selectedCard = "UpgradeCard" + nextHeroUpgrade.name;
             UpdateButtonName(oldCardName);
-            UpdateShopUI();
+            //UpdateShopUI();
+            UpdateButtonPriceTextColor();
+            //UpdateNextHeroUpgrades(next);
+            UpdateNextHeroUpgrades(nextHeroUpgrade.name);
+            SetPlayerGoldText();
             AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
+            UpdateCurrentButton();
             CreateUpgradeEffect();
+            //UpdateCurrentButtonLevelText();
         }
 
         if (IsUpgradeMax(GetUpgradeNameFromSelectCard()))

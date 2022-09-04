@@ -37,13 +37,11 @@ public class DevScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            print("give money");
             SaveManager.instance.money += 100000;
             SaveManager.instance.SavePrefs();
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
-            print("give money");
             SaveManager.instance.money += 100;
             SaveManager.instance.SavePrefs();
         }

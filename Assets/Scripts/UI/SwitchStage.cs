@@ -97,8 +97,6 @@ public class SwitchStage : MonoBehaviour
     {
         float score = saveManager.GetLevelScore();
         int starsNumber = levelScore.HowManyStar((int)score);
-        print("score:" + score);
-        print("starNumber:" + starsNumber);
 
         starsPanel.Find("Star1/In").gameObject.SetActive(false);
         starsPanel.Find("Star2/In").gameObject.SetActive(false);

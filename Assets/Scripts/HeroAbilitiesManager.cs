@@ -146,7 +146,6 @@ public class HeroAbilitiesManager : MonoBehaviour
             return Paralysis;
         else if (name == "Lightning")
             return Lightning;
-        print("null func");
         return null;
 
     }
@@ -163,7 +162,6 @@ public class HeroAbilitiesManager : MonoBehaviour
 
     void DamageBuff()
     {
-        print("DamageBuff");
         PoolObject poolObject = PoolObject.instance;
         float damageCoef = 2.5f;
         float damageBonus = GetUpgradeNameNumbersOnly(GetAbility("DamageBuff").name) * damageCoef;
@@ -188,7 +186,6 @@ public class HeroAbilitiesManager : MonoBehaviour
 
     void Paralysis()
     {
-        print("Paralysis");
         PoolObject poolObject = PoolObject.instance;
         float duration = 1.5f;
         float paralyseDuration = GetUpgradeNameNumbersOnly(GetAbility("Paralysis").name) * duration;
@@ -223,7 +220,6 @@ public class HeroAbilitiesManager : MonoBehaviour
     void Lightning()
     {
         PoolObject poolObject = PoolObject.instance;
-        print("Lightning");
         float lightningDamage = 10f;
         float damage = GetUpgradeNameNumbersOnly(GetAbility("Lightning").name) * lightningDamage;
         // Cooldown duration is in heroUpgrade class.

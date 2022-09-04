@@ -26,10 +26,9 @@ public class MenuScript : MonoBehaviour
     }
 
 
-    public void
-        Save()
+    public void SaveIfAutoSave()
     {
-        SaveManager.instance.ResetPlayerPrefs();
+        SaveManager.instance.SavePrefIfAutoSave();
     }
     void Init()
     {

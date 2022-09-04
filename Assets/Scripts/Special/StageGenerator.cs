@@ -64,11 +64,7 @@ public class StageGenerator : MonoBehaviour
 
     EnemyType GetEnemyType(int index, ref GameObject[] prefabs)
     {
-        //if (index >= prefabs.Length)
-        //{
-        //    Debug.LogError("index > prefabs.legth" + prefabs.Length);
-        //    return null;
-        //}
+
         EnemyType enemyType = new()
         {
             Enemy = prefabs[index],
@@ -120,7 +116,6 @@ public class StageGenerator : MonoBehaviour
         float coef2 = maxPrefabIndex - currentPrefabIndex;
         float fullCoef = coef * coef2;
         newTime = minTime - (0.075f * fullCoef);
-        //print($"coef : {coef}, coef2 : {coef2}, fullCoef: {fullCoef}, newTime : {newTime}");
         return newTime;
     }
 

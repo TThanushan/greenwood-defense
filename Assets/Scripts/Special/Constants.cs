@@ -14,7 +14,7 @@ public static class Constants
     public const int REWARD_BONUS_EVERY_X_STAGE = 50;
     public const int MAX_SCORE = 100;
     public const int MAX_STAGE_NUMBER = 100;
-    public const string GAME_VERSION = "1.11";
+    public const string GAME_VERSION = "2.0";
     public const int ENEMY_CAPTAIN_MAX_HEALTH = 100;
     public const int ENEMY_CAPTAIN_MAX_HEALTH_BONUS = 10;
     public const float TIME_BEFORE_FIRST_ENEMY_SPAWN = 2.5f;

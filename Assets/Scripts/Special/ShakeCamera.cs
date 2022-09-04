@@ -53,7 +53,6 @@ public class ShakeCamera : MonoBehaviour
         fading = false;
         CancelInvoke();
         Invoke("StopShaking", duration);
-        print("shake");
     }
 
     void SlowDownShaking()
