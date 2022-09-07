@@ -11,9 +11,10 @@ public class TweenPosition : MyTween
 
 
     Vector2 startPosition;
-    void Awake()
-    {
 
+    protected override void Awake()
+    {
+        base.Awake();
         TweenPositionInit();
     }
 
@@ -28,11 +29,11 @@ public class TweenPosition : MyTween
 
     void TweenPositionInit()
     {
-        startPosition = transform.position;
+        startPosition = tweenedObject.transform.localPosition;
         if (axisOnly == AxisOnly.XAxis)
-            newPosition.y = transform.position.y;
+            newPosition.y = tweenedObject.transform.localPosition.y;
         if (axisOnly == AxisOnly.YAxis)
-            newPosition.x = transform.position.x;
+            newPosition.x = tweenedObject.transform.localPosition.x;
         if (startFromNewPosition)
         {
             Vector2 tmp = new Vector2(startPosition.x, startPosition.y);
@@ -43,9 +44,11 @@ public class TweenPosition : MyTween
 
     public override void Tween()
     {
-        transform.position = startPosition;
+        LeanTween.cancel(gameObject);
 
-        LeanTween.move(gameObject, newPosition, tweenTimePosition)
+        tweenedObject.transform.localPosition = startPosition;
+
+        LeanTween.move(tweenedObject, newPosition, tweenTimePosition)
         .setEase(leanTweenType);
     }
 }

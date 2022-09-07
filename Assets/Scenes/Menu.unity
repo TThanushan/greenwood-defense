@@ -2819,6 +2819,8 @@ GameObject:
   - component: {fileID: 1452916470}
   - component: {fileID: 1452916473}
   - component: {fileID: 1452916474}
+  - component: {fileID: 1452916476}
+  - component: {fileID: 1452916475}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -2929,6 +2931,38 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1452916476}
+          m_TargetAssemblyTypeName: TweenSize, Assembly-CSharp
+          m_MethodName: Tween
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1452916475}
+          m_TargetAssemblyTypeName: TweenSize, Assembly-CSharp
+          m_MethodName: Tween
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1452916474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2941,6 +2975,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3983cac0968f3a04b959ce9d2fcf5cc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1452916475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452916468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d4702800b40934f8a40d7d1b9a319b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenedObject: {fileID: 0}
+  tweenTimeSize: 0
+  maxSize: 1
+  useNewStartSize: 1
+  newStartSize: {x: 2.837982, y: 2.837982, z: 1}
+  leanTweenType: 12
+--- !u!114 &1452916476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452916468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26d4702800b40934f8a40d7d1b9a319b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenedObject: {fileID: 0}
+  tweenTimeSize: 0.1
+  maxSize: 1.15
+  useNewStartSize: 0
+  newStartSize: {x: 0, y: 0, z: 0}
+  leanTweenType: 12
 --- !u!1 &1572050565
 GameObject:
   m_ObjectHideFlags: 0

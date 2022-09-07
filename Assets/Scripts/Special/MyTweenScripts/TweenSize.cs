@@ -28,6 +28,8 @@ public class TweenSize : MyTween
     }
     public override void Tween()
     {
+        LeanTween.cancel(tweenedObject);
+
         tweenedObject.transform.localScale = startScale;
         LeanTween.scale(tweenedObject, startScale * maxSize, tweenTimeSize)
         .setEase(leanTweenType);
