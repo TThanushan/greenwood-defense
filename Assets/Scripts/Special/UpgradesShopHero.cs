@@ -11,6 +11,7 @@ public class UpgradesShopHero : MonoBehaviour
 {
     private SaveManager saveManager;
     public string selectedCard;
+    public GameObject heroUpgradeButtonPrefab;
     public GameObject selectCursor;
     public TMP_ColorGradient tooExpensivePriceColor;
     public TMP_ColorGradient priceOriginalColor;
@@ -29,6 +30,7 @@ public class UpgradesShopHero : MonoBehaviour
 
         prices = new List<float>();
         //UpdateNextHeroUpgrades();
+        GenerateUpgradeButton();
         InitNextHeroUpgrades();
         InitUpgradesCards();
     }
@@ -45,6 +47,21 @@ public class UpgradesShopHero : MonoBehaviour
 
     }
 
+    void GenerateUpgradeButton()
+    {
+        GameObject button;
+        GameObject spriteLoaded;
+        GameObject sprite;
+        saveManager.unlockedHeroUpgrades.Sort();
+
+        foreach (string upgradeName in saveManager.unlockedHeroUpgrades)
+        {
+            button = Instantiate(heroUpgradeButtonPrefab, transform.Find(Constants.HERO_BUTTON_PANEL_PATH));
+            spriteLoaded = (GameObject)Resources.Load(Constants.HERO_UPGRADES_SPRITE_RESOURCES_PATH + '/' + GetUpgradeNameWithoutNumbers(upgradeName));
+            sprite = Instantiate(spriteLoaded, button.transform.Find("Sprite").transform);
+            button.name = "UpgradeCard" + upgradeName;
+        }
+    }
     void InitUpgradesCards()
     {
         //Transform unitsButtonPanel = transform.Find("Buttons/HeroButtonPanel");
@@ -66,7 +83,7 @@ public class UpgradesShopHero : MonoBehaviour
                 SaveManager.HeroUpgrade nextHeroUpgrade = GetNextHeroUpgrade(unlockedName);
                 UpdatePriceTextColor(priceText, nextHeroUpgrade.name);
                 prices.Add(nextHeroUpgrade.shopPrice);
-                string price = nextHeroUpgrade.shopPrice.ToString() + "$";
+                string price = nextHeroUpgrade.shopPrice.ToString();
                 priceText.text = price;
 
             }
@@ -116,7 +133,7 @@ public class UpgradesShopHero : MonoBehaviour
             if (!IsUpgradeMax(unlockedName))
             {
                 SaveManager.HeroUpgrade nextHeroUpgrade = GetNextHeroUpgrade(unlockedName);
-                price = nextHeroUpgrade.shopPrice.ToString() + "$";
+                price = nextHeroUpgrade.shopPrice.ToString();
                 UpdatePriceTextColor(priceText, nextHeroUpgrade.name);
             }
             UpdateUpgradeCardLevelText(upgradeCardButton, unlockedName);
@@ -142,7 +159,7 @@ public class UpgradesShopHero : MonoBehaviour
             if (!IsUpgradeMax(unlockedName))
             {
                 SaveManager.HeroUpgrade nextHeroUpgrade = GetNextHeroUpgrade(unlockedName);
-                price = nextHeroUpgrade.shopPrice.ToString() + "$";
+                price = nextHeroUpgrade.shopPrice.ToString();
                 UpdatePriceTextColor(priceText, nextHeroUpgrade.name);
             }
             priceText.text = price;
@@ -224,7 +241,7 @@ public class UpgradesShopHero : MonoBehaviour
 
     void SetPlayerGoldText()
     {
-        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = saveManager.money.ToString() + '$';
+        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = saveManager.money.ToString();
     }
 
 
@@ -434,6 +451,8 @@ public class UpgradesShopHero : MonoBehaviour
     }
     string GetUpgradeNameWithoutNumbers(string upgradeName)
     {
+        if (upgradeName is null)
+            return null;
         string withoutNumbers = Regex.Replace(upgradeName, @"[\d-]", string.Empty);
         withoutNumbers = withoutNumbers.Replace(".", "");
         return withoutNumbers;

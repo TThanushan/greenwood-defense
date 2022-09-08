@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class LevelSelectUI : MonoBehaviour
 {
-    Color autoSaveEnabledColor = new Color(255, 0, 165);
+    Color autoSaveEnabledColor = new Color(65, 229, 61);
     private void Start()
     {
-        transform.Find(Constants.LEVEL_SELECT_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = ((int)SaveManager.instance.money).ToString() + "$";
+        transform.Find(Constants.LEVEL_SELECT_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = ((int)SaveManager.instance.money).ToString();
         SetAutoSaveColor();
     }
 
@@ -14,7 +14,7 @@ public class LevelSelectUI : MonoBehaviour
         Color col = Color.gray;
         if (SaveManager.instance.isAutoSave)
             col = autoSaveEnabledColor;
-        transform.Find("MiddleGroup/Buttons/AutoSave/Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().color = col;
+        transform.Find(Constants.LEVEL_SELECT_AUTO_SAVE_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().color = col;
 
     }
 

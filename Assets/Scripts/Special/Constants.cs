@@ -1,6 +1,7 @@
 public static class Constants
 {
     public const string UNITS_SPRITE_RESOURCES_PATH = "UnitsSprite";
+    public const string HERO_UPGRADES_SPRITE_RESOURCES_PATH = "HeroUpgradesSprite";
     public const string HERO_ABILITIES_SPRITE_RESOURCES_PATH = "HeroAbilitiesSprite";
     public const string UNITS_PREFAB_RESOURCES_PATH = "Units";
     public const string BUTTON_CLICK_SFX_NAME = "ButtonClick";
@@ -8,7 +9,13 @@ public static class Constants
     public const string BUY_SFX_NAME = "Buy";
     public const string UNITS_BUTTON_PANEL_PATH = "Buttons/UnitsButtonPanel/Viewport/Content";
     public const string HERO_BUTTON_PANEL_PATH = "Buttons/HeroButtonPanel/Viewport/Content";
-    public const string LEVEL_SELECT_GOLD_TEXT_PATH = "LeftGroup/MoneyText";
+    public const string LEVEL_SELECT_GOLD_TEXT_PATH = "TopGroup/Status_Coin/Text_Value";
+    public const string LEVEL_SELECT_STAGE_TITLE_TEXT_PATH = "MiddleGroup/Title";
+    public const string LEVEL_SELECT_STARS_PANEL_PATH = "MiddleGroup/Stars/Panel";
+    public const string LEVEL_SELECT_NEXT_LEVEL_IMAGE_PATH = "MiddleGroup/NextLevel/Image";
+    public const string LEVEL_SELECT_PREVIOUS_LEVEL_IMAGE_PATH = "MiddleGroup/PreviousLevel/Image";
+    public const string LEVEL_SELECT_AUTO_SAVE_TEXT_PATH = "MiddleGroup/Buttons/AutoSave/Text (TMP)";
+
     public const int LEVEL_COMPLETE_REWARD = 125;
     public const int FIRST_STAGE_REWARD_BONUS = 200;
     public const int REWARD_BONUS_EVERY_X_STAGE = 50;

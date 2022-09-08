@@ -41,7 +41,6 @@ public class UpgradesShop : MonoBehaviour
         {
             if (!unit.name.Contains('1'))
                 continue;
-
             GameObject button = Instantiate(upgradeButtonPrefab, buttonParentTransform);
             button.name = "UpgradeCard" + unit.name;
         }

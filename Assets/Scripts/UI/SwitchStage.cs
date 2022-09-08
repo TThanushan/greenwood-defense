@@ -5,7 +5,6 @@ public class SwitchStage : MonoBehaviour
 {
     public string currentStage;
     TMPro.TextMeshProUGUI stageTitle;
-    TMPro.TextMeshProUGUI completed;
     Transform starsPanel;
     SaveManager saveManager;
     LevelScore levelScore;
@@ -19,14 +18,13 @@ public class SwitchStage : MonoBehaviour
     {
         saveManager = SaveManager.instance;
         levelScore = LevelScore.instance;
-        stageTitle = transform.Find("TopGroup/Title").GetComponent<TMPro.TextMeshProUGUI>();
+        stageTitle = transform.Find(Constants.LEVEL_SELECT_STAGE_TITLE_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>();
         currentStage = "Stage " + saveManager.maxLevelUnlocked.ToString();
         StageInfosManager.instance.SetCurrentStageName(currentStage);
-        completed = transform.Find("TopGroup/Completed").GetComponent<TMPro.TextMeshProUGUI>();
         stageTitle.text = currentStage;
-        starsPanel = transform.Find("TopGroup/Stars/Panel");
-        imageNext = transform.Find("TopGroup/NextLevel/Image").GetComponent<Image>();
-        imagePrevious = transform.Find("TopGroup/PreviousLevel/Image").GetComponent<Image>();
+        starsPanel = transform.Find(Constants.LEVEL_SELECT_STARS_PANEL_PATH);
+        imageNext = transform.Find(Constants.LEVEL_SELECT_NEXT_LEVEL_IMAGE_PATH).GetComponent<Image>();
+        imagePrevious = transform.Find(Constants.LEVEL_SELECT_PREVIOUS_LEVEL_IMAGE_PATH).GetComponent<Image>();
 
         UpdateButtonColor();
         UpdateStars();

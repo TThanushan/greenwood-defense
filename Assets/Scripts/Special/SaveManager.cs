@@ -515,8 +515,8 @@ public class SaveManager : MonoBehaviour
         {
             "ManaMax100",
             "ManaRegen0.0",
-            "UnitCooldownReduction0",
             "StartMana0",
+            "UnitCooldownReduction0",
             "MaxHealth100",
             "DamageReduction0",
             "MoneyIncomeIncrease0",
