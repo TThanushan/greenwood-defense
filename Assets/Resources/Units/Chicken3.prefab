@@ -268,7 +268,7 @@ MonoBehaviour:
   hitCountNeeded: 3
   timeBetweenHitEffect: 0.125
   blockEffect: {fileID: 0}
-  dodgeChance: 50
+  dodgeChance: 40
   dodgeEffect: {fileID: 64473780753522552, guid: 0bf5335b826f7584aadc9ef56cd940da,
     type: 3}
 --- !u!1 &5367232546079401138

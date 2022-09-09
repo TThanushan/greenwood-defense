@@ -415,7 +415,7 @@ public class SaveManager : MonoBehaviour
             new HeroUpgrade("UnitDamageBonus75", "Increase units attack damage (67.5 => 75%)", 7500),
 
             new HeroUpgrade("UnitDamageReduction0"),
-            new HeroUpgrade("UnitDamageReduction7.5", "Units damage received reduced by 5%", 750),
+            new HeroUpgrade("UnitDamageReduction7.5", "Units damage received reduced by 7.5%", 750),
             new HeroUpgrade("UnitDamageReduction15", "Units damage received reduced (7.5 => 15%)", 1500),
             new HeroUpgrade("UnitDamageReduction22.5", "Units damage received reduced (15 => 22.5%)", 2250),
             new HeroUpgrade("UnitDamageReduction30", "Units damage received reduced (22.5 => 30%)", 3000),
@@ -538,8 +538,8 @@ public class SaveManager : MonoBehaviour
         {
             new Unit("Chicken1", 20, 6, 100, "Fast dps unit."),
             new Unit("Chicken2", 30, 8, 350, "Every 3 attacks, double hit"),
-            new Unit("Chicken3", 70, 10, 950, "Every 3 attacks, triple hit and 50% chance to dodge an attack"),
-            new Unit("Chicken4", 120, 12, 3200, "When under 25% health, attack speed is increase by 500%, each hit increase attack damage by 5% until 50%)"),
+            new Unit("Chicken3", 70, 10, 1500, "Every 3 attacks, triple hit and 40% chance to dodge an attack"),
+            new Unit("Chicken4", 120, 12, 4000, "When under 25% health, attack speed is increase by 500%, each hit increase attack damage by 5% until 50%)"),
 
             new Unit("Duck1", 20, 8, 100, "Tank unit, high health."),
             new Unit("Duck2", 35, 10, 300, "Every 3 hit received, block next hit"),
@@ -573,8 +573,8 @@ public class SaveManager : MonoBehaviour
 
             new Unit("Toucan1", 20, 10, 140, "Dps unit."),
             new Unit("Toucan2", 50, 12, 500, "Summon a bird that will drop an explosive egg on enemies."),
-            new Unit("Toucan3", 95, 14, 1400, "Summon a bird that will drop multiple explosive eggs on enemies."),
-            new Unit("Toucan4", 180, 16, 4200, "Summon a bird that will drop multiple eggs that spawn small birds on enemies."),
+            new Unit("Toucan3", 95, 14, 1600, "Summon a bird that will drop multiple explosive eggs on enemies."),
+            new Unit("Toucan4", 180, 16, 4700, "Summon a bird that will drop multiple eggs that spawn small birds on enemies."),
 
             new Unit("Snail1", 15, 10, 100, "Give close allies additional health."),
             new Unit("Snail2", 30, 12, 300, "Every certain amount of time, heal close allies."),
@@ -582,9 +582,9 @@ public class SaveManager : MonoBehaviour
             new Unit("Snail4", 100, 16, 2000, "When an close ally is low life, start a strong global healing."),
 
             new Unit("FireSkull1", 75, 13, 1500, "Shoot fireball that explode (small radius)."),
-            new Unit("FireSkull2", 100, 17, 2500, "Spawn fireball around him, after x seconds fireballs rush toward the closest enemies."),
-            new Unit("FireSkull3", 200, 22, 4000, "Summon a meteor on enemies (aoe damage explosion)."),
-            new Unit("FireSkull4", 300, 26, 10000, "Explosion that do enormous amount of damage then leave for x seconds magma on ground that damage enemies."),
+            new Unit("FireSkull2", 100, 17, 3500, "Spawn fireball around him, after x seconds fireballs rush toward the closest enemies."),
+            new Unit("FireSkull3", 200, 22, 8000, "Summon a meteor on enemies (aoe damage explosion)."),
+            new Unit("FireSkull4", 300, 26, 20000, "Explosion that do enormous amount of damage then leave for x seconds magma on ground that damage enemies."),
 
             new Unit("Chameleon1", 20, 10, 150, "Each hit reduced 40% attack speed of the enemy touched (non cumulative)."),
             new Unit("Chameleon2", 35, 12, 450, "(Color red) : Rage effect, attack speed and damage increased."),
@@ -610,7 +610,6 @@ public class SaveManager : MonoBehaviour
             new Unit("Ghost2", 55, 15, 750, "Invincible for x seconds, every x seconds (scale with level)."),
             new Unit("Ghost3", 110, 18, 1800, "First enemy hit join ally camp, every x seconds."),
             new Unit("Ghost4", 190, 25, 5000, "Aoe attacks : inflict 20% max health, heal for 20% of damage inflict, reload every x seconds."),
-
         };
 
     }

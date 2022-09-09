@@ -62,6 +62,14 @@ public class UpgradesShopHero : MonoBehaviour
             button.name = "UpgradeCard" + upgradeName;
         }
     }
+
+    string GetUpgradeTitle(string upgradeName)
+    {
+        upgradeName = GetUpgradeNameWithoutNumbers(upgradeName);
+        upgradeName = upgradeName.Replace("Ability", "");
+        upgradeName = upgradeName.Replace("Unit", "");
+        return upgradeName;
+    }
     void InitUpgradesCards()
     {
         //Transform unitsButtonPanel = transform.Find("Buttons/HeroButtonPanel");
@@ -73,7 +81,8 @@ public class UpgradesShopHero : MonoBehaviour
             upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
             unlockedName = GetUnlockedUpgradeName(upgradeName);
             //string name = GetUnlockedUpgradeName(upgradeName);
-            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
+
+            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeTitle(upgradeName);
             upgradeCardButton.name = "UpgradeCard" + unlockedName;
             TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>();
 
@@ -124,7 +133,7 @@ public class UpgradesShopHero : MonoBehaviour
                 continue;
             string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
             string unlockedName = GetUnlockedUpgradeName(upgradeName);
-            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
+            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeTitle(upgradeName);
 
 
             upgradeCardButton.name = "UpgradeCard" + unlockedName;
@@ -150,7 +159,8 @@ public class UpgradesShopHero : MonoBehaviour
         {
             string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
             string unlockedName = GetUnlockedUpgradeName(upgradeName);
-            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
+            //upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
+            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeTitle(upgradeName);
 
 
             upgradeCardButton.name = "UpgradeCard" + unlockedName;

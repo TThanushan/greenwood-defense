@@ -16,6 +16,19 @@ public static class Constants
     public const string LEVEL_SELECT_PREVIOUS_LEVEL_IMAGE_PATH = "MiddleGroup/PreviousLevel/Image";
     public const string LEVEL_SELECT_AUTO_SAVE_TEXT_PATH = "MiddleGroup/Buttons/AutoSave/Text (TMP)";
 
+    public const string LEVEL_COMPLET_PANEL_PATH = "MiddleGroup/LevelCompletePanel";
+    public const string LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH = "Popup/StageReward/StageRewardText";
+    public const string LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH = "Popup/Group_Get_Item/Coin/TotalGoldText";
+    public const string LEVEL_COMPLETE_SCORE_PATH = "Popup/Score";
+
+    public const string LEVEL_COMPLETE_STAR1_STAR_UNLOCKED = "Popup/Score/Star1/StarUnlocked";
+    public const string LEVEL_COMPLETE_STAR2_STAR_UNLOCKED = "Popup/Score/Star2/StarUnlocked";
+    public const string LEVEL_COMPLETE_STAR3_STAR_UNLOCKED = "Popup/Score/Star3/StarUnlocked";
+    public const string LEVEL_COMPLETE_BAR_FRONT_PATH = "Popup/Bar/Bg/Front";
+    public const string LEVEL_COMPLETE_BAR_SCORE_PATH = "Popup/Bar/Score";
+
+
+
     public const int LEVEL_COMPLETE_REWARD = 125;
     public const int FIRST_STAGE_REWARD_BONUS = 200;
     public const int REWARD_BONUS_EVERY_X_STAGE = 50;

@@ -115,7 +115,7 @@ public class StageManager : MonoBehaviour
         playerCaptain = GameObject.Find("PlayerCaptain").GetComponent<Unit>();
         enemyCaptain = GameObject.Find("EnemyCaptain").GetComponent<Unit>();
         gameOverPanel = transform.Find("MiddleGroup/GameOverPanel").gameObject;
-        levelCompletePanel = transform.Find("MiddleGroup/LevelCompletePanel").gameObject;
+        levelCompletePanel = transform.Find(Constants.LEVEL_COMPLET_PANEL_PATH).gameObject;
         saveManager = SaveManager.instance;
         SetEnemyCaptainHealthUsingStageNumber();
 
@@ -205,11 +205,19 @@ public class StageManager : MonoBehaviour
 
     void UpdateLevelPanelInfos(GameObject panel)
     {
-        panel.transform.Find("TotalGoldText").GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.money.ToString();
+        //panel.transform.Find(Constants.LEVEL_COMPLETE_TOTAL_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.money.ToString();
+        Transform s = panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH);
+        print(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH);
+        print(panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text);
+        panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
+        print("bip11");
+        if (panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH))
+        {
 
-        panel.transform.Find("GoldEarnedText").GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
-        if (panel.transform.Find("StageRewardText"))
-            panel.transform.Find("StageRewardText").GetComponent<TMPro.TextMeshProUGUI>().text = '+' + Mathf.Round((CalculateRewardAmount())).ToString() + '$';
+            print("bip");
+            panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = '+' + Mathf.Round((CalculateRewardAmount())).ToString();
+            print("bip2");
+        }
     }
 
     void DoVictory()

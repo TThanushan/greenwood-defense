@@ -17,11 +17,11 @@ public class LevelComplete : MonoBehaviour
     bool animationDone;
     private void Awake()
     {
-        scoreBar = transform.Find("Bar/Bg/Front").GetComponent<Image>();
-        star1 = transform.Find("Score/Star1/StarUnlocked").GetComponent<TweenSize>();
-        star2 = transform.Find("Score/Star2/StarUnlocked").GetComponent<TweenSize>();
-        star3 = transform.Find("Score/Star3/StarUnlocked").GetComponent<TweenSize>();
-        scoreText = transform.Find("Bar/Score").GetComponent<TextMeshProUGUI>();
+        scoreBar = transform.Find(Constants.LEVEL_COMPLETE_BAR_FRONT_PATH).GetComponent<Image>();
+        star1 = transform.Find(Constants.LEVEL_COMPLETE_STAR1_STAR_UNLOCKED).GetComponent<TweenSize>();
+        star2 = transform.Find(Constants.LEVEL_COMPLETE_STAR2_STAR_UNLOCKED).GetComponent<TweenSize>();
+        star3 = transform.Find(Constants.LEVEL_COMPLETE_STAR3_STAR_UNLOCKED).GetComponent<TweenSize>();
+        scoreText = transform.Find(Constants.LEVEL_COMPLETE_BAR_SCORE_PATH).GetComponent<TextMeshProUGUI>();
         //InvokeRepeating("PlayScoreBarFillingSFX", 0f, 0.1f);
 
     }
@@ -54,9 +54,9 @@ public class LevelComplete : MonoBehaviour
         // Don't show while...
         if (animationDone || !Mathf.Approximately(scoreBar.fillAmount, scoreBarFillAmountMax))
             return;
-        transform.Find("NextLevelButton").gameObject.SetActive(true);
-        transform.Find("MenuButton").gameObject.SetActive(true);
-        transform.Find("UpgradesButton").gameObject.SetActive(true);
+        transform.Find("Popup/Group_Buttons/Button_Home").gameObject.SetActive(true);
+        transform.Find("Popup/Group_Buttons/Button_Restart").gameObject.SetActive(true);
+        transform.Find("Popup/Group_Buttons/Button_Next").gameObject.SetActive(true);
 
         animationDone = true;
 
