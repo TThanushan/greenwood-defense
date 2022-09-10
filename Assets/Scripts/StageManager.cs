@@ -206,18 +206,15 @@ public class StageManager : MonoBehaviour
     void UpdateLevelPanelInfos(GameObject panel)
     {
         //panel.transform.Find(Constants.LEVEL_COMPLETE_TOTAL_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.money.ToString();
-        Transform s = panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH);
-        print(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH);
-        print(panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text);
         panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
-        print("bip11");
         if (panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH))
-        {
-
-            print("bip");
             panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = '+' + Mathf.Round((CalculateRewardAmount())).ToString();
-            print("bip2");
-        }
+    }
+
+    void UpdateGameoverPanel()
+    {
+        gameOverPanel.transform.Find(Constants.GAMEOVER_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
+
     }
 
     void DoVictory()
@@ -247,7 +244,8 @@ public class StageManager : MonoBehaviour
         Time.timeScale = 1;
         isGameOver = true;
         gameOverPanel.SetActive(true);
-        UpdateLevelPanelInfos(gameOverPanel);
+        //UpdateLevelPanelInfos(gameOverPanel);
+        UpdateGameoverPanel();
         gameOverPanel.SetActive(true);
 
         saveManager.SavePrefIfAutoSave();

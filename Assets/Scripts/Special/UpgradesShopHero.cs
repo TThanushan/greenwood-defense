@@ -268,6 +268,12 @@ public class UpgradesShopHero : MonoBehaviour
     }
     public void SetSelectedCardButtonCursor()
     {
+        GameObject unitCursor = selectCursor.transform.Find("UnitsUpgrades").gameObject;
+        if (unitCursor.activeSelf)
+        {
+            unitCursor.SetActive(false);
+            selectCursor.transform.Find("HerosUpgrades").gameObject.SetActive(true);
+        }
         if (selectedCard != "")
             selectCursor.transform.position = GetSelectedCard().position;
     }
@@ -504,6 +510,7 @@ public class UpgradesShopHero : MonoBehaviour
             AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
             UpdateCurrentButton();
             CreateUpgradeEffect();
+            SetSelectedCardInfos();
             //UpdateCurrentButtonLevelText();
         }
 

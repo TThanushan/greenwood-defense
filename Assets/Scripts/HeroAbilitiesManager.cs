@@ -158,6 +158,8 @@ public class HeroAbilitiesManager : MonoBehaviour
         System.Action callAbility = GetAbilityFunctionToAdd(name);
         callAbility();
         ResetAbilityCooldown(name);
+        print(buttonPrefab.name + name);
+
     }
 
     void DamageBuff()
@@ -187,8 +189,9 @@ public class HeroAbilitiesManager : MonoBehaviour
     void Paralysis()
     {
         PoolObject poolObject = PoolObject.instance;
-        float duration = 1.5f;
-        float paralyseDuration = GetUpgradeNameNumbersOnly(GetAbility("Paralysis").name) * duration;
+        float duration = 1f;
+        float coef = 0.5f;
+        float paralyseDuration = duration + GetUpgradeNameNumbersOnly(GetAbility("Paralysis").name) * coef;
 
         foreach (GameObject enemy in PoolObject.instance.Enemies)
         {

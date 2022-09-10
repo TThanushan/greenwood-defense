@@ -16,6 +16,8 @@ public static class Constants
     public const string LEVEL_SELECT_PREVIOUS_LEVEL_IMAGE_PATH = "MiddleGroup/PreviousLevel/Image";
     public const string LEVEL_SELECT_AUTO_SAVE_TEXT_PATH = "MiddleGroup/Buttons/AutoSave/Text (TMP)";
 
+    public const string GAMEOVER_PANEL_PATH = "MiddleGroup/GameOverPanel";
+    public const string GAMEOVER_EARNED_GOLD_TEXT_PATH = "Popup_Lose/Popup/Coin/Text_Value";
     public const string LEVEL_COMPLET_PANEL_PATH = "MiddleGroup/LevelCompletePanel";
     public const string LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH = "Popup/StageReward/StageRewardText";
     public const string LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH = "Popup/Group_Get_Item/Coin/TotalGoldText";
@@ -29,9 +31,9 @@ public static class Constants
 
 
 
-    public const int LEVEL_COMPLETE_REWARD = 125;
+    public const int LEVEL_COMPLETE_REWARD = 100;
     public const int FIRST_STAGE_REWARD_BONUS = 200;
-    public const int REWARD_BONUS_EVERY_X_STAGE = 50;
+    public const int REWARD_BONUS_EVERY_X_STAGE = 25;
     public const int MAX_SCORE = 100;
     public const int MAX_STAGE_NUMBER = 100;
     public const string GAME_VERSION = "2.0";

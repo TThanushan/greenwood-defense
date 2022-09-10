@@ -107,6 +107,13 @@ public class UpgradesShop : MonoBehaviour
     }
     public void SetSelectedCardButtonCursor()
     {
+        GameObject heroCursor = selectCursor.transform.Find("HerosUpgrades").gameObject;
+        if (heroCursor.activeSelf)
+        {
+            heroCursor.SetActive(false);
+            selectCursor.transform.Find("UnitsUpgrades").gameObject.SetActive(true);
+        }
+
         if (selectedCard != "")
             selectCursor.transform.position = GetSelectedCard().position;
     }
@@ -125,12 +132,7 @@ public class UpgradesShop : MonoBehaviour
         SetSelectedCardInfos();
     }
 
-    void AddTriggers(Transform upgradeCardButton)
-    {
-        AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SelectCard);
-        AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetSelectedCardButtonCursor);
 
-    }
 
     public void PlayButtonClick()
     {
@@ -175,6 +177,12 @@ public class UpgradesShop : MonoBehaviour
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
             //if (!saveManager.unlockedUnits.Contains(unitName))
         }
+    }
+    void AddTriggers(Transform upgradeCardButton)
+    {
+        AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SelectCard);
+        AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetSelectedCardButtonCursor);
+
     }
 
     void CreateUpgradeEffect()

@@ -23,7 +23,7 @@ public class DevScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            int speed = 4;
+            int speed = 10;
             if (Time.timeScale == speed)
                 Time.timeScale = 1;
             else
