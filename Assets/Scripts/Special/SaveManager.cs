@@ -116,14 +116,6 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         Init();
 
-        //Old
-        //PlayerPrefs.DeleteAll();
-        //SaveManager.instance.money = 0f;
-        //isTutorialDone = 0;
-        //maxLevelUnlocked = 1;
-        //Init();
-        //InitFirstTimeUnlockedUnits();
-        //InitFirstTimeUnlockedHeroUpgrades();
     }
     public int GetLevelScore(int index)
     {

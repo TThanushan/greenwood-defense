@@ -20,6 +20,11 @@ public class MenuScript : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
+
+#if UNITY_ANDROID
+        Application.targetFrameRate = 120;
+#endif
+
         Init();
         audioManager = AudioManager.instance;
 

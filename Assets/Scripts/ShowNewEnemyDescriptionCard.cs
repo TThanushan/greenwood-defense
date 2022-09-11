@@ -92,9 +92,9 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
     }
     void SetSprite(GameObject enemy)
     {
-        Transform spriteBody = Instantiate(enemy.transform.Find("SpriteBody"), transform.Find("NewEnemyDescriptionCard"));
+        Transform spriteBody = Instantiate(enemy.transform.Find("SpriteBody"), transform.Find("NewEnemyDescriptionCard/Popup"));
         spriteBody.name = spriteBody.name.Replace("(Clone)", "");
-        Transform spriteBodyTransformModel = descriptionCard.transform.Find("SpriteBodyModel");
+        Transform spriteBodyTransformModel = descriptionCard.transform.Find("Popup/SpriteBodyModel");
         spriteBody.transform.localPosition = spriteBodyTransformModel.localPosition;
         spriteBody.transform.localEulerAngles = spriteBodyTransformModel.localEulerAngles;
         spriteBody.transform.localScale = spriteBodyTransformModel.localScale;
@@ -131,8 +131,8 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
 
     void SetDescriptionInfos(string name, string description)
     {
-        descriptionCard.transform.Find("Name").GetComponent<TMPro.TextMeshProUGUI>().text = name;
-        descriptionCard.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = description;
+        descriptionCard.transform.Find("Popup/NameGroup/Name").GetComponent<TMPro.TextMeshProUGUI>().text = name;
+        descriptionCard.transform.Find("Popup/DescriptionGroup/Description").GetComponent<TMPro.TextMeshProUGUI>().text = description;
     }
 
 
