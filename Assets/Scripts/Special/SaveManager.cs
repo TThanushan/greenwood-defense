@@ -15,11 +15,14 @@ public class SaveManager : MonoBehaviour
     public List<string> unlockedHeroUpgrades;
     public List<string> unlockedUnits;
     public List<UnitDescription> unitDescriptions;
+    public List<string> chosenUnits;
+
     int isTutorialDone;
     const string MAX_LEVEL_UNLOCKED_KEY = "MaxLevelUnlockedKey";
     const string PLAYER_MONEY_KEY = "Money";
     const string UNLOCKED_UNITS_KEY = "UnlockedUnits";
     const string UNLOCKED_HERO_UPGRADES_KEY = "UnlockedHeroUpgrades";
+    const string CHOSEN_UNITS_KEY = "ChosenUnits";
     const string IS_TUTORIAL_DONE_KEY = "IsTutorialDone";
     const string AUTO_SAVE_KEY = "IsAutoSave";
     const string NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY = "newEnemyCardShownedIndex";
@@ -63,6 +66,7 @@ public class SaveManager : MonoBehaviour
         InitFirstTimeUnlockedUnits();
         InitFirstTimeUnlockedHeroUpgrades();
         SaveUnlockedUnits();
+        SaveChosenUnits();
         SaveUnlockedHeroUpgrades();
         isTutorialDone = 0;
         isAutoSave = true;
@@ -212,6 +216,16 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetString(UNLOCKED_UNITS_KEY, String.Join("|", unlockedUnits));
     }
 
+    public void SaveChosenUnits()
+    {
+        PlayerPrefs.SetString(CHOSEN_UNITS_KEY, String.Join("|", chosenUnits));
+    }
+
+    public string GetChosenUnits()
+    {
+        string units = PlayerPrefs.GetString(CHOSEN_UNITS_KEY);
+        return string.Join("|", units);
+    }
     public string GetUnlockedUnitsFromPrefs()
     {
         string units = PlayerPrefs.GetString(UNLOCKED_UNITS_KEY);
@@ -232,7 +246,10 @@ public class SaveManager : MonoBehaviour
     {
         return GetUnlockedHeroUpgradesFromPrefs().Split('|');
     }
-
+    string[] GetChosenUnitsArray()
+    {
+        return GetChosenUnits().Split('|');
+    }
     string[] GetUnlockedUnitsArray()
     {
         return GetUnlockedUnitsFromPrefs().Split('|');
@@ -258,9 +275,19 @@ public class SaveManager : MonoBehaviour
         newEnemyCardDescriptionShownedIndex = PlayerPrefs.GetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY);
 
         LoadUnlockedUnits();
+        LoadChosenUnits();
         LoadUnlockedHeroUpgrades();
     }
-
+    void LoadChosenUnits()
+    {
+        string[] units = GetChosenUnitsArray();
+        chosenUnits.Clear();
+        foreach (string name in units)
+        {
+            if (name != "")
+                chosenUnits.Add(name);
+        }
+    }
     void LoadUnlockedUnits()
     {
         string[] units = GetUnlockedUnitsArray();
@@ -478,30 +505,31 @@ public class SaveManager : MonoBehaviour
 
             new HeroUpgrade("Phoenix0", "Your captain comeback to life once per stage (Must be bought again after using it)"),
             new HeroUpgrade("Phoenix1", "Your captain comeback to life once per stage (Must be bought again after using it)", 2000),
-
-            new HeroUpgrade("AbilityRandomSpawn0", "Spawn for free 0 random unit"),
-            new HeroUpgrade("AbilityRandomSpawn1", "Spawn for free 1 random unit (Cooldown: 25 seconds)", 400, 0, 25),
-            new HeroUpgrade("AbilityRandomSpawn2", "Spawn for free 2 random unit (Cooldown: 25 => 35 seconds)", 900, 0, 35),
-            new HeroUpgrade("AbilityRandomSpawn3", "Spawn for free 3 random unit (Cooldown: 35 => 50 seconds)", 1500, 0, 50),
-            new HeroUpgrade("AbilityRandomSpawn4", "Spawn for free 4 random unit (Cooldown: 50 => 65 seconds)", 2200, 0, 65),
-            new HeroUpgrade("AbilityDamageBuff0", "Increase units damage by x for 5 seconds"),
-            new HeroUpgrade("AbilityDamageBuff1", "Increase units damage by 2.5 for 5 seconds (Cooldown: 30 seconds)", 500, 0, 30),
-            new HeroUpgrade("AbilityDamageBuff2", "Increase units damage by 5 for 5 seconds (Cooldown: 30 => 40 seconds)", 1000, 0, 40),
-            new HeroUpgrade("AbilityDamageBuff3", "Increase units damage by 7.5 for 5 seconds (Cooldown: 40 => 50 seconds)", 1500, 0, 50),
-            new HeroUpgrade("AbilityDamageBuff4", "Increase units damage by 9 for 5 seconds (Cooldown: 50 => 60 seconds)", 2000, 0, 60),
-            new HeroUpgrade("AbilityParalysis0", "Paralyse enemies for x seconds"),
-            new HeroUpgrade("AbilityParalysis1", "Paralyse enemies for 1.5 seconds (Cooldown: 70 seconds)", 600, 0, 70),
-            new HeroUpgrade("AbilityParalysis2", "Paralyse enemies for 2 seconds (Cooldown: 70 seconds)", 1200, 0, 70),
-            new HeroUpgrade("AbilityParalysis3", "Paralyse enemies for 2.5 seconds (Cooldown: 70 seconds)", 1800, 0, 70),
-            new HeroUpgrade("AbilityParalysis4", "Paralyse enemies for 3 seconds (Cooldown: 70 seconds)", 2000, 0, 70),
-            new HeroUpgrade("AbilityLightning0", "Makes the lightning fall all enemies and makes them take x amount of damage"),
-            new HeroUpgrade("AbilityLightning1", "Makes the lightning fall all enemies and makes them take 10 amount of damage (Cooldown: 30 seconds)", 1000, 0, 30),
-            new HeroUpgrade("AbilityLightning2", "Makes the lightning fall all enemies and makes them take 20 amount of damage (Cooldown: 30 => 40 seconds)", 2000, 0, 40),
-            new HeroUpgrade("AbilityLightning3", "Makes the lightning fall all enemies and makes them take 30 amount of damage (Cooldown: 40 => 50 seconds)", 3000, 0, 50),
-            new HeroUpgrade("AbilityLightning4", "Makes the lightning fall all enemies and makes them take 40 amount of damage (Cooldown: 50 => 60 seconds)", 4000, 0, 60),
+            new HeroUpgrade("AbilityRandomSpawn0", abilityText + "Spawn for free 0 random unit"),
+            new HeroUpgrade("AbilityRandomSpawn1", abilityText + "Spawn for free 1 random unit (Cooldown: 25 seconds)", 400, 0, 25),
+            new HeroUpgrade("AbilityRandomSpawn2", abilityText + "Spawn for free 2 random unit (Cooldown: 25 => 35 seconds)", 900, 0, 35),
+            new HeroUpgrade("AbilityRandomSpawn3", abilityText + "Spawn for free 3 random unit (Cooldown: 35 => 50 seconds)", 1500, 0, 50),
+            new HeroUpgrade("AbilityRandomSpawn4", abilityText + "Spawn for free 4 random unit (Cooldown: 50 => 65 seconds)", 2200, 0, 65),
+            new HeroUpgrade("AbilityDamageBuff0", abilityText + "Increase units damage by x for 5 seconds"),
+            new HeroUpgrade("AbilityDamageBuff1", abilityText + "Increase units damage by 2.5 for 5 seconds (Cooldown: 30 seconds)", 500, 0, 30),
+            new HeroUpgrade("AbilityDamageBuff2", abilityText + "Increase units damage by 5 for 5 seconds (Cooldown: 30 => 40 seconds)", 1000, 0, 40),
+            new HeroUpgrade("AbilityDamageBuff3", abilityText + "Increase units damage by 7.5 for 5 seconds (Cooldown: 40 => 50 seconds)", 1500, 0, 50),
+            new HeroUpgrade("AbilityDamageBuff4", abilityText + "Increase units damage by 9 for 5 seconds (Cooldown: 50 => 60 seconds)", 2000, 0, 60),
+            new HeroUpgrade("AbilityParalysis0", abilityText + "Paralyse enemies for x seconds"),
+            new HeroUpgrade("AbilityParalysis1", abilityText + "Paralyse enemies for 1.5 seconds (Cooldown: 70 seconds)", 600, 0, 70),
+            new HeroUpgrade("AbilityParalysis2", abilityText + "Paralyse enemies for 2 seconds (Cooldown: 70 seconds)", 1200, 0, 70),
+            new HeroUpgrade("AbilityParalysis3", abilityText + "Paralyse enemies for 2.5 seconds (Cooldown: 70 seconds)", 1800, 0, 70),
+            new HeroUpgrade("AbilityParalysis4", abilityText + "Paralyse enemies for 3 seconds (Cooldown: 70 seconds)", 2000, 0, 70),
+            new HeroUpgrade("AbilityLightning0", abilityText + "Makes the lightning fall all enemies and makes them take x amount of damage"),
+            new HeroUpgrade("AbilityLightning1", abilityText + "Makes the lightning fall all enemies and makes them take 10 amount of damage (Cooldown: 30 seconds)", 1000, 0, 30),
+            new HeroUpgrade("AbilityLightning2", abilityText + "Makes the lightning fall all enemies and makes them take 20 amount of damage (Cooldown: 30 => 40 seconds)", 2000, 0, 40),
+            new HeroUpgrade("AbilityLightning3", abilityText + "Makes the lightning fall all enemies and makes them take 30 amount of damage (Cooldown: 40 => 50 seconds)", 3000, 0, 50),
+            new HeroUpgrade("AbilityLightning4", abilityText + "Makes the lightning fall all enemies and makes them take 40 amount of damage (Cooldown: 50 => 60 seconds)", 4000, 0, 60),
 
         };
     }
+    string abilityText = "<color=#a442f5> (Ability) </color>";
+
     void InitFirstTimeUnlockedHeroUpgrades()
     {
         unlockedHeroUpgrades = new List<string>

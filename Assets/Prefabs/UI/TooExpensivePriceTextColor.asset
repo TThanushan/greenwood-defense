@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TooExpensivePriceTextColor
   m_EditorClassIdentifier: 
   colorMode: 0
-  topLeft: {r: 1, g: 0.2509804, b: 0.1254902, a: 1}
-  topRight: {r: 1, g: 0.2509804, b: 0.1254902, a: 1}
-  bottomLeft: {r: 1, g: 0.2509804, b: 0.1254902, a: 1}
-  bottomRight: {r: 1, g: 0.2509804, b: 0.1254902, a: 1}
+  topLeft: {r: 1, g: 0.25352353, b: 0.1273585, a: 1}
+  topRight: {r: 1, g: 0.25352353, b: 0.1273585, a: 1}
+  bottomLeft: {r: 1, g: 0.25352353, b: 0.1273585, a: 1}
+  bottomRight: {r: 1, g: 0.25352353, b: 0.1273585, a: 1}

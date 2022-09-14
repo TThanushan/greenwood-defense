@@ -24,6 +24,7 @@ public class UpgradesShop : MonoBehaviour
         GenerateUpgradeButton();
         InitUpgradesCards();
         UpdateShopUI();
+        InvokeRepeating(nameof(SetSelectedCardButtonCursor), 0, 0.1f);
     }
 
     public void UpdateShopUI(string oldCardName = "")
@@ -47,7 +48,7 @@ public class UpgradesShop : MonoBehaviour
     }
     void SetPlayerGoldText()
     {
-        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = ((int)saveManager.money).ToString() + '$';
+        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = ((int)saveManager.money).ToString();
     }
 
     void UpdateUpgradesCards()
@@ -60,6 +61,8 @@ public class UpgradesShop : MonoBehaviour
             SaveManager.Unit upgradeUnit = GetUpgradeUnit(unitName);
             if (upgradeUnit != null)
                 UpdatePriceTextColor(upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>(), upgradeUnit.name);
+            InitLevelLockMessageText(upgradeCardButton, unitName);
+
         }
     }
 
@@ -107,6 +110,8 @@ public class UpgradesShop : MonoBehaviour
     }
     public void SetSelectedCardButtonCursor()
     {
+        if (!buttonParentTransform.gameObject.activeInHierarchy)
+            return;
         GameObject heroCursor = selectCursor.transform.Find("HerosUpgrades").gameObject;
         if (heroCursor.activeSelf)
         {
@@ -175,9 +180,65 @@ public class UpgradesShop : MonoBehaviour
             if (!IsUnitOfAnyLevelUnlocked(unitName))
                 SetActiveUpgradeCardButtonLock(upgradeCardButton);
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
+            UpdateStarsLock(upgradeCardButton, unitName);
             //if (!saveManager.unlockedUnits.Contains(unitName))
         }
     }
+    int GetLockAmount(Transform upgradeCardButton, int level)
+    {
+        int levelMax = 4;
+        int lockCount = 0;
+        for (int i = levelMax; i > 0 + 1; i--)
+        {
+            if (IsUnitLevelUnlocked(i))
+                break;
+            lockCount++;
+        }
+        return lockCount;
+    }
+    void InitLevelLockMessageText(Transform upgradeCardButton, string unitName)
+    {
+        int maxLevelUnlocked = saveManager.maxLevelUnlocked;
+        bool doesMessageNeedToBeShowned = IsUnitOfAnyLevelUnlocked(unitName) && DoesUnitExist(unitName) && GetMaxUnitLevelUnlocked() == GetUnitLevelNumber(unitName);
+        if (maxLevelUnlocked >= Constants.UNIT_LEVEL_4_LOCK_UNTIL_STAGE || !doesMessageNeedToBeShowned)
+            return;
+
+        string text = "Unlock <color=#00A2FF> stage " + GetStageToUnlockNextUnitLevel().ToString();
+        upgradeCardButton.Find("LockMessage/Message").GetComponent<TextMeshProUGUI>().text = text;
+        upgradeCardButton.Find("LockMessage").gameObject.SetActive(true);
+    }
+
+    int GetStageToUnlockNextUnitLevel()
+    {
+        int maxLevelUnlocked = saveManager.maxLevelUnlocked;
+        int stageNumber = 0;
+        if (maxLevelUnlocked < Constants.UNIT_LEVEL_2_LOCK_UNTIL_STAGE)
+            stageNumber = Constants.UNIT_LEVEL_2_LOCK_UNTIL_STAGE;
+        else if (maxLevelUnlocked < Constants.UNIT_LEVEL_3_LOCK_UNTIL_STAGE)
+            stageNumber = Constants.UNIT_LEVEL_3_LOCK_UNTIL_STAGE;
+        else if (maxLevelUnlocked < Constants.UNIT_LEVEL_4_LOCK_UNTIL_STAGE)
+            stageNumber = Constants.UNIT_LEVEL_4_LOCK_UNTIL_STAGE;
+        return stageNumber;
+    }
+
+    int GetMaxUnitLevelUnlocked()
+    {
+        int maxLevelUnlocked = saveManager.maxLevelUnlocked;
+        if (maxLevelUnlocked < Constants.UNIT_LEVEL_2_LOCK_UNTIL_STAGE)
+            return 1;
+        else if (maxLevelUnlocked < Constants.UNIT_LEVEL_3_LOCK_UNTIL_STAGE)
+            return 2;
+        else if (maxLevelUnlocked < Constants.UNIT_LEVEL_4_LOCK_UNTIL_STAGE)
+            return 3;
+        return 4;
+    }
+
+    //void EnableLevelLockMessage(Transform upgradeButton, string unitName)
+    //{
+    //    if (!IsUnitLevelMax(unitName) && !IsUnitUnlocked(unitName))
+    //        upgradeButton.Find("LockMessage").gameObject.SetActive(true);
+
+    //}
     void AddTriggers(Transform upgradeCardButton)
     {
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SelectCard);
@@ -350,19 +411,82 @@ public class UpgradesShop : MonoBehaviour
             EmptySelectedCardInfos();
             AudioManager.instance.PlaySfx("UnitLevelMax");
         }
+        //UpdateActiveUpgradeCardButtonLevelLockMessage(unitName);
         SetActiveUpgradeCardButtonLock(GetSelectedCard(), false);
+        //EnableLevelLockMessage(GetSelectedCard(), upgradeUnitName);
         AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
-        //saveManager.SaveUnlockedUnits();
-        //saveManager.SavePrefIfAutoSave();
+
+    }
+
+
+
+    void UpdateActiveUpgradeCardButtonLevelLockMessage(string unitName)
+    {
+        if (!IsUnitLevelUnlocked(unitName))
+            GetSelectedCard().Find("LockMessage").gameObject.SetActive(true);
 
     }
 
     bool CanUpgrade(string unitName)
     {
-        return DoesUnitExist(unitName) && !UnitAlreadyUnlocked(unitName) && saveManager.money >= GetUnit(unitName).shopPrice;
+        bool enoughMoney = saveManager.money >= GetUnit(unitName).shopPrice;
+
+        return DoesUnitExist(unitName) && enoughMoney && IsUnitUnlocked(unitName);
+    }
+
+    bool IsUnitUnlocked(string unitName)
+    {
+        return !UnitAlreadyUnlocked(unitName) && (!IsUnitOfAnyLevelUnlocked(unitName) || IsUnitLevelUnlocked(unitName));
+    }
+
+    bool IsUnitLevelUnlocked(int unitLevel)
+    {
+        if (unitLevel == 2)
+            return saveManager.maxLevelUnlocked >= Constants.UNIT_LEVEL_2_LOCK_UNTIL_STAGE;
+        else if (unitLevel == 3)
+            return saveManager.maxLevelUnlocked >= Constants.UNIT_LEVEL_3_LOCK_UNTIL_STAGE;
+
+        return saveManager.maxLevelUnlocked >= Constants.UNIT_LEVEL_4_LOCK_UNTIL_STAGE;
+    }
+
+    //bool IsUnitNextLevelLocked(string unitName)
+    //{
+    //    if (!IsUnitOfAnyLevelUnlocked(unitName))
+    //        return true;
+
+    //    int unitLevel = int.Parse(GetUnitLevel(unitName)) + 1;
+    //    return IsUnitLevelUnlocked(unitLevel);
+    //}
+
+    bool IsUnitLevelUnlocked(string unitName)
+    {
+        if (!IsUnitOfAnyLevelUnlocked(unitName))
+            return true;
+        int unitLevel = int.Parse(GetUnitLevel(unitName));
+        return IsUnitLevelUnlocked(unitLevel);
     }
 
 
+    void UpdateStarsLock(Transform upgradeCardButton, int level)
+    {
+        Transform stars = upgradeCardButton.Find("StarsLock");
+        int levelMax = 4;
+        for (int i = levelMax; i > 0 + 1; i--)
+        {
+            if (IsUnitLevelUnlocked(i))
+                break;
+            string starName = "Star" + i.ToString();
+            string lockName = starName + "/Lock";
+            Transform lockTransform = stars.Find(lockName);
+            GameObject starUnlocked = lockTransform.gameObject;
+            starUnlocked.SetActive(true);
+        }
+    }
+
+    void UpdateStarsLock(Transform upgradeCardButton, string unitName)
+    {
+        UpdateStarsLock(upgradeCardButton, int.Parse(GetUnitLevel(unitName)));
+    }
 
     bool UnitAlreadyUnlocked(string unitName)
     {
@@ -415,7 +539,7 @@ public class UpgradesShop : MonoBehaviour
         TMPro.TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>();
         if (!IsUnitLevelMax(unitName))
         {
-            priceText.text = price + '$';
+            priceText.text = price;
             //UpdatePriceTextColor(priceText, upgradeUnit.name, upgradeUnit.shopPrice);
         }
 
@@ -475,4 +599,10 @@ public class UpgradesShop : MonoBehaviour
             return "4";
         return "1";
     }
+
+    int GetUnitLevelNumber(string unitName)
+    {
+        return int.Parse(GetUnitLevel(unitName));
+    }
+
 }

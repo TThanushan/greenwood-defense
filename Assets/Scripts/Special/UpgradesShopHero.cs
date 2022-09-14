@@ -19,6 +19,8 @@ public class UpgradesShopHero : MonoBehaviour
 
     List<SaveManager.HeroUpgrade> nextHeroUpgrades;
 
+    Transform heroButtonPanel;
+
     StringBuilder _sb = new(50);
     List<float> prices;
     float oldPlayerMoney;
@@ -27,12 +29,13 @@ public class UpgradesShopHero : MonoBehaviour
         if (!saveManager)
             saveManager = SaveManager.instance;
         oldPlayerMoney = saveManager.money;
-
+        heroButtonPanel = transform.Find(Constants.HERO_BUTTON_PANEL_PATH);
         prices = new List<float>();
         //UpdateNextHeroUpgrades();
         GenerateUpgradeButton();
         InitNextHeroUpgrades();
         InitUpgradesCards();
+        InvokeRepeating(nameof(SetSelectedCardButtonCursor), 0, 0.1f);
     }
 
     public void UpdateShopUI()
@@ -268,6 +271,8 @@ public class UpgradesShopHero : MonoBehaviour
     }
     public void SetSelectedCardButtonCursor()
     {
+        if (!heroButtonPanel.gameObject.activeInHierarchy)
+            return;
         GameObject unitCursor = selectCursor.transform.Find("UnitsUpgrades").gameObject;
         if (unitCursor.activeSelf)
         {

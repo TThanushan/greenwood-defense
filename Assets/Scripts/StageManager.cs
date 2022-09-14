@@ -247,6 +247,8 @@ public class StageManager : MonoBehaviour
         //UpdateLevelPanelInfos(gameOverPanel);
         UpdateGameoverPanel();
         gameOverPanel.SetActive(true);
+        if (GameObject.FindGameObjectWithTag("Spawner"))
+            GameObject.FindGameObjectWithTag("Spawner").SetActive(false);
 
         saveManager.SavePrefIfAutoSave();
     }

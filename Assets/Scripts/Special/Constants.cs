@@ -30,6 +30,10 @@ public static class Constants
     public const string LEVEL_COMPLETE_BAR_SCORE_PATH = "Popup/Bar/Score";
 
 
+    public const int UNIT_LEVEL_2_LOCK_UNTIL_STAGE = 15;
+    public const int UNIT_LEVEL_3_LOCK_UNTIL_STAGE = 30;
+    public const int UNIT_LEVEL_4_LOCK_UNTIL_STAGE = 45;
+
 
     public const int LEVEL_COMPLETE_REWARD = 100;
     public const int FIRST_STAGE_REWARD_BONUS = 200;
