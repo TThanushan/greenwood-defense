@@ -65,7 +65,9 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, 0);
         InitFirstTimeUnlockedUnits();
         InitFirstTimeUnlockedHeroUpgrades();
+        InitFirstTimeChosenUnits();
         SaveUnlockedUnits();
+
         SaveChosenUnits();
         SaveUnlockedHeroUpgrades();
         isTutorialDone = 0;
@@ -194,6 +196,7 @@ public class SaveManager : MonoBehaviour
         SaveLevels();
         SaveIsAutoSave();
         SaveUnlockedUnits();
+        SaveChosenUnits();
         SaveUnlockedHeroUpgrades();
 
 
@@ -662,7 +665,14 @@ public class SaveManager : MonoBehaviour
         };
     }
 
-
+    void InitFirstTimeChosenUnits()
+    {
+        chosenUnits = new List<string>()
+        {
+            "Chicken1",
+            "Duck1",
+        };
+    }
 
     [System.Serializable]
     public class Unit

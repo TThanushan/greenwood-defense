@@ -27,7 +27,7 @@ public class SpawnBar : MonoBehaviour
     private void Start()
     {
         InitUnitButtons();
-        OrderChildButtonsByCost();
+        //OrderChildButtonsByCost();
         GenerateButtons();
         audioManager = AudioManager.instance;
     }
@@ -40,20 +40,13 @@ public class SpawnBar : MonoBehaviour
     void InitUnitButtons()
     {
         SaveManager saveManager = SaveManager.instance;
-        unitButtons = new UnitButton[saveManager.unlockedUnits.Count];
+        unitButtons = new UnitButton[saveManager.chosenUnits.Count];
         float cooldownReduction = 1 - GetCooldownReductionFromShop() / 100;
         int i = 0;
-        foreach (string unitName in saveManager.unlockedUnits)
+        foreach (string unitName in saveManager.chosenUnits)
         {
             SaveManager.Unit unitS = saveManager.GetUnit(unitName);
-            UnitButton unitButton = new UnitButton(unitS.name, unitS.cost, unitS.reloadTime * cooldownReduction);
-            //unitButton.prefabClone = Instantiate(unitButton.prefab);
-            //unitButton.prefabClone.SetActive(false);
-            //Unit unit = unitButton.prefabClone.GetComponent<Unit>();
-            ////Add health bonus from shop.
-            //unit.maxHealth *= 1 + GetMaxHealthPercentageBonusFromShop() / 100f;
-            //unit.currentHealth = unit.maxHealth;
-
+            UnitButton unitButton = new(unitS.name, unitS.cost, unitS.reloadTime * cooldownReduction);
             unitButtons[i] = unitButton;
             i++;
         }

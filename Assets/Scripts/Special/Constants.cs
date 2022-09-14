@@ -34,6 +34,7 @@ public static class Constants
     public const int UNIT_LEVEL_3_LOCK_UNTIL_STAGE = 30;
     public const int UNIT_LEVEL_4_LOCK_UNTIL_STAGE = 45;
 
+    public const int CHOSEN_UNIT_MAX = 6;
 
     public const int LEVEL_COMPLETE_REWARD = 100;
     public const int FIRST_STAGE_REWARD_BONUS = 200;

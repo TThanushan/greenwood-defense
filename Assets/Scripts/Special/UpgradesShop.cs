@@ -11,18 +11,21 @@ public class UpgradesShop : MonoBehaviour
     public string selectedCard;
     public GameObject selectCursor;
     public GameObject upgradeButtonPrefab;
+    public GameObject chosenUnitPrefab;
+
     public TMP_ColorGradient tooExpensivePriceColor;
     public TMP_ColorGradient priceOriginalColor;
     public GameObject upgradeEffect;
     public Color32 starsMaxColor;
-    Transform buttonParentTransform;
+    Transform buttonsParentTransform;
     private void Start()
     {
         if (!saveManager)
             saveManager = SaveManager.instance;
-        buttonParentTransform = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH);
+        buttonsParentTransform = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH);
         GenerateUpgradeButton();
         InitUpgradesCards();
+        InitChosenUnitsButtons();
         UpdateShopUI();
         InvokeRepeating(nameof(SetSelectedCardButtonCursor), 0, 0.1f);
     }
@@ -42,7 +45,7 @@ public class UpgradesShop : MonoBehaviour
         {
             if (!unit.name.Contains('1'))
                 continue;
-            GameObject button = Instantiate(upgradeButtonPrefab, buttonParentTransform);
+            GameObject button = Instantiate(upgradeButtonPrefab, buttonsParentTransform);
             button.name = "UpgradeCard" + unit.name;
         }
     }
@@ -53,8 +56,8 @@ public class UpgradesShop : MonoBehaviour
 
     void UpdateUpgradesCards()
     {
-        Transform unitsButtonPanel = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH);
-        foreach (Transform upgradeCardButton in unitsButtonPanel)
+
+        foreach (Transform upgradeCardButton in buttonsParentTransform)
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
@@ -64,6 +67,24 @@ public class UpgradesShop : MonoBehaviour
             InitLevelLockMessageText(upgradeCardButton, unitName);
 
         }
+    }
+
+
+    Transform GetUpgradeButton(string unitName)
+    {
+        unitName = GetUnitNameWithoutNumbers(unitName);
+
+        foreach (Transform upgradeCardButton in buttonsParentTransform)
+        {
+            if (upgradeCardButton.name.Contains(unitName))
+                return upgradeCardButton;
+        }
+        return null;
+    }
+
+    string GetUnitNameFromButton(string buttonName)
+    {
+        return buttonName.Replace("UpgradeCard", "");
     }
 
     void SetSelectedCardInfos()
@@ -110,7 +131,7 @@ public class UpgradesShop : MonoBehaviour
     }
     public void SetSelectedCardButtonCursor()
     {
-        if (!buttonParentTransform.gameObject.activeInHierarchy)
+        if (!buttonsParentTransform.gameObject.activeInHierarchy)
             return;
         GameObject heroCursor = selectCursor.transform.Find("HerosUpgrades").gameObject;
         if (heroCursor.activeSelf)
@@ -143,12 +164,13 @@ public class UpgradesShop : MonoBehaviour
     {
         AudioManager.instance.PlaySfx(Constants.BUTTON_CLICK_SFX_NAME);
     }
+
     void AddEventTriggerOnButton(GameObject button, System.Action function)
     {
         EventTrigger eventTrigger = button.GetComponent<EventTrigger>();
         if (eventTrigger is null)
             eventTrigger = button.AddComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry
+        EventTrigger.Entry entry = new()
         {
             eventID = EventTriggerType.PointerClick
         };
@@ -156,11 +178,47 @@ public class UpgradesShop : MonoBehaviour
         eventTrigger.triggers.Add(entry);
     }
 
+    void AddEventTriggerOnChooseButton(GameObject button, string unitName)
+    {
+        EventTrigger eventTrigger = button.transform.Find("RemoveButton").GetComponent<EventTrigger>();
+        if (eventTrigger is null)
+            eventTrigger = button.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new()
+        {
+            eventID = EventTriggerType.PointerClick
+        };
+        entry.callback.AddListener((eventData) => { RemoveChosenUnit(unitName); });
+        eventTrigger.triggers.Add(entry);
+
+        eventTrigger = button.transform.Find("ChooseButton").GetComponent<EventTrigger>();
+        if (eventTrigger is null)
+            eventTrigger = button.AddComponent<EventTrigger>();
+        entry = new()
+        {
+            eventID = EventTriggerType.PointerClick
+        };
+        entry.callback.AddListener((eventData) => { ChooseUnit(unitName); });
+        eventTrigger.triggers.Add(entry);
+    }
+
+    void AddEventTriggerOnChosenUnitButton(GameObject button)
+    {
+        EventTrigger eventTrigger = button.GetComponent<EventTrigger>();
+        if (eventTrigger is null)
+            eventTrigger = button.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new()
+        {
+            eventID = EventTriggerType.PointerClick
+        };
+        entry.callback.AddListener((eventData) => { RemoveChosenUnitUsingButtonName(button); });
+        eventTrigger.triggers.Add(entry);
+    }
+
     void UpdateButtonName(string oldCardName)
     {
         if (selectedCard == "")
             return;
-        Transform button = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH + '/' + oldCardName);
+        Transform button = buttonsParentTransform.Find(oldCardName);
         button.name = selectedCard;
     }
 
@@ -168,8 +226,7 @@ public class UpgradesShop : MonoBehaviour
     void InitUpgradesCards()
     {
         //Transform unitsButtonPanel = transform.Find("Buttons/UnitsButtonPanel");
-        Transform unitsButtonPanel = transform.Find(Constants.UNITS_BUTTON_PANEL_PATH);
-        foreach (Transform upgradeCardButton in unitsButtonPanel)
+        foreach (Transform upgradeCardButton in buttonsParentTransform)
         {
             string unitName = upgradeCardButton.name.Replace("UpgradeCard", "");
             AddTriggers(upgradeCardButton);
@@ -184,6 +241,9 @@ public class UpgradesShop : MonoBehaviour
             //if (!saveManager.unlockedUnits.Contains(unitName))
         }
     }
+
+
+
     int GetLockAmount(Transform upgradeCardButton, int level)
     {
         int levelMax = 4;
@@ -243,7 +303,7 @@ public class UpgradesShop : MonoBehaviour
     {
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SelectCard);
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetSelectedCardButtonCursor);
-
+        AddEventTriggerOnChooseButton(upgradeCardButton.Find("ChooseUnitButton").gameObject, GetUnitNameFromButton(upgradeCardButton.name));
     }
 
     void CreateUpgradeEffect()
@@ -255,8 +315,7 @@ public class UpgradesShop : MonoBehaviour
     void SetUpgradeButtonName(string unitName, string oldName)
     {
         //string path = "Buttons/UnitsButtonPanel/";
-        string path = Constants.UNITS_BUTTON_PANEL_PATH + '/';
-        transform.Find(path + oldName).name = "UpgradeCard" + unitName;
+        buttonsParentTransform.Find(oldName).name = "UpgradeCard" + unitName;
     }
 
     string GetUnlockedUnit(string unitName)
@@ -266,7 +325,7 @@ public class UpgradesShop : MonoBehaviour
             if (GetUnitNameWithoutNumbers(unitName) == GetUnitNameWithoutNumbers(unitNameUnlocked))
                 return unitNameUnlocked;
         }
-        return unitName;
+        return null;
     }
 
 
@@ -276,7 +335,7 @@ public class UpgradesShop : MonoBehaviour
     {
         if (selectedCard == "")
             return null;
-        return transform.Find(Constants.UNITS_BUTTON_PANEL_PATH + '/' + selectedCard);
+        return buttonsParentTransform.Find(selectedCard);
     }
 
 
@@ -347,15 +406,20 @@ public class UpgradesShop : MonoBehaviour
 
     void Upgrade(string upgradeUnitName, string unitName, float price)
     {
+        RemoveChosenUnit(unitName);
         saveManager.money -= price;
         saveManager.unlockedUnits.Add(upgradeUnitName);
         saveManager.unlockedUnits.Remove(unitName);
+
+        ChooseUnit(upgradeUnitName);
+
     }
 
     void Unlock(string unitName, float price)
     {
         saveManager.money -= price;
         saveManager.unlockedUnits.Add(unitName);
+        ChooseUnit(unitName);
     }
 
     void DisableUpgradeCard(Button button = null)
@@ -395,6 +459,7 @@ public class UpgradesShop : MonoBehaviour
         {
             Unlock(unitName, price);
             upgradeUnitName = unitName;
+            SetActiveUpgradeCardButtonLock(GetSelectedCard(), false);
         }
         else
         {
@@ -410,9 +475,9 @@ public class UpgradesShop : MonoBehaviour
             HideSelectedCardButtonCursor();
             EmptySelectedCardInfos();
             AudioManager.instance.PlaySfx("UnitLevelMax");
+            UnselectCard();
         }
         //UpdateActiveUpgradeCardButtonLevelLockMessage(unitName);
-        SetActiveUpgradeCardButtonLock(GetSelectedCard(), false);
         //EnableLevelLockMessage(GetSelectedCard(), upgradeUnitName);
         AudioManager.instance.PlaySfx(Constants.BUY_SFX_NAME);
 
@@ -529,14 +594,16 @@ public class UpgradesShop : MonoBehaviour
         }
         else if (IsUnitLevelMax(unitName))
         {
-            upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = "Max";
+            //upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = "Max";
+            upgradeCardButton.Find("UpgradePrice").gameObject.SetActive(false);
             UpdateCardStars(upgradeCardButton, int.Parse(lvl));
             DisableUpgradeCard(upgradeCardButton.Find("Button").GetComponent<Button>());
         }
+        else
+            UpdateCardStars(upgradeCardButton, int.Parse(lvl));
         //upgradeCardButton.Find("LevelText").GetComponent<TextMeshProUGUI>().text = "Lvl " + lvl + "/4";
-        UpdateCardStars(upgradeCardButton, int.Parse(lvl));
 
-        TMPro.TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>();
+        TextMeshProUGUI priceText = upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>();
         if (!IsUnitLevelMax(unitName))
         {
             priceText.text = price;
@@ -556,6 +623,11 @@ public class UpgradesShop : MonoBehaviour
             if (level == levelMax)
                 starUnlocked.GetComponent<Image>().color = starsMaxColor;
         }
+    }
+
+    void UpdateChosenUnitButtonManaCost(Transform unit, string unitName)
+    {
+        unit.Find("CostText").GetComponent<TextMeshProUGUI>().text = GetUnit(unitName).cost.ToString();
     }
 
     void UpdatePriceTextColor(TMPro.TextMeshProUGUI text, string unitName)
@@ -603,6 +675,119 @@ public class UpgradesShop : MonoBehaviour
     int GetUnitLevelNumber(string unitName)
     {
         return int.Parse(GetUnitLevel(unitName));
+    }
+
+    public void ChooseUnit(string unitName)
+    {
+        unitName = GetUnlockedUnit(unitName);
+        if (saveManager.chosenUnits.Contains(unitName) || saveManager.chosenUnits.Count >= Constants.CHOSEN_UNIT_MAX || unitName == null)
+            return;
+        AddChosenUnit(unitName);
+    }
+
+    void AddChosenUnit(string unitName)
+    {
+        Transform btn = GetUpgradeButton(unitName).Find("ChooseUnitButton");
+        btn.Find("ChooseButton").gameObject.SetActive(false);
+        btn.Find("RemoveButton").gameObject.SetActive(true);
+        saveManager.chosenUnits.Add(unitName);
+        UpdateChosenUnitList();
+    }
+
+    public void RemoveChosenUnit(string unitName)
+    {
+        unitName = GetUnlockedUnit(unitName);
+        if (!saveManager.chosenUnits.Contains(unitName))
+            return;
+        Transform btn = GetUpgradeButton(unitName).Find("ChooseUnitButton");
+        btn.Find("ChooseButton").gameObject.SetActive(true);
+        btn.Find("RemoveButton").gameObject.SetActive(false);
+        saveManager.chosenUnits.Remove(unitName);
+        UpdateChosenUnitList();
+    }
+
+    public void RemoveChosenUnitUsingButtonName(GameObject button)
+    {
+        RemoveChosenUnit(button.name.Replace("ChosenUnit", ""));
+        UpdateChosenUnitList();
+    }
+
+    void UpdateChosenUnitList()
+    {
+        int i = 0;
+        int count = saveManager.chosenUnits.Count;
+        string unitName;
+        string spritePath = Constants.UNITS_SPRITE_RESOURCES_PATH + '/';
+        Transform unit;
+        Transform chosenUnitButton;
+        Transform chosenUnitsParent = transform.Find("Buttons/ChosenUnits");
+
+        foreach (Transform button in chosenUnitsParent.transform)
+        {
+            chosenUnitButton = chosenUnitsParent.GetChild(i);
+            unit = chosenUnitButton.transform.Find("Unit");
+            if (i >= count)
+                unit.gameObject.SetActive(false);
+            else
+            {
+                unitName = saveManager.chosenUnits[i];
+                unit.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(spritePath + unitName);
+                chosenUnitButton.name = "ChosenUnit" + unitName;
+                unit.gameObject.SetActive(true);
+
+                UpdateCardStars(unit.Find("StarsCanvas"), GetUnitLevelNumber(unitName));
+                UpdateChosenUnitButtonManaCost(unit, unitName);
+                i++;
+            }
+        }
+        if (i == Constants.CHOSEN_UNIT_MAX)
+            DisableUnselectedChoseButtons();
+        else
+            EnableUnselectedChoseButtons();
+
+    }
+
+    void DisableUnselectedChoseButtons()
+    {
+        foreach (Transform button in buttonsParentTransform)
+        //foreach (string unitName in saveManager.unlockedUnits)
+        {
+            string unitName = GetUnitNameFromButton(button.name);
+            if (!saveManager.chosenUnits.Contains(unitName))
+                //GetUpgradeButton(unitName).Find("ChooseUnitButton").gameObject.SetActive(false);
+                GetUpgradeButton(unitName).Find("ChooseUnitButton/ChooseButton").GetComponent<Button>().interactable = false;
+        }
+    }
+
+    void EnableUnselectedChoseButtons()
+    {
+        foreach (string unitName in saveManager.unlockedUnits)
+        {
+            if (!saveManager.chosenUnits.Contains(unitName))
+                //GetUpgradeButton(unitName).Find("ChooseUnitButton").gameObject.SetActive(true);
+                GetUpgradeButton(unitName).Find("ChooseUnitButton/ChooseButton").GetComponent<Button>().interactable = true;
+        }
+    }
+
+    void InitChosenUnitsButtons()
+    {
+        Transform chosenUnitsParent = transform.Find("Buttons/ChosenUnits");
+        for (int i = 0; i < Constants.CHOSEN_UNIT_MAX; i++)
+        {
+            GameObject btn = Instantiate(chosenUnitPrefab, chosenUnitsParent);
+            btn.name = btn.name.Replace("(Clone)", "");
+
+            AddEventTriggerOnChosenUnitButton(btn);
+            btn.transform.Find("Unit").gameObject.SetActive(false);
+        }
+
+        foreach (string unitName in saveManager.chosenUnits)
+        {
+            Transform btn = GetUpgradeButton(unitName).Find("ChooseUnitButton");
+            btn.Find("ChooseButton").gameObject.SetActive(false);
+            btn.Find("RemoveButton").gameObject.SetActive(true);
+            UpdateChosenUnitList();
+        }
     }
 
 }
