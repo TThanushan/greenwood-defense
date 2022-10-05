@@ -25,7 +25,7 @@ public class SaveManager : MonoBehaviour
     const string CHOSEN_UNITS_KEY = "ChosenUnits";
     const string IS_TUTORIAL_DONE_KEY = "IsTutorialDone";
     const string AUTO_SAVE_KEY = "IsAutoSave";
-    const string NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY = "newEnemyCardShownedIndex";
+    const string NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY = "NewEnemyCardShownedIndex";
 
     public int newEnemyCardDescriptionShownedIndex;
     public float money;
@@ -48,7 +48,7 @@ public class SaveManager : MonoBehaviour
     }
     public bool SaveExist()
     {
-        return PlayerPrefs.HasKey(MAX_LEVEL_UNLOCKED_KEY) && PlayerPrefs.HasKey("Level1Unlocked");
+        return PlayerPrefs.HasKey(CHOSEN_UNITS_KEY) && PlayerPrefs.HasKey("Level1Unlocked");
     }
 
     public void Init()
@@ -555,6 +555,7 @@ public class SaveManager : MonoBehaviour
             "UnitMaxHealthBonus0",
         };
     }
+
 
     void InitUnits()
     {

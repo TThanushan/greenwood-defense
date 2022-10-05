@@ -27,6 +27,8 @@
 // Save() statements at the end of the Set
 // methods.
 
+using UnityEngine;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 #elif UNITY_WEBGL
 using System;
@@ -212,8 +214,6 @@ public static class PlayerPrefs
 #endif
 
 
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartScript : MonoBehaviour
 {

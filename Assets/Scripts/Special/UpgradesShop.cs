@@ -263,7 +263,7 @@ public class UpgradesShop : MonoBehaviour
         if (maxLevelUnlocked >= Constants.UNIT_LEVEL_4_LOCK_UNTIL_STAGE || !doesMessageNeedToBeShowned)
             return;
 
-        string text = "Unlock <color=#00A2FF> stage " + GetStageToUnlockNextUnitLevel().ToString();
+        string text = "Unlock <color=\"red\"> stage " + GetStageToUnlockNextUnitLevel().ToString();
         upgradeCardButton.Find("LockMessage/Message").GetComponent<TextMeshProUGUI>().text = text;
         upgradeCardButton.Find("LockMessage").gameObject.SetActive(true);
     }

@@ -9,7 +9,7 @@ public static class Constants
     public const string BUY_SFX_NAME = "Buy";
     public const string UNITS_BUTTON_PANEL_PATH = "Buttons/UnitsButtonPanel/Viewport/Content";
     public const string HERO_BUTTON_PANEL_PATH = "Buttons/HeroButtonPanel/Viewport/Content";
-    public const string LEVEL_SELECT_GOLD_TEXT_PATH = "TopGroup/Status_Coin/Text_Value";
+    public const string LEVEL_SELECT_GOLD_TEXT_PATH = "MiddleGroup/Status_Coin/Text_Value";
     public const string LEVEL_SELECT_STAGE_TITLE_TEXT_PATH = "MiddleGroup/Title";
     public const string LEVEL_SELECT_STARS_PANEL_PATH = "MiddleGroup/Stars/Panel";
     public const string LEVEL_SELECT_NEXT_LEVEL_IMAGE_PATH = "MiddleGroup/NextLevel/Image";
@@ -34,14 +34,14 @@ public static class Constants
     public const int UNIT_LEVEL_3_LOCK_UNTIL_STAGE = 30;
     public const int UNIT_LEVEL_4_LOCK_UNTIL_STAGE = 45;
 
-    public const int CHOSEN_UNIT_MAX = 6;
+    public const int CHOSEN_UNIT_MAX = 8;
 
     public const int LEVEL_COMPLETE_REWARD = 100;
     public const int FIRST_STAGE_REWARD_BONUS = 200;
     public const int REWARD_BONUS_EVERY_X_STAGE = 25;
     public const int MAX_SCORE = 100;
     public const int MAX_STAGE_NUMBER = 100;
-    public const string GAME_VERSION = "2.0";
+    public const string GAME_VERSION = "2.1";
     public const int ENEMY_CAPTAIN_MAX_HEALTH = 100;
     public const int ENEMY_CAPTAIN_MAX_HEALTH_BONUS = 10;
     public const float TIME_BEFORE_FIRST_ENEMY_SPAWN = 2.5f;
