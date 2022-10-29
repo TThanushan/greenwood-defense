@@ -12,6 +12,7 @@ public class SpawnBar : MonoBehaviour
     public UnitButton[] unitButtons;
     public GameObject buttonPrefab;
 
+    PoolObject poolObject;
     AudioManager audioManager;
     Transform buttonParentTransform;
     private void Awake()
@@ -26,6 +27,7 @@ public class SpawnBar : MonoBehaviour
 
     private void Start()
     {
+        poolObject = PoolObject.instance;
         InitUnitButtons();
         //OrderChildButtonsByCost();
         GenerateButtons();
@@ -156,10 +158,18 @@ public class SpawnBar : MonoBehaviour
     }
     private void SpawnUnit(GameObject prefab)
     {
-        GameObject newUnit = PoolObject.instance.GetPoolObject(prefab);
+        GameObject newUnit = poolObject.GetPoolObject(prefab);
         newUnit.SetActive(true);
         float randomYPos = spawnPosition.y + UnityEngine.Random.Range(-0.1f, 0.3f);
         newUnit.transform.position = new Vector2(spawnPosition.x, randomYPos);
+        //newUnit.tag = "Ally";
+
+        if (newUnit.name.Contains("Frog"))
+        {
+            newUnit.GetComponent<Unit>().SetTargetTag("Enemy");
+            newUnit.GetComponent<Unit>().RotateSprite();
+        }
+
         audioManager.PlaySfx("SpawnUnit");
 
     }
@@ -238,9 +248,10 @@ public class SpawnBar : MonoBehaviour
 
     void SetButtonPrefab(UnitButton unitButton)
     {
-        string path = Constants.UNITS_PREFAB_RESOURCES_PATH + '/' + unitButton.name;
+        string path = SaveManager.instance.GetUnitsPrefabRessourcePath() + '/' + unitButton.name;
         unitButton.prefab = (GameObject)Resources.Load(path);
     }
+
 
     void SetButtonSprite(GameObject button, string spriteName)
     {
@@ -294,10 +305,10 @@ public class SpawnBar : MonoBehaviour
         public float reloadTime;
         public float reloadTimeInitial;
 
-        [HideInInspector]
+        //[HideInInspector]
         //Only used one time.
         public GameObject prefab;
-        [HideInInspector]
+        //[HideInInspector]
         public GameObject prefabClone;
         [HideInInspector]
         public Transform reloadBar;

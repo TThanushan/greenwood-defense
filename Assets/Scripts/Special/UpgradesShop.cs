@@ -43,7 +43,8 @@ public class UpgradesShop : MonoBehaviour
     {
         foreach (SaveManager.Unit unit in saveManager.units)
         {
-            if (!unit.name.Contains('1'))
+
+            if (saveManager.IsModeNormalChosen() && !unit.name.Contains('1'))
                 continue;
             GameObject button = Instantiate(upgradeButtonPrefab, buttonsParentTransform);
             button.name = "UpgradeCard" + unit.name;
@@ -101,7 +102,7 @@ public class UpgradesShop : MonoBehaviour
 
             return;
         }
-        else if (IsUnitLevelMax(unitName))
+        else if (IsUnitLevelMax(unitName) && !unitName.Contains("Frog"))
         {
             GetSelectedCard().Find("UpgradePrice/PriceText").GetComponent<TMPro.TextMeshProUGUI>().text = "Max";
             return;
@@ -188,6 +189,7 @@ public class UpgradesShop : MonoBehaviour
             eventID = EventTriggerType.PointerClick
         };
         entry.callback.AddListener((eventData) => { RemoveChosenUnit(unitName); });
+
         eventTrigger.triggers.Add(entry);
 
         eventTrigger = button.transform.Find("ChooseButton").GetComponent<EventTrigger>();
@@ -236,6 +238,7 @@ public class UpgradesShop : MonoBehaviour
             }
             if (!IsUnitOfAnyLevelUnlocked(unitName))
                 SetActiveUpgradeCardButtonLock(upgradeCardButton);
+            print(unitName);
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
             UpdateStarsLock(upgradeCardButton, unitName);
             //if (!saveManager.unlockedUnits.Contains(unitName))
@@ -304,6 +307,7 @@ public class UpgradesShop : MonoBehaviour
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SelectCard);
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetSelectedCardButtonCursor);
         AddEventTriggerOnChooseButton(upgradeCardButton.Find("ChooseUnitButton").gameObject, GetUnitNameFromButton(upgradeCardButton.name));
+        //AddEventTriggerOnChooseButton(upgradeCardButton.Find("ChooseUnitButton").gameObject, RemoveSpriteBody(upgradeCardButton.Find("ChooseUnitButton").gameObject));
     }
 
     void CreateUpgradeEffect()
@@ -369,6 +373,9 @@ public class UpgradesShop : MonoBehaviour
 
     SaveManager.Unit GetUpgradeUnit(string unitName)
     {
+        if (unitName.Contains("Frog"))
+            return saveManager.GetUnit(unitName);
+
         if (unitName == "")
             return null;
         SaveManager.Unit unit = null;
@@ -574,11 +581,116 @@ public class UpgradesShop : MonoBehaviour
     }
 
 
+    void SetUpgradeButtonImage(Transform upgradeCardButton, string unitName)
+    {
+        if (saveManager.IsModeNormalChosen())
+            upgradeCardButton.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + unitName);
+        else
+        {
+            //Skip if already exist (frog unit doesn't need image update when upgrading).
+            if (upgradeCardButton.Find("SpriteBody"))
+                return;
+
+            upgradeCardButton.Find("UnitSprite").gameObject.SetActive(false);
+            InstantiateSpriteBodyFromPrefabWithImage(unitName, upgradeCardButton);
+
+        }
+    }
+    Transform InstantiateSpriteBodyFromPrefabWithImage(string unitName, Transform upgradeCardButton)
+    {
+        string path = SaveManager.instance.GetUnitsPrefabRessourcePath() + '/' + unitName;
+        GameObject frogPrefab = (GameObject)Resources.Load(path);
+        Transform spriteBody = InstantiateSpriteBodyFromPrefab(frogPrefab, upgradeCardButton);
+        foreach (SpriteRenderer spriteRenderer in spriteBody.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.transform.parent = spriteBody;
+        }
+        foreach (Transform child in spriteBody)
+        {
+            if (!child.GetComponent<SpriteRenderer>())
+                //if (!child.GetComponent<SpriteRenderer>() || child.name.Equals("Shadow"))
+                Destroy(child.gameObject);
+        }
+
+        SpriteRenderer[] sprites = spriteBody.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer sp in sprites)
+        {
+            sp.sortingLayerName = "UI";
+        }
+        spriteBody.localScale = new Vector2(1540, 1540);
+        spriteBody.localPosition = new Vector2(171, 24);
+
+        ReplaceSpriteComponentByImageComponent(spriteBody);
+        return spriteBody;
+    }
+
+    Transform InstantiateSpriteBodyFromPrefab(GameObject prefab, Transform parent)
+    {
+        Transform spriteBody = Instantiate(prefab.transform.Find("SpriteBody"), parent.transform);
+        spriteBody.name = spriteBody.name.Replace("(Clone)", "");
+        return spriteBody;
+    }
+
+    void ReplaceSpriteComponentByImageComponent(Transform spriteBody)
+    {
+        CreateImageFromSprite(spriteBody);
+        MoveSpriteBodyAboveLockTransform(spriteBody);
+        OrderChildIndexUsingSpriteOrder(spriteBody);
+    }
+
+    void CreateImageFromSprite(Transform spriteBody)
+    {
+        SpriteRenderer[] sprites = spriteBody.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer sp in sprites)
+        {
+            Image imgComp = sp.gameObject.AddComponent<Image>();
+            imgComp.sprite = sp.sprite;
+            imgComp.color = sp.color;
+            if (sp.flipX)
+                sp.transform.RotateAround(sp.transform.position, Vector3.up, 180f);
+            if (sp.sortingOrder < 0)
+                imgComp.transform.SetAsFirstSibling();
+            else
+                imgComp.transform.SetSiblingIndex(sp.sortingOrder);
+            Destroy(sp);
+        }
+    }
+
+    void MoveSpriteBodyAboveLockTransform(Transform spriteBody)
+    {
+        foreach (Transform t in spriteBody.parent)
+        {
+            if (t.name.Equals("Lock"))
+            {
+                spriteBody.SetSiblingIndex(t.GetSiblingIndex() - 1);
+                break;
+            }
+        }
+    }
+
+
+    void OrderChildIndexUsingSpriteOrder(Transform spriteBody)
+    {
+        SpriteRenderer[] spriteRenderers = spriteBody.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 1; i < spriteRenderers.Length; i++)
+        {
+            for (int y = 0; y < spriteRenderers.Length; y++)
+            {
+                float spOrder1 = spriteRenderers[i - 1].sortingOrder;
+                float spOrder2 = spriteRenderers[i].sortingOrder;
+
+                if (spOrder1 > spOrder2)
+                    spriteRenderers[i].transform.SetSiblingIndex(i - 1);
+            }
+        }
+    }
 
     void SetUpgradeButtonTexts(Transform upgradeCardButton, string unitName)
     {
         string nameWithoutNumbers = GetUnitNameWithoutNumbers(unitName);
-        upgradeCardButton.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + unitName);
+        //upgradeCardButton.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + unitName);
+        SetUpgradeButtonImage(upgradeCardButton, unitName);
+
         upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = nameWithoutNumbers;
         string lvl = GetUnitLevel(unitName);
 
@@ -691,6 +803,7 @@ public class UpgradesShop : MonoBehaviour
         btn.Find("ChooseButton").gameObject.SetActive(false);
         btn.Find("RemoveButton").gameObject.SetActive(true);
         saveManager.chosenUnits.Add(unitName);
+        RemoveSpriteBody(btn);
         UpdateChosenUnitList();
     }
 
@@ -706,10 +819,19 @@ public class UpgradesShop : MonoBehaviour
         UpdateChosenUnitList();
     }
 
+
     public void RemoveChosenUnitUsingButtonName(GameObject button)
     {
         RemoveChosenUnit(button.name.Replace("ChosenUnit", ""));
+        RemoveSpriteBody(button.transform);
         UpdateChosenUnitList();
+    }
+
+    void RemoveSpriteBody(Transform button)
+    {
+        Transform spriteBody = button.Find("SpriteBody");
+        if (spriteBody)
+            Destroy(spriteBody.gameObject);
     }
 
     void UpdateChosenUnitList()
@@ -717,7 +839,7 @@ public class UpgradesShop : MonoBehaviour
         int i = 0;
         int count = saveManager.chosenUnits.Count;
         string unitName;
-        string spritePath = Constants.UNITS_SPRITE_RESOURCES_PATH + '/';
+        //string spritePath = Constants.UNITS_SPRITE_RESOURCES_PATH + '/';
         Transform unit;
         Transform chosenUnitButton;
         Transform chosenUnitsParent = transform.Find("Buttons/ChosenUnits");
@@ -727,11 +849,35 @@ public class UpgradesShop : MonoBehaviour
             chosenUnitButton = chosenUnitsParent.GetChild(i);
             unit = chosenUnitButton.transform.Find("Unit");
             if (i >= count)
+            {
                 unit.gameObject.SetActive(false);
+                RemoveSpriteBody(button);
+                //break;
+            }
             else
             {
                 unitName = saveManager.chosenUnits[i];
-                unit.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(spritePath + unitName);
+                //print("chosen:" + unitName);
+
+                //unit.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(spritePath + unitName);
+                ////////////
+                //string path = SaveManager.instance.GetUnitsPrefabRessourcePath() + '/' + unitName;
+                //GameObject frogPrefab = (GameObject)Resources.Load(path);
+
+                //Transform spriteBody = InstantiateSpriteBodyFromPrefab(frogPrefab, button);
+                //Remove old one.
+                Transform spriteBody = button.Find("SpriteBody");
+                foreach (Transform child in button)
+                {
+                    if (child.name.Equals("SpriteBody"))
+                        Destroy(child.gameObject);
+                }
+
+
+                spriteBody = InstantiateSpriteBodyFromPrefabWithImage(unitName, button);
+                spriteBody.localScale = new Vector2(228, 228);
+                spriteBody.localPosition = new Vector2(4.7f, 13.3f);
+
                 chosenUnitButton.name = "ChosenUnit" + unitName;
                 unit.gameObject.SetActive(true);
 
@@ -744,7 +890,6 @@ public class UpgradesShop : MonoBehaviour
             DisableUnselectedChoseButtons();
         else
             EnableUnselectedChoseButtons();
-
     }
 
     void DisableUnselectedChoseButtons()
@@ -754,8 +899,11 @@ public class UpgradesShop : MonoBehaviour
         {
             string unitName = GetUnitNameFromButton(button.name);
             if (!saveManager.chosenUnits.Contains(unitName))
+            {
                 //GetUpgradeButton(unitName).Find("ChooseUnitButton").gameObject.SetActive(false);
                 GetUpgradeButton(unitName).Find("ChooseUnitButton/ChooseButton").GetComponent<Button>().interactable = false;
+            }
+
         }
     }
 

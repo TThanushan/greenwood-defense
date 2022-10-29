@@ -84,6 +84,11 @@ public class EnemySpawner : MonoBehaviour
         enemyType.SetRandomNextEnemySpawnTime();
         if (newEnemy.name.Contains("Ultimate"))
             UltimateHealthBar.instance.SetUltimateReference(newEnemy.GetComponent<Unit>());
+        if (!newEnemy.name.Contains("Frog"))
+        {
+            newEnemy.GetComponent<Unit>().SetTargetTag("Ally");
+            newEnemy.GetComponent<Unit>().RotateSprite();
+        }
     }
 
     void UpdateUnitStatsUsingStageNumber(GameObject enemy)

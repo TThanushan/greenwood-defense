@@ -4,6 +4,7 @@ public static class Constants
     public const string HERO_UPGRADES_SPRITE_RESOURCES_PATH = "HeroUpgradesSprite";
     public const string HERO_ABILITIES_SPRITE_RESOURCES_PATH = "HeroAbilitiesSprite";
     public const string UNITS_PREFAB_RESOURCES_PATH = "Units";
+    public const string UNITS_FROG_PREFAB_RESOURCES_PATH = "Units/Frogs";
     public const string BUTTON_CLICK_SFX_NAME = "ButtonClick";
     public const string VICTORY_SFX_NAME = "Victory";
     public const string BUY_SFX_NAME = "Buy";

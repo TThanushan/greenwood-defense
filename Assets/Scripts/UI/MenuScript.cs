@@ -142,4 +142,12 @@ public class MenuScript : MonoBehaviour
         SaveManager.instance.ResetPlayerPrefs();
     }
 
+    public void ChangeMode()
+    {
+        if (SaveManager.instance.chosenMode == "ModeFrog")
+            SaveManager.instance.chosenMode = "ModeNormal";
+        else
+            SaveManager.instance.chosenMode = "ModeFrog";
+    }
+
 }

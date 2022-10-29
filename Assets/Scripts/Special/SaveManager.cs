@@ -16,8 +16,12 @@ public class SaveManager : MonoBehaviour
     public List<string> unlockedUnits;
     public List<UnitDescription> unitDescriptions;
     public List<string> chosenUnits;
+    public string chosenMode;
 
     int isTutorialDone;
+    public const string MODE_NORMAL = "ModeNormal";
+    const string MODE_FROG = "ModeFrog";
+    const string CHOSEN_MODE_KEY = "ChosenMode";
     const string MAX_LEVEL_UNLOCKED_KEY = "MaxLevelUnlockedKey";
     const string PLAYER_MONEY_KEY = "Money";
     const string UNLOCKED_UNITS_KEY = "UnlockedUnits";
@@ -43,12 +47,16 @@ public class SaveManager : MonoBehaviour
             LoadPrefs();
 
         InitFrogDescription();
-        InitUnits();
+        if (IsModeNormalChosen())
+            InitUnits();
+        else
+            InitFrogUnits();
+
         InitsHeroUpgrades();
     }
     public bool SaveExist()
     {
-        return PlayerPrefs.HasKey(CHOSEN_UNITS_KEY) && PlayerPrefs.HasKey("Level1Unlocked");
+        return PlayerPrefs.HasKey(CHOSEN_UNITS_KEY + chosenMode) && PlayerPrefs.HasKey("Level1Unlocked");
     }
 
     public void Init()
@@ -62,7 +70,7 @@ public class SaveManager : MonoBehaviour
         levels[0].unlocked = 1;
         // Player money.
         maxLevelUnlocked = 1;
-        PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, 0);
+        PlayerPrefs.SetFloat(PLAYER_MONEY_KEY + chosenMode, 0);
         InitFirstTimeUnlockedUnits();
         InitFirstTimeUnlockedHeroUpgrades();
         InitFirstTimeChosenUnits();
@@ -72,11 +80,15 @@ public class SaveManager : MonoBehaviour
         SaveUnlockedHeroUpgrades();
         isTutorialDone = 0;
         isAutoSave = true;
+        // TEMPORARY
+        chosenMode = MODE_FROG;
+        //chosenMode = MODE_NORMAL;
         SaveLevels();
         SaveIsAutoSave();
+        SaveChosenMode();
         money = 0f;
-        PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, 0);
-        PlayerPrefs.SetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY, 0);
+        PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY + chosenMode, 0);
+        PlayerPrefs.SetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY + chosenMode, 0);
     }
 
     void OnApplicationQuit()
@@ -196,14 +208,15 @@ public class SaveManager : MonoBehaviour
         SaveLevels();
         SaveIsAutoSave();
         SaveUnlockedUnits();
+        SaveChosenMode();
         SaveChosenUnits();
         SaveUnlockedHeroUpgrades();
 
 
-        PlayerPrefs.SetInt(MAX_LEVEL_UNLOCKED_KEY, maxLevelUnlocked);
-        PlayerPrefs.SetFloat(PLAYER_MONEY_KEY, money);
-        PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY, isTutorialDone);
-        PlayerPrefs.SetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY, newEnemyCardDescriptionShownedIndex);
+        PlayerPrefs.SetInt(MAX_LEVEL_UNLOCKED_KEY + chosenMode, maxLevelUnlocked);
+        PlayerPrefs.SetFloat(PLAYER_MONEY_KEY + chosenMode, money);
+        PlayerPrefs.SetInt(IS_TUTORIAL_DONE_KEY + chosenMode, isTutorialDone);
+        PlayerPrefs.SetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY + chosenMode, newEnemyCardDescriptionShownedIndex);
 
         PlayerPrefs.Save();
     }
@@ -211,38 +224,48 @@ public class SaveManager : MonoBehaviour
     public void SaveIsAutoSave()
     {
         int autoSaveInt = (isAutoSave == true) ? 1 : 0;
-        PlayerPrefs.SetInt(AUTO_SAVE_KEY, autoSaveInt);
+        PlayerPrefs.SetInt(AUTO_SAVE_KEY + chosenMode, autoSaveInt);
+    }
+
+    public void SaveChosenMode()
+    {
+        PlayerPrefs.SetString(CHOSEN_MODE_KEY, chosenMode);
+    }
+
+    void LoadCHosenMode()
+    {
+        chosenMode = PlayerPrefs.GetString(CHOSEN_MODE_KEY);
     }
 
     public void SaveUnlockedUnits()
     {
-        PlayerPrefs.SetString(UNLOCKED_UNITS_KEY, String.Join("|", unlockedUnits));
+        PlayerPrefs.SetString(UNLOCKED_UNITS_KEY + chosenMode, String.Join("|", unlockedUnits));
     }
 
     public void SaveChosenUnits()
     {
-        PlayerPrefs.SetString(CHOSEN_UNITS_KEY, String.Join("|", chosenUnits));
+        PlayerPrefs.SetString(CHOSEN_UNITS_KEY + chosenMode, String.Join("|", chosenUnits));
     }
 
     public string GetChosenUnits()
     {
-        string units = PlayerPrefs.GetString(CHOSEN_UNITS_KEY);
+        string units = PlayerPrefs.GetString(CHOSEN_UNITS_KEY + chosenMode);
         return string.Join("|", units);
     }
     public string GetUnlockedUnitsFromPrefs()
     {
-        string units = PlayerPrefs.GetString(UNLOCKED_UNITS_KEY);
+        string units = PlayerPrefs.GetString(UNLOCKED_UNITS_KEY + chosenMode);
         return string.Join("|", units);
     }
 
     public void SaveUnlockedHeroUpgrades()
     {
-        PlayerPrefs.SetString(UNLOCKED_HERO_UPGRADES_KEY, String.Join("|", unlockedHeroUpgrades));
+        PlayerPrefs.SetString(UNLOCKED_HERO_UPGRADES_KEY + chosenMode, String.Join("|", unlockedHeroUpgrades));
     }
 
     public string GetUnlockedHeroUpgradesFromPrefs()
     {
-        string units = PlayerPrefs.GetString(UNLOCKED_HERO_UPGRADES_KEY);
+        string units = PlayerPrefs.GetString(UNLOCKED_HERO_UPGRADES_KEY + chosenMode);
         return string.Join("|", units);
     }
     string[] GetUnlockedHeroUpgradesArray()
@@ -260,8 +283,8 @@ public class SaveManager : MonoBehaviour
     public void LoadPrefs()
     {
         levels = new List<Level>();
-        maxLevelUnlocked = PlayerPrefs.GetInt(MAX_LEVEL_UNLOCKED_KEY, 1);
-        money = PlayerPrefs.GetFloat(PLAYER_MONEY_KEY, 0);
+        maxLevelUnlocked = PlayerPrefs.GetInt(MAX_LEVEL_UNLOCKED_KEY + chosenMode, 1);
+        money = PlayerPrefs.GetFloat(PLAYER_MONEY_KEY + chosenMode, 0);
 
         for (int i = 0; i < Constants.MAX_STAGE_NUMBER; i++)
         {
@@ -273,10 +296,10 @@ public class SaveManager : MonoBehaviour
             };
             levels.Add(newLevel);
         }
-        isTutorialDone = PlayerPrefs.GetInt(IS_TUTORIAL_DONE_KEY);
-        isAutoSave = PlayerPrefs.GetInt(AUTO_SAVE_KEY) == 1;
-        newEnemyCardDescriptionShownedIndex = PlayerPrefs.GetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY);
-
+        isTutorialDone = PlayerPrefs.GetInt(IS_TUTORIAL_DONE_KEY + chosenMode);
+        isAutoSave = PlayerPrefs.GetInt(AUTO_SAVE_KEY + chosenMode) == 1;
+        newEnemyCardDescriptionShownedIndex = PlayerPrefs.GetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY + chosenMode);
+        LoadCHosenMode();
         LoadUnlockedUnits();
         LoadChosenUnits();
         LoadUnlockedHeroUpgrades();
@@ -556,6 +579,51 @@ public class SaveManager : MonoBehaviour
         };
     }
 
+    void InitFrogUnits()
+    {
+        units = new List<Unit>
+        {
+            new Unit("MeleeFrogUnit", 10, 6, 100, "Basic frog, spawn frequently."),
+
+            new Unit("SwordFrogUnit", 20, 6, 100, "Range frog, low health."),
+
+            new Unit("TankFrogUnit", 20, 6, 100, "High health but low damage."),
+
+            new Unit("SpearFrogUnit", 20, 6, 125, "Damage all enemies in front of him."),
+
+            new Unit("FatFrogUnit", 20, 6, 100, "Really high health, explode on death and spawn several small frogs."),
+
+            new Unit("TrapFrogUnit", 20, 6, 100, "Drop traps when walking, damage units that walk on them."),
+
+            new Unit("PoisonFrogUnit", 20, 6, 100, "Poison his target."),
+
+            new Unit("HealerFrogUnit", 20, 6, 100, "Heal his allies."),
+
+            new Unit("AxeFrogUnit", 20, 6, 100, "Low attack speed, high damage on all enemies in front of him."),
+
+            new Unit("DoubleSwordFrogUnit", 20, 6, 100, "High move speed and attack speed."),
+
+            new Unit("ShotgunFrogUnit", 20, 6, 100, "High range damage."),
+
+            new Unit("TeleportFrogUnit", 20, 6, 100, "Every certain time, teleport behind his enemy."),
+
+            new Unit("RocketLauncherFrogUnit", 20, 6, 100, "Fire a rocket that does splash damage."),
+
+            new Unit("NinjaFrogUnit", 20, 6, 100, "\"KAGE BUNSHIN NO JUTSU!\""),
+
+            new Unit("SpeedFrogUnit", 20, 6, 100, "Move and atack super fast."),
+
+            new Unit("MageFrogUnit", 20, 6, 100, "Shoot fire ball with splash damage."),
+
+            new Unit("KamikazeFrogUnit", 20, 6, 100, "Explode when being hit."),
+
+            new Unit("ZombieFrogUnit", 20, 6, 100, "Instead of dying, come back to life with increased damage and movement speed."),
+
+            new Unit("ScytheFrogUnit", 20, 6, 100, "Each of his attacks send a shock wave in front of him."),
+
+            new Unit("SummonerFrogUnit", 20, 6, 100, "Summon other frogs."),
+        };
+    }
 
     void InitUnits()
     {
@@ -657,22 +725,56 @@ public class SaveManager : MonoBehaviour
         }
     }
 
+    public bool IsModeNormalChosen()
+    {
+        return chosenMode == MODE_NORMAL;
+    }
     void InitFirstTimeUnlockedUnits()
     {
-        unlockedUnits = new List<string>
+
+        if (IsModeNormalChosen())
         {
-            "Chicken1",
-            "Duck1",
-        };
+            unlockedUnits = new List<string>
+            {
+                "Chicken1",
+                "Duck1",
+            };
+        }
+        else
+        {
+            unlockedUnits = new List<string>
+            {
+                "MeleeFrogUnit",
+                "SwordFrogUnit",
+            };
+        }
     }
 
     void InitFirstTimeChosenUnits()
     {
-        chosenUnits = new List<string>()
+        if (IsModeNormalChosen())
         {
-            "Chicken1",
-            "Duck1",
-        };
+            chosenUnits = new List<string>()
+            {
+                "Chicken1",
+                "Duck1",
+            };
+        }
+        else
+        {
+            chosenUnits = new List<string>()
+            {
+                "MeleeFrogUnit",
+                "SwordFrogUnit",
+            };
+        }
+    }
+    public string GetUnitsPrefabRessourcePath()
+    {
+        if (IsModeNormalChosen())
+            return Constants.UNITS_PREFAB_RESOURCES_PATH;
+
+        return Constants.UNITS_FROG_PREFAB_RESOURCES_PATH;
     }
 
     [System.Serializable]

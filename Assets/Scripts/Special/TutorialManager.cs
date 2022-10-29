@@ -49,7 +49,7 @@ public class TutorialManager : MonoBehaviour
         }
 
         mainCamera = Camera.main;
-        enemySpawner = GameObject.Find("Spawner").GetComponent<EnemySpawner>();
+        enemySpawner = GameObject.FindGameObjectWithTag("Spawner").GetComponent<EnemySpawner>();
         enemySpawner.gameObject.SetActive(false);
         poolObject = PoolObject.instance;
         ShowTutoPart();
