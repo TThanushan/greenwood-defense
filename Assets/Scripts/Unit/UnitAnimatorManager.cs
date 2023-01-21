@@ -54,7 +54,7 @@ public class UnitAnimatorManager : MonoBehaviour
 
     private void OnEnable()
     {
-        animator.keepAnimatorControllerStateOnDisable = true;
+        animator.keepAnimatorStateOnDisable = true;
         GetSpriteBody().rotation = Quaternion.identity;
     }
 

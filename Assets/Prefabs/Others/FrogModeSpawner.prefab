@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPosition: {fileID: 25482787934621599}
-  stage1: {fileID: 11400000, guid: 9f7650de52d0cbd43bf684d07d3f2120, type: 2}
+  stage1: {fileID: 11400000, guid: 7be0c8dfe4d5b1d4db40da01ae8c2580, type: 2}
 --- !u!114 &25482787319998715
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using static ShowNewEnemyDescriptionCard;
 
@@ -14,6 +15,7 @@ public class SaveManager : MonoBehaviour
     public List<HeroUpgrade> heroUpgrades;
     public List<string> unlockedHeroUpgrades;
     public List<string> unlockedUnits;
+    public List<string> unlockedFrogUnitsLevel;
     public List<UnitDescription> unitDescriptions;
     public List<string> chosenUnits;
     public string chosenMode;
@@ -25,6 +27,8 @@ public class SaveManager : MonoBehaviour
     const string MAX_LEVEL_UNLOCKED_KEY = "MaxLevelUnlockedKey";
     const string PLAYER_MONEY_KEY = "Money";
     const string UNLOCKED_UNITS_KEY = "UnlockedUnits";
+    const string UNLOCKED_FROG_UNITS_LEVEL_KEY = "UnlockedFrogUnitsLevel";
+
     const string UNLOCKED_HERO_UPGRADES_KEY = "UnlockedHeroUpgrades";
     const string CHOSEN_UNITS_KEY = "ChosenUnits";
     const string IS_TUTORIAL_DONE_KEY = "IsTutorialDone";
@@ -46,7 +50,7 @@ public class SaveManager : MonoBehaviour
         else
             LoadPrefs();
 
-        InitFrogDescription();
+        InitEnemiesDescription();
         if (IsModeNormalChosen())
             InitUnits();
         else
@@ -71,6 +75,7 @@ public class SaveManager : MonoBehaviour
         // Player money.
         maxLevelUnlocked = 1;
         PlayerPrefs.SetFloat(PLAYER_MONEY_KEY + chosenMode, 0);
+        InitFirstTimeUnlockedFrogUnitsLevel();
         InitFirstTimeUnlockedUnits();
         InitFirstTimeUnlockedHeroUpgrades();
         InitFirstTimeChosenUnits();
@@ -81,8 +86,8 @@ public class SaveManager : MonoBehaviour
         isTutorialDone = 0;
         isAutoSave = true;
         // TEMPORARY
-        chosenMode = MODE_FROG;
-        //chosenMode = MODE_NORMAL;
+        //chosenMode = MODE_FROG;
+        chosenMode = MODE_NORMAL;
         SaveLevels();
         SaveIsAutoSave();
         SaveChosenMode();
@@ -102,7 +107,26 @@ public class SaveManager : MonoBehaviour
             SavePrefs();
     }
 
-    void InitFrogDescription()
+    public void ReplaceUnlockedFrogUnitLevel(string unitName)
+    {
+        string nameToRemove = null;
+        foreach (string name in unlockedFrogUnitsLevel)
+        {
+            string nameWithoutNumber = GetUnitNameWithoutNumbers(name);
+            if (unitName == nameWithoutNumber)
+                nameToRemove = name;
+        }
+        unlockedFrogUnitsLevel.Remove(nameToRemove);
+        unlockedFrogUnitsLevel.Add(unitName);
+    }
+
+
+
+    string GetUnitNameWithoutNumbers(string unitName)
+    {
+        return Regex.Replace(unitName, @"[\d-]", string.Empty);
+    }
+    void InitEnemiesDescription()
     {
         unitDescriptions = new List<UnitDescription>
         {
@@ -120,7 +144,7 @@ public class SaveManager : MonoBehaviour
             new UnitDescription("TeleportFrog", "Every certain time, teleport behind his enemy."),
             new UnitDescription("RocketLauncherFrog", "Fire a rocket that does splash damage."),
             new UnitDescription("NinjaFrog", "\"KAGE BUNSHIN NO JUTSU!\""),
-            new UnitDescription("SpeedFrog", "Move and atack super fast."),
+            new UnitDescription("SpeedFrog", "Move and attack super fast."),
             new UnitDescription("MageFrog", "Shoot fire ball with splash damage."),
             new UnitDescription("KamikazeFrog", "Explode when being hit."),
             new UnitDescription("ZombieFrog", "Instead of dying, come back to life with increased damage and movement speed."),
@@ -208,6 +232,7 @@ public class SaveManager : MonoBehaviour
         SaveLevels();
         SaveIsAutoSave();
         SaveUnlockedUnits();
+        SaveUnlockedFrogUnitsLevel();
         SaveChosenMode();
         SaveChosenUnits();
         SaveUnlockedHeroUpgrades();
@@ -232,7 +257,7 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.SetString(CHOSEN_MODE_KEY, chosenMode);
     }
 
-    void LoadCHosenMode()
+    void LoadChosenMode()
     {
         chosenMode = PlayerPrefs.GetString(CHOSEN_MODE_KEY);
     }
@@ -241,7 +266,11 @@ public class SaveManager : MonoBehaviour
     {
         PlayerPrefs.SetString(UNLOCKED_UNITS_KEY + chosenMode, String.Join("|", unlockedUnits));
     }
+    void SaveUnlockedFrogUnitsLevel()
+    {
+        PlayerPrefs.SetString(UNLOCKED_FROG_UNITS_LEVEL_KEY, String.Join("|", unlockedFrogUnitsLevel));
 
+    }
     public void SaveChosenUnits()
     {
         PlayerPrefs.SetString(CHOSEN_UNITS_KEY + chosenMode, String.Join("|", chosenUnits));
@@ -255,6 +284,12 @@ public class SaveManager : MonoBehaviour
     public string GetUnlockedUnitsFromPrefs()
     {
         string units = PlayerPrefs.GetString(UNLOCKED_UNITS_KEY + chosenMode);
+        return string.Join("|", units);
+    }
+
+    public string GetUnlockedFrogUnitsLevelFromPrefs()
+    {
+        string units = PlayerPrefs.GetString(UNLOCKED_FROG_UNITS_LEVEL_KEY);
         return string.Join("|", units);
     }
 
@@ -280,6 +315,12 @@ public class SaveManager : MonoBehaviour
     {
         return GetUnlockedUnitsFromPrefs().Split('|');
     }
+
+    string[] GetUnlockedFrogUnitsLevelArray()
+    {
+        return GetUnlockedFrogUnitsLevelFromPrefs().Split('|');
+    }
+
     public void LoadPrefs()
     {
         levels = new List<Level>();
@@ -299,7 +340,8 @@ public class SaveManager : MonoBehaviour
         isTutorialDone = PlayerPrefs.GetInt(IS_TUTORIAL_DONE_KEY + chosenMode);
         isAutoSave = PlayerPrefs.GetInt(AUTO_SAVE_KEY + chosenMode) == 1;
         newEnemyCardDescriptionShownedIndex = PlayerPrefs.GetInt(NEW_ENEMY_CARD_DESCRIPTION_SHOWNED_INDEX_KEY + chosenMode);
-        LoadCHosenMode();
+        LoadChosenMode();
+        LoadUnlockedFrogUnitsLevel();
         LoadUnlockedUnits();
         LoadChosenUnits();
         LoadUnlockedHeroUpgrades();
@@ -324,6 +366,20 @@ public class SaveManager : MonoBehaviour
                 unlockedUnits.Add(name);
         }
     }
+
+    void LoadUnlockedFrogUnitsLevel()
+    {
+
+        string[] units = GetUnlockedFrogUnitsLevelArray();
+        unlockedFrogUnitsLevel.Clear();
+        foreach (string name in units)
+        {
+            if (name != "")
+                unlockedFrogUnitsLevel.Add(name);
+        }
+    }
+
+
 
     void LoadUnlockedHeroUpgrades()
     {
@@ -355,9 +411,24 @@ public class SaveManager : MonoBehaviour
 
     public Unit GetUnit(string unitName)
     {
+        if (!IsModeNormalChosen())
+            return GetFrogUnit(unitName);
         foreach (Unit unit in units)
         {
             if (unit.name == unitName)
+                return unit;
+        }
+
+        return null;
+    }
+
+
+    Unit GetFrogUnit(string unitName)
+    {
+        unitName = GetUnitNameWithoutNumbers(unitName);
+        foreach (Unit unit in units)
+        {
+            if (GetUnitNameWithoutNumbers(unit.name) == unitName)
                 return unit;
         }
 
@@ -583,45 +654,27 @@ public class SaveManager : MonoBehaviour
     {
         units = new List<Unit>
         {
-            new Unit("MeleeFrogUnit", 10, 6, 100, "Basic frog, spawn frequently."),
-
-            new Unit("SwordFrogUnit", 20, 6, 100, "Range frog, low health."),
-
-            new Unit("TankFrogUnit", 20, 6, 100, "High health but low damage."),
-
+            new Unit("MeleeFrogUnit", 10, 6, 0, "Basic frog, spawn frequently.", new float[]{ 100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("SwordFrogUnit", 20, 6, 0, "Range frog, low health.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("TankFrogUnit", 20, 6, 0, "High health but low damage.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
             new Unit("SpearFrogUnit", 20, 6, 125, "Damage all enemies in front of him."),
+            new Unit("FatFrogUnit", 20, 6, 0, "Really high health, explode on death and spawn several small frogs.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("TrapFrogUnit", 20, 6, 0, "Drop traps when walking, damage units that walk on them.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("PoisonFrogUnit", 20, 6, 0, "Poison his target.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("HealerFrogUnit", 20, 6, 0, "Heal his allies.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("AxeFrogUnit", 20, 6, 0, "Low attack speed, high damage on all enemies in front of him.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("DoubleSwordFrogUnit", 20, 6, 0, "High move speed and attack speed.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("ShotgunFrogUnit", 20, 6, 0, "High range damage.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("TeleportFrogUnit", 20, 6, 0, "Every certain time, teleport behind his enemy.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("RocketLauncherFrogUnit", 20, 6, 0, "Fire a rocket that does splash damage.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("NinjaFrogUnit", 20, 6, 0, "\"Kage Bunshin No Jutsu!\"", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("SpeedFrogUnit", 20, 6, 0, "Move and atack super fast.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("MageFrogUnit", 20, 6, 0, "Shoot fire ball with splash damage.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("KamikazeFrogUnit", 20, 6, 0, "Explode when being hit.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("ZombieFrogUnit", 20, 6, 0, "Instead of dying, come back to life with increased damage and movemen, new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}t speed."),
+            new Unit("ScytheFrogUnit", 20, 6, 0, "Each of his attacks send a shock wave in front of him.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
+            new Unit("SummonerFrogUnit", 20, 6, 0, "Summon other frogs.", new float[]{100, 125, 150, 175, 200, 225, 250, 275, 300}),
 
-            new Unit("FatFrogUnit", 20, 6, 100, "Really high health, explode on death and spawn several small frogs."),
-
-            new Unit("TrapFrogUnit", 20, 6, 100, "Drop traps when walking, damage units that walk on them."),
-
-            new Unit("PoisonFrogUnit", 20, 6, 100, "Poison his target."),
-
-            new Unit("HealerFrogUnit", 20, 6, 100, "Heal his allies."),
-
-            new Unit("AxeFrogUnit", 20, 6, 100, "Low attack speed, high damage on all enemies in front of him."),
-
-            new Unit("DoubleSwordFrogUnit", 20, 6, 100, "High move speed and attack speed."),
-
-            new Unit("ShotgunFrogUnit", 20, 6, 100, "High range damage."),
-
-            new Unit("TeleportFrogUnit", 20, 6, 100, "Every certain time, teleport behind his enemy."),
-
-            new Unit("RocketLauncherFrogUnit", 20, 6, 100, "Fire a rocket that does splash damage."),
-
-            new Unit("NinjaFrogUnit", 20, 6, 100, "\"KAGE BUNSHIN NO JUTSU!\""),
-
-            new Unit("SpeedFrogUnit", 20, 6, 100, "Move and atack super fast."),
-
-            new Unit("MageFrogUnit", 20, 6, 100, "Shoot fire ball with splash damage."),
-
-            new Unit("KamikazeFrogUnit", 20, 6, 100, "Explode when being hit."),
-
-            new Unit("ZombieFrogUnit", 20, 6, 100, "Instead of dying, come back to life with increased damage and movement speed."),
-
-            new Unit("ScytheFrogUnit", 20, 6, 100, "Each of his attacks send a shock wave in front of him."),
-
-            new Unit("SummonerFrogUnit", 20, 6, 100, "Summon other frogs."),
         };
     }
 
@@ -729,6 +782,16 @@ public class SaveManager : MonoBehaviour
     {
         return chosenMode == MODE_NORMAL;
     }
+
+    void InitFirstTimeUnlockedFrogUnitsLevel()
+    {
+        unlockedFrogUnitsLevel = new List<string>
+        {
+            "MeleeFrogUnit1",
+            "SwordFrogUnit1",
+        };
+    }
+
     void InitFirstTimeUnlockedUnits()
     {
 
@@ -786,12 +849,16 @@ public class SaveManager : MonoBehaviour
         public float shopPrice;
         public string effectDescription;
 
-        public Unit(string name, float cost, float reloadTime, float upgradePrice, string effectDescription = "No effect.")
+        //Used for frog unit since they only have one prefab.
+        public float[] shopPrices;
+
+        public Unit(string name, float cost, float reloadTime, float shopPrice, string effectDescription = "No effect.", float[] shopPrices = null)
         {
             this.name = name;
             this.cost = cost;
             this.reloadTime = reloadTime;
-            this.shopPrice = upgradePrice;
+            this.shopPrice = shopPrice;
+            this.shopPrices = shopPrices;
             this.effectDescription = effectDescription;
         }
 

@@ -29,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
             stage = stage1;
         else
             stage = (Stage)Resources.Load("Stages/GeneratedStage");
+        
         InitEnemyTypes();
         showNewEnemyDescriptionCard = ShowNewEnemyDescriptionCard.instance;
     }

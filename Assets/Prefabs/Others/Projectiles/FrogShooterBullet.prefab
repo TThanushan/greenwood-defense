@@ -53,6 +53,8 @@ MonoBehaviour:
   target: {fileID: 0}
   effect: {fileID: 0}
   spriteRenderer: {fileID: 2116847985150317399}
+  canBeReflected: 1
+  moveTowardTarget: 0
 --- !u!114 &-6435582994483077401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8ccc894ad7c5a44d84eeef5474acc0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disableTime: 2
+  disableTime: 0.5
 --- !u!1 &2116847985150317397
 GameObject:
   m_ObjectHideFlags: 0

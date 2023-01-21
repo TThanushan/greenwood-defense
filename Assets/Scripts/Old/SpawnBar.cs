@@ -255,7 +255,108 @@ public class SpawnBar : MonoBehaviour
 
     void SetButtonSprite(GameObject button, string spriteName)
     {
-        button.transform.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + spriteName);
+        InstantiateSpriteBodyFromPrefabWithImage(spriteName, button.transform);
+        //button.transform.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + spriteName);
+    }
+
+    Transform InstantiateSpriteBodyFromPrefab(GameObject prefab, Transform parent)
+    {
+        Transform spriteBody = Instantiate(prefab.transform.Find("SpriteBody"), parent.transform);
+        spriteBody.name = spriteBody.name.Replace("(Clone)", "");
+        return spriteBody;
+    }
+
+    void CreateImageFromSprite(Transform spriteBody)
+    {
+        SpriteRenderer[] sprites = spriteBody.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer sp in sprites)
+        {
+            Image imgComp = sp.gameObject.AddComponent<Image>();
+            imgComp.sprite = sp.sprite;
+            imgComp.color = sp.color;
+            if (sp.flipX)
+                sp.transform.RotateAround(sp.transform.position, Vector3.up, 180f);
+            if (sp.sortingOrder < 0)
+                imgComp.transform.SetAsFirstSibling();
+            else
+                imgComp.transform.SetSiblingIndex(sp.sortingOrder);
+            Destroy(sp);
+        }
+
+        if (!SaveManager.instance.IsModeNormalChosen())
+            spriteBody.transform.Rotate(0, 180, 0);
+    }
+
+    void MoveSpriteBodyAboveCostTextTransform(Transform spriteBody)
+    {
+        foreach (Transform t in spriteBody.parent)
+        {
+            if (t.name.Equals("StarsCanvas"))
+            {
+                spriteBody.SetSiblingIndex(t.GetSiblingIndex() - 1);
+                break;
+            }
+        }
+    }
+
+
+    void OrderChildIndexUsingSpriteOrder(Transform spriteBody)
+    {
+        SpriteRenderer[] spriteRenderers = spriteBody.GetComponentsInChildren<SpriteRenderer>();
+        for (int i = 1; i < spriteRenderers.Length; i++)
+        {
+            for (int y = 0; y < spriteRenderers.Length; y++)
+            {
+                float spOrder1 = spriteRenderers[i - 1].sortingOrder;
+                float spOrder2 = spriteRenderers[i].sortingOrder;
+
+                if (spOrder1 > spOrder2)
+                    spriteRenderers[i].transform.SetSiblingIndex(i - 1);
+            }
+        }
+    }
+    void ReplaceSpriteComponentByImageComponent(Transform spriteBody)
+    {
+        CreateImageFromSprite(spriteBody);
+        MoveSpriteBodyAboveCostTextTransform(spriteBody);
+        OrderChildIndexUsingSpriteOrder(spriteBody);
+        SetImagesInteractableToFalse(spriteBody);
+
+    }
+    void SetImagesInteractableToFalse(Transform imageParent)
+    {
+        Image[] images = imageParent.GetComponentsInChildren<Image>();
+        foreach (Image image in images)
+        {
+            image.raycastTarget = false;
+        }
+    }
+    Transform InstantiateSpriteBodyFromPrefabWithImage(string unitName, Transform upgradeCardButton)
+    {
+        string path = SaveManager.instance.GetUnitsPrefabRessourcePath() + '/' + unitName;
+        GameObject frogPrefab = (GameObject)Resources.Load(path);
+        Transform spriteBody = InstantiateSpriteBodyFromPrefab(frogPrefab, upgradeCardButton);
+        foreach (SpriteRenderer spriteRenderer in spriteBody.GetComponentsInChildren<SpriteRenderer>())
+        {
+            spriteRenderer.transform.parent = spriteBody;
+        }
+        foreach (Transform child in spriteBody)
+        {
+            //if (!child.GetComponent<SpriteRenderer>())
+            if (!child.GetComponent<SpriteRenderer>() || child.name.Equals("Shadow"))
+                Destroy(child.gameObject);
+        }
+
+        SpriteRenderer[] sprites = spriteBody.GetComponentsInChildren<SpriteRenderer>();
+        foreach (SpriteRenderer sp in sprites)
+        {
+            sp.sortingLayerName = "UI";
+        }
+        spriteBody.localScale = new Vector2(243, 243);
+        spriteBody.localPosition = new Vector2(-0.5f, 9.4f);
+
+        ReplaceSpriteComponentByImageComponent(spriteBody);
+        return spriteBody;
     }
 
     void SetButtonPrefabClone(UnitButton unitButton)
