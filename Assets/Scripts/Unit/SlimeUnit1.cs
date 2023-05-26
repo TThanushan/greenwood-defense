@@ -36,7 +36,7 @@ public class SlimeUnit1 : Unit
     Vector2 GetRandomSpawnPosition(Vector2 spawnPosition)
     {
         float radius = 0.15f;
-        Vector2 randomPos = spawnPosition + Random.insideUnitCircle * radius;
+        Vector2 randomPos = spawnPosition + (Random.insideUnitCircle * radius);
 
         return randomPos;
     }

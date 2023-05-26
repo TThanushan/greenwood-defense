@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
             stage = stage1;
         else
             stage = (Stage)Resources.Load("Stages/GeneratedStage");
-        
+
         InitEnemyTypes();
         showNewEnemyDescriptionCard = ShowNewEnemyDescriptionCard.instance;
     }
@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
     float GetIncreasedHealthUsingStageNumber(float health)
     {
-        return Mathf.FloorToInt(health * (1 + stageNumber / 100));
+        return Mathf.FloorToInt(health * (1 + (stageNumber / 100)));
     }
 
     void InitEnemyTypes()
@@ -103,7 +103,7 @@ public class EnemySpawner : MonoBehaviour
     Vector2 GetRandomSpawnPosition()
     {
         float radius = 0.15f;
-        Vector2 randomPos = (Vector2)spawnPosition.position + Random.insideUnitCircle * radius;
+        Vector2 randomPos = (Vector2)spawnPosition.position + (Random.insideUnitCircle * radius);
 
         return randomPos;
     }

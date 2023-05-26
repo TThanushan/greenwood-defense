@@ -60,7 +60,7 @@ public class ChickenUnit4 : ChickenUnit3
     }
     float GetMaxBonusPercentage()
     {
-        return initialAttackDamage * (1 + maxDamageBonusPercentage / 100);
+        return initialAttackDamage * (1 + (maxDamageBonusPercentage / 100));
     }
     float GetDamageBonusPercentage()
     {
@@ -97,7 +97,7 @@ public class ChickenUnit4 : ChickenUnit3
 
     bool IsHealthThresholdReached()
     {
-        float threshold = (healthThreshold / 100) * maxHealth;
+        float threshold = healthThreshold / 100 * maxHealth;
         return currentHealth <= threshold;
     }
 

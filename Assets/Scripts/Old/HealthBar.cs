@@ -96,7 +96,7 @@ public class HealthBar : MonoBehaviour
 
     public void SetShieldRelatedToCurrentHealthPercentage(float amount)
     {
-        amount = currentHealth - currentHealth * (1 - amount / 100);
+        amount = currentHealth - (currentHealth * (1 - (amount / 100)));
         if (amount > shield)
             shield = amount;
     }
@@ -203,7 +203,7 @@ public class HealthBar : MonoBehaviour
     }
     float GetDamageTakenIncreasePercentage()
     {
-        return 1f + damageTakenIncreasePercentage / 100f;
+        return 1f + (damageTakenIncreasePercentage / 100f);
     }
 
     private void UpdateHealthBarLength()

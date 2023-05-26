@@ -36,7 +36,7 @@ public class MushroomUnit4 : MushroomUnit3
             if (!IsTargetEnabled(target))
                 break;
             Unit unit = target.GetComponent<Unit>();
-            float damage = unit.maxHealth * (maxHealthPercentageDamage / 100) + effectDamage;
+            float damage = (unit.maxHealth * (maxHealthPercentageDamage / 100)) + effectDamage;
             unit.GetDamage(damage, transform);
             yield return new WaitForSeconds(timeBetweenDotDamage);
 

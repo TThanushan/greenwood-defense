@@ -153,7 +153,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_FlipX
-    path: SpriteBody/Sprite
+    path: SpriteBody/Sprite/UnitSprite
     classID: 212
     script: {fileID: 0}
   m_PPtrCurves:
@@ -162,7 +162,7 @@ AnimationClip:
       value: {fileID: 7167584040609486739, guid: 9b0499fd3a0892046926ed19c78cfea3,
         type: 3}
     attribute: m_Sprite
-    path: SpriteBody/Sprite
+    path: SpriteBody/Sprite/UnitSprite
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 12
@@ -194,14 +194,14 @@ AnimationClip:
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4013372489
+      path: 1026696858
       attribute: 555744692
       script: {fileID: 0}
       typeID: 212
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 4013372489
+      path: 1026696858
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -587,7 +587,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_FlipX
-    path: SpriteBody/Sprite
+    path: SpriteBody/Sprite/UnitSprite
     classID: 212
     script: {fileID: 0}
   m_EulerEditorCurves:

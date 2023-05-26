@@ -15,7 +15,7 @@ public class MoveTowardTarget : MonoBehaviour
 
     private void Update()
     {
-        if (!target.activeSelf || target.GetComponent<Unit>() && target.GetComponent<Unit>().Disabled)
+        if (!target.activeSelf || (target.GetComponent<Unit>() && target.GetComponent<Unit>().Disabled))
             gameObject.SetActive(false);
         MoveToward();
 

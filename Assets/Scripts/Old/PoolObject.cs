@@ -45,11 +45,12 @@ public class PoolObject : MonoBehaviour
         FindAllAllies();
     }
 
+
     public GameObject DisplayDamageText(float damage)
     {
         if (!damageText)
             return null;
-        damage = (damage * 100.0f) / 100.0f;
+        damage = damage * 100.0f / 100.0f;
         damage = (int)damage;
         GameObject obj = GetPoolObject(damageText);
         float scale = damage / 30f;
@@ -59,7 +60,20 @@ public class PoolObject : MonoBehaviour
         obj.transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().text = damage.ToString();
         return obj;
     }
-
+    public GameObject DisplayText(string text, float scale)
+    {
+        if (!damageText)
+            return null;
+        //damage = damage * 100.0f / 100.0f;
+        //damage = (int)damage;
+        GameObject obj = GetPoolObject(damageText);
+        //float scale = damage / 30f;
+        //scale = Mathf.Min(1.5f, scale);
+        //scale = Mathf.Max(0.7f, scale);
+        obj.transform.localScale = new Vector2(damageText.transform.localScale.x * scale, damageText.transform.localScale.y * scale);
+        obj.transform.Find("Text (TMP)").GetComponent<TMPro.TextMeshProUGUI>().text = text;
+        return obj;
+    }
     public string GetStageNumber()
     {
         return SceneManager.GetActiveScene().name.Split(' ')[1];
@@ -90,7 +104,7 @@ public class PoolObject : MonoBehaviour
 
     private GameObject CreateNewClone(GameObject prefab)
     {
-        GameObject clone = (GameObject)Instantiate(prefab, bin);
+        GameObject clone = Instantiate(prefab, bin);
         clone.name = prefab.name;
         clone.SetActive(true);
         pool.Add(clone);

@@ -31,7 +31,7 @@ public class DuckUnit4 : DuckUnit3
     void Heal()
     {
         nextHealingTime = healingSpeed + Time.time;
-        currentHealth *= 1 + healingPercentage / 100;
+        currentHealth *= 1 + (healingPercentage / 100);
         if (currentHealth > maxHealth)
             currentHealth = maxHealth;
     }

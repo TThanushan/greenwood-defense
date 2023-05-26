@@ -91,7 +91,7 @@ public class TrackPlayer : MonoBehaviour
             while (rand == trackHistory)
                 rand = Random.Range(0, myMusic.Length);
 
-            myAudio.clip = myMusic[rand] as AudioClip;
+            myAudio.clip = myMusic[rand];
             myAudio.Play();
             trackHistory = rand;
         }

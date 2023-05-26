@@ -24,7 +24,7 @@ public class ZombieFrogUnit : Unit
         CreateEffect();
         currentHealth = maxHealth;
         attackDamageSave = attackDamage;
-        attackDamage *= 1 + attackDamageBonus / 100;
+        attackDamage *= 1 + (attackDamageBonus / 100);
 
         attackSpeedSave = attackSpeed;
         attackSpeed = zombieAttackSpeed;

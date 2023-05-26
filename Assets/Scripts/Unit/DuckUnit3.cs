@@ -74,7 +74,7 @@ public class DuckUnit3 : HitBasedUnit
         }
 
         if (isDefenseBonusEnabled)
-            damage *= 1 - defenseBonusDamageReduction / 100;
+            damage *= 1 - (defenseBonusDamageReduction / 100);
         base.GetDamage(damage, caller, HitSoundName);
     }
 

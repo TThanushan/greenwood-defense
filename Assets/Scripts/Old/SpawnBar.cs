@@ -43,7 +43,7 @@ public class SpawnBar : MonoBehaviour
     {
         SaveManager saveManager = SaveManager.instance;
         unitButtons = new UnitButton[saveManager.chosenUnits.Count];
-        float cooldownReduction = 1 - GetCooldownReductionFromShop() / 100;
+        float cooldownReduction = 1 - (GetCooldownReductionFromShop() / 100);
         int i = 0;
         foreach (string unitName in saveManager.chosenUnits)
         {
@@ -88,14 +88,14 @@ public class SpawnBar : MonoBehaviour
     {
         foreach (UnitButton unitButton in unitButtons)
         {
-            unitButton.reloadTime *= 1f - percentageReduction / 100f;
+            unitButton.reloadTime *= 1f - (percentageReduction / 100f);
         }
     }
     public void IncreaseMaxCooldown(float percentageReduction)
     {
         foreach (UnitButton unitButton in unitButtons)
         {
-            unitButton.reloadTime *= 1f + percentageReduction / 100f;
+            unitButton.reloadTime *= 1f + (percentageReduction / 100f);
         }
     }
 
@@ -366,7 +366,7 @@ public class SpawnBar : MonoBehaviour
         unitButton.prefabClone.SetActive(false);
         Unit unit = unitButton.prefabClone.GetComponent<Unit>();
         //Add health bonus from shop.
-        unit.maxHealth *= 1 + GetMaxHealthPercentageBonusFromShop() / 100f;
+        unit.maxHealth *= 1 + (GetMaxHealthPercentageBonusFromShop() / 100f);
         unit.currentHealth = unit.maxHealth;
 
         //Add damage reduction.
@@ -374,7 +374,7 @@ public class SpawnBar : MonoBehaviour
         unit.damageTakenIncreasePercentage = unit.initialDamageTakenIncreasePercentage;
 
         //Add damage bonus.
-        unit.attackDamage *= 1 + GetDamageBonusFromShop() / 100;
+        unit.attackDamage *= 1 + (GetDamageBonusFromShop() / 100);
         unit.SetInitialAttackDamage(unit.attackDamage);
     }
 

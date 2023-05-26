@@ -5,21 +5,18 @@ public class UnitAnimatorManager : MonoBehaviour
 
     Animator animator;
     Unit unit;
-    Vector3 startPos;
     Transform unitSpriteTransform;
     private void Awake()
     {
         unit = GetComponent<Unit>();
         animator = GetComponent<Animator>();
-        GetComponent<Unit>().OnAttack += PlayAttackAnimation;
-        GetComponent<Unit>().OnDeath += PlayDeathAnimation;
-        unitSpriteTransform = GetSpriteBody();
+
+        unit.OnAttack += PlayAttackAnimation;
+        unit.OnDeath += PlayDeathAnimation;
+        unit.OnHit += PlayHitAnimation;
     }
 
-    void Start()
-    {
-        startPos = unitSpriteTransform.localPosition;
-    }
+
 
     Transform GetSpriteBody()
     {
@@ -45,7 +42,7 @@ public class UnitAnimatorManager : MonoBehaviour
             return;
         string clipName = animatorClipInfo[0].clip.name;
         //if (!GetComponent<Unit>().Target && clipName != "Run" && clipName != "Attack")
-        if (!unit.Target || !unit.EnoughRangeToAttackTarget() && clipName != "Attack")
+        if (!unit.Target || (!unit.EnoughRangeToAttackTarget() && clipName != "Attack"))
         {
             if (animator.HasState(0, Animator.StringToHash("Run")))
                 animator.Play("Run");
@@ -67,6 +64,12 @@ public class UnitAnimatorManager : MonoBehaviour
         if (IsUnitDisabled())
             return;
         animator.Play("Attack");
+    }
+
+    void PlayHitAnimation()
+    {
+        if (animator.HasState(0, Animator.StringToHash("Hit")))
+            animator.Play("Hit");
     }
 
     private void PlayDeathAnimation()

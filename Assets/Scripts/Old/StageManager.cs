@@ -36,7 +36,7 @@ public class StageManager : MonoBehaviour
 
     void SetEnemyCaptainHealthUsingStageNumber()
     {
-        enemyCaptain.maxHealth = Constants.ENEMY_CAPTAIN_MAX_HEALTH + StageInfosManager.instance.GetCurrentStageNumber() * Constants.ENEMY_CAPTAIN_MAX_HEALTH_BONUS;
+        enemyCaptain.maxHealth = Constants.ENEMY_CAPTAIN_MAX_HEALTH + (StageInfosManager.instance.GetCurrentStageNumber() * Constants.ENEMY_CAPTAIN_MAX_HEALTH_BONUS);
         enemyCaptain.currentHealth = enemyCaptain.maxHealth;
     }
 
@@ -54,7 +54,7 @@ public class StageManager : MonoBehaviour
             const string MONEY_INCOME_INCREASE = "MoneyIncomeIncrease";
             if (name.Contains(MONEY_INCOME_INCREASE))
             {
-                moneyIncomeIncrease = 1 + GetUpgradeNameNumbersOnly(name) / 100;
+                moneyIncomeIncrease = 1 + (GetUpgradeNameNumbersOnly(name) / 100);
                 return;
             }
         }
@@ -112,7 +112,7 @@ public class StageManager : MonoBehaviour
     void InitVal()
     {
         playerStatsScript = PlayerStatsScript.instance;
-        playerCaptain = GameObject.Find("PlayerCaptain").GetComponent<Unit>();
+        playerCaptain = GameObject.Find(Constants.PLAYER_CAPTAIN_NAME).GetComponent<Unit>();
         enemyCaptain = GameObject.Find("EnemyCaptain").GetComponent<Unit>();
         gameOverPanel = transform.Find("MiddleGroup/GameOverPanel").gameObject;
         levelCompletePanel = transform.Find(Constants.LEVEL_COMPLET_PANEL_PATH).gameObject;
@@ -131,7 +131,7 @@ public class StageManager : MonoBehaviour
             return;
         }
         int rewardCoef = (int)currentStageNb / 5;
-        levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + rewardCoef * Constants.REWARD_BONUS_EVERY_X_STAGE;
+        levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + (rewardCoef * Constants.REWARD_BONUS_EVERY_X_STAGE);
     }
 
     float GetNumbersOnly(string numberString)
@@ -206,14 +206,14 @@ public class StageManager : MonoBehaviour
     void UpdateLevelPanelInfos(GameObject panel)
     {
         //panel.transform.Find(Constants.LEVEL_COMPLETE_TOTAL_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.money.ToString();
-        panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
+        panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString();
         if (panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH))
-            panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = '+' + Mathf.Round((CalculateRewardAmount())).ToString();
+            panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = '+' + Mathf.Round(CalculateRewardAmount()).ToString();
     }
 
     void UpdateGameoverPanel()
     {
-        gameOverPanel.transform.Find(Constants.GAMEOVER_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = (goldEarnedInStage).ToString();
+        gameOverPanel.transform.Find(Constants.GAMEOVER_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString();
 
     }
 

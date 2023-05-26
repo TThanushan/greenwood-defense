@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerPrefsStatsLoader : MonoBehaviour
 {
     Unit playerUnit;
+
+
     void Start()
     {
         playerUnit = GetComponent<Unit>();
@@ -18,6 +20,12 @@ public class PlayerPrefsStatsLoader : MonoBehaviour
             const string MAX_HEALTH = "MaxHealth";
             const string DAMAGE_REDUCTION = "DamageReduction";
             const string SHIELD = "Shield";
+            const string SWORD_DAMAGE = "SwordDamage";
+            const string CROSSBOW_DAMAGE = "CrossbowDamage";
+            const string CROSSBOW_WEAPON = "CrossbowWeapon1";
+            //const string CROSSBOW_ABILITY_PIERCING_ARROW = "CrossbowAbilityPiercingArrow";
+            //const string SWORD_ABILITY_SLASH = "SwordAbilitySlash";
+
             if (name.Contains(MAX_HEALTH) && !name.Contains("Unit"))
             {
                 float maxHealth = GetUpgradeNameNumbersOnly(name);
@@ -35,10 +43,30 @@ public class PlayerPrefsStatsLoader : MonoBehaviour
                 float shield = GetUpgradeNameNumbersOnly(name);
                 playerUnit.SetBigShieldCurrent(shield);
             }
-
+            else if (name.Contains(SWORD_DAMAGE))
+            {
+                float damage = GetUpgradeNameNumbersOnly(name);
+                if (damage > 0) playerUnit.gameObject.GetComponent<PlayerCaptainUnit>().swordDamage = damage;
+            }
+            else if (name.Contains(CROSSBOW_DAMAGE))
+            {
+                float damage = GetUpgradeNameNumbersOnly(name);
+                if (damage > 0) playerUnit.gameObject.GetComponent<PlayerCaptainUnit>().crossbowDamage = damage;
+            }
+            else if (name.Contains(CROSSBOW_WEAPON))
+            {
+                playerUnit.gameObject.GetComponent<PlayerCaptainUnit>().isCrossbowUnlocked = true;
+            }
         }
+        //else if (name.Contains(CROSSBOW_ABILITY_PIERCING_ARROW))
+        //{
+
+        //}
+        //else if (name.Contains(SWORD_ABILITY_SLASH))
+        //{
 
     }
+
     float GetUpgradeNameNumbersOnly(string upgradeName)
     {
         string withoutNumbers = GetUpgradeNameWithoutNumbers(upgradeName);

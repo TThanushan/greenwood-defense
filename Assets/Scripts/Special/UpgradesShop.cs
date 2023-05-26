@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class UpgradesShop : MonoBehaviour
@@ -676,7 +675,7 @@ public class UpgradesShop : MonoBehaviour
         Transform spriteBody = Instantiate(prefab.transform.Find(spriteName), parent.transform);
         if (spriteBody == null)
 
-        spriteBody.name = spriteBody.name.Replace("(Clone)", "");
+            spriteBody.name = spriteBody.name.Replace("(Clone)", "");
         return spriteBody;
     }
 

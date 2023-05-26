@@ -64,7 +64,7 @@ namespace UnityEditor
         }
 
         private ReorderableList m_ReorderableList;
-        public RuleTile tile { get { return (target as RuleTile); } }
+        public RuleTile tile { get { return target as RuleTile; } }
         private Rect m_ListRect;
 
         const float k_DefaultElementHeight = 48f;
@@ -96,9 +96,9 @@ namespace UnityEditor
                 switch (tile.m_TilingRules[index].m_Output)
                 {
                     case RuleTile.TilingRule.OutputSprite.Random:
-                        return k_DefaultElementHeight + k_SingleLineHeight * (tile.m_TilingRules[index].m_Sprites.Length + 3) + k_PaddingBetweenRules;
+                        return k_DefaultElementHeight + (k_SingleLineHeight * (tile.m_TilingRules[index].m_Sprites.Length + 3)) + k_PaddingBetweenRules;
                     case RuleTile.TilingRule.OutputSprite.Animation:
-                        return k_DefaultElementHeight + k_SingleLineHeight * (tile.m_TilingRules[index].m_Sprites.Length + 2) + k_PaddingBetweenRules;
+                        return k_DefaultElementHeight + (k_SingleLineHeight * (tile.m_TilingRules[index].m_Sprites.Length + 2)) + k_PaddingBetweenRules;
                 }
             }
             return k_DefaultElementHeight + k_PaddingBetweenRules;
@@ -112,8 +112,8 @@ namespace UnityEditor
             float height = rect.height - k_PaddingBetweenRules;
             float matrixWidth = k_DefaultElementHeight;
 
-            Rect inspectorRect = new Rect(rect.xMin, yPos, rect.width - matrixWidth * 2f - 20f, height);
-            Rect matrixRect = new Rect(rect.xMax - matrixWidth * 2f - 10f, yPos, matrixWidth, k_DefaultElementHeight);
+            Rect inspectorRect = new Rect(rect.xMin, yPos, rect.width - (matrixWidth * 2f) - 20f, height);
+            Rect matrixRect = new Rect(rect.xMax - (matrixWidth * 2f) - 10f, yPos, matrixWidth, k_DefaultElementHeight);
             Rect spriteRect = new Rect(rect.xMax - matrixWidth - 5f, yPos, matrixWidth, k_DefaultElementHeight);
 
             EditorGUI.BeginChangeCheck();
@@ -154,12 +154,12 @@ namespace UnityEditor
 
             for (int y = 0; y <= 3; y++)
             {
-                float top = rect.yMin + y * h;
+                float top = rect.yMin + (y * h);
                 Handles.DrawLine(new Vector3(rect.xMin, top), new Vector3(rect.xMax, top));
             }
             for (int x = 0; x <= 3; x++)
             {
-                float left = rect.xMin + x * w;
+                float left = rect.xMin + (x * w);
                 Handles.DrawLine(new Vector3(left, rect.yMin), new Vector3(left, rect.yMax));
             }
             Handles.color = Color.white;
@@ -168,13 +168,13 @@ namespace UnityEditor
             {
                 for (int x = 0; x <= 2; x++)
                 {
-                    Rect r = new Rect(rect.xMin + x * w, rect.yMin + y * h, w - 1, h - 1);
+                    Rect r = new Rect(rect.xMin + (x * w), rect.yMin + (y * h), w - 1, h - 1);
                     if (x != 1 || y != 1)
                     {
                         switch (tilingRule.m_Neighbors[index])
                         {
                             case RuleTile.TilingRule.Neighbor.This:
-                                GUI.DrawTexture(r, arrows[y * 3 + x]);
+                                GUI.DrawTexture(r, arrows[(y * 3) + x]);
                                 break;
                             case RuleTile.TilingRule.Neighbor.NotThis:
                                 GUI.DrawTexture(r, arrows[9]);

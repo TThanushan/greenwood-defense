@@ -81,7 +81,7 @@ public class RockUnit3 : RockUnit2
         {
             if (caller.GetComponent<HealthBar>())
             {
-                damage *= 1 - damageReductionPercentage / 100;
+                damage *= 1 - (damageReductionPercentage / 100);
                 caller.GetComponent<HealthBar>().GetDamage(damage, caller);
             }
         }

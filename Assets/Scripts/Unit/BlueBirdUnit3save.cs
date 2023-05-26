@@ -36,7 +36,7 @@ public class BlueBirdUnit3save : BlueBirdUnit2
 
     void DropEggsOnDistance()
     {
-        currentTimeBetweenTravel = travelTime * 2 + timeBetweenTravel;
+        currentTimeBetweenTravel = (travelTime * 2) + timeBetweenTravel;
         isTraveling = true;
         Invoke("ReverseWayX", travelTime);
 

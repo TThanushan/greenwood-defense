@@ -68,7 +68,7 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
     bool DoesCardNeedToBeShowned()
     {
         int currentLevel = StageInfosManager.instance.GetCurrentStageNumber();
-        int index = (currentLevel) / 5;
+        int index = currentLevel / 5;
         if (currentLevel == Constants.MAX_STAGE_NUMBER)
             return false;
         return saveManager.maxLevelUnlocked == currentLevel && (saveManager.newEnemyCardDescriptionShownedIndex == index) &&

@@ -22,7 +22,7 @@ public class UnitShooter : Unit
     protected override void Update()
     {
         base.Update();
-        Target = GetClosestEnemy();
+        Target = GetClosestEnemyInFrontOfMe();
     }
 
 

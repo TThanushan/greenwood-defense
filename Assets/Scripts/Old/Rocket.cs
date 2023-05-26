@@ -7,7 +7,7 @@ public class Rocket : BulletScript
 
     protected override void AttackTarget()
     {
-        if (target == null && gameObject.activeSelf || (maxTargetDistance > 0 && Vector2.Distance(transform.position, target.transform.position) > maxTargetDistance))
+        if ((target == null && gameObject.activeSelf) || (maxTargetDistance > 0 && Vector2.Distance(transform.position, target.transform.position) > maxTargetDistance))
         {
             DisableDestroyEffect();
             gameObject.SetActive(false);

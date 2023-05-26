@@ -80,7 +80,7 @@ public class ManaBar : MonoBehaviour
         foreach (string name in SaveManager.instance.unlockedHeroUpgrades)
         {
             if (name.Contains("StartMana"))
-                currentMana = maxMana * (1 + (GetUpgradeNameNumbersOnly(name) / 100)) - maxMana;
+                currentMana = (maxMana * (1 + (GetUpgradeNameNumbersOnly(name) / 100))) - maxMana;
         }
     }
     private void UpdateCurrentManaText()
@@ -92,7 +92,7 @@ public class ManaBar : MonoBehaviour
     {
         if (currentMana < maxMana)
         {
-            if (currentMana + regenerationSpeed * Time.deltaTime > maxMana)
+            if (currentMana + (regenerationSpeed * Time.deltaTime) > maxMana)
                 currentMana = maxMana;
             else
                 currentMana += regenerationSpeed * Time.deltaTime;

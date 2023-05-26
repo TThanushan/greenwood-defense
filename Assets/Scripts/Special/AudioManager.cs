@@ -37,24 +37,54 @@ public class AudioManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        for (int i = 0; i < 1; i++)
+        InitSources();
+    }
+
+    void InitSources()
+    {
+        //for (int i = 0; i < 1; i++)
+        //{
+        foreach (Sound s in sounds)
         {
-            foreach (Sound s in sounds)
-            {
-                s.source = gameObject.AddComponent<AudioSource>();
-                s.source.clip = s.clip;
-                s.source.volume = s.volume;
-                s.source.pitch = s.pitch;
-                s.source.loop = s.loop;
-            }
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+        }
+        //}
+    }
+
+
+
+    /// <summary>
+    /// Use this to add more audio source in case the sound risks to be used a lot before the audio has finished playing.
+    /// </summary>
+    /// <param name="soundName"></param>
+    /// <param name="count"></param>
+    public void AddSoundAudioSource(string soundName, int count = 1, float volume = -1)
+    {
+        Sound s = sounds.Find(Sound => Sound.name == soundName);
+        if (s == null)
+            return;
+        for (int i = 0; i < count; i++)
+        {
+            s = AddSound(s.name, s.clip, s.volume, s.pitch, s.loop);
+            if (volume != -1)
+                s.volume = volume;
+            //s.source = gameObject.AddComponent<AudioSource>();
+            //s.source.clip = s.clip;
+            //s.source.volume = s.volume;
+            //s.source.pitch = s.pitch;
+            //s.source.loop = s.loop;
         }
     }
 
-    public void PlaySfx(string sfxName)
+    public void PlaySfx(string sfxName, float _volume = -1)
     {
         if (sfxName == "")
             sfxName = Constants.BUTTON_CLICK_SFX_NAME;
-        Play(sfxName, false);
+        Play(sfxName, false, volume: _volume);
     }
 
     public void PlaySfxWithPitch(string sfxName)
@@ -64,35 +94,37 @@ public class AudioManager : MonoBehaviour
         Play(sfxName, true);
     }
 
-    public void Play(string _name, bool randomPitch = false, float pitchPower = 0.1f)
+    public void Play(string _name, bool randomPitch = false, float pitchPower = 0.1f, float volume = -1f)
     {
         if (SFXMuted || GetNumberOfAudioPlaying() > 25)
             return;
-        Sound newS = sounds.Find(Sound => Sound.name == _name && Sound.source.isPlaying == false);
-        //sound not playing wasn't found ?
-        if (newS == null)
+        Sound soundNotPlaying;
+        if (volume != -1f)
+            soundNotPlaying = sounds.Find(Sound => Sound.name == _name && Sound.source.isPlaying == false && Sound.source.volume == volume);
+        else
+            soundNotPlaying = sounds.Find(Sound => Sound.name == _name && Sound.source.isPlaying == false);
+        //sound not playing is found ?
+        if (soundNotPlaying != null)
         {
-            //Get a model of the sound.
-            Sound s = sounds.Find(Sound => Sound.name == _name);
-
-            if (s != null)
-            {
-                //Create and add the new Sound to the list.
-                newS = AddSound(s.name, s.clip, s.volume, s.pitch, s.loop);
-            }
-            //It means that the name is wrong !
-            else
-            {
-                return;
-            }
+            if (randomPitch == true)
+                soundNotPlaying.source.pitch = Random.Range(1f - pitchPower, 1f + pitchPower);
+            soundNotPlaying.source.Play();
         }
         else
         {
-            if (randomPitch == true)
-                newS.source.pitch = UnityEngine.Random.Range(1f - pitchPower, 1f + pitchPower);
-            newS.source.Play();
-        }
+            //Get a model of the sound.
+            Sound s = sounds.Find(Sound => Sound.name == _name);
+            if (s != null)
+            {
+                float newVolume = s.volume;
+                if (volume != -1f)
+                    newVolume = volume;
+                soundNotPlaying = AddSound(s.name, s.clip, newVolume, s.pitch, s.loop);
+                soundNotPlaying.source.Play();
+            }
 
+
+        }
     }
 
     public void PlayHitSound(string name = "")

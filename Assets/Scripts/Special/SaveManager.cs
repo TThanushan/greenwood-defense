@@ -450,6 +450,31 @@ public class SaveManager : MonoBehaviour
     {
         heroUpgrades = new List<HeroUpgrade>
         {
+            new HeroUpgrade("SwordDamage0"),
+            new HeroUpgrade("SwordDamage2", "Increase sword damage to 2", 600),
+            new HeroUpgrade("SwordDamage4", "Increase sword damage to 4", 800),
+            new HeroUpgrade("SwordDamage8", "Increase sword damage to 8", 1200),
+            new HeroUpgrade("SwordDamage16", "Increase sword damage to 16", 1600),
+            new HeroUpgrade("SwordDamage32", "Increase sword damage to 32", 3200),
+
+
+            new HeroUpgrade("CrossbowWeapon0"),
+            new HeroUpgrade("CrossbowWeapon1", "Shoot arrow using a crossbow", 500),
+
+            new HeroUpgrade("CrossbowDamage0"),
+            new HeroUpgrade("CrossbowDamage2", "Increase sword damage to 2", 600),
+            new HeroUpgrade("CrossbowDamage4", "Increase sword damage to 4", 800),
+            new HeroUpgrade("CrossbowDamage8", "Increase sword damage to 8", 1200),
+            new HeroUpgrade("CrossbowDamage16", "Increase sword damage to 16", 1600),
+            new HeroUpgrade("CrossbowDamage32", "Increase sword damage to 32", 3200),
+
+            new HeroUpgrade("CrossbowAbilityPiercingArrow0"),
+            new HeroUpgrade("CrossbowAbilityPiercingArrow1", "Shoot an arrow that go throught x enemies", 100),
+            new HeroUpgrade("SwordAbilitySlash0"),
+            new HeroUpgrade("SwordAbilitySlash1", "Slash enemies in front.", 100),
+
+
+
             new HeroUpgrade("ManaMax100"),
             new HeroUpgrade("ManaMax110", "Increase maximum mana from 110 to 110",100),
             new HeroUpgrade("ManaMax120", "Increase maximum mana from 110 to 120",120),
@@ -631,6 +656,9 @@ public class SaveManager : MonoBehaviour
     {
         unlockedHeroUpgrades = new List<string>
         {
+            "CrossbowWeapon0",
+            "CrossbowDamage0",
+            "SwordDamage0",
             "ManaMax100",
             "ManaRegen0.0",
             "StartMana0",

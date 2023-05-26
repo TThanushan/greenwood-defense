@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HeroMover : MonoBehaviour
 {
@@ -21,6 +19,6 @@ public class HeroMover : MonoBehaviour
     void Update()
     {
         offset = Mathf.Sin(Time.time * Frequency * 4.0f) * Amplitude;
-        transform.position = origin + Vector3.right * offset;
+        transform.position = origin + (Vector3.right * offset);
     }
 }

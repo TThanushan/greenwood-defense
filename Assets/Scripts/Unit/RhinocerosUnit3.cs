@@ -44,7 +44,7 @@ public class RhinocerosUnit3 : RhinocerosUnit2
 
     private void UpdateEffectBarLength()
     {
-        float x = 1f - (float)currentCount / count;
+        float x = 1f - ((float)currentCount / count);
         if (currentCount == count && ChargeReady())
             x = 1;
         HitEffectBar.transform.localScale = new Vector3(x, HitEffectBar.transform.localScale.y, HitEffectBar.transform.localScale.z);

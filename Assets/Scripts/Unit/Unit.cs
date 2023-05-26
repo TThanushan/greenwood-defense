@@ -60,7 +60,7 @@ public class Unit : HealthBar
         initialTag = tag;
     }
 
-    void UpdateTag()
+    protected virtual void UpdateTag()
     {
         if (isNotAUnit)
             return;
@@ -88,7 +88,7 @@ public class Unit : HealthBar
 
         if (paralysed)
             return;
-        Target = GetClosestEnemy();
+        Target = GetClosestEnemyInFrontOfMe();
         if (Target)
         {
             if (EnoughRangeToAttackTarget())
@@ -142,6 +142,10 @@ public class Unit : HealthBar
     public Transform GetSpriteTransform()
     {
         return transform.Find("SpriteBody/Sprite").transform;
+    }
+    public Transform GetSpriteBody()
+    {
+        return transform.Find("SpriteBody").transform;
     }
     public void RotateSprite()
     {
@@ -274,9 +278,9 @@ public class Unit : HealthBar
         {
             // TODO
             if (targetTag == "Enemy" && CompareTag("Enemy"))
-                spriteRenderer.flipX = (wayX == 1);
+                spriteRenderer.flipX = wayX == 1;
             else
-                spriteRenderer.flipX = (wayX == -1);
+                spriteRenderer.flipX = wayX == -1;
         }
     }
 
@@ -345,7 +349,7 @@ public class Unit : HealthBar
             spriteRenderer.color = originalColor;
     }
 
-    protected void MoveToward()
+    protected virtual void MoveToward()
     {
         transform.Translate(new Vector2(moveSpeed * wayX * Time.deltaTime, 0));
     }
@@ -364,11 +368,15 @@ public class Unit : HealthBar
         Target.GetComponent<Unit>().GetDamage(attackDamage, transform);
     }
 
-    protected void PlayHitSfx()
+    protected void PlayHitSfx(int index = -1)
     {
-        if (hitSFX.Length > 0)
-            audioManager.Play(hitSFX[Random.Range(0, hitSFX.Length)], true);
+        string name = "";
+        if (index != -1)
+            name = hitSFX[index];
+        else if (hitSFX.Length > 0)
+            name = hitSFX[Random.Range(0, hitSFX.Length)];
 
+        audioManager.Play(name, true);
     }
 
     protected virtual void AttackTarget()
@@ -380,7 +388,7 @@ public class Unit : HealthBar
         }
         if (NextAttackReady())
         {
-            OnAttack?.Invoke();
+            InvokeOnAttack();
             nextAttackTime = GetRandomizedNextAttackTime();
             Attack();
         }
@@ -397,13 +405,13 @@ public class Unit : HealthBar
             attackRange += Random.Range(0f, 0.05f);
     }
 
-    protected float GetRandomizedNextAttackTime()
+    protected virtual float GetRandomizedNextAttackTime()
     {
         //return Time.time + attackSpeed - Random.Range(0f, attackSpeed / 2f);
         return Time.time + attackSpeed;
     }
 
-    bool IsTargetDisabled()
+    protected bool IsTargetDisabled()
     {
         return Target.GetComponent<Unit>().Disabled;
     }
@@ -415,12 +423,20 @@ public class Unit : HealthBar
         return Vector2.Distance(transform.position, Target.transform.position) <= attackRange;
     }
 
-    bool NextAttackReady()
+    protected bool EnoughRangeToAttackTarget(float range)
+    {
+        if (!Target)
+            return false;
+        return Vector2.Distance(transform.position, Target.transform.position) <= range;
+
+    }
+
+    protected bool NextAttackReady()
     {
         return nextAttackTime <= Time.time;
     }
 
-    protected GameObject GetClosestEnemy()
+    virtual protected GameObject GetClosestEnemyInFrontOfMe()
     {
         GameObject[] enemies;
         if ((enemies = GetEnemies()) == null) return null;
@@ -442,7 +458,7 @@ public class Unit : HealthBar
         return closestEnemy;
     }
 
-    bool IsEnemyBehindMeOnXAxis(Transform target)
+    protected virtual bool IsEnemyBehindMeOnXAxis(Transform target)
     {
         if (wayX == -1)
             return transform.position.x > target.transform.position.x;

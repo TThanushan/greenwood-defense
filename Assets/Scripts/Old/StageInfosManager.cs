@@ -45,6 +45,7 @@ public class StageInfosManager : MonoBehaviour
 
     public int GetCurrentStageNumber()
     {
+        print(currentStage);
         return int.Parse(currentStage.Split(' ')[1]);
     }
 }

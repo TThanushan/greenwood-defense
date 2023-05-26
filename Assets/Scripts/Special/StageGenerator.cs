@@ -10,7 +10,7 @@ public class StageGenerator : MonoBehaviour
     public GameObject meleeFrog;
 
     //Test
-    public int tmpStageNumber;
+    public int tmpStageNumber = 1;
     public bool generate;
     //Test
 
@@ -18,10 +18,12 @@ public class StageGenerator : MonoBehaviour
     int stageNumber;
     private void Awake()
     {
-        stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
+        stageNumber = tmpStageNumber;
+        //TODO:UNCOMMENT
+        //if (StageManager.instance)
+        //    stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
         maxPrefabIndex = GetMaxPrefabIndex();
         GenerateStages();
-
     }
     void GenerateStages()
     {

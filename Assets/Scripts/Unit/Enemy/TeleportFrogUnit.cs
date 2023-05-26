@@ -29,7 +29,7 @@ public class TeleportFrogUnit : Unit
     void TeleportBehind()
     {
         Vector2 pos = transform.position;
-        transform.position = new Vector2(pos.x + teleportDistance * wayX, pos.y);
+        transform.position = new Vector2(pos.x + (teleportDistance * wayX), pos.y);
 
         if (transform.position.x < poolObject.playerCaptain.transform.position.x)
             transform.position = new Vector2(poolObject.playerCaptain.transform.position.x + 0.15f, transform.position.y);

@@ -50,7 +50,7 @@ public class GiantFrogUnit : UnitAoeAttack
     public override void GetDamage(float damage, Transform caller, string HitSoundName = "")
     {
         if (isDefenseBonusEnabled)
-            damage *= 1 - damageReductionPercentage / 100;
+            damage *= 1 - (damageReductionPercentage / 100);
         base.GetDamage(damage, caller, HitSoundName);
     }
 

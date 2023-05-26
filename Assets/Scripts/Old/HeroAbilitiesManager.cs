@@ -32,7 +32,7 @@ public class HeroAbilitiesManager : MonoBehaviour
         SaveManager saveManager = SaveManager.instance;
         List<string> abilitiesName = GetUnlockedAbilitiesName();
         abilityButtons = new AbilityButton[abilitiesName.Count];
-        float cooldownReduction = 1 - GetCooldownReductionShop() / 100;
+        float cooldownReduction = 1 - (GetCooldownReductionShop() / 100);
         int i = 0;
         foreach (string AbilityName in abilitiesName)
         {
@@ -191,7 +191,7 @@ public class HeroAbilitiesManager : MonoBehaviour
         PoolObject poolObject = PoolObject.instance;
         float duration = 1f;
         float coef = 0.5f;
-        float paralyseDuration = duration + GetUpgradeNameNumbersOnly(GetAbility("Paralysis").name) * coef;
+        float paralyseDuration = duration + (GetUpgradeNameNumbersOnly(GetAbility("Paralysis").name) * coef);
 
         foreach (GameObject enemy in PoolObject.instance.Enemies)
         {

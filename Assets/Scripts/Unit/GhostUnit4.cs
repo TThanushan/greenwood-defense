@@ -18,7 +18,7 @@ public class GhostUnit4 : GhostUnit3
         if (Disabled)
             return;
         base.Update();
-        if (nextEffectTime4 <= Time.time && EnoughRangeToAttackTarget() && (!nextAttackConvertEnemyTag && Target && (!Target.name.Contains("Captain") && !Target.name.Contains("Ultimate"))))
+        if (nextEffectTime4 <= Time.time && EnoughRangeToAttackTarget() && !nextAttackConvertEnemyTag && Target && !Target.name.Contains("Captain") && !Target.name.Contains("Ultimate"))
             DoEffect();
     }
 

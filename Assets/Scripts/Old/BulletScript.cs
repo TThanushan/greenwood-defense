@@ -123,7 +123,8 @@ public class BulletScript : MonoBehaviour
         if (effect)
         {
             GameObject newEffect = PoolObject.instance.GetPoolObject(effect);
-            newEffect.transform.position = (transform.position + target.transform.position * 1.25f) / 2;
+            //newEffect.transform.position = (transform.position + (target.transform.position * 1.25f)) / 2;
+            newEffect.transform.position = target.transform.position;
             RotateObjAwayFrom(newEffect, target);
         }
     }

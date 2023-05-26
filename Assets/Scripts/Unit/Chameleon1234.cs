@@ -84,8 +84,8 @@ public class Chameleon1234 : Unit
         if (attackDamage != initialAttackDamage)
             return;
         nextAttackTime = 0f;
-        attackSpeed *= 1 - attackSpeedBuff / 100;
-        attackDamage *= 1 + attackDamageBuff / 100;
+        attackSpeed *= 1 - (attackSpeedBuff / 100);
+        attackDamage *= 1 + (attackDamageBuff / 100);
     }
 
     void DisableRageEffect()
@@ -106,7 +106,7 @@ public class Chameleon1234 : Unit
     {
         Unit unit = Target.GetComponent<Unit>();
         if (unit.attackSpeed == unit.GetInitialAttackSpeed())
-            unit.attackSpeed *= 1 + attackSpeedReduction / 100f;
+            unit.attackSpeed *= 1 + (attackSpeedReduction / 100f);
         unit.InvokeResetAttackSpeed(effectDuration);
     }
 

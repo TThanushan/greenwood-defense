@@ -38,7 +38,7 @@ public class Trap : MonoBehaviour
         if (triggerEffect)
         {
             GameObject newEffect = PoolObject.instance.GetPoolObject(triggerEffect);
-            newEffect.transform.position = (transform.position + target.transform.position * 1.25f) / 2;
+            newEffect.transform.position = (transform.position + (target.transform.position * 1.25f)) / 2;
             RotateObjAwayFrom(newEffect, target);
         }
     }

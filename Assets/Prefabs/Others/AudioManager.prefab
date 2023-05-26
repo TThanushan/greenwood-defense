@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: ButtonClick
-    clip: {fileID: 8300000, guid: 79fb7476873819b4f8ad93a47da3f356, type: 3}
+    clip: {fileID: 8300000, guid: d80feb39494cd824993379ce64ca57ec, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -149,6 +149,156 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: SaveGame
     clip: {fileID: 8300000, guid: 772afa3762699e5448188fff46bed738, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CrossbowShoot
+    clip: {fileID: 8300000, guid: 80bfb649e0f1a9f43a747eec7cc315ad, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordCriticalAttack1
+    clip: {fileID: 8300000, guid: 97c8f149099006f4293c304d829595a3, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordCriticalAttack2
+    clip: {fileID: 8300000, guid: 838587b368687c94293b7a9121f2ad15, type: 3}
+    volume: 0.75
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordAttack1
+    clip: {fileID: 8300000, guid: c822259ad38ade049a3f120858bbf7e8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordAttack2
+    clip: {fileID: 8300000, guid: 22d02254a91b1f243837a1991861ccb9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordAttack3
+    clip: {fileID: 8300000, guid: 23c7d68a117fa3240b68939f3b2fc60e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordAttack4
+    clip: {fileID: 8300000, guid: f7bfa67a11ee6184b8c1ce9c7d490e7a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordAttack5
+    clip: {fileID: 8300000, guid: 5f73e29bf5d21dc4a9f780be56684b5e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordAbilitySlash
+    clip: {fileID: 8300000, guid: f76b318aa94c85d4da7b830ed6de2e55, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: CrossbowAbilityPiercingArrow
+    clip: {fileID: 8300000, guid: 397ee7c623b812945be29bc07411e98a, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking1
+    clip: {fileID: 8300000, guid: e4c099c440ca97447a54069c86094f2b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking2
+    clip: {fileID: 8300000, guid: 3b6ea85f53c6637488ee269591881daf, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking3
+    clip: {fileID: 8300000, guid: e78cfbcf637dcdd4eb9146a200e55672, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking4
+    clip: {fileID: 8300000, guid: a842e01b1879dab4fb946af3d97a144e, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking5
+    clip: {fileID: 8300000, guid: 1518734f62351b1418159b621ee2df9f, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking6
+    clip: {fileID: 8300000, guid: 8ee02dffb242970458bdf1eb59c4e6d1, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking7
+    clip: {fileID: 8300000, guid: 9abe7b6f53a3567469b4a1d522b0b798, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking8
+    clip: {fileID: 8300000, guid: e4f45f6e2577e7a41ba2f7287763142b, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking9
+    clip: {fileID: 8300000, guid: ce7bb44ff2c08484bac0f2a748529d7a, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GrassWalking10
+    clip: {fileID: 8300000, guid: bf30facfd506c1c4cb9d6b2770d2122d, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EarthPunch1
+    clip: {fileID: 8300000, guid: bc12005c56f386c42ad4704cc53a9366, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EarthPunch2
+    clip: {fileID: 8300000, guid: 9c08a0f0650d6c14eb3cfae8ef5eb9c7, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EarthPunch3
+    clip: {fileID: 8300000, guid: 8bf896bde1784bb46af7c543fd5412e2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EarthPunch4
+    clip: {fileID: 8300000, guid: 85f48141d7ad84844a05e0c4cf72395e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: EarthPunch5
+    clip: {fileID: 8300000, guid: 5749b170cb790af4aaa5dbcf05f655b4, type: 3}
     volume: 1
     pitch: 1
     loop: 0

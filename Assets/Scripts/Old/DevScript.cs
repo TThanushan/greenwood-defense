@@ -7,16 +7,14 @@ public class DevScript : MonoBehaviour
     {
         SpeedManager();
 
-        if (Input.GetKeyDown(KeyCode.C))
-        {
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
 
-            SaveManager.instance.money = 500;
-            SaveManager.instance.SavePrefs();
+        //    SaveManager.instance.money = 500;
+        //    SaveManager.instance.SavePrefs();
 
-        }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.T))
-            AudioManager.instance.PlaySfx(Constants.BUTTON_CLICK_SFX_NAME);
     }
 
     void SpeedManager()
