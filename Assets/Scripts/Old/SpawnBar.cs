@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -215,7 +216,7 @@ public class SpawnBar : MonoBehaviour
 
     void SetButtonPrice(GameObject button, float cost)
     {
-        button.transform.Find("CostText").GetComponent<TMPro.TextMeshProUGUI>().text = cost.ToString();
+        button.transform.Find("CostText").GetComponent<TextMeshProUGUI>().text = cost.ToString();
     }
 
     void AddEventTriggerOnButton(GameObject button, UnitButton unitButton)
@@ -377,8 +378,34 @@ public class SpawnBar : MonoBehaviour
         unit.attackDamage *= 1 + (GetDamageBonusFromShop() / 100);
         unit.SetInitialAttackDamage(unit.attackDamage);
     }
-
     void EnableButtonStars(GameObject button, UnitButton unitButton)
+    {
+        TextMeshProUGUI textLevel = button.transform.Find("FrontFrame/Lvl/Text_LVL_Value").GetComponent<TextMeshProUGUI>();
+        textLevel.text = GetUnitLevel(GetButtonUnitName(unitButton));
+
+        //if (unitButton.name.Contains("2"))
+        //    panel.Find("Star2").gameObject.SetActive(true);
+        //unitButton
+
+    }
+
+    string GetButtonUnitName(UnitButton unitButton)
+    {
+        return unitButton.name.Replace("UnitButton", "");
+    }
+
+
+    string GetUnitLevel(string unitName)
+    {
+        if (unitName.Contains("2"))
+            return "2";
+        if (unitName.Contains("3"))
+            return "3";
+        if (unitName.Contains("4"))
+            return "4";
+        return "1";
+    }
+    void oldEnableButtonStars(GameObject button, UnitButton unitButton)
     {
         Transform panel = button.transform.Find("StarsCanvas/Panel");
         if (unitButton.name.Contains("2"))

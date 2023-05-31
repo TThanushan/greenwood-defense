@@ -53,4 +53,8 @@ public static class Constants
     public const float TIME_THRESHOLD_TO_SKIP_UNIT = 2f;
     public const string SHIELD_HIT_SFX = "ShieldHit";
     public const string NEW_ENEMY_SFX = "NewEnemy";
+
+
+    public const string MANA_BAR_FILL = "ManaBar/Slider_Blue/Fill_Area/Fill";
+    public const string MANA_BAR_TEXT = "CurrentManaText";
 }

@@ -288,7 +288,6 @@ public class PlayerCaptainUnit : Unit
             string sfxName = "SwordCriticalAttack" + Random.Range(1, 3).ToString();
             audioManager.Play(sfxName, volume: 0.75f);
             poolObject.DisplayText("CRIT", 1).transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y + 0.30f, Target.transform.position.z);
-            print("before" + Time.time.ToString());
             //shakeCamera.ShakeWithDelay(0.15f, 0.01f, 0.25f);
 
         }

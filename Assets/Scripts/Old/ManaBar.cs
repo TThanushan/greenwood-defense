@@ -19,9 +19,11 @@ public class ManaBar : MonoBehaviour
         if (!instance)
             instance = this;
         if (!manaBar)
-            manaBar = transform.Find("ManaBar/Bar").gameObject;
+            manaBar = transform.Find(Constants.MANA_BAR_FILL).gameObject;
+        //manaBar = transform.Find("ManaBar/Bar").gameObject;
         if (!currentManaText)
-            currentManaText = transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>();
+            currentManaText = transform.Find(Constants.MANA_BAR_TEXT).GetComponent<TextMeshProUGUI>();
+        //currentManaText = transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>();
     }
 
 
