@@ -162,7 +162,7 @@ public class UpgradesShopHero : MonoBehaviour
         {
             string upgradeName = upgradeCardButton.name.Replace("UpgradeCard", "");
             string unlockedName = GetUnlockedUpgradeName(upgradeName);
-            //upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
+            upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeNameWithoutNumbers(upgradeName);
             upgradeCardButton.Find("Title").GetComponent<TextMeshProUGUI>().text = GetUpgradeTitle(upgradeName);
 
 
@@ -212,7 +212,7 @@ public class UpgradesShopHero : MonoBehaviour
     void UpdateUpgradeCardLevelText(Transform button, string upgradeName)
     {
 
-        TextMeshProUGUI tmPro = button.Find("LevelText").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI tmPro = button.Find("Lvl/Text_LVL_Value").GetComponent<TextMeshProUGUI>();
 
         int lvl = GetUpgradeLevel(upgradeName) - 1;
         string lvlText = lvl.ToString();

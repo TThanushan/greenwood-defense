@@ -67,6 +67,8 @@ public class UpgradesShop : MonoBehaviour
             if (upgradeUnit != null)
                 UpdatePriceTextColor(upgradeCardButton.Find("UpgradePrice/PriceText").GetComponent<TextMeshProUGUI>(), upgradeUnit.name);
             InitLevelLockMessageText(upgradeCardButton, unitName);
+            if (IsUnitOfAnyLevelUnlocked(unitName))
+                EnableChooseUnitButtonIfNecessary(upgradeCardButton);
 
         }
     }
@@ -236,16 +238,28 @@ public class UpgradesShop : MonoBehaviour
             if (IsUnitOfAnyLevelUnlocked(unitName))
             {
                 SetUpgradeButtonName(GetUnlockedUnit(unitName), upgradeCardButton.name);
+                EnableChooseUnitButtonIfNecessary(upgradeCardButton);
             }
             if (!IsUnitOfAnyLevelUnlocked(unitName))
                 SetActiveUpgradeCardButtonLock(upgradeCardButton);
             SetUpgradeButtonTexts(upgradeCardButton, unitName);
             UpdateStarsLock(upgradeCardButton, unitName);
+
+
             //if (!saveManager.unlockedUnits.Contains(unitName))
         }
     }
 
+    void EnableChooseUnitButtonIfNecessary(Transform upgradeCardButton)
+    {
+        if (GetNumberOfUnitUnlocked() > Constants.CHOSEN_UNIT_MAX)
+            upgradeCardButton.Find("ChooseUnitButton").gameObject.SetActive(true);
+    }
 
+    int GetNumberOfUnitUnlocked()
+    {
+        return saveManager.unlockedUnits.Count;
+    }
 
     int GetLockAmount(Transform upgradeCardButton, int level)
     {
@@ -789,7 +803,7 @@ public class UpgradesShop : MonoBehaviour
         int levelMax = 4;
         if (!saveManager.IsModeNormalChosen())
             levelMax = 10;
-        levelText.text = string.Concat("Lvl ", level.ToString(), "/", levelMax.ToString());
+        levelText.text = string.Concat(level.ToString(), "/", levelMax.ToString());
 
 
         //for (int i = 1; i < level + 1; i++)

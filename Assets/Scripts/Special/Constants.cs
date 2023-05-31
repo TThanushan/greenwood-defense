@@ -57,4 +57,6 @@ public static class Constants
 
     public const string MANA_BAR_FILL = "ManaBar/Slider_Blue/Fill_Area/Fill";
     public const string MANA_BAR_TEXT = "CurrentManaText";
+
+
 }
