@@ -254,7 +254,7 @@ public class UpgradesShopHero : MonoBehaviour
 
     void SetPlayerGoldText()
     {
-        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = saveManager.money.ToString();
+        transform.Find("Money/MoneyText").GetComponent<TextMeshProUGUI>().text = ((int)saveManager.money).ToString();
     }
 
 

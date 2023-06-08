@@ -157,7 +157,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2053501823536692338, guid: aec37b825939c4640ba5db40252ff5e7,
+  m_Sprite: {fileID: -5498619856834178012, guid: 070a0fea8d7c56647b4a4a1bf7feb63e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -240,7 +240,7 @@ MonoBehaviour:
   spawnAll: 0
 --- !u!95 &1829568272
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -257,7 +257,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!114 &1829568273
 MonoBehaviour:
   m_ObjectHideFlags: 0

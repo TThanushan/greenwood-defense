@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -427,7 +428,6 @@ public class UpgradesShop : MonoBehaviour
 
     void Upgrade(string upgradeUnitName, string unitName, float price)
     {
-        print("HERE:" + upgradeUnitName);
         if (saveManager.IsModeNormalChosen())
         {
             RemoveChosenUnit(unitName);
@@ -440,6 +440,7 @@ public class UpgradesShop : MonoBehaviour
         }
 
         saveManager.money -= price;
+        //bookmark
         ChooseUnit(upgradeUnitName);
     }
 
@@ -528,7 +529,6 @@ public class UpgradesShop : MonoBehaviour
         bool enoughMoney = saveManager.money >= GetUnit(unitName).shopPrice;
         if (!saveManager.IsModeNormalChosen() && saveManager.unlockedUnits.Contains(unitName))
         {
-            print(unitName);
             int frogLevel = GetFrogUnitLevel(unitName);
             SaveManager.Unit unit = GetUnit(unitName);
             int index = frogLevel - 1;
@@ -663,7 +663,6 @@ public class UpgradesShop : MonoBehaviour
         }
         foreach (Transform child in spriteBody)
         {
-            Debug.Log(child.name);
             if (!child.GetComponent<SpriteRenderer>())
                 //if (!child.GetComponent<SpriteRenderer>() || child.name.Equals("Shadow"))
                 Destroy(child.gameObject);
@@ -687,8 +686,8 @@ public class UpgradesShop : MonoBehaviour
         if (prefab.transform.Find("SpriteBody") == null)
             spriteName = "Sprite";
         Transform spriteBody = Instantiate(prefab.transform.Find(spriteName), parent.transform);
-        if (spriteBody == null)
-
+        //if (spriteBody == null)
+        if (spriteBody != null)
             spriteBody.name = spriteBody.name.Replace("(Clone)", "");
         return spriteBody;
     }
@@ -899,6 +898,7 @@ public class UpgradesShop : MonoBehaviour
         saveManager.chosenUnits.Add(unitName);
         RemoveSpriteBody(btn);
         UpdateChosenUnitList();
+        SortChosenUnitByCost();
     }
 
     public void RemoveChosenUnit(string unitName)
@@ -911,6 +911,7 @@ public class UpgradesShop : MonoBehaviour
         btn.Find("RemoveButton").gameObject.SetActive(false);
         saveManager.chosenUnits.Remove(unitName);
         UpdateChosenUnitList();
+        SortChosenUnitByCost();
     }
 
 
@@ -919,6 +920,7 @@ public class UpgradesShop : MonoBehaviour
         RemoveChosenUnit(button.name.Replace("ChosenUnit", ""));
         RemoveSpriteBody(button.transform);
         UpdateChosenUnitList();
+        SortChosenUnitByCost();
     }
 
     void RemoveSpriteBody(Transform button)
@@ -928,54 +930,103 @@ public class UpgradesShop : MonoBehaviour
             Destroy(spriteBody.gameObject);
     }
 
+    public void SortChosenUnitByCost()
+    {
+        Transform chosenUnitsParent = transform.Find("Buttons/ChosenUnits");
+        Dictionary<Transform, SaveManager.Unit> unitDictionary = new Dictionary<Transform, SaveManager.Unit>();
+
+        //Convert to unit then add it to the dictionary
+        foreach (Transform button in chosenUnitsParent)
+        {
+            if (button.name == "ChosenUnit")
+                continue;
+
+            string name = button.name.Replace("ChosenUnit", "");
+            var unit = GetUnit(name);
+            unitDictionary[button] = unit;
+        }
+
+        // Create a sorted list of buttons
+        List<Transform> sortedButtons = unitDictionary.OrderBy(pair => pair.Value.cost).Select(pair => pair.Key).ToList();
+
+        // Detach all buttons from the parent
+        foreach (var button in sortedButtons)
+        {
+            button.SetParent(null, true);
+        }
+
+        // Reattach buttons to the parent in the sorted order
+        foreach (var button in sortedButtons)
+        {
+            button.SetParent(chosenUnitsParent, true);
+        }
+
+        for (int i = sortedButtons.Count - 1; i >= 0; i--)
+        {
+            sortedButtons[i].SetAsFirstSibling();
+        }
+
+    }
+
+
+
+    // UpdateChosenUnitList function is called when there is a need to update the display of units chosen by the player
     void UpdateChosenUnitList()
     {
         int i = 0;
-        int count = saveManager.chosenUnits.Count;
-        string unitName;
-        //string spritePath = Constants.UNITS_SPRITE_RESOURCES_PATH + '/';
-        Transform unit;
-        Transform chosenUnitButton;
+        int count = saveManager.chosenUnits.Count; // Total count of the chosen units from saveManager
+
+        string unitName; // Variable to store unit name
+        Transform unit, chosenUnitButton; // Variables to store transforms
+
+        // Find the parent of chosen units
         Transform chosenUnitsParent = transform.Find("Buttons/ChosenUnits");
 
+        // Loop over each button inside chosenUnitsParent
         foreach (Transform button in chosenUnitsParent.transform)
         {
-            chosenUnitButton = chosenUnitsParent.GetChild(i);
-            unit = chosenUnitButton.transform.Find("Unit");
-            if (i >= count)
+            chosenUnitButton = chosenUnitsParent.GetChild(i); // Get the child of chosenUnitsParent at the current index
+            unit = chosenUnitButton.transform.Find("Unit"); // Get the "Unit" child transform of the chosenUnitButton
+
+            if (i >= count) // Check if index is out of bounds of the chosenUnits
             {
-                unit.gameObject.SetActive(false);
-                RemoveSpriteBody(button);
-                //break;
+                unit.gameObject.SetActive(false); // Hide the unit game object
+                RemoveSpriteBody(button); // Remove the sprite body of the button
             }
             else
             {
-                unitName = saveManager.chosenUnits[i];
-                Transform spriteBody = button.Find("SpriteBody");
+                unitName = saveManager.chosenUnits[i]; // Get the name of the unit from saveManager
+                Transform spriteBody = button.Find("SpriteBody"); // Find the "SpriteBody" child transform of the button
+
+                // Loop over each child transform in the button and destroy the "SpriteBody"
                 foreach (Transform child in button)
                 {
                     if (child.name.Equals("SpriteBody"))
                         Destroy(child.gameObject);
                 }
 
-
+                // Instantiate a new sprite body from prefab and set its size and position
                 spriteBody = InstantiateSpriteBodyFromPrefabWithImage(unitName, button);
                 spriteBody.localScale = new Vector2(228, 228);
                 spriteBody.localPosition = new Vector2(4.7f, 13.3f);
 
-                chosenUnitButton.name = "ChosenUnit" + unitName;
-                unit.gameObject.SetActive(true);
+                chosenUnitButton.name = "ChosenUnit" + unitName; // Rename the chosenUnitButton
+                unit.gameObject.SetActive(true); // Make the unit game object visible
 
-                //UpdateCardStars(unit.Find("StarsCanvas"), GetUnitLevelNumber(unitName));
+                // Update the mana cost of the chosen unit
                 UpdateChosenUnitButtonManaCost(unit, unitName);
+
                 i++;
             }
         }
+
+        // Disable or enable unselected buttons based on whether the maximum limit has been reached or not
         if (i == Constants.CHOSEN_UNIT_MAX)
             DisableUnselectedChoseButtons();
         else
             EnableUnselectedChoseButtons();
     }
+
 
     void DisableUnselectedChoseButtons()
     {
@@ -1019,8 +1070,11 @@ public class UpgradesShop : MonoBehaviour
             Transform btn = GetUpgradeButton(unitName).Find("ChooseUnitButton");
             btn.Find("ChooseButton").gameObject.SetActive(false);
             btn.Find("RemoveButton").gameObject.SetActive(true);
-            UpdateChosenUnitList();
         }
+        UpdateChosenUnitList();
+
+        SortChosenUnitByCost();
+
     }
 
 }

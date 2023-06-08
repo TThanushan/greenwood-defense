@@ -53,11 +53,13 @@ public class Unit : HealthBar
 
     protected override void Awake()
     {
+
         if (GetSpriteTransform())
             originalSpriteRotation = GetSpriteTransform().localRotation;
         base.Awake();
         InvokeRepeating("UpdateTag", 0f, 0.1f);
         initialTag = tag;
+        OnHit += CreateOnHitEffect;
     }
 
     protected virtual void UpdateTag()
@@ -75,6 +77,11 @@ public class Unit : HealthBar
             wayX = 1;
 
         }
+    }
+
+    void CreateOnHitEffect()
+    {
+        poolObject.GetOnHitEffect().position = GetRandomPosition(transform.position, yRangeA: 0f, yRangeB: -0.25f);
     }
 
     public void SetInitialAttackDamage(float value)
@@ -165,6 +172,8 @@ public class Unit : HealthBar
         transform.GetComponent<HealthBar>().OnDeath += Disable;
         transform.GetComponent<HealthBar>().OnDeath += GiveMoneyReward;
         transform.GetComponent<HealthBar>().OnDeath += GiveManaReward;
+        transform.GetComponent<HealthBar>().OnDeath += OnDeathEffect;
+
     }
 
     void Unsubscribe()
@@ -172,7 +181,13 @@ public class Unit : HealthBar
         transform.GetComponent<HealthBar>().OnDeath -= Disable;
         transform.GetComponent<HealthBar>().OnDeath -= GiveMoneyReward;
         transform.GetComponent<HealthBar>().OnDeath -= GiveManaReward;
+        transform.GetComponent<HealthBar>().OnDeath -= OnDeathEffect;
 
+    }
+
+    void OnDeathEffect()
+    {
+        poolObject.GetPoolObject(poolObject.frogOnDeathEffect).transform.position = transform.position;
     }
 
     public void BuffAttackDamage(float _attackDamage, float duration)
@@ -263,6 +278,8 @@ public class Unit : HealthBar
     {
         if (deathSfxName != "")
             poolObject.audioManager.Play(deathSfxName, true);
+        else if (tag.Equals("Enemy"))
+            poolObject.audioManager.Play("FrogDeath", true);
     }
 
     void ResetSpriteRotation()
@@ -436,6 +453,28 @@ public class Unit : HealthBar
         return nextAttackTime <= Time.time;
     }
 
+    public GameObject GetClosestEnemy()
+    {
+        GameObject[] enemies;
+        if ((enemies = GetEnemies()) == null) return null;
+
+        GameObject closestEnemy = null;
+        float lowestDistance = Mathf.Infinity;
+        foreach (GameObject enemy in enemies)
+        {
+            //if (!IsInRange(enemy) || enemy.GetComponent<Unit>().Disabled)
+            if (enemy.GetComponent<Unit>().Disabled)
+                continue;
+            float distance = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distance < lowestDistance)
+            {
+                lowestDistance = distance;
+                closestEnemy = enemy;
+            }
+        }
+        return closestEnemy;
+    }
+
     virtual protected GameObject GetClosestEnemyInFrontOfMe()
     {
         GameObject[] enemies;
@@ -457,6 +496,8 @@ public class Unit : HealthBar
         }
         return closestEnemy;
     }
+
+
 
     protected virtual bool IsEnemyBehindMeOnXAxis(Transform target)
     {

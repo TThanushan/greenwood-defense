@@ -9,6 +9,7 @@ TagManager:
   - Ally
   - Bullet
   - Spawner
+  - ManaBody
   layers:
   - Default
   - TransparentFX

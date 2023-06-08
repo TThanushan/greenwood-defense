@@ -14,19 +14,23 @@ public class MenuScript : MonoBehaviour
     const string STAGE_SCENE_NAME = "Stage";
 
     AudioManager audioManager;
-    void Start()
+
+    private void Awake()
     {
         if (!instance)
             instance = this;
         else
             Destroy(gameObject);
+    }
 
+    void Start()
+    {
 #if UNITY_ANDROID
         Application.targetFrameRate = 120;
 #endif
 
-        Init();
         audioManager = AudioManager.instance;
+        Init();
 
     }
 
@@ -49,6 +53,8 @@ public class MenuScript : MonoBehaviour
     }
     IEnumerator FadeInScene(int sceneIndex)
     {
+        //if (fadeAnimator == null)
+        //    yield return null;
         fadeAnimator.Play("FadeIn");
         yield return new WaitUntil(() => blackSquareFade.color == Color.black);
         //yield return new WaitUntil(() => loadingBarTransform.localPosition.x == 0);
@@ -62,7 +68,7 @@ public class MenuScript : MonoBehaviour
 
     public void MuteMusic()
     {
-        TrackPlayer.instance.MuteMusic();
+        TrackPlayer.instance.ReverseMuteMusic();
 
     }
 

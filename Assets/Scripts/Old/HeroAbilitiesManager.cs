@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public class HeroAbilitiesManager : MonoBehaviour
     {
         InitAbilityButtons();
         GenerateButtons();
+
+
         //OrderChildButtonsByCost();
     }
 
@@ -118,7 +121,8 @@ public class HeroAbilitiesManager : MonoBehaviour
             //SetButtonPrice(button, AbilityButton.cost);
             SetButtonReloadBarAndEnougManaShade(button, AbilityButton);
             AddEventTriggerOnButton(button, AbilityButton);
-            EnableButtonStars(button, AbilityButton);
+            //EnableButtonStars(button, AbilityButton);
+            SetLevelText(button, AbilityButton);
         }
     }
 
@@ -270,6 +274,14 @@ public class HeroAbilitiesManager : MonoBehaviour
     {
         button.transform.Find("AbilitySprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.HERO_ABILITIES_SPRITE_RESOURCES_PATH + '/' + spriteName);
     }
+
+    void SetLevelText(GameObject button, AbilityButton abilityButton)
+    {
+        Transform text = button.transform.Find("Lvl/Text_LVL_Value");
+        text.GetComponent<TextMeshProUGUI>().text = GetUpgradeNameNumbersOnly(abilityButton.name).ToString();
+
+    }
+
     void EnableButtonStars(GameObject button, AbilityButton AbilityButton)
     {
         Transform panel = button.transform.Find("StarsCanvas/Panel");

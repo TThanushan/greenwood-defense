@@ -53,6 +53,7 @@ public class UnitAnimatorManager : MonoBehaviour
     {
         animator.keepAnimatorStateOnDisable = true;
         GetSpriteBody().rotation = Quaternion.identity;
+        GetSpriteBody().gameObject.SetActive(true);
     }
 
     bool IsUnitDisabled()
@@ -74,8 +75,9 @@ public class UnitAnimatorManager : MonoBehaviour
 
     private void PlayDeathAnimation()
     {
-        //if (IsUnitDisabled())
-        //    return;
-        animator.Play("Death");
+
+        GetSpriteBody().gameObject.SetActive(false);
+
+        //animator.Play("Death");
     }
 }

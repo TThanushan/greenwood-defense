@@ -207,8 +207,12 @@ public class StageManager : MonoBehaviour
     {
         //panel.transform.Find(Constants.LEVEL_COMPLETE_TOTAL_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.money.ToString();
         panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString();
-        if (panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH))
-            panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = '+' + Mathf.Round(CalculateRewardAmount()).ToString();
+        float reward = Mathf.Round(CalculateRewardAmount());
+        if (reward > 0 && panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH))
+        {
+            panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).parent.gameObject.SetActive(true);
+            panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = '+' + reward.ToString();
+        }
     }
 
     void UpdateGameoverPanel()
@@ -249,9 +253,17 @@ public class StageManager : MonoBehaviour
         gameOverPanel.SetActive(true);
         if (GameObject.FindGameObjectWithTag("Spawner"))
             GameObject.FindGameObjectWithTag("Spawner").SetActive(false);
+        TrackPlayer.instance.ReverseMuteMusic();
+        AudioManager.instance.Play("GameOver");
 
         saveManager.SavePrefIfAutoSave();
     }
+
+    public void UnmuteMusic()
+    {
+        TrackPlayer.instance.UnmuteMusic();
+    }
+
 
     public void LoadNextLevel()
     {

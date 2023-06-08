@@ -43,21 +43,33 @@ public class SaveManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
+
+        InitEnemiesDescription();
+
+
         if (!SaveExist())
-        {
             Init();
-        }
         else
             LoadPrefs();
 
-        InitEnemiesDescription();
+
         if (IsModeNormalChosen())
             InitUnits();
         else
             InitFrogUnits();
 
         InitsHeroUpgrades();
+
     }
+    private void Start()
+    {
+        if (SaveExist())
+        {
+            LoadPrefs();
+            //MenuScript.instance.LoadCurrentScene();
+        }
+    }
+
     public bool SaveExist()
     {
         return PlayerPrefs.HasKey(CHOSEN_UNITS_KEY + chosenMode) && PlayerPrefs.HasKey("Level1Unlocked");
@@ -345,6 +357,8 @@ public class SaveManager : MonoBehaviour
         LoadUnlockedUnits();
         LoadChosenUnits();
         LoadUnlockedHeroUpgrades();
+
+
     }
     void LoadChosenUnits()
     {

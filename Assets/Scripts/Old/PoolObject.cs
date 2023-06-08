@@ -14,14 +14,21 @@ public class PoolObject : MonoBehaviour
     private GameObject[] allies;
     public List<GameObject> pool;
     public PlayerStatsScript playerStatsScript;
+    [HideInInspector]
     public StageManager stageManager;
+    [HideInInspector]
     public ManaBar manaBar;
+    [HideInInspector]
     public Unit enemyCaptain;
+    [HideInInspector]
     public Unit playerCaptain;
-
-    public GameObject moneyRewardEffect;
+    [HideInInspector]
     public AudioManager audioManager;
+
     public GameObject damageText;
+    public GameObject frogOnDeathEffect;
+    public GameObject moneyRewardEffect;
+    public GameObject onHitEffect;
 
     void Awake()
     {
@@ -45,6 +52,10 @@ public class PoolObject : MonoBehaviour
         FindAllAllies();
     }
 
+    public Transform GetOnHitEffect()
+    {
+        return GetPoolObject(onHitEffect).transform;
+    }
 
     public GameObject DisplayDamageText(float damage)
     {

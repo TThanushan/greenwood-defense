@@ -83,7 +83,7 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
             return;
         DisableAllUnits();
 
-        GameObject.Find("ManaBody").GetComponent<ManaBar>().enabled = false;
+        GameObject.FindWithTag("ManaBody").GetComponent<ManaBar>().enabled = false;
         GameObject.Find("SpawnBar").GetComponent<SpawnBar>().enabled = false;
         AudioManager.instance.PlaySfx(Constants.NEW_ENEMY_SFX);
         GetEnemySprite(saveManager.newEnemyCardDescriptionShownedIndex);

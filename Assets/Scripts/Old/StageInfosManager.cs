@@ -26,16 +26,20 @@ public class StageInfosManager : MonoBehaviour
         SetCurrentStageNumber(GetCurrentStageNumber() + 1);
         //currentStage = "Stage " + (GetCurrentStageNumber() + 1).ToString();
     }
-
-    public void SetCurrentStageName(string stage)
-    {
-        currentStage = stage;
-    }
     public void SetCurrentStageNumber(int number)
     {
         if (number > Constants.MAX_STAGE_NUMBER)
             return;
         currentStage = "Stage " + number.ToString();
+    }
+    public int GetCurrentStageNumber()
+    {
+        return int.Parse(currentStage.Split(' ')[1]);
+    }
+
+    public void SetCurrentStageName(string stage)
+    {
+        currentStage = stage;
     }
 
     public string GetCurrentStageName()
@@ -43,9 +47,4 @@ public class StageInfosManager : MonoBehaviour
         return currentStage;
     }
 
-    public int GetCurrentStageNumber()
-    {
-        print(currentStage);
-        return int.Parse(currentStage.Split(' ')[1]);
-    }
 }

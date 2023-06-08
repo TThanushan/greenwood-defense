@@ -12,7 +12,7 @@ public class UpdateUI : MonoBehaviour
     {
         moneyText = transform.Find("RightGroup/MoneyTextGroup/MoneyText").GetComponent<TextMeshProUGUI>();
         timeText = transform.Find("LeftGroup/Time/TimeText").GetComponent<TextMeshProUGUI>();
-        transform.Find("TopGroup/Title/TitleText").GetComponent<TextMeshProUGUI>().text = GetStageTitle();
+        SetStageTitle();
     }
 
     private void Update()
@@ -26,6 +26,17 @@ public class UpdateUI : MonoBehaviour
     {
         return StageInfosManager.instance.GetCurrentStageName();
     }
+
+    public void SetStageTitle()
+    {
+        transform.Find("TopGroup/Title/TitleText").GetComponent<TextMeshProUGUI>().text = GetStageTitle();
+    }
+
+    public void SetStageTitle(int stageNumber)
+    {
+        transform.Find("TopGroup/Title/TitleText").GetComponent<TextMeshProUGUI>().text = "Stage " + stageNumber.ToString();
+    }
+
 
     public Vector2 GetMoneyTextPosition()
     {

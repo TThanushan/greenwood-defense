@@ -76,11 +76,18 @@ public class TrackPlayer : MonoBehaviour
         myAudio.Play();
     }
 
-    public void MuteMusic()
+    public void ReverseMuteMusic()
     {
         myAudio.mute = !myAudio.mute;
     }
-
+    public void MuteMusic()
+    {
+        myAudio.mute = true;
+    }
+    public void UnmuteMusic()
+    {
+        myAudio.mute = false;
+    }
     public void PlayRandomMusic()
     {
 

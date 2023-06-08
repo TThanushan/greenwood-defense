@@ -5,9 +5,11 @@ public class CameraController : MonoBehaviour
 {
 
     // CameraLerp variables
-    private Vector3 offset = new Vector3(0.5f, 0f, -10f);
-    private float smoothTime = 0.25f;
-    private Vector3 velocity = Vector3.zero;
+    public Vector3 offset = new Vector3(0.5f, 0f, -10f);
+    public float smoothTime = 0.8f;
+    public float slowSmoothTime = 1.25f;
+    float initialSmoothTime;
+    Vector3 velocity = Vector3.zero;
     [SerializeField] private Transform target;
     PoolObject poolObject;
 
@@ -16,6 +18,8 @@ public class CameraController : MonoBehaviour
     public float intensity;
     public float duration;
     public float fadeSpeed;
+    public float enemyDistanceThreshold;
+
 
     float startTime;
     float t;
@@ -24,6 +28,8 @@ public class CameraController : MonoBehaviour
     bool fading = false;
     Vector3 initialPosition;
     Vector3 lastNonShakingPosition;
+    PlayerCaptainUnit PlayerCaptainUnit;
+
     void Awake()
     {
         if (instance == null)
@@ -33,6 +39,8 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         poolObject = PoolObject.instance;
+        PlayerCaptainUnit = poolObject.playerCaptain.gameObject.GetComponent<PlayerCaptainUnit>();
+        initialSmoothTime = smoothTime;
     }
 
     void Update()
@@ -70,10 +78,23 @@ public class CameraController : MonoBehaviour
         }
     }
 
+
+    bool IsEnemyTooCloseToPlayer()
+    {
+        GameObject newTarget = PlayerCaptainUnit.GetClosestEnemy();
+        float threshold = enemyDistanceThreshold;
+        if (!newTarget)
+            return false;
+        return Vector2.Distance(PlayerCaptainUnit.transform.position, newTarget.transform.position) < threshold;
+    }
     void UpdateCameraPosition()
     {
         if (!target)
             return;
+        if (IsEnemyTooCloseToPlayer())
+            smoothTime = slowSmoothTime;
+        else
+            smoothTime = initialSmoothTime;
         Vector3 targetPosition = target.position + offset;
         Vector3 newPos = new Vector3(targetPosition.x, transform.position.y, transform.position.z);
         transform.position = Vector3.SmoothDamp(transform.position, newPos, ref velocity, smoothTime);
@@ -160,4 +181,13 @@ public class CameraController : MonoBehaviour
 
         return newTarget;
     }
+
+
+    //void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.green;
+    //    if (IsEnemyTooCloseToPlayer())
+    //        Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(PlayerCaptainUnit.gameObject.transform.position, tmpThreshold);
+    //}
 }

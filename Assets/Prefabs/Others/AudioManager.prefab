@@ -51,6 +51,12 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: BattleButton
+    clip: {fileID: 8300000, guid: c7f01de3e0d79074b9d54d9b4f0191ba, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   - name: Hit1
     clip: {fileID: 8300000, guid: c209e8c41a1403c4386e4bcc603a376f, type: 3}
     volume: 0.5
@@ -76,8 +82,8 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: FrogDeath
-    clip: {fileID: 8300000, guid: eab98736d5289f84ea1e761d7cc61e5d, type: 3}
-    volume: 0.5
+    clip: {fileID: 8300000, guid: 114a597e9e4af6941b04929d3b1ef2c0, type: 3}
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
@@ -299,6 +305,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: EarthPunch5
     clip: {fileID: 8300000, guid: 5749b170cb790af4aaa5dbcf05f655b4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: 1d9790be3923f2941920c3c664714918, type: 3}
     volume: 1
     pitch: 1
     loop: 0

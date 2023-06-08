@@ -181,17 +181,18 @@ public class HealthBar : MonoBehaviour
             return;
         GameObject obj = poolObject.DisplayDamageText(damage);
         if (obj)
-            obj.transform.position = GetRandomPosition(transform.position, -0.04f, 0.04f, -0.04f, 0.04f);
+            obj.transform.position = GetRandomPosition(transform.position);
     }
 
 
 
-    Vector2 GetRandomPosition(Vector2 pos, float xRangeA, float xRangeB, float yRangeA, float yRangeB)
+    protected Vector2 GetRandomPosition(Vector2 pos, float xRangeA = -0.04f, float xRangeB = 0.04f, float yRangeA = -0.04f, float yRangeB = 0.04f)
     {
         pos.x += Random.Range(xRangeA, xRangeB);
         pos.y += Random.Range(yRangeA, yRangeB);
         return pos;
     }
+
     void ResetDamageTakenIncreasePercentage()
     {
         damageTakenIncreasePercentage = initialDamageTakenIncreasePercentage;

@@ -10,20 +10,34 @@ public class StageGenerator : MonoBehaviour
     public GameObject meleeFrog;
 
     //Test
+    public bool useTmpStageNumber;
     public int tmpStageNumber = 1;
-    public bool generate;
     //Test
 
     int maxPrefabIndex;
     int stageNumber;
     private void Awake()
     {
-        stageNumber = tmpStageNumber;
-        //TODO:UNCOMMENT
-        //if (StageManager.instance)
-        //    stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
+        if (useTmpStageNumber)
+            stageNumber = tmpStageNumber;
+        else if (StageInfosManager.instance)
+            stageNumber = StageInfosManager.instance.GetCurrentStageNumber();
         maxPrefabIndex = GetMaxPrefabIndex();
         GenerateStages();
+
+    }
+    void TmpStageNumberInit()
+    {
+        if (!useTmpStageNumber)
+            return;
+        Debug.LogWarning("Using tmpStageNumber! Current stage set to stage " + stageNumber);
+        StageInfosManager.instance.SetCurrentStageNumber(stageNumber);
+        StageManager.instance.GetComponent<UpdateUI>().SetStageTitle(stageNumber);
+    }
+
+    private void Start()
+    {
+        TmpStageNumberInit();
     }
     void GenerateStages()
     {

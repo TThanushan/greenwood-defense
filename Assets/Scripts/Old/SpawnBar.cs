@@ -30,7 +30,7 @@ public class SpawnBar : MonoBehaviour
     {
         poolObject = PoolObject.instance;
         InitUnitButtons();
-        //OrderChildButtonsByCost();
+        OrderChildButtonsByCost();
         GenerateButtons();
         audioManager = AudioManager.instance;
     }

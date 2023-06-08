@@ -1,0 +1,3 @@
+Put the AllEffects Scene in the Scenes folder
+
+Put ParticleGlobal.cs anywhere, make sure it's attached to "GlobalSetting" gameobject. Modifications are visible in play mode.

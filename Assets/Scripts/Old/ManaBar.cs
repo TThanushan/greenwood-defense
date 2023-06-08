@@ -11,22 +11,53 @@ public class ManaBar : MonoBehaviour
     public float currentMana;
     public float regenerationSpeed;
 
-    private GameObject manaBar;
-    private TextMeshProUGUI currentManaText;
+    GameObject manaBarFill;
+    TextMeshProUGUI currentManaText;
 
+
+    Transform manaBarFillAbovePlayer;
+    TextMeshProUGUI currentManaTextAbovePlayer;
     private void Awake()
     {
         if (!instance)
             instance = this;
-        if (!manaBar)
-            manaBar = transform.Find(Constants.MANA_BAR_FILL).gameObject;
+        if (!manaBarFill)
+            manaBarFill = transform.Find(Constants.MANA_BAR_FILL).gameObject;
         //manaBar = transform.Find("ManaBar/Bar").gameObject;
         if (!currentManaText)
-            currentManaText = transform.Find(Constants.MANA_BAR_TEXT).GetComponent<TextMeshProUGUI>();
+            currentManaText = transform.Find(Constants.MAN_BAR_CURRENT_TEXT).GetComponent<TextMeshProUGUI>();
         //currentManaText = transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>();
     }
 
+    private void Update()
+    {
+        UpdateManaBarLength();
+        UpdateCurrentManaText();
+        RegenerateMana();
+        UpdateManaBarAbovePlayer();
+    }
+    private void Start()
+    {
+        //regenerationSpeed += 0.1f * StageInfosManager.instance.GetCurrentStageNumber();
+        LoadStatsFromPrefs();
+        InitCurrentManaUsingStartManaBonus();
 
+        InitManaBarAbovePlayer();
+
+    }
+    void InitManaBarAbovePlayer()
+    {
+        var playerCaptain = PoolObject.instance.playerCaptain;
+        manaBarFillAbovePlayer = playerCaptain.transform.Find("ManaBarCanvas/ManaBody/" + Constants.MANA_BAR_FILL);
+        currentManaTextAbovePlayer = playerCaptain.transform.Find("ManaBarCanvas/ManaBody/CurrentManaText").GetComponent<TextMeshProUGUI>();
+        transform.Find("MaxManaText").GetComponent<TextMeshProUGUI>().text = "/" + maxMana.ToString();
+    }
+
+    void UpdateManaBarAbovePlayer()
+    {
+        currentManaTextAbovePlayer.text = currentManaText.text;
+        manaBarFillAbovePlayer.transform.localScale = manaBarFill.transform.localScale;
+    }
 
     void LoadStatsFromPrefs()
     {
@@ -64,18 +95,7 @@ public class ManaBar : MonoBehaviour
         withoutNumbers = withoutNumbers.Replace(".", "");
         return withoutNumbers;
     }
-    private void Update()
-    {
-        UpdateManaBarLength();
-        UpdateCurrentManaText();
-        RegenerateMana();
-    }
-    private void Start()
-    {
-        //regenerationSpeed += 0.1f * StageInfosManager.instance.GetCurrentStageNumber();
-        LoadStatsFromPrefs();
-        InitCurrentManaUsingStartManaBonus();
-    }
+
 
     void InitCurrentManaUsingStartManaBonus()
     {
@@ -118,7 +138,7 @@ public class ManaBar : MonoBehaviour
 
     private void UpdateManaBarLength()
     {
-        manaBar.transform.localScale = new Vector3(GetNewBarLength(), manaBar.transform.localScale.y, manaBar.transform.localScale.z);
+        manaBarFill.transform.localScale = new Vector3(GetNewBarLength(), manaBarFill.transform.localScale.y, manaBarFill.transform.localScale.z);
     }
 
     private float GetNewBarLength()
