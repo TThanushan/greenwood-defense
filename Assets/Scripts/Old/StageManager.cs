@@ -30,6 +30,7 @@ public class StageManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        PigUnit1.ResetGold();
     }
 
 
