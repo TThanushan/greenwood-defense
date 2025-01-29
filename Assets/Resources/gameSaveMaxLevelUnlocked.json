@@ -1,0 +1,458 @@
+{
+    "maxLevelUnlocked": 100,
+    "isAutoSave": true,
+    "levels": [
+        {
+            "unlocked": 1,
+            "score": 100
+        },
+        {
+            "unlocked": 1,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        },
+        {
+            "unlocked": 0,
+            "score": 0
+        }
+    ],
+    "unlockedHeroUpgrades": [
+        "ManaMax350",
+        "ManaRegen10.0",
+        "AbilityDamageBuff4",
+        "AbilityLightning4",
+        "AbilityParalysis4",
+        "AbilityRandomSpawn4",
+        "Phoenix1",
+        "MoneyIncomeIncrease100",
+        "MaxHealth500",
+        "StartMana100",
+        "UnitDamageReduction60",
+        "UnitMaxHealthBonus120",
+        "UnitDamageBonus60",
+        "UnitCooldownReduction60",
+        "DamageReduction50",
+        "Shield30"
+    ],
+    "unlockedUnits": [
+        "Chicken4",
+        "Trunk4",
+        "Plant4",
+        "FireSkull4",
+        "Duck4",
+        "Mushroom4",
+        "Bunny4",
+        "Snail4",
+        "Slime4",
+        "Rhinoceros4",
+        "Rock4",
+        "Pig4",
+        "Chameleon4",
+        "Ghost4",
+        "Toucan4"
+    ],
+    "unlockedFrogUnitsLevel": [
+        "MeleeFrogUnit1",
+        "SwordFrogUnit1"
+    ],
+    "chosenUnits": [
+        "Chicken4",
+        "Trunk4",
+        "Plant4",
+        "FireSkull4",
+        "Snail4",
+        "Mushroom4",
+        "Bunny4",
+        "Rock4"
+    ],
+    "chosenMode": "ModeNormal",
+    "newEnemyCardDescriptionShownedIndex": 1,
+    "money": 572298.0
+}

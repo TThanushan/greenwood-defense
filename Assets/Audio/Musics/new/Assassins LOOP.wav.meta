@@ -1,0 +1,34 @@
+fileFormatVersion: 2
+guid: cfe1d6e6a81124bf4bcf44c12c1b76dc
+labels:
+- Audio
+- Combat
+- Loop
+AssetOrigin:
+  serializedVersion: 1
+  productId: 37351
+  packageName: Ultimate Game Music Collection
+  packageVersion: 1.9.2
+  assetPath: Assets/Ultimate Game Music Collection/Combat/Assassins LOOP.wav
+  uploadId: 432473
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 7
+  defaultSettings:
+    serializedVersion: 2
+    loadType: 2
+    sampleRateSetting: 1
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+    preloadAudioData: 1
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

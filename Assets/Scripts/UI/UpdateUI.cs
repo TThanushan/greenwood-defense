@@ -18,7 +18,7 @@ public class UpdateUI : MonoBehaviour
     private void Update()
     {
         int money = (int)SaveManager.instance.money;
-        moneyText.text = money.ToString();
+        moneyText.text = money.ToString() + '$';
         timeText.text = GetFormatedTime();
     }
 

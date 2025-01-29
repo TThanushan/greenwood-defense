@@ -21,7 +21,6 @@ public class StageManager : MonoBehaviour
     float rewardPreviouslyGiven;
 
     float moneyIncomeIncrease = 1f;
-
     void Awake()
     {
         if (instance == null)
@@ -43,7 +42,7 @@ public class StageManager : MonoBehaviour
     private void Start()
     {
         InitVal();
-        TrackPlayer.instance.PlayMainTheme();
+        //TrackPlayer.instance.StopTrack();
         LoadStatsFromPrefs();
     }
 
@@ -79,7 +78,7 @@ public class StageManager : MonoBehaviour
         saveManager.money += reward;
     }
 
-    float CalculateRewardAmount()
+    public float CalculateRewardAmount()
     {
         float reward = levelCompleteMoneyReward;
         int stars = LevelScore.instance.HowManyStar();
@@ -134,6 +133,13 @@ public class StageManager : MonoBehaviour
         levelCompleteMoneyReward = Constants.LEVEL_COMPLETE_REWARD + (rewardCoef * Constants.REWARD_BONUS_EVERY_X_STAGE);
     }
 
+    //public int CalculateTotalGoldEarnedThisStage()
+    //{
+    //    float currentStageNb = GetNumbersOnly(StageInfosManager.instance.currentStage);
+    //    int rewardCoef = (int)currentStageNb / 5;
+    //    return Constants.LEVEL_COMPLETE_REWARD + (rewardCoef * Constants.REWARD_BONUS_EVERY_X_STAGE);
+    //}
+
     float GetNumbersOnly(string numberString)
     {
         string withoutNumbers = GetWithoutNumbers(numberString);
@@ -169,12 +175,17 @@ public class StageManager : MonoBehaviour
         UpdatePlayerLife();
     }
 
-    public void GivePlayerMoney(float money)
+    public void GivePlayerMoney(float money, Transform moneyRewardTextPosition = null)
     {
         money *= moneyIncomeIncrease;
         money = Mathf.Round(money);
         saveManager.money += money;
         goldEarnedInStage += money;
+
+        if (moneyRewardTextPosition != null)
+        {
+            //PoolObject.instance.DisplayText
+        }
     }
 
     void UpdatePlayerLife()
@@ -206,18 +217,19 @@ public class StageManager : MonoBehaviour
     void UpdateLevelPanelInfos(GameObject panel)
     {
         //panel.transform.Find(Constants.LEVEL_COMPLETE_TOTAL_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = saveManager.money.ToString();
-        panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString();
+        //panel.transform.Find(Constants.LEVEL_COMPLETE_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString() + '$';
         float reward = Mathf.Round(CalculateRewardAmount());
         if (reward > 0 && panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH))
         {
             panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).parent.gameObject.SetActive(true);
-            panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = '+' + reward.ToString();
+            //panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = '+' + reward.ToString() + '$';
+            //panel.transform.Find(Constants.LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH).GetComponent<DamageNumberGUI>().number = reward;
         }
     }
 
     void UpdateGameoverPanel()
     {
-        gameOverPanel.transform.Find(Constants.GAMEOVER_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString();
+        gameOverPanel.transform.Find(Constants.GAMEOVER_EARNED_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = goldEarnedInStage.ToString() + '$';
 
     }
 
@@ -235,8 +247,9 @@ public class StageManager : MonoBehaviour
         UnlockNextStage();
         SaveScoreIfHigher();
         saveManager.SavePrefIfAutoSave();
-        AudioManager.instance.PlaySfx(Constants.VICTORY_SFX_NAME);
-        //AudioManager.instance.PlaySfx("Victory2");
+        SFXManager.instance.Play(Constants.VICTORY_SFX_NAME);
+        //AudioManager.instance.Play("Victory2");
+
         levelCompletePanel.GetComponent<LevelComplete>().enabled = true;
         if (GameObject.FindGameObjectWithTag("Spawner"))
             GameObject.FindGameObjectWithTag("Spawner").SetActive(false);
@@ -253,15 +266,15 @@ public class StageManager : MonoBehaviour
         gameOverPanel.SetActive(true);
         if (GameObject.FindGameObjectWithTag("Spawner"))
             GameObject.FindGameObjectWithTag("Spawner").SetActive(false);
-        TrackPlayer.instance.ReverseMuteMusic();
-        AudioManager.instance.Play("GameOver");
+        //TrackPlayer.instance.ReverseMuteMusic();
+        SFXManager.instance.Play("GameOver");
 
         saveManager.SavePrefIfAutoSave();
     }
 
     public void UnmuteMusic()
     {
-        TrackPlayer.instance.UnmuteMusic();
+        //TrackPlayer.instance.UnmuteMusic();
     }
 
 

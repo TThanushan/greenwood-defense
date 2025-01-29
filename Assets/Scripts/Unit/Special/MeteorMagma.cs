@@ -7,13 +7,6 @@ public class MeteorMagma : Rocket
     public GameObject triggerEffect4;
     public float magmaDamage;
 
-    PoolObject poolObject;
-
-    private void Start()
-    {
-        poolObject = PoolObject.instance;
-    }
-
     protected override void DamageEnemiesAround()
     {
         base.DamageEnemiesAround();
@@ -29,7 +22,7 @@ public class MeteorMagma : Rocket
             if (distance <= explosionRange)
             {
                 //enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform, "Classic");
-                InstantiateTrap(enemy);
+                _ = InstantiateTrap(enemy);
             }
         }
 
@@ -38,11 +31,13 @@ public class MeteorMagma : Rocket
     {
         if (!magma || !target)
             return null;
-        GameObject newTrap = poolObject.GetPoolObject(magma);
-        newTrap.transform.position = target.transform.position;
+        GameObject newTrap = PoolObject.instance.GetPoolTrap(magma, target.transform.position);
+
+        if (newTrap is null)
+            return null;
+
         newTrap.GetComponent<Trap>().SetTargetTag(targetTag);
         newTrap.GetComponent<Trap>().damage = magmaDamage;
-
 
         return newTrap;
     }

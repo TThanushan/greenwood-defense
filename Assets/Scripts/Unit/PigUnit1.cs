@@ -8,6 +8,7 @@ public class PigUnit1 : BunnyUnit2
     {
         base.Attack();
         GivePlayerMoney();
+        PlayHitSfx();
     }
 
     void GivePlayerMoney()

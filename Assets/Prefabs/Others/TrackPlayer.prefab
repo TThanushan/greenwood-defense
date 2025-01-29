@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3939612983096211847}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.19990298, y: 0.6808042, z: 2024.8796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3939612983096211845
 MonoBehaviour:
@@ -45,10 +45,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2cb27d3ca79a24a8132c1d70a81473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myAudio: {fileID: 0}
-  myMusic:
-  - {fileID: 8300000, guid: 6f1f0bfeec51a944ab06685f28ce6a69, type: 3}
-  - {fileID: 8300000, guid: 08f53e028ebc15c4c93d592094fac12e, type: 3}
+  menuMusic: {fileID: 8300000, guid: 08f53e028ebc15c4c93d592094fac12e, type: 3}
+  stageMusicInfo:
+  - clip: {fileID: 8300000, guid: 00365d8fca0dc2f4dbb67d5d0bfeac5f, type: 3}
+    chanceRate: 25
+    loop: 0
+  - clip: {fileID: 8300000, guid: dc93a8ceef2fa5743bca94ca1f623642, type: 3}
+    chanceRate: 100
+    loop: 0
+  - clip: {fileID: 8300000, guid: 6f1f0bfeec51a944ab06685f28ce6a69, type: 3}
+    chanceRate: 100
+    loop: 0
+  - clip: {fileID: 8300000, guid: cfe1d6e6a81124bf4bcf44c12c1b76dc, type: 3}
+    chanceRate: 50
+    loop: 1
+  - clip: {fileID: 8300000, guid: a5e781efd4f6e4309b0367131a10893d, type: 3}
+    chanceRate: 25
+    loop: 1
+  - clip: {fileID: 8300000, guid: ffd19692cf158406c90fba087bd2d747, type: 3}
+    chanceRate: 25
+    loop: 1
+  - clip: {fileID: 8300000, guid: d39171ec42e9a4facb48a1fdceed4e99, type: 3}
+    chanceRate: 25
+    loop: 1
+  - clip: {fileID: 8300000, guid: dbc020beb37c9417d9bc390d888827a0, type: 3}
+    chanceRate: 25
+    loop: 1
+  - clip: {fileID: 8300000, guid: 81b1552a888064dc3b54aa5de72d8d53, type: 3}
+    chanceRate: 50
+    loop: 1
+  - clip: {fileID: 8300000, guid: add9e2c2a1b2746d6987518c41d4bda2, type: 3}
+    chanceRate: 15
+    loop: 1
+  - clip: {fileID: 8300000, guid: 98b37014e75414b2bab3404a08937561, type: 3}
+    chanceRate: 50
+    loop: 1
+  - clip: {fileID: 8300000, guid: 0874a0018c3194d06815aa2c72359ad6, type: 3}
+    chanceRate: 25
+    loop: 1
+  - clip: {fileID: 8300000, guid: 5622d4a206b14400b8f6f4d1fb43265d, type: 3}
+    chanceRate: 50
+    loop: 1
+  - clip: {fileID: 8300000, guid: 18e01a7ec88254c88b062418743f7b64, type: 3}
+    chanceRate: 50
+    loop: 1
 --- !u!82 &3939612983096211578
 AudioSource:
   m_ObjectHideFlags: 0
@@ -58,12 +98,14 @@ AudioSource:
   m_GameObject: {fileID: 3939612983096211847}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2614674820971503417, guid: 368666fbde2fd3a4ea2884819922d3e1,
+    type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 0.4
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+guid: 0874a0018c3194d06815aa2c72359ad6
+labels:
+- Audio
+AssetOrigin:
+  serializedVersion: 1
+  productId: 37351
+  packageName: Ultimate Game Music Collection
+  packageVersion: 1.9.2
+  assetPath: Assets/Ultimate Game Music Collection/Combat/Combat Drums 3 Loop.wav
+  uploadId: 432473
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 7
+  defaultSettings:
+    serializedVersion: 2
+    loadType: 2
+    sampleRateSetting: 1
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+    preloadAudioData: 1
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

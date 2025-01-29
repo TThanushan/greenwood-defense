@@ -55,10 +55,7 @@ public class EggBomb : MonoBehaviour
     }
     protected GameObject[] GetEnemies()
     {
-        if (targetTag == "Enemy")
-            return PoolObject.instance.Enemies;
-        else
-            return PoolObject.instance.Allies;
+        return targetTag == "Enemy" ? PoolObject.instance.GetEnemiesAsArray() : PoolObject.instance.GetAlliesAsArray();
     }
     void OnDrawGizmosSelected()
     {

@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2635031429580449651}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.1376498, w: 0.99048096}
   m_LocalPosition: {x: -0.027799996, y: -0.009400001, z: 3.310191}
   m_LocalScale: {x: 1.1172079, y: 0.33677116, z: 0.38189638}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5044992576239302551}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 15.824}
 --- !u!212 &8861886873407247739
 SpriteRenderer:
@@ -49,10 +49,12 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -108,13 +110,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4032932453998041574}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.20329553, w: 0.97911745}
   m_LocalPosition: {x: -0.029, y: 0.0117, z: 3.310191}
   m_LocalScale: {x: 1.1172079, y: 0.33677116, z: 0.38189638}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5044992576239302551}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -23.459}
 --- !u!212 &662625630529575913
 SpriteRenderer:
@@ -133,10 +135,12 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -193,6 +197,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5044992576239302536}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.36208245, y: -0.088962376, z: -3.310191}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -203,7 +208,6 @@ Transform:
   - {fileID: 2192026612102954594}
   - {fileID: 4342876852270552855}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7257153307950705333
 MonoBehaviour:
@@ -224,6 +228,8 @@ MonoBehaviour:
   target: {fileID: 0}
   effect: {fileID: 0}
   spriteRenderer: {fileID: 0}
+  canBeReflected: 1
+  moveTowardTarget: 0
   piercingCount: 1000
 --- !u!114 &1870398952
 MonoBehaviour:
@@ -262,13 +268,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5044992576978585982}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.000000014901, y: 0, z: 3.310191}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5044992576239302551}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5044992576978585980
 SpriteRenderer:
@@ -287,10 +293,12 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -346,13 +354,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7634389021122546162}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0454, y: 0, z: 3.310191}
   m_LocalScale: {x: 0.65521, y: 0.32474357, z: 0.65521}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5044992576239302551}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4827715933907801828
 SpriteRenderer:
@@ -371,10 +379,12 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -40,6 +40,7 @@ public class HealthBar : MonoBehaviour
     {
         poolObject = PoolObject.instance;
         initialDamageTakenIncreasePercentage = damageTakenIncreasePercentage;
+
     }
     public void Heal(float amount)
     {
@@ -54,11 +55,20 @@ public class HealthBar : MonoBehaviour
         if (bigShield)
             UpdateBigShieldCurrent();
         UpdateDamageTakenBar();
+        DisableHealthBarIfFullLife();
+    }
+
+    void DisableHealthBarIfFullLife()
+    {
+        if (currentHealth == maxHealth)
+            DisableHealthBar();
+        else
+            EnableHealthBar();
     }
 
     void UpdateDamageTakenBar()
     {
-        float decreaseSpeed = 0.01f;
+        float decreaseSpeed = 0.002f;
         if (damageTakenBar.transform.localScale.x > healthBar.transform.localScale.x)
             damageTakenBar.transform.localScale = new Vector3(damageTakenBar.transform.localScale.x - decreaseSpeed, damageTakenBar.transform.localScale.y, damageTakenBar.transform.localScale.z);
 
@@ -122,13 +132,21 @@ public class HealthBar : MonoBehaviour
 
     void DisableHealthBar()
     {
-        healthBar.SetActive(false);
+
+        healthBar.transform.parent.gameObject.SetActive(false);
+    }
+
+    void EnableHealthBar()
+    {
+        healthBar.transform.parent.gameObject.SetActive(true);
 
     }
 
+
+
     protected virtual void OnEnable()
     {
-        healthBar.SetActive(true);
+        //healthBar.SetActive(true);
         OnDeath += DisableHealthBar;
         healthBar.transform.localScale = new Vector3(0, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
         currentHealth = maxHealth;
@@ -173,20 +191,22 @@ public class HealthBar : MonoBehaviour
             OnDeath?.Invoke();
             currentHealth = 0f;
         }
+        if (damage > 1)
+        {
+            GameObject obj = poolObject.DisplayDamageText(damage);
+            if (obj)
+                obj.transform.position = GetRandomPosition(transform.position);
+        }
         if (hitSoundName != "None" && (!caller || (caller && !caller.GetComponent<UnitAoeAttack>() && !caller.GetComponent<Trap>() && !IsCallerPoisoning(caller))))
             poolObject.audioManager.PlayHitSound();
-        if (damage > currentHealth)
-            damage = currentHealth;
-        if (damage < 1)
-            return;
-        GameObject obj = poolObject.DisplayDamageText(damage);
-        if (obj)
-            obj.transform.position = GetRandomPosition(transform.position);
+
+        //if (damage > currentHealth)
+        //    damage = currentHealth;
     }
 
 
 
-    protected Vector2 GetRandomPosition(Vector2 pos, float xRangeA = -0.04f, float xRangeB = 0.04f, float yRangeA = -0.04f, float yRangeB = 0.04f)
+    protected Vector2 GetRandomPosition(Vector2 pos, float xRangeA = -0.04f, float xRangeB = 0.04f, float yRangeA = 0.1f, float yRangeB = 0.15f)
     {
         pos.x += Random.Range(xRangeA, xRangeB);
         pos.y += Random.Range(yRangeA, yRangeB);

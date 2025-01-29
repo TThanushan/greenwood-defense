@@ -34,7 +34,6 @@ public class ManaBar : MonoBehaviour
         UpdateManaBarLength();
         UpdateCurrentManaText();
         RegenerateMana();
-        UpdateManaBarAbovePlayer();
     }
     private void Start()
     {
@@ -51,12 +50,6 @@ public class ManaBar : MonoBehaviour
         manaBarFillAbovePlayer = playerCaptain.transform.Find("ManaBarCanvas/ManaBody/" + Constants.MANA_BAR_FILL);
         currentManaTextAbovePlayer = playerCaptain.transform.Find("ManaBarCanvas/ManaBody/CurrentManaText").GetComponent<TextMeshProUGUI>();
         transform.Find("MaxManaText").GetComponent<TextMeshProUGUI>().text = "/" + maxMana.ToString();
-    }
-
-    void UpdateManaBarAbovePlayer()
-    {
-        currentManaTextAbovePlayer.text = currentManaText.text;
-        manaBarFillAbovePlayer.transform.localScale = manaBarFill.transform.localScale;
     }
 
     void LoadStatsFromPrefs()

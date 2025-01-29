@@ -12,9 +12,12 @@ public class SpawnBar : MonoBehaviour
     public Vector2 spawnPosition;
     public UnitButton[] unitButtons;
     public GameObject buttonPrefab;
+    // list of audio clips
+    public AudioClip[] spawnAudioClips;
+
 
     PoolObject poolObject;
-    AudioManager audioManager;
+    SFXManager audioManager;
     Transform buttonParentTransform;
     private void Awake()
     {
@@ -32,7 +35,7 @@ public class SpawnBar : MonoBehaviour
         InitUnitButtons();
         OrderChildButtonsByCost();
         GenerateButtons();
-        audioManager = AudioManager.instance;
+        audioManager = SFXManager.instance;
     }
 
     private void Update()
@@ -136,6 +139,8 @@ public class SpawnBar : MonoBehaviour
             if (GetSimplifiedName(unitButton.name) == name && unitButton.ReadyToSpawn() && unitButton.HasEnoughMana())
             {
                 SpawnUnit(unitButton.prefabClone);
+                unitButton.reloadBar.parent.parent.Find("SpawnEffect").gameObject.SetActive(true);
+
                 unitButton.ResetCurrentReloadTime();
                 ManaBar.instance.UseMana(unitButton.cost);
             }
@@ -155,7 +160,10 @@ public class SpawnBar : MonoBehaviour
 
     public void SpawnUnitForFree(string name)
     {
-        SpawnUnit(GetUnitButton(name).prefabClone);
+        UnitButton unitButton = GetUnitButton(name);
+        SpawnUnit(unitButton.prefabClone);
+        //Effect
+        unitButton.spawnEffect.SetActive(true);
     }
     private void SpawnUnit(GameObject prefab)
     {
@@ -171,8 +179,18 @@ public class SpawnBar : MonoBehaviour
             newUnit.GetComponent<Unit>().RotateSprite();
         }
 
-        audioManager.PlaySfx("SpawnUnit");
+        //audioManager.Play("SpawnUnit");
+        PlayRandomSpawnAudioClip();
 
+    }
+
+    // Make a method that will play a random audio clip from the spawnAudioClips array.
+    private void PlayRandomSpawnAudioClip()
+    {
+        // Get a random index from the spawnAudioClips array.
+        int randomIndex = Random.Range(0, spawnAudioClips.Length);
+        // Play the audio clip at the random index.
+        audioManager.Play(spawnAudioClips[randomIndex], volume: 1);
     }
 
     private void UpdateUnitButtons()
@@ -201,6 +219,7 @@ public class SpawnBar : MonoBehaviour
             SetButtonPrefabClone(unitButton);
             SetButtonPrice(button, unitButton.cost);
             SetButtonReloadBarAndEnougManaShade(button, unitButton);
+            SetSpawnEffect(unitButton);
             AddEventTriggerOnButton(button, unitButton);
             EnableButtonStars(button, unitButton);
         }
@@ -212,6 +231,11 @@ public class SpawnBar : MonoBehaviour
         unitButton.reloadBar = button.transform.Find("ReloadBar/Bar");
         unitButton.enoughManaShade = button.transform.Find("EnoughManaShade").gameObject;
 
+    }
+
+    void SetSpawnEffect(UnitButton unitButton)
+    {
+        unitButton.spawnEffect = unitButton.enoughManaShade.transform.parent.Find("SpawnEffect").gameObject;
     }
 
     void SetButtonPrice(GameObject button, float cost)
@@ -228,7 +252,7 @@ public class SpawnBar : MonoBehaviour
         };
         entry.callback.AddListener((eventData) => { TweenIfButtonReady(button); });
         entry.callback.AddListener((eventData) => { SpawnUnit(unitButton.name); });
-        entry.callback.AddListener((eventData) => { AudioManager.instance.PlaySfx(Constants.BUTTON_CLICK_SFX_NAME); });
+        entry.callback.AddListener((eventData) => { SFXManager.instance.Play(Constants.BUTTON_CLICK_SFX_NAME); });
         //entry.callback.AddListener((eventData) => { button.GetComponent<TweenSize>().Tween(); });
 
         eventTrigger.triggers.Add(entry);
@@ -256,7 +280,7 @@ public class SpawnBar : MonoBehaviour
 
     void SetButtonSprite(GameObject button, string spriteName)
     {
-        InstantiateSpriteBodyFromPrefabWithImage(spriteName, button.transform);
+        _ = InstantiateSpriteBodyFromPrefabWithImage(spriteName, button.transform);
         //button.transform.Find("UnitSprite").GetComponent<Image>().sprite = (Sprite)Resources.Load(Constants.UNITS_SPRITE_RESOURCES_PATH + '/' + spriteName);
     }
 
@@ -360,6 +384,7 @@ public class SpawnBar : MonoBehaviour
         return spriteBody;
     }
 
+    // We set a clone of the prefab to the button and instantiate to prevent modifying the original prefab stats.
     void SetButtonPrefabClone(UnitButton unitButton)
     {
         unitButton.prefabClone = Instantiate(unitButton.prefab);
@@ -397,13 +422,7 @@ public class SpawnBar : MonoBehaviour
 
     string GetUnitLevel(string unitName)
     {
-        if (unitName.Contains("2"))
-            return "2";
-        if (unitName.Contains("3"))
-            return "3";
-        if (unitName.Contains("4"))
-            return "4";
-        return "1";
+        return unitName.Contains("2") ? "2" : unitName.Contains("3") ? "3" : unitName.Contains("4") ? "4" : "1";
     }
     void oldEnableButtonStars(GameObject button, UnitButton unitButton)
     {
@@ -442,7 +461,7 @@ public class SpawnBar : MonoBehaviour
         public Transform reloadBar;
         [HideInInspector]
         public GameObject enoughManaShade;
-
+        public GameObject spawnEffect;
         private float currentReloadTime = 0f;
 
         public UnitButton(string name, float cost, float reloadTime)

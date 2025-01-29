@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7739281586083438916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 15659695641369385}
+  - component: {fileID: 6040975766537139147}
+  m_Layer: 0
+  m_Name: PoolObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &15659695641369385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7739281586083438916}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.027254956, y: 0.4195515, z: -1.5026388}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6040975766537139147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7739281586083438916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f50920f37c5874e89cdd8576185a85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bin: {fileID: 0}
+  pool: []
+  playerStatsScript:
+    life: 0
+    money: 0
+    pause: 0
+    timeWhenPaused: 0
+    isTutorialDisable: 1
+  stageManager: {fileID: 0}
+  manaBar: {fileID: 0}
+  enemyCaptain: {fileID: 0}
+  playerCaptain: {fileID: 0}
+  audioManager: {fileID: 0}
+  damageNumbersProPrefab: {fileID: 6066560017962233154, guid: b44e71e03032b6f4a8dc815e34aec51c,
+    type: 3}
+  goldOnDeathTextPrefab: {fileID: 7577702008597321352, guid: 7dd8843b762b1ea44bba13bcaed99ef5,
+    type: 3}
+  damageText: {fileID: 64473780753522552, guid: a8b3c39d2abe6d942a001debf2a68c52,
+    type: 3}
+  frogOnDeathEffect: {fileID: 3161202793816403839, guid: 0a17e1aad4e33a143a20be98cc43dcd3,
+    type: 3}
+  moneyRewardEffect: {fileID: 0}
+  onHitEffect: {fileID: 3161202793816403839, guid: 50d660ac68d7dc24ba153316c31ddc43,
+    type: 3}
+  maxActiveOnHitEffects: 50
+  minDistanceBetweenEffects: 0.025
+  minDistanceBetweenTraps: 0.025

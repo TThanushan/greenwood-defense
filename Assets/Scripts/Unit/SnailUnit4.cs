@@ -19,7 +19,7 @@ public class SnailUnit4 : SnailUnit3
 
     void HealAllies()
     {
-        GameObject[] allies = poolObject.Allies;
+        GameObject[] allies = PoolObject.instance.GetAlliesAsArray();
         if (allies == null || allies.Length == 0)
             return;
 

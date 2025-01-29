@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - Spawner
   - ManaBody
+  - Backgrounds
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Water
   - UI
   - UI1
-  - 
+  - No Post Processing
   - 
   - 
   - 
@@ -50,14 +51,14 @@ TagManager:
   - name: Background_Mid
     uniqueID: 2979010303
     locked: 0
-  - name: Background_Front
-    uniqueID: 252151829
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Frontground
     uniqueID: 2030022207
+    locked: 0
+  - name: Background_Front
+    uniqueID: 252151829
     locked: 0
   - name: UI
     uniqueID: 3687017483

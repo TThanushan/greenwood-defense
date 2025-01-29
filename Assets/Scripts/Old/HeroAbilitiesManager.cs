@@ -16,11 +16,12 @@ public class HeroAbilitiesManager : MonoBehaviour
     public GameObject damageBuffEffect;
     public GameObject stunEffect;
 
+    SFXManager audioManager;
     private void Start()
     {
         InitAbilityButtons();
         GenerateButtons();
-
+        audioManager = SFXManager.instance;
 
         //OrderChildButtonsByCost();
     }
@@ -42,6 +43,7 @@ public class HeroAbilitiesManager : MonoBehaviour
             SaveManager.HeroUpgrade Ability = saveManager.GetHeroUpgrade(AbilityName);
             AbilityButton AbilityButton = new AbilityButton(Ability.name, Ability.cost, Ability.reloadTime * cooldownReduction);
             abilityButtons[i] = AbilityButton;
+
             i++;
         }
     }
@@ -130,7 +132,8 @@ public class HeroAbilitiesManager : MonoBehaviour
     void SetButtonReloadBarAndEnougManaShade(GameObject button, AbilityButton AbilityButton)
     {
         AbilityButton.reloadBar = button.transform.Find("ReloadBar/Bar");
-        //AbilityButton.enoughManaShade = button.transform.Find("EnoughManaShade").gameObject;
+        AbilityButton.readyImage = button.transform.Find("ReadyImage").GetComponent<Image>();
+        AbilityButton.enoughManaShade = button.transform.Find("EnoughManaShade").gameObject;
 
     }
 
@@ -162,7 +165,6 @@ public class HeroAbilitiesManager : MonoBehaviour
         System.Action callAbility = GetAbilityFunctionToAdd(name);
         callAbility();
         ResetAbilityCooldown(name);
-        print(buttonPrefab.name + name);
 
     }
 
@@ -172,7 +174,7 @@ public class HeroAbilitiesManager : MonoBehaviour
         float damageCoef = 2.5f;
         float damageBonus = GetUpgradeNameNumbersOnly(GetAbility("DamageBuff").name) * damageCoef;
 
-        foreach (GameObject ally in PoolObject.instance.Allies)
+        foreach (GameObject ally in PoolObject.instance.GetAlliesAsArray())
         {
             Unit unit = ally.GetComponent<Unit>();
             if (!unit || unit.Disabled)
@@ -188,6 +190,7 @@ public class HeroAbilitiesManager : MonoBehaviour
             effect.SetActive(true);
 
         }
+        SFXManager.instance.Play("AbilityDamageBuff");
     }
 
     void Paralysis()
@@ -197,14 +200,14 @@ public class HeroAbilitiesManager : MonoBehaviour
         float coef = 0.5f;
         float paralyseDuration = duration + (GetUpgradeNameNumbersOnly(GetAbility("Paralysis").name) * coef);
 
-        foreach (GameObject enemy in PoolObject.instance.Enemies)
+        foreach (GameObject enemy in PoolObject.instance.GetEnemiesAsArray())
         {
             Unit unit = enemy.GetComponent<Unit>();
             if (!unit || unit.Disabled || enemy.name.Contains("FrogTrap"))
                 continue;
 
             unit.ParalyseEffect(true);
-            StartCoroutine(Paralyse(unit, paralyseDuration));
+            _ = StartCoroutine(Paralyse(unit, paralyseDuration));
 
             GameObject effect = poolObject.GetPoolObject(stunEffect);
             effect.GetComponent<MoveTowardTarget>().target = unit.gameObject;
@@ -214,6 +217,7 @@ public class HeroAbilitiesManager : MonoBehaviour
             effect.SetActive(false);
             effect.SetActive(true);
         }
+        SFXManager.instance.Play("AbilityParalyse");
     }
 
     IEnumerator Paralyse(Unit unit, float duration)
@@ -230,7 +234,7 @@ public class HeroAbilitiesManager : MonoBehaviour
         float lightningDamage = 10f;
         float damage = GetUpgradeNameNumbersOnly(GetAbility("Lightning").name) * lightningDamage;
         // Cooldown duration is in heroUpgrade class.
-        foreach (GameObject enemy in PoolObject.instance.Enemies)
+        foreach (GameObject enemy in PoolObject.instance.GetEnemiesAsArray())
         {
             Unit unit = enemy.GetComponent<Unit>();
             if (!unit || unit.Disabled || enemy.name == "EnemyCaptain")
@@ -239,17 +243,24 @@ public class HeroAbilitiesManager : MonoBehaviour
             poolObject.GetPoolObject(lightingEffect).transform.position = new Vector2(unit.transform.position.x, unit.transform.position.y + 0.5f);
 
         }
+        SFXManager.instance.Play("AbilityLightning");
+
     }
     void RandomSpawn()
     {
-        int count = (int)GetUpgradeNameNumbersOnly(GetAbility("RandomSpawn").name);
-        for (int i = 0; i < count; i++)
+        int numberToSpawn = (int)GetUpgradeNameNumbersOnly(GetAbility("RandomSpawn").name);
+        for (int i = 0; i < numberToSpawn; i++)
         {
-            int index = Random.Range(0, SaveManager.instance.unlockedUnits.Count);
-            string name = SaveManager.instance.unlockedUnits[index];
+            //int index = Random.Range(0, SaveManager.instance.unlockedUnits.Count);
+            int index = Random.Range(0, SpawnBar.instance.unitButtons.Length);
+            //string name = SaveManager.instance.unlockedUnits[index];
+            string name = SpawnBar.instance.unitButtons[index].name;
             GameObject.Find("SpawnBar").GetComponent<SpawnBar>().SpawnUnitForFree(name);
 
+            //Effect
+
         }
+        SFXManager.instance.Play("AbilityRandom");
     }
 
     void AddEventTriggerOnButton(GameObject button, AbilityButton abilityButton)
@@ -261,7 +272,7 @@ public class HeroAbilitiesManager : MonoBehaviour
         };
         //System.Action ability = GetAbilityFunctionToAdd(GetUpgradeNameWithoutNumbers(abilityButton.name));
         entry.callback.AddListener((eventData) => { UseAbility(GetSimplifiedAbilityName(abilityButton.name)); });
-        entry.callback.AddListener((eventData) => { AudioManager.instance.PlaySfx(Constants.BUTTON_CLICK_SFX_NAME); });
+        entry.callback.AddListener((eventData) => { SFXManager.instance.Play(Constants.BUTTON_CLICK_SFX_NAME); });
         eventTrigger.triggers.Add(entry);
     }
     void SetButtonName(GameObject button, AbilityButton AbilityButton)
@@ -282,25 +293,6 @@ public class HeroAbilitiesManager : MonoBehaviour
 
     }
 
-    void EnableButtonStars(GameObject button, AbilityButton AbilityButton)
-    {
-        Transform panel = button.transform.Find("StarsCanvas/Panel");
-        if (AbilityButton.name.Contains("2"))
-        {
-            panel.Find("Star2").gameObject.SetActive(true);
-        }
-        if (AbilityButton.name.Contains("3"))
-        {
-            panel.Find("Star2").gameObject.SetActive(true);
-            panel.Find("Star3").gameObject.SetActive(true);
-        }
-        if (AbilityButton.name.Contains("4"))
-        {
-            panel.Find("Star2").gameObject.SetActive(true);
-            panel.Find("Star3").gameObject.SetActive(true);
-            panel.Find("Star4").gameObject.SetActive(true);
-        }
-    }
 
     AbilityButton GetAbility(string name)
     {
@@ -327,6 +319,7 @@ public class HeroAbilitiesManager : MonoBehaviour
         public Transform reloadBar;
         [HideInInspector]
         public GameObject enoughManaShade;
+        public Image readyImage;
 
         private float currentReloadTime = 0f;
 
@@ -337,11 +330,13 @@ public class HeroAbilitiesManager : MonoBehaviour
             this.reloadTime = reloadTime;
         }
 
+
         public void Update()
         {
             UpdateCurrentReloadTime();
             UpdateReloadBarLength();
-            //UpdateEnoughManaShade();
+            UpdateReadyImage();
+            UpdateEnoughManaShade();
         }
 
         public bool ReadyToUse()
@@ -359,15 +354,15 @@ public class HeroAbilitiesManager : MonoBehaviour
             return ManaBar.instance.currentMana >= cost;
         }
 
-        //private void UpdateEnoughManaShade()
-        //{
-        //    if (!enoughManaShade) return;
-        //    if (HasEnoughMana() && enoughManaShade.activeSelf)
-        //        enoughManaShade.SetActive(false);
-        //    else if (!HasEnoughMana() && !enoughManaShade.activeSelf)
-        //        enoughManaShade.SetActive(true);
-        //}
-
+        private void UpdateEnoughManaShade()
+        {
+            enoughManaShade.SetActive(!ReadyToUse());
+        }
+        private void UpdateReadyImage()
+        {
+            //readyImage.enabled = ReadyToUse();
+            readyImage.gameObject.SetActive(ReadyToUse());
+        }
         private void UpdateCurrentReloadTime()
         {
             if (currentReloadTime > 0f)

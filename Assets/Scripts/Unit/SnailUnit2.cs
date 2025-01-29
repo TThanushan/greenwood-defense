@@ -58,7 +58,7 @@ public class SnailUnit2 : Unit
     }
     void GiveHealthBonusToAllies()
     {
-        GameObject[] allies = poolObject.Allies;
+        GameObject[] allies = PoolObject.instance.GetAlliesAsArray();
         if (allies == null || allies.Length == 0)
             return;
 

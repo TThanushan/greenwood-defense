@@ -5,6 +5,7 @@ public class StageInfosManager : MonoBehaviour
     public static StageInfosManager instance;
     public string currentStage = "Stage 1";
 
+    public float goldSpeedTMP = 0.02f;
     private void Awake()
     {
         if (instance == null)

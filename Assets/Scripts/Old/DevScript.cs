@@ -22,10 +22,7 @@ public class DevScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             int speed = 10;
-            if (Time.timeScale == speed)
-                Time.timeScale = 1;
-            else
-                Time.timeScale = speed;
+            Time.timeScale = Time.timeScale == speed ? 1 : speed;
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -46,16 +43,23 @@ public class DevScript : MonoBehaviour
 
         // Kill Enemy captain.
         if (Input.GetKeyDown(KeyCode.K))
-            PoolObject.instance.enemyCaptain.Disabled = true;
+            WinCurrentLevel();
 
         // Kill player Captain.
         if (Input.GetKeyDown(KeyCode.P))
             PoolObject.instance.playerCaptain.Disabled = true;
     }
+
+
     void ResetData()
     {
         SaveManager.instance.money = 0f;
 
     }
 #endif
+    /// For testing purposes.
+    public void WinCurrentLevel()
+    {
+        PoolObject.instance.enemyCaptain.Disabled = true;
+    }
 }

@@ -3,56 +3,58 @@
 public class BulletScript : MonoBehaviour
 {
     public float attackRange = 2f;
-
     public float moveSpeed = 1;
-
-    [HideInInspector]
     public float attackDamage = 1;
-    [HideInInspector]
     public int wayX = 1;
     //[HideInInspector]
     public GameObject target;
-
     public GameObject effect;
     public SpriteRenderer spriteRenderer;
     public bool canBeReflected = true;
-
     public bool moveTowardTarget;
     protected string targetTag = "Ally";
 
     public static System.Action<float> damageEvent;
     Color startColor;
-
     float timeBeforeMove;
+
+    // Cached PoolObject instance
+    private PoolObject poolObject;
+
+    private void Awake()
+    {
+        poolObject = PoolObject.instance; // Cache PoolObject instance
+        if (spriteRenderer)
+        {
+            startColor = spriteRenderer.color;
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (spriteRenderer)
+        {
+            spriteRenderer.color = startColor;
+        }
+    }
 
     void FixedUpdate()
     {
         if (timeBeforeMove > Time.time)
             return;
+
         target = GetClosestEnemy();
         AttackTarget();
+
         if (moveTowardTarget)
             MoveTowardTarget();
         else
             Move();
-
     }
 
     public void WaitBeforeMove(float duration)
     {
         timeBeforeMove = duration + Time.time;
-    }
-
-    private void OnEnable()
-    {
-        if (GetSpriteRenderer())
-            GetSpriteRenderer().color = startColor;
-    }
-
-    private void Awake()
-    {
-        if (GetSpriteRenderer())
-            startColor = GetSpriteRenderer().color;
     }
 
     void MoveTowardTarget()
@@ -62,14 +64,13 @@ public class BulletScript : MonoBehaviour
         transform.Translate(dir.normalized * moveSpeed * Time.deltaTime);
     }
 
-
     public void SetTargetTag(string tag)
     {
         targetTag = tag;
     }
+
     private void Move()
     {
-
         transform.Translate(new Vector2(moveSpeed * wayX * Time.deltaTime, 0));
     }
 
@@ -80,6 +81,7 @@ public class BulletScript : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
+
         if (IsTargetInRange() && target.GetComponent<Unit>().ProjectileAffectMe())
         {
             DamageTarget();
@@ -91,15 +93,17 @@ public class BulletScript : MonoBehaviour
 
     private GameObject GetClosestEnemy()
     {
-        GameObject[] enemies;
-        if ((enemies = GetEnemies()) == null) return null;
+        GameObject[] enemies = GetEnemies();
+        if (enemies == null) return null;
 
         GameObject closestEnemy = null;
         float lowestDistance = Mathf.Infinity;
+
         foreach (GameObject enemy in enemies)
         {
-            if (enemy.GetComponent<Unit>().Disabled)
-                continue;
+            Unit unit = enemy.GetComponent<Unit>(); // Cache component
+            if (unit.Disabled) continue;
+
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
             if (distance < lowestDistance)
             {
@@ -112,18 +116,14 @@ public class BulletScript : MonoBehaviour
 
     protected GameObject[] GetEnemies()
     {
-        if (targetTag == "Enemy")
-            return PoolObject.instance.Enemies;
-        else
-            return PoolObject.instance.Allies;
+        return targetTag == "Enemy" ? poolObject.GetEnemiesAsArray() : poolObject.GetAlliesAsArray();
     }
 
     protected void DestroyEffect()
     {
-        if (effect)
+        if (effect && target)
         {
-            GameObject newEffect = PoolObject.instance.GetPoolObject(effect);
-            //newEffect.transform.position = (transform.position + (target.transform.position * 1.25f)) / 2;
+            GameObject newEffect = poolObject.GetPoolObject(effect);
             newEffect.transform.position = target.transform.position;
             RotateObjAwayFrom(newEffect, target);
         }
@@ -136,19 +136,11 @@ public class BulletScript : MonoBehaviour
         return dir.magnitude <= (distanceThisFrame * attackRange);
     }
 
-    protected bool IsTargetInRange(GameObject target)
-    {
-        Vector2 dir = target.transform.position - transform.position;
-        float distanceThisFrame = moveSpeed * Time.deltaTime;
-        return dir.magnitude <= (distanceThisFrame * attackRange);
-    }
-
     protected void DamageTarget()
     {
         OnDamageDealt(attackDamage);
         target.GetComponent<HealthBar>().GetDamage(attackDamage, transform);
     }
-
     protected void DamageTarget(GameObject target)
     {
         OnDamageDealt(attackDamage);
@@ -162,20 +154,18 @@ public class BulletScript : MonoBehaviour
 
     protected void CreateTargetDeathEffect(GameObject deathEffect)
     {
-        GameObject effect = PoolObject.instance.GetPoolObject(deathEffect);
+        GameObject effect = poolObject.GetPoolObject(deathEffect);
         RotateObjAgainst(effect, target);
         effect.transform.position = target.transform.position;
+
         float randomValue = 0.125f;
         effect.transform.Translate(Random.Range(-randomValue, randomValue), Random.Range(-randomValue, randomValue), 0);
     }
 
     private void RotateObjAgainst(GameObject obj, GameObject _target)
     {
-        if (target.CompareTag("Ally"))
+        if (_target.CompareTag("Ally"))
             obj.transform.Rotate(180, 0, 0);
-        //Vector3 dir = _target.transform.position - transform.position;
-        //float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        //obj.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
     }
 
     private void RotateObjAwayFrom(GameObject obj, GameObject _target)
@@ -189,10 +179,10 @@ public class BulletScript : MonoBehaviour
     {
         return spriteRenderer;
     }
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

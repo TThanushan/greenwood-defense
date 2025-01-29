@@ -46,7 +46,7 @@ public class FireskullUnit4 : FireskullUnit3
             if (distance <= explosionRange)
             {
                 enemy.GetComponent<HealthBar>().GetDamage(explosionDamage, transform);
-                InstantiateTrap(enemy);
+                _ = InstantiateTrap(enemy);
             }
         }
         nextEffectTime4 = Time.time + timeBetweenEffect4;
@@ -56,13 +56,16 @@ public class FireskullUnit4 : FireskullUnit3
     {
         if (!magma || !target)
             return null;
-        GameObject newTrap = poolObject.GetPoolObject(magma);
-        newTrap.transform.position = target.transform.position;
+        GameObject newTrap = PoolObject.instance.GetPoolTrap(magma, target.transform.position);
+        if (newTrap is null)
+            return null;
+
         newTrap.GetComponent<Trap>().SetTargetTag(targetTag);
         //newTrap.GetComponent<Unit>().SetTargetTag(targetTag);
 
         return newTrap;
     }
+
     void CreateEffect()
     {
         if (triggerEffect4)

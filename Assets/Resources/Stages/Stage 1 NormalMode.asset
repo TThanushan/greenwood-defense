@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyTypes:
   - Enemy: {fileID: 7241784478119512346, guid: cc27ae804451fec4aa6d5c0a98178bfc, type: 3}
-    TimeBetweenSpawn: 10
-    RandomTimeBetweenSpawn: 5
-    TimeBeforeFirstSpawn: 0
-    InfiniteSpawning: 1
-    EnemyCount: 0
+    timeBetweenSpawn: 13
+    randomTimeBetweenSpawn: 4.5
+    timeBeforeFirstSpawn: 0
+    infiniteSpawning: 1
+    enemyCount: 0
     currentEnemyCount: 0
-    nextEnemySpawnTime: 46.940887
+    nextEnemySpawnTime: 66.570786

@@ -54,10 +54,10 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
 
     void DisableAllUnits(bool value = true)
     {
-        GameObject[] allies = PoolObject.instance.Allies;
+        GameObject[] allies = PoolObject.instance.GetAlliesAsArray();
         if (allies is null || allies.Length == 0)
             return;
-        foreach (GameObject ally in PoolObject.instance.Allies)
+        foreach (GameObject ally in PoolObject.instance.GetAlliesAsArray())
         {
             if (ally.name == "PlayerCaptain")
                 continue;
@@ -69,9 +69,9 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
     {
         int currentLevel = StageInfosManager.instance.GetCurrentStageNumber();
         int index = currentLevel / 5;
-        if (currentLevel == Constants.MAX_STAGE_NUMBER)
-            return false;
-        return saveManager.maxLevelUnlocked == currentLevel && (saveManager.newEnemyCardDescriptionShownedIndex == index) &&
+        return currentLevel == Constants.MAX_STAGE_NUMBER
+            ? false
+            : saveManager.maxLevelUnlocked == currentLevel && (saveManager.newEnemyCardDescriptionShownedIndex == index) &&
             (currentLevel == 2 || (currentLevel % 5 == 0 && saveManager.GetLevelScore(currentLevel - 1) == 0));
     }
 
@@ -83,9 +83,10 @@ public class ShowNewEnemyDescriptionCard : MonoBehaviour
             return;
         DisableAllUnits();
 
+
         GameObject.FindWithTag("ManaBody").GetComponent<ManaBar>().enabled = false;
         GameObject.Find("SpawnBar").GetComponent<SpawnBar>().enabled = false;
-        AudioManager.instance.PlaySfx(Constants.NEW_ENEMY_SFX);
+        SFXManager.instance.Play(Constants.NEW_ENEMY_SFX);
         GetEnemySprite(saveManager.newEnemyCardDescriptionShownedIndex);
         descriptionCard.SetActive(true);
         saveManager.newEnemyCardDescriptionShownedIndex++;

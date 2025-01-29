@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Unit : HealthBar
 {
     [Header("Attack")]
@@ -37,7 +36,8 @@ public class Unit : HealthBar
     protected float initialAttackSpeed;
     protected float initialMoveSpeed;
 
-    protected AudioManager audioManager;
+    protected SFXManager audioManager;
+    [SerializeField]
     GameObject target;
     bool disabled;
     Color originalColor;
@@ -62,32 +62,6 @@ public class Unit : HealthBar
         OnHit += CreateOnHitEffect;
     }
 
-    protected virtual void UpdateTag()
-    {
-        if (isNotAUnit)
-            return;
-        if (transform.CompareTag("Enemy"))
-        {
-            targetTag = "Ally";
-            wayX = -1;
-        }
-        else
-        {
-            targetTag = "Enemy";
-            wayX = 1;
-
-        }
-    }
-
-    void CreateOnHitEffect()
-    {
-        poolObject.GetOnHitEffect().position = GetRandomPosition(transform.position, yRangeA: 0f, yRangeB: -0.25f);
-    }
-
-    public void SetInitialAttackDamage(float value)
-    {
-        initialAttackDamage = value;
-    }
     protected override void Update()
     {
         if (disabled) return;
@@ -108,8 +82,8 @@ public class Unit : HealthBar
     }
     protected virtual void Start()
     {
-        poolObject = PoolObject.instance;
-        audioManager = AudioManager.instance;
+
+        audioManager = SFXManager.instance;
         RandomizeAttackRange();
         coroutines = new List<IEnumerator>();
         //FlipUnitSpriteOnWayX();
@@ -120,6 +94,33 @@ public class Unit : HealthBar
         initialMoveSpeed = moveSpeed;
     }
 
+    protected virtual void UpdateTag()
+    {
+        if (isNotAUnit)
+            return;
+        if (transform.CompareTag("Enemy"))
+        {
+            targetTag = "Ally";
+            wayX = -1;
+        }
+        else
+        {
+            targetTag = "Enemy";
+            wayX = 1;
+
+        }
+    }
+
+    void CreateOnHitEffect()
+    {
+        Vector3 pos = GetRandomPosition(transform.position, yRangeA: 0f, yRangeB: -0.25f);
+        _ = poolObject.GetOnHitEffect(pos);
+    }
+
+    public void SetInitialAttackDamage(float value)
+    {
+        initialAttackDamage = value;
+    }
 
     public virtual bool ProjectileAffectMe()
     {
@@ -132,7 +133,35 @@ public class Unit : HealthBar
         base.OnDisable();
         Unsubscribe();
         tag = initialTag;
+
+        RemoveFromPoolObjectList();
     }
+
+    void AddToPoolObjectList()
+    {
+        if (CompareTag("Enemy"))
+        {
+            poolObject.AddEnemy(gameObject);
+        }
+        else if (CompareTag("Ally"))
+        {
+            poolObject.AddAlly(gameObject);
+        }
+    }
+
+    void RemoveFromPoolObjectList()
+    {
+        if (CompareTag("Enemy"))
+        {
+            poolObject.RemoveEnemy(gameObject);
+        }
+        else if (CompareTag("Ally"))
+        {
+            poolObject.RemoveAlly(gameObject);
+        }
+    }
+
+
 
     public float GetInitialAttackSpeed()
     {
@@ -157,10 +186,9 @@ public class Unit : HealthBar
     public void RotateSprite()
     {
         Transform spriteTransform = GetSpriteTransform();
-        if (spriteTransform.rotation.y != 180f)
-            spriteTransform.rotation = Quaternion.Euler(spriteTransform.rotation.x, 180f, spriteTransform.rotation.z);
-        else
-            spriteTransform.rotation = Quaternion.Euler(spriteTransform.rotation.x, 0f, spriteTransform.rotation.z);
+        spriteTransform.rotation = spriteTransform.rotation.y != 180f
+            ? Quaternion.Euler(spriteTransform.rotation.x, 180f, spriteTransform.rotation.z)
+            : Quaternion.Euler(spriteTransform.rotation.x, 0f, spriteTransform.rotation.z);
     }
     public void InvokeResetSpriteColor(float time)
     {
@@ -232,7 +260,10 @@ public class Unit : HealthBar
     void GiveMoneyReward()
     {
         if (gameObject.CompareTag("Enemy"))
+        {
             poolObject.stageManager.GivePlayerMoney(moneyReward);
+            poolObject.DisplayGoldText(transform.position, moneyReward);
+        }
     }
 
     void GiveManaReward()
@@ -248,10 +279,7 @@ public class Unit : HealthBar
         targetTag = tag;
         if (isNotAUnit)
             return;
-        if (targetTag == "Enemy")
-            transform.tag = "Ally";
-        else
-            transform.tag = "Enemy";
+        transform.tag = targetTag == "Enemy" ? "Ally" : "Enemy";
     }
     protected bool IsTargetEnabled(GameObject target)
     {
@@ -294,10 +322,7 @@ public class Unit : HealthBar
         if (spriteRenderer)
         {
             // TODO
-            if (targetTag == "Enemy" && CompareTag("Enemy"))
-                spriteRenderer.flipX = wayX == 1;
-            else
-                spriteRenderer.flipX = wayX == -1;
+            spriteRenderer.flipX = targetTag == "Enemy" && CompareTag("Enemy") ? wayX == 1 : wayX == -1;
         }
     }
 
@@ -320,12 +345,16 @@ public class Unit : HealthBar
 
     protected override void OnEnable()
     {
+        poolObject = GameObject.Find("PoolObject").GetComponent<PoolObject>();
         base.OnEnable();
+
         ResetSpriteRotation();
 
         RandomizeAttackRange();
         Disabled = false;
         Subscribe();
+
+        AddToPoolObjectList();
     }
 
 
@@ -345,7 +374,7 @@ public class Unit : HealthBar
     public virtual void Disable()
     {
         if (GetComponent<Animator>())
-            StartCoroutine(DisableIE());
+            _ = StartCoroutine(DisableIE());
         else
         {
             disabled = true;
@@ -435,17 +464,12 @@ public class Unit : HealthBar
 
     public virtual bool EnoughRangeToAttackTarget()
     {
-        if (!Target)
-            return false;
-        return Vector2.Distance(transform.position, Target.transform.position) <= attackRange;
+        return !Target ? false : Vector2.Distance(transform.position, Target.transform.position) <= attackRange;
     }
 
     protected bool EnoughRangeToAttackTarget(float range)
     {
-        if (!Target)
-            return false;
-        return Vector2.Distance(transform.position, Target.transform.position) <= range;
-
+        return !Target ? false : Vector2.Distance(transform.position, Target.transform.position) <= range;
     }
 
     protected bool NextAttackReady()
@@ -501,26 +525,18 @@ public class Unit : HealthBar
 
     protected virtual bool IsEnemyBehindMeOnXAxis(Transform target)
     {
-        if (wayX == -1)
-            return transform.position.x > target.transform.position.x;
-        return transform.position.x < target.transform.position.x;
+        return wayX == -1 ? transform.position.x > target.position.x : transform.position.x < target.position.x;
     }
 
 
     protected GameObject[] GetEnemies()
     {
-        if (targetTag == "Enemy")
-            return PoolObject.instance.Enemies;
-        else
-            return PoolObject.instance.Allies;
+        return targetTag == "Enemy" ? PoolObject.instance.GetEnemiesAsArray() : PoolObject.instance.GetAlliesAsArray();
     }
 
     protected GameObject[] GetAllies()
     {
-        if (targetTag == "Ally")
-            return PoolObject.instance.Enemies;
-        else
-            return PoolObject.instance.Allies;
+        return targetTag == "Ally" ? PoolObject.instance.GetEnemiesAsArray() : PoolObject.instance.GetAlliesAsArray();
     }
     void OnDrawGizmosSelected()
     {

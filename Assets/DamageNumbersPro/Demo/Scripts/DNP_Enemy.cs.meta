@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 691e22d54c32cf94ea01d158533d2aa2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 186447
+  packageName: Damage Numbers Pro
+  packageVersion: 4.31
+  assetPath: Assets/DamageNumbersPro/Demo/Scripts/DNP_Enemy.cs
+  uploadId: 644910

@@ -12,10 +12,7 @@ public class ExplodeOnDeath : MonoBehaviour
 
     private void Awake()
     {
-        if (tag == "Enemy")
-            targetTag = "Ally";
-        else
-            targetTag = "Enemy";
+        targetTag = tag == "Enemy" ? "Ally" : "Enemy";
     }
     private void OnEnable()
     {
@@ -68,9 +65,6 @@ public class ExplodeOnDeath : MonoBehaviour
     }
     protected GameObject[] GetEnemies()
     {
-        if (targetTag == "Enemy")
-            return PoolObject.instance.Enemies;
-        else
-            return PoolObject.instance.Allies;
+        return targetTag == "Enemy" ? PoolObject.instance.GetEnemiesAsArray() : PoolObject.instance.GetAlliesAsArray();
     }
 }

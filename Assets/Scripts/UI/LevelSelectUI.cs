@@ -5,7 +5,7 @@ public class LevelSelectUI : MonoBehaviour
     Color autoSaveEnabledColor = new Color(0f, 1f, 0.5292978f);
     private void Start()
     {
-        transform.Find(Constants.LEVEL_SELECT_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = ((int)SaveManager.instance.money).ToString();
+        transform.Find(Constants.LEVEL_SELECT_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = ((int)SaveManager.instance.money).ToString() + '$';
         SetAutoSaveColor();
     }
 

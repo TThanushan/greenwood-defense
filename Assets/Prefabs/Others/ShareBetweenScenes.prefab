@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2985511611478847749}
   - component: {fileID: 2985511611478847748}
   - component: {fileID: 529598980}
+  - component: {fileID: 8677383707474657060}
   m_Layer: 0
   m_Name: ShareBetweenScenes
   m_TagString: Untagged
@@ -27,12 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2985511611478847744}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.35047472, y: 0.04177852, z: 222.31685}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2985511611478847751
 MonoBehaviour:
@@ -59,9 +61,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLevelUnlocked: 1
+  isAutoSave: 0
   levels: []
   units: []
+  heroUpgrades: []
+  unlockedHeroUpgrades: []
   unlockedUnits: []
+  unlockedFrogUnitsLevel: []
+  chosenUnits: []
+  chosenMode: 
+  newEnemyCardDescriptionShownedIndex: 0
+  money: 0
 --- !u!114 &2985511611478847748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,3 +101,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStage: Stage 1
+  goldSpeedTMP: 0.02
+--- !u!114 &8677383707474657060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2985511611478847744}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8613d12023ffe1445b5e65f1ede882cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fps: 0

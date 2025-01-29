@@ -30,7 +30,7 @@ public class GhostUnit3 : GhostUnit2
     {
         if (nextAttackConvertEnemyTag)
             ConvertEnemyCamp(Target);
-        else
+        else if (Target.CompareTag(targetTag))
             base.Attack();
     }
 
@@ -54,6 +54,7 @@ public class GhostUnit3 : GhostUnit2
             nextEffectTime3 = Time.time + timeBetweenEffect;
             currentConvertCount = convertCount;
         }
+        Target = null;
     }
 
     void CreateConvertEffect(GameObject effect, Transform targetConverted)

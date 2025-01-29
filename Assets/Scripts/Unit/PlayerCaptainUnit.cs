@@ -70,34 +70,34 @@ public class PlayerCaptainUnit : Unit
                 transform.Find("SpriteBody/PhoenixEnabled").gameObject.SetActive(true);
             }
         }
-        Invoke(nameof(SetStats), 0.1f);
-        InvokeRepeating(nameof(PassiveHealing), 0f, 1f);
+        //Invoke(nameof(SetStats), 0.1f);
+        //InvokeRepeating(nameof(PassiveHealing), 0f, 1f);
 
     }
 
     protected override void Update()
     {
         base.Update();
-        PlayerControl();
-        SwitchAutomaticallyWeapon();
-        UpdateWeaponSprite();
-        UpdateWeaponAbilityCooldownBar();
+        //PlayerControl();
+        //SwitchAutomaticallyWeapon();
+        //UpdateWeaponSprite();
+        //UpdateWeaponAbilityCooldownBar();
     }
     void Init()
     {
-        OnAttack += PlayAttackAnimation;
+        //OnAttack += PlayAttackAnimation;
         sprite = transform.GetComponent<Unit>().GetSpriteTransform().parent;
         animator = GetComponent<Animator>();
 
-        swordWeaponAbilityCooldownEffectBar = transform.Find("SwordEffectBar/Canvas/Bar").gameObject;
-        swordWeaponAbilityCooldownGlow = transform.Find("SwordEffectBar/Canvas/Glow").gameObject;
+        //swordWeaponAbilityCooldownEffectBar = transform.Find("SwordEffectBar/Canvas/Bar").gameObject;
+        //swordWeaponAbilityCooldownGlow = transform.Find("SwordEffectBar/Canvas/Glow").gameObject;
 
-        crossbowWeaponAbilityCooldownGlow = transform.Find("CrossbowEffectBar/Canvas/Glow").gameObject;
-        crossbowWeaponAbilityCooldownEffectBar = transform.Find("CrossbowEffectBar/Canvas/Bar").gameObject;
+        //crossbowWeaponAbilityCooldownGlow = transform.Find("CrossbowEffectBar/Canvas/Glow").gameObject;
+        //crossbowWeaponAbilityCooldownEffectBar = transform.Find("CrossbowEffectBar/Canvas/Bar").gameObject;
 
-        nextSwordAbilitySlash = Time.time + swordAbilitySlashCooldown;
-        nextCrossbowAbilityPiercingArrow = Time.time + crossbowAbilityPiercingArrowCooldown;
-        playerWalkingSfx = GetComponent<PlayerWalkingSfx>();
+        //nextSwordAbilitySlash = Time.time + swordAbilitySlashCooldown;
+        //nextCrossbowAbilityPiercingArrow = Time.time + crossbowAbilityPiercingArrowCooldown;
+        //playerWalkingSfx = GetComponent<PlayerWalkingSfx>();
         shakeCamera = CameraController.instance;
 
         OnDeath += PlayDeathAnimation;
@@ -158,7 +158,7 @@ public class PlayerCaptainUnit : Unit
     {
         isPhoenix = false;
         currentHealth = maxHealth;
-        SaveManager.instance.unlockedHeroUpgrades.Remove("Phoenix1");
+        _ = SaveManager.instance.unlockedHeroUpgrades.Remove("Phoenix1");
         SaveManager.instance.unlockedHeroUpgrades.Add("Phoenix0");
         poolObject.GetPoolObject(phoenixEffect).transform.position = transform.position;
         transform.Find("SpriteBody/PhoenixEnabled").gameObject.SetActive(false);
@@ -258,10 +258,7 @@ public class PlayerCaptainUnit : Unit
 
     bool IsTooCloseToTargetToMove()
     {
-        if (!Target)
-            return false;
-        return Vector2.Distance(transform.position, Target.transform.position) < 0.25f;
-
+        return !Target ? false : Vector2.Distance(transform.position, Target.transform.position) < 0.25f;
     }
 
     void UseSwordAbilitySlash()
@@ -315,51 +312,29 @@ public class PlayerCaptainUnit : Unit
         return damage * 3;
     }
 
-    public override void Attack()
-    {
-        if (!Target)
-            return;
-        if (weapon == Weapon.Sword)
-        {
-            float damageDealt = attackDamage;
-            bool isCritical = IsAttackCritical(swordCriticalChance);
-            if (isCritical)
-            {
-                damageDealt = GetCriticalDamage(damageDealt);
-                //poolObject.GetPoolObject(criticalAttackEffect).transform.position = GetRandomPosition(Target.transform.position, yRangeA: 0f, yRangeB: -0.25f);
-                poolObject.GetPoolObject(criticalAttackEffect).transform.position = transform.position;
+    //public override void Attack()
+    //{
+    //    if (!Target)
+    //        return;
+    //    if (weapon == Weapon.Sword)
+    //    {
+    //        float damageDealt = attackDamage;
+    //        bool isCritical = IsAttackCritical(swordCriticalChance);
+    //        if (isCritical)
+    //        {
+    //            damageDealt = GetCriticalDamage(damageDealt);
+    //            //poolObject.GetPoolObject(criticalAttackEffect).transform.position = GetRandomPosition(Target.transform.position, yRangeA: 0f, yRangeB: -0.25f);
+    //            poolObject.GetPoolObject(criticalAttackEffect).transform.position = transform.position;
 
-            }
-            PlayAttackSfx(isCritical);
+    //        }
+    //        PlayAttackSfx(isCritical);
 
-            Target.GetComponent<Unit>().GetDamage(damageDealt, transform);
-        }
-        else if (weapon == Weapon.Crossbow)
-            Shoot(Target);
-    }
+    //        Target.GetComponent<Unit>().GetDamage(damageDealt, transform);
+    //    }
+    //    else if (weapon == Weapon.Crossbow)
+    //        Shoot(Target);
+    //}
 
-
-
-    void PlayAttackSfx(bool isCritical)
-    {
-        if (isCritical)
-        {
-            string sfxName = "SwordCriticalAttack" + Random.Range(1, 3).ToString();
-            audioManager.Play(sfxName, volume: 0.75f);
-            //poolObject.DisplayText("CRIT", 1).transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y + 0.30f, Target.transform.position.z);
-            poolObject.GetPoolObject(criticalText).transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y + 0.30f, Target.transform.position.z);
-            //shakeCamera.ShakeWithDelay(0.15f, 0.01f, 0.25f);
-
-        }
-        else
-        {
-
-            string name = "EarthPunch" + Random.Range(3, 6).ToString();
-            audioManager.Play(name);
-            name = "SwordAttack" + Random.Range(1, 6).ToString();
-            audioManager.Play(name);
-        }
-    }
 
     void SwitchAutomaticallyWeapon()
     {
@@ -373,7 +348,7 @@ public class PlayerCaptainUnit : Unit
     {
         string spriteLocation = "SpriteBody/Sprite/";
         string swordInBackLocation = spriteLocation + "SwordInBack";
-        string crossbowInBackLocation = spriteLocation + "CrossbowInBack";
+        _ = spriteLocation + "CrossbowInBack";
         if (wayX == -1)
         {
             //transform.Find(spriteLocation + Weapon.Crossbow.ToString()).gameObject.SetActive(false);
@@ -434,7 +409,7 @@ public class PlayerCaptainUnit : Unit
     void Shoot(GameObject target)
     {
         PlayHitSfx(1);
-        InstantiateBullet(target);
+        _ = InstantiateBullet(target);
     }
 
     void ShootPiercingArrow(GameObject target)

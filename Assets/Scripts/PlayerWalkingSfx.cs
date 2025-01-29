@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerWalkingSfx : MonoBehaviour
 {
 
-    private AudioManager audioManager;
+    private SFXManager audioManager;
     public float nextPlayTime;
     public float timeBetweenPlay = 0.25f;
     public float shakeIntensity = 1.0f;
@@ -13,7 +13,7 @@ public class PlayerWalkingSfx : MonoBehaviour
     CameraController shakeCamera;
     void Start()
     {
-        audioManager = AudioManager.instance;
+        audioManager = SFXManager.instance;
         shakeCamera = CameraController.instance;
     }
     private void Update()
@@ -27,7 +27,7 @@ public class PlayerWalkingSfx : MonoBehaviour
     {
         if (nextPlayTime > Time.time)
             return;
-        audioManager.PlaySfx(sfxName + Random.Range(1, maxSfx).ToString(), _volume: 0.25f);
+        audioManager.Play(sfxName + Random.Range(1, maxSfx).ToString(), volume: 0.25f);
         nextPlayTime = Time.time + timeBetweenPlay;
     }
 

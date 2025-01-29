@@ -14,8 +14,11 @@ public class SwitchStage : MonoBehaviour
     Image imageNext;
     Image imagePrevious;
 
+    UpdateStageBackground updateStageBackground;
     private void Start()
     {
+        updateStageBackground = GameObject.Find("Backgrounds").GetComponent<UpdateStageBackground>();
+
         saveManager = SaveManager.instance;
         levelScore = LevelScore.instance;
         stageTitle = transform.Find(Constants.LEVEL_SELECT_STAGE_TITLE_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>();
@@ -25,6 +28,7 @@ public class SwitchStage : MonoBehaviour
         starsPanel = transform.Find(Constants.LEVEL_SELECT_STARS_PANEL_PATH);
         imageNext = transform.Find(Constants.LEVEL_SELECT_NEXT_LEVEL_IMAGE_PATH).GetComponent<Image>();
         imagePrevious = transform.Find(Constants.LEVEL_SELECT_PREVIOUS_LEVEL_IMAGE_PATH).GetComponent<Image>();
+        updateStageBackground.UpdateBackground();
 
         UpdateButtonColor();
         UpdateStars();
@@ -32,7 +36,10 @@ public class SwitchStage : MonoBehaviour
 
     public void LoadCurrentStage()
     {
+        //TrackPlayer.instance.StopTrack();
         MenuScript.instance.LoadStageScene();
+        Destroy(GameObject.FindGameObjectWithTag("Backgrounds"));
+        //TrackPlayer.instance.StartPlayingStageTracks();
     }
 
     public void SelectPreviousStage()
@@ -128,6 +135,7 @@ public class SwitchStage : MonoBehaviour
         currentStage = newStage;
         stageTitle.text = newStage;
         StageInfosManager.instance.SetCurrentStageName(newStage);
+        updateStageBackground.UpdateBackground();
     }
 
     //bool IsStageCompleted(string stage)
