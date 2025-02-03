@@ -1,13 +1,17 @@
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
+#if UNITY_EDITOR
+
 [InitializeOnLoad]
-class SpriteSorter
+#endif
+public class SpriteSorter
 {
     static SpriteSorter()
     {
         Initialize();
     }
+
     [RuntimeInitializeOnLoadMethod]
     static void Initialize()
     {

@@ -272,12 +272,15 @@ public class UpgradesShopHero : MonoBehaviour
     {
         if (!heroButtonPanel.gameObject.activeInHierarchy)
             return;
+
         GameObject unitCursor = selectCursor.transform.Find("UnitsUpgrades").gameObject;
         if (unitCursor.activeSelf)
         {
+            Canvas.ForceUpdateCanvases(); // Ensure UI updates before modifying
             unitCursor.SetActive(false);
             selectCursor.transform.Find("HerosUpgrades").gameObject.SetActive(true);
         }
+
         if (selectedCard != "")
             selectCursor.transform.position = GetSelectedCard().position;
     }

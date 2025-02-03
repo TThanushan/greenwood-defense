@@ -55,3 +55,11 @@ sysinfo.txt
 
 # 📦 IGNORE DEBUG FILES
 crashlytics-build.properties
+
+# 📦 IGNORE ZIP FILES
+*.zip
+
+# 📦 IGNORE SPECIFIC IMPORTED ASSETS
+/Assets/Layer Lab
+/Assets/ImportedAssets
+/Assets/ImportedAssets/GUI Pro-CasualGame Fonts

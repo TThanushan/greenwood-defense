@@ -840,7 +840,7 @@ public class SaveManager : MonoBehaviour
             new Unit("Snail3", 60, 14, 800, "Constantly heal close allies."),
             new Unit("Snail4", 100, 16, 2000, "When an close ally is low life, start a strong global healing."),
 
-            new Unit("Bunny1", 20, 10, 130, "Summon weak rabbit."),
+            new Unit("Bunny1", 20, 10, 130, "Summon small rabbits."),
             new Unit("Bunny2", 35, 13, 350, "Instead of weak rabbit, randomly summon unique rabbit (dps or tank)."),
             new Unit("Bunny3", 65, 16, 900, "Instead of unique rabbit (dps or tank), summon an army of weak rabbits."),
             new Unit("Bunny4", 125, 19, 2200, "Instead of an army of weak rabbits, summon an army of unique rabbits (dps or tank)."),
