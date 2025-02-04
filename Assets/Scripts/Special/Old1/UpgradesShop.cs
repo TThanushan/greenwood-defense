@@ -32,7 +32,7 @@ public class UpgradesShop : MonoBehaviour
         InitUpgradesCards();
         InitChosenUnitsButtons();
         UpdateShopUI();
-        InvokeRepeating(nameof(SetSelectedCardButtonCursor), 0, 0.1f);
+        //InvokeRepeating(nameof(SetSelectedCardButtonCursor), 0, 0.1f);
     }
 
     public void UpdateShopUI(string oldCardName = "")

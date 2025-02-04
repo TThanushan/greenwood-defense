@@ -37,7 +37,9 @@ public class UpgradesShopHero : MonoBehaviour
         GenerateUpgradeButton();
         InitNextHeroUpgrades();
         InitUpgradesCards();
-        InvokeRepeating(nameof(SetSelectedCardButtonCursor), 0, 0.1f);
+
+        // line below used to update the description when using the buy button.
+        //InvokeRepeating(nameof(SetCardButtonCursorHero), 0, 0.1f);
     }
 
     public void UpdateShopUI()
@@ -270,8 +272,12 @@ public class UpgradesShopHero : MonoBehaviour
     }
     public void SetSelectedCardButtonCursor()
     {
-        if (!heroButtonPanel.gameObject.activeInHierarchy)
-            return;
+        //// if the selected card is not in the heroButtonPanel, return
+        //if (selectedCard == "" || !transform.Find(Constants.HERO_BUTTON_PANEL_PATH + '/' + selectedCard))
+        //    return;
+
+        //if (!heroButtonPanel.gameObject.activeInHierarchy)
+        //return;
 
         GameObject unitCursor = selectCursor.transform.Find("UnitsUpgrades").gameObject;
         if (unitCursor.activeSelf)
@@ -284,6 +290,42 @@ public class UpgradesShopHero : MonoBehaviour
         if (selectedCard != "")
             selectCursor.transform.position = GetSelectedCard().position;
     }
+
+    public void SetCardButtonCursorHero()
+    {
+
+        GameObject unitCursor = selectCursor.transform.Find("HerosUpgrades").gameObject;
+        if (unitCursor.activeSelf)
+        {
+            Canvas.ForceUpdateCanvases(); // Ensure UI updates before modifying
+            unitCursor.SetActive(true);
+            selectCursor.transform.Find("UnitsUpgrades").gameObject.SetActive(false);
+        }
+
+        if (selectedCard != "")
+            selectCursor.transform.position = GetSelectedCard().position;
+    }
+
+
+
+    //// Create a method to set the selected card cursor, the method will do the same as SetSelectedCardButtonCursor, but it will only have one of both cursor active at a time. When activating one, the other will be deactivated.
+    //public void SetSelectedCardButtonCursor()
+    //{
+    //    if (selectedCard == "")
+    //        return;
+
+    //    GameObject unitCursor = selectCursor.transform.Find("UnitsUpgrades").gameObject;
+    //    if (unitCursor.activeSelf)
+    //    {
+    //        Canvas.ForceUpdateCanvases(); // Ensure UI updates before modifying
+    //        unitCursor.SetActive(false);
+    //        selectCursor.transform.Find("HerosUpgrades").gameObject.SetActive(true);
+    //    }
+
+    //    if (selectedCard != "")
+    //        selectCursor.transform.position = GetSelectedCard().position;
+    //}
+
     public void SelectCard()
     {
 
@@ -376,7 +418,8 @@ public class UpgradesShopHero : MonoBehaviour
     void AddTriggers(Transform upgradeCardButton)
     {
         AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SelectCard);
-        AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetSelectedCardButtonCursor);
+        //AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetSelectedCardButtonCursor);
+        AddEventTriggerOnButton(upgradeCardButton.Find("Button").gameObject, SetCardButtonCursorHero);
     }
 
     public void PlayButtonClick()

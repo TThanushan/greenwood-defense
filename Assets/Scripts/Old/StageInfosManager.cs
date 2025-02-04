@@ -9,7 +9,10 @@ public class StageInfosManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
         {
             Destroy(gameObject);
@@ -19,12 +22,18 @@ public class StageInfosManager : MonoBehaviour
 
     private void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        Invoke(nameof(SetCurrentStageToMaxLevelUnlocked), 1);
     }
+
+    void SetCurrentStageToMaxLevelUnlocked()
+    {
+        currentStage = "Stage " + SaveManager.instance.maxLevelUnlocked.ToString();
+    }
+
 
     public void SetCurrentStageToNextStage()
     {
-        SetCurrentStageNumber(GetCurrentStageNumber() + 1);
+        //SetCurrentStageNumber(GetCurrentStageNumber() + 1);
         //currentStage = "Stage " + (GetCurrentStageNumber() + 1).ToString();
     }
     public void SetCurrentStageNumber(int number)

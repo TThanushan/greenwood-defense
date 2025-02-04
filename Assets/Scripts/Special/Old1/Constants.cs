@@ -10,14 +10,14 @@ public static class Constants
     public const string BUY_SFX_NAME = "Buy";
     public const string UNITS_BUTTON_PANEL_PATH = "Buttons/UnitsButtonPanel/Viewport/Content";
     public const string HERO_BUTTON_PANEL_PATH = "Buttons/HeroButtonPanel/Viewport/Content";
-    public const string LEVEL_SELECT_GOLD_TEXT_PATH = "MiddleGroup/Status_Coin/Text_Value";
-    public const string LEVEL_SELECT_STAGE_TITLE_TEXT_PATH = "MiddleGroup/Title";
-    public const string LEVEL_SELECT_STARS_PANEL_PATH = "MiddleGroup/Stars/Panel";
-    public const string LEVEL_SELECT_NEXT_LEVEL_IMAGE_PATH = "MiddleGroup/NextLevel/Image";
-    public const string LEVEL_SELECT_PREVIOUS_LEVEL_IMAGE_PATH = "MiddleGroup/PreviousLevel/Image";
-    public const string LEVEL_SELECT_AUTO_SAVE_TEXT_PATH = "MiddleGroup/Buttons/AutoSave/Text (TMP)";
+    public const string LEVEL_SELECT_GOLD_TEXT_PATH = "Status_Coin/Text_Value";
+    public const string LEVEL_SELECT_STAGE_TITLE_TEXT_PATH = "Title";
+    public const string LEVEL_SELECT_STARS_PANEL_PATH = "Stars/Panel";
+    public const string LEVEL_SELECT_NEXT_LEVEL_IMAGE_PATH = "NextLevel/Image";
+    public const string LEVEL_SELECT_PREVIOUS_LEVEL_IMAGE_PATH = "PreviousLevel/Image";
+    public const string LEVEL_SELECT_AUTO_SAVE_TEXT_PATH = "Buttons/AutoSave/Text (TMP)";
 
-    public const string GAMEOVER_PANEL_PATH = "MiddleGroup/GameOverPanel";
+    public const string GAMEOVER_PANEL_PATH = "GameOverPanel";
     public const string GAMEOVER_EARNED_GOLD_TEXT_PATH = "Popup_Lose/Popup/Coin/Text_Value";
     public const string LEVEL_COMPLET_PANEL_PATH = "MiddleGroup/LevelCompletePanel";
     public const string LEVEL_COMPLETE_STAGE_REWARD_TEXT_PATH = "Popup/StageReward/StageRewardText";

@@ -30,14 +30,14 @@ public class StageGenerator : MonoBehaviour
     {
         if (!useTmpStageNumber)
             return;
-        //Debug.LogWarning("Using tmpStageNumber! Current stage set to stage " + stageNumber);
+        Debug.LogWarning("Using tmpStageNumber! Current stage set to stage " + stageNumber);
         StageInfosManager.instance.SetCurrentStageNumber(stageNumber);
         StageManager.instance.GetComponent<UpdateUI>().SetStageTitle(stageNumber);
     }
 
     private void Start()
     {
-        TmpStageNumberInit();
+        //TmpStageNumberInit();
     }
     void GenerateStages()
     {

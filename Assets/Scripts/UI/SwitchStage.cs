@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SwitchStage : MonoBehaviour
 {
+    public static SwitchStage instance;
     public string currentStage;
     TMPro.TextMeshProUGUI stageTitle;
     Transform starsPanel;
@@ -17,13 +19,22 @@ public class SwitchStage : MonoBehaviour
     UpdateStageBackground updateStageBackground;
     private void Start()
     {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+            Destroy(gameObject);
         updateStageBackground = GameObject.Find("Backgrounds").GetComponent<UpdateStageBackground>();
 
         saveManager = SaveManager.instance;
         levelScore = LevelScore.instance;
         stageTitle = transform.Find(Constants.LEVEL_SELECT_STAGE_TITLE_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>();
+
         currentStage = "Stage " + saveManager.maxLevelUnlocked.ToString();
+
         StageInfosManager.instance.SetCurrentStageName(currentStage);
+
         stageTitle.text = currentStage;
         starsPanel = transform.Find(Constants.LEVEL_SELECT_STARS_PANEL_PATH);
         imageNext = transform.Find(Constants.LEVEL_SELECT_NEXT_LEVEL_IMAGE_PATH).GetComponent<Image>();
@@ -34,6 +45,7 @@ public class SwitchStage : MonoBehaviour
         UpdateStars();
     }
 
+
     public void LoadCurrentStage()
     {
         //TrackPlayer.instance.StopTrack();
@@ -41,6 +53,7 @@ public class SwitchStage : MonoBehaviour
         Destroy(GameObject.FindGameObjectWithTag("Backgrounds"));
         //TrackPlayer.instance.StartPlayingStageTracks();
     }
+
 
     public void SelectPreviousStage()
     {
@@ -79,23 +92,15 @@ public class SwitchStage : MonoBehaviour
         string[] splitted = currentStage.Split(' ');
         string newStage = splitted[0] + ' ' + (int.Parse(splitted[1]) + i);
 
-        if (!IsStageUnlocked(newStage))
-            return null;
-        return newStage;
+        return !IsStageUnlocked(newStage) ? null : newStage;
     }
 
     public void UpdateButtonColor()
     {
-        if (DoesStageExist(true) is null)
-            imageNext.color = disabledButtonColor;
-        else
-            imageNext.color = enableButtonColor;
+        imageNext.color = DoesStageExist(true) is null ? disabledButtonColor : enableButtonColor;
 
 
-        if (DoesStageExist(false) is null)
-            imagePrevious.color = disabledButtonColor;
-        else
-            imagePrevious.color = enableButtonColor;
+        imagePrevious.color = DoesStageExist(false) is null ? disabledButtonColor : enableButtonColor;
     }
 
     void UpdateStars()
@@ -123,6 +128,43 @@ public class SwitchStage : MonoBehaviour
             starsPanel.Find("Star3/In").gameObject.SetActive(true);
         }
     }
+    public void LoadStage(int stageNumber)
+    {
+        //// Ensure the stage number is valid
+        //if (stageNumber <= 0 || stageNumber > Constants.MAX_STAGE_NUMBER)
+        //{
+        //    Debug.LogError("Invalid stage number: " + stageNumber);
+        //    return;
+        //}
+
+        //// Set the stage number in StageInfosManager
+        //StageInfosManager.instance.SetCurrentStageNumber(stageNumber);
+
+        //// Load the single "Stage" scene
+        SceneManager.LoadScene("Stage");
+    }
+
+    //public void LoadCurrentStage()
+    //{
+    //    if (string.IsNullOrEmpty(currentStage))
+    //    {
+    //        Debug.LogError("Current stage is not set!");
+    //        return;
+    //    }
+
+    //    // Extract the stage number from "Stage X"
+    //    string[] splitStage = currentStage.Split(' ');
+    //    if (splitStage.Length < 2 || !int.TryParse(splitStage[1], out int stageNumber))
+    //    {
+    //        Debug.LogError("Invalid stage format: " + currentStage);
+    //        return;
+    //    }
+
+    //    // Set the stage number in StageInfosManager
+    //    StageInfosManager.instance.SetCurrentStageNumber(stageNumber);
+    //    // Load the stage scene
+    //    SceneManager.LoadScene("Stage");
+    //}
 
     //void GetStageStarsNumber()
     //{

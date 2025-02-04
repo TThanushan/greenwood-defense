@@ -111,6 +111,8 @@ public class SaveManager : MonoBehaviour
 
         string json = JsonUtility.ToJson(saveData, true);
         SaveToFile(json);
+
+
     }
 
     private void SaveToFile(string saveJson)
@@ -347,6 +349,7 @@ public class SaveManager : MonoBehaviour
         PlayerPrefs.Save();
 
         SaveGame();
+        SharedMethodsToolBox.instance.ShowSaveNotificationPopup();
     }
 
     public void SaveIsAutoSave()

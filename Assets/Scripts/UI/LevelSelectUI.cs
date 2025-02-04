@@ -5,18 +5,18 @@ public class LevelSelectUI : MonoBehaviour
     Color autoSaveEnabledColor = new Color(0f, 1f, 0.5292978f);
     private void Start()
     {
-        transform.Find(Constants.LEVEL_SELECT_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = ((int)SaveManager.instance.money).ToString() + '$';
-        SetAutoSaveColor();
+        //transform.Find(Constants.LEVEL_SELECT_GOLD_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().text = ((int)SaveManager.instance.money).ToString() + '$';
+        //SetAutoSaveColor();
     }
 
-    void SetAutoSaveColor()
-    {
-        Color col = Color.gray;
-        if (SaveManager.instance.isAutoSave)
-            col = autoSaveEnabledColor;
-        transform.Find(Constants.LEVEL_SELECT_AUTO_SAVE_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().color = col;
+    //void SetAutoSaveColor()
+    //{
+    //    Color col = Color.gray;
+    //    if (SaveManager.instance.isAutoSave)
+    //        col = autoSaveEnabledColor;
+    //    transform.Find(Constants.LEVEL_SELECT_AUTO_SAVE_TEXT_PATH).GetComponent<TMPro.TextMeshProUGUI>().color = col;
 
-    }
+    //}
 
     public void SavePrefs()
     {
@@ -29,7 +29,7 @@ public class LevelSelectUI : MonoBehaviour
         SaveManager saveManager = SaveManager.instance;
         saveManager.isAutoSave = !saveManager.isAutoSave;
         saveManager.SaveIsAutoSave();
-        SetAutoSaveColor();
+        //SetAutoSaveColor();
     }
 
 
